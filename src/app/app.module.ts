@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from "./shared";
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
-    NgbModule
+    NgbModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
