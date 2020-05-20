@@ -2,3 +2,7 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+/* Estilos globales */
+@import './assets/estilos/global-style.scss';
+@import './assets/estilos/layout.scss';
