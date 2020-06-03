@@ -12,4 +12,7 @@ export class CabeceraComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cerrarSesion() {
+    console.log("cierre de sesion");
+  }
 }

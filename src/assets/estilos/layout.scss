@@ -18,6 +18,12 @@
 }
 .navbar-nav {
   li {
+    &:hover {
+      background-color: #8cc63f !important;
+    }
+    &:focus {
+      background-color: #8cc63f !important;
+      }
     a {
       &:hover{
         cursor: pointer;
