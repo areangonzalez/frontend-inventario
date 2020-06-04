@@ -11,40 +11,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td class="ancho-celda-minimo text-center">2000</td>
-      <td>Fideos 1kg</td>
-      <td class="text-center">Canale</td>
-      <td class="text-center">Alimentos</td>
-      <td class="ancho-celda-vencimiento text-center">24/07/2020</td>
-    </tr>
-    <tr>
-      <td class="ancho-celda-minimo text-center">2000</td>
-      <td>Fideos 1kg</td>
-      <td class="text-center">Canale</td>
-      <td class="text-center">Alimentos</td>
-      <td class="ancho-celda-vencimiento text-center">24/07/2020</td>
-    </tr>
-    <tr>
-      <td class="ancho-celda-minimo text-center">2000</td>
-      <td>Fideos 1kg</td>
-      <td class="text-center">Canale</td>
-      <td class="text-center">Alimentos</td>
-      <td class="ancho-celda-vencimiento text-center">24/07/2020</td>
-    </tr>
-    <tr>
-      <td class="ancho-celda-minimo text-center">2000</td>
-      <td>Fideos 1kg</td>
-      <td class="text-center">Canale</td>
-      <td class="text-center">Alimentos</td>
-      <td class="ancho-celda-vencimiento text-center">24/07/2020</td>
-    </tr>
-    <tr>
-      <td class="ancho-celda-minimo text-center">2000</td>
-      <td>Fideos 1kg</td>
-      <td class="text-center">Canale</td>
-      <td class="text-center">Alimentos</td>
-      <td class="ancho-celda-vencimiento text-center">24/07/2020</td>
+    <tr *ngFor="let producto of listadoStock">
+      <td class="ancho-celda-minimo text-center">{{producto.cantidad}}</td>
+      <td>{{producto.producto}}</td>
+      <td class="text-center">{{producto.marca}}</td>
+      <td class="text-center">{{producto.categoria}}</td>
+      <td class="ancho-celda-vencimiento text-center">{{producto.vencimiento | date: 'dd/MM/yyyy'}}</td>
     </tr>
   </tbody>
 </table>
