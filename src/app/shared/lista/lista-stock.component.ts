@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListaStockComponent implements OnInit {
   @Input("listadoStock") public listadoStock: any;
+  @Input("tipoTabla") public tipoTabla: string;
   constructor() { }
 
   ngOnInit(): void {
