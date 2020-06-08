@@ -34,8 +34,6 @@ export class AlertComponent implements OnInit, OnDestroy {
                   this.mensaje = false;
                     return;
                 }else{
-                  console.log(alert);
-
                   this.mensaje = alert.mensaje;
                   this.tipo = alert.tipo;
                 }

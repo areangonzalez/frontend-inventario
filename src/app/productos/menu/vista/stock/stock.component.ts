@@ -25,8 +25,10 @@ export class StockComponent implements OnInit {
   }
 
   agregarStock() {
-    console.log("presiono boton");
+    this._alertService.exitoso('Success!!')
+  }
 
+  buscarStock() {
     this._alertService.exitoso('Success!!')
   }
 
