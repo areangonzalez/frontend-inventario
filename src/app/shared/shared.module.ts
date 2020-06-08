@@ -1,17 +1,18 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListaStockComponent } from './lista';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
-  declarations: [ListaStockComponent],
+  declarations: [ListaStockComponent, AlertComponent],
   imports: [
     CommonModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     CommonModule,
-    ListaStockComponent
+    ListaStockComponent, AlertComponent
   ]
 })
 export class SharedModule { }
