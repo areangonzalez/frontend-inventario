@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule, CabeceraComponent } from "./shared";
 
 
@@ -16,6 +16,7 @@ import { SharedModule, CabeceraComponent } from "./shared";
   imports: [
     BrowserModule,
     NgbModule,
+    NgbTooltipModule,
     RoutingModule,
     SharedModule
   ],
