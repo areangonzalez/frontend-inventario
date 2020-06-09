@@ -6,6 +6,7 @@ import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
 import { SharedModule, CabeceraComponent } from "./shared";
+import { CustomDatepickerI18n } from './shared/helpers';
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import { SharedModule, CabeceraComponent } from "./shared";
     RoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
