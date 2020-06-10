@@ -12,6 +12,7 @@ import { UtilService } from 'src/app/core/service';
 export class BaStockComponent implements OnInit {
   public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
   public marcaLista: any = [{id:1, nombre:'Canale'}];
+  public medidadLista: any = [{ id:1, nombre:'kg' },{ id:2, nombre:'lts' },{ id:3, nombre:'gr' }];
   public globalParam:string = '';
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
@@ -38,6 +39,10 @@ export class BaStockComponent implements OnInit {
         global_param: '',
         categoriaid: '',
         marcaid: '',
+        unidad: '',
+        medidadid: '',
+        defectuoso: '',
+        vencido: '',
         vencimientoDesde: null,
         vencimiento_desde: '',
         vencimientoHasta: null,

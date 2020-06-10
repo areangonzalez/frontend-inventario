@@ -22,7 +22,6 @@ import { SharedModule, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserF
   ],
   providers: [
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
-    //{provide: NgbDateAdapter, useClass: CustomAdapter},
     { provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

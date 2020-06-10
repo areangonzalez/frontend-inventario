@@ -14,7 +14,7 @@
     <i class="fas fa-caret-down" *ngIf="!mostrar" ></i>
     <i class="fas fa-caret-up" *ngIf="mostrar" ></i>
   </button>
-  <div class="card mt-1" >
+  <div class="card mt-1" *ngIf="mostrar" >
     <div class="card-body">
       <fieldset>
         <div class="row">
@@ -32,8 +32,17 @@
               <option *ngFor="let marca of marcaLista" value="{{marca.id}}">{{marca.nombre}}</option>
             </select>
           </div>
+          <div class="form-group col-md-4">
+            <label for="marca" class="prioridad">Unidad de medida:</label>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="500" formControlName="unidad" >
+              <select class="form-control" id="marca" formControlName="medidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('medidadid').value)}" >
+                <option value="">Seleccione Medidad</option>
+                <option *ngFor="let marca of medidadLista" value="{{marca.id}}">{{marca.nombre}}</option>
+              </select>
+            </div>
+          </div>
         </div>
-
         <div class="row">
           <div class="form-group col-md-4">
             <label for="fecha_desde" class="prioridad">Vencimiento Desde/Hasta:</label>
@@ -69,6 +78,18 @@
                       {{ date.day }}
                     </span>
                   </ng-template>
+              </div>
+            </div>
+            <div class="col-md-4 alinear-checkbox">
+              <div class="d-flex justify-content-between">
+                <div class="form-group form-check-inline">
+                  <input type="checkbox" class="form-check-input" formControlName="defectuoso" id="defectuoso">
+                  <label class="form-check-label" for="defectuoso">Defectuoso/s</label>
+                </div>
+                <div class="form-group form-check-inline">
+                  <input type="checkbox" class="form-check-input" formControlName="vencido" id="vencidos">
+                  <label class="form-check-label" for="vencidos">Vencido/s</label>
+                </div>
               </div>
             </div>
           </div>
