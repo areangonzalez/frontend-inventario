@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  AlertService
+  AlertService, UtilService
  } from "./service";
 
 
 @NgModule({
   declarations: [
-    AlertService
+    AlertService, UtilService
   ],
   imports: [
     CommonModule

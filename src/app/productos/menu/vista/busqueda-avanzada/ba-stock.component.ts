@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { UtilService } from 'src/app/core/service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class BaStockComponent implements OnInit {
       private _fb: FormBuilder,
       private _configNgbDate: NgbDatepickerConfig,
       private _calendar: NgbCalendar,
+      private _util: UtilService
     ) {
       // configuracion de fecha minima
       _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
@@ -59,7 +61,7 @@ export class BaStockComponent implements OnInit {
    */
   public formatFecha(obj:any, keyFecha:string){
     if (obj != null){
-      //this.busquedaAvanzada.controls[keyFecha].setValue(this._util.formatearFecha(obj.day, obj.month, obj.year, "yyyy-MM-dd"));
+      this.busquedaAvanzada.controls[keyFecha].setValue(this._util.formatearFecha(obj.day, obj.month, obj.year, "yyyy-MM-dd"));
     }else{
       this.busquedaAvanzada.controls[keyFecha].setValue('');
     }
@@ -89,6 +91,7 @@ export class BaStockComponent implements OnInit {
   public onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
+      console.log(date);
       this.busquedaAvanzada.patchValue({vencimientoDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;

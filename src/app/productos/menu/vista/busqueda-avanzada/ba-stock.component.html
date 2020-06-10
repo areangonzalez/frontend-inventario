@@ -58,7 +58,7 @@
                         <span class="oi oi-calendar" title="Fecha desde/hasta" aria-hidden="true"></span>
                     </button>
                 </div>
-                <ngb-datepicker #db (select)="onDateSelection($event)" class="dp-style dp-style-flotante" [ngClass]="{'d-block': mostrarDp, 'd-none': !mostrarDp}" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [container]="'body'" ></ngb-datepicker>
+                <ngb-datepicker #db (select)="onDateSelection($event)" class="dp-style" [ngClass]="{'d-block': mostrarDp, 'd-none': !mostrarDp}" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [container]="'body'" ></ngb-datepicker>
                 <ng-template #t let-date let-focused="focused">
                     <span class="custom-day"
                           [class.focused]="focused"

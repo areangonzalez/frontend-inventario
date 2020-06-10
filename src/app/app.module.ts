@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDatepickerI18n, NgbTooltipModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
-import { SharedModule, CabeceraComponent } from "./shared";
-import { CustomDatepickerI18n } from './shared/helpers';
+import { SharedModule, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserFormatter } from "./shared";
 
 
 @NgModule({
@@ -22,7 +21,9 @@ import { CustomDatepickerI18n } from './shared/helpers';
     SharedModule
   ],
   providers: [
-    { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }
+    { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
+    //{provide: NgbDateAdapter, useClass: CustomAdapter},
+    { provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
