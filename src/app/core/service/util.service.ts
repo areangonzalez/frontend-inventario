@@ -26,4 +26,13 @@ export class UtilService {
     return fecha;
   }
 
+  /**
+   * @function validarNumero valida si el valor es un numero
+   * @param numero [string] parametro que sera validado.
+   */
+  public validarNumero(numero:any):boolean{
+    const patternNum = /^([0-9])*$/;
+    return patternNum.test(numero);
+  }
+
 }

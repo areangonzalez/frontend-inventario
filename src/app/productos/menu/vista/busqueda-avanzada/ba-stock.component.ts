@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from 'src/app/core/service';
 
@@ -85,6 +85,18 @@ export class BaStockComponent implements OnInit {
    */
   public mostrarBusquedaAvanzada(){
     return this.mostrar = !this.mostrar;
+  }
+  /**
+   * Valido si los valores ingresados al input son numeros,
+   * si no borro los valores ingresados
+   * @param datos objeto que contiene el valor del input
+   */
+  validarNumero(datos: any){
+    console.log(datos.value)
+    if (!this._util.validarNumero(datos.value)) {
+      datos.value = datos.value.substring(0,datos.value.length - 1);
+      this.busquedaAvanzada.get("unidad").patchValue(datos.value);
+    }
   }
 
 

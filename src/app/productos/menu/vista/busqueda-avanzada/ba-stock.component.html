@@ -1,7 +1,7 @@
 <fieldset [formGroup]="busquedaAvanzada">
   <div class="form-group">
     <div class="input-group">
-      <input type="text" class="form-control" formControlName="global_param" id="buscar-stock" placeholder="se busca algo" (keyup.enter)="buscar()" >
+      <input type="text" class="form-control" formControlName="global_param" id="buscar-stock" placeholder="buscar por nombre de producto Ej.: Azucar" (keyup.enter)="buscar()" >
       <div class="input-group-append btn-group">
         <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
         <button type="button" class="btn btn-danger" (click)="buscar()"><i class="fas fa-trash-alt"></i></button>
@@ -35,7 +35,7 @@
           <div class="form-group col-md-4">
             <label for="marca" class="prioridad">Unidad de medida:</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="500" formControlName="unidad" >
+              <input type="text" class="form-control" (keyup)="validarNumero($event.target)" placeholder="500" formControlName="unidad" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('unidad').value)}">
               <select class="form-control" id="marca" formControlName="medidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('medidadid').value)}" >
                 <option value="">Seleccione Medidad</option>
                 <option *ngFor="let marca of medidadLista" value="{{marca.id}}">{{marca.nombre}}</option>
