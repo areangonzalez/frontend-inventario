@@ -1,1 +1,75 @@
-<p>producto works!</p>
+<fieldset>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="nombre">Producto</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Ej.: Azucar" formControlName="nombre">
+        <input type="hidden" id="productoid" formControlName="productoid">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="cantidad">Cantidad</label>
+        <input type="text" class="form-control" id="cantidad" formControlName="cantidad" placeholder="Ej.: 1000">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="categoria">Categoría</label>
+        <select class="form-control" id="categoriaid" formControlName="cantidad">
+          <option value="">Seleccione una Categoría</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="marca">Marca</label>
+        <select class="form-control" id="marca" formControlName="marcaid">
+          <option value="">Seleccione Marca</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="unidad_medida">Unidad de Medida</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="unidad" formControlName="unidad" placeholder="Ej.: 500">
+          <select class="form-control" id="medida">
+            <option value="">Seleccione una medidad</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="vencimiento">Vencimiento</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="dd/mm/yyyy"
+                 name="dp" formControlName="vencimiento" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 alinear-checkbox">
+      <div class="d-flex justify-content-between">
+        <div class="form-group form-check-inline">
+          <input type="checkbox" class="form-check-input" formControlName="defectuoso" id="defectuoso">
+          <label class="form-check-label" for="defectuoso">Defectuoso/s</label>
+        </div>
+        <div class="form-group form-check-inline">
+          <input type="checkbox" class="form-check-input" formControlName="vencido" id="vencidos">
+          <label class="form-check-label" for="vencidos">Vencido/s</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-success">Agregar Producto</button>
+  </div>
+</fieldset>

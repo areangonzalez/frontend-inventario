@@ -1,1 +1,22 @@
-<p>comprobante works!</p>
+<fieldset [formGroup]="comprobanteForm">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="nro_comprobante">Nro. Remito</label>
+        <input class="form-control" type="text" min="1"minlength="4" [(ngModel)]="nroComprobantePrincipal" > - <input class="form-control" type="text" min="1"minlength="4" [(ngModel)]="nroComprobanteFinal" >
+      </div>
+      <input type="hidden"  >
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="dd/mm/yyyy"
+                 name="dp" formControlName="fechaEmision" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
