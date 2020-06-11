@@ -7,7 +7,7 @@
         <th scope="col" class="text-center">Marca</th>
         <th scope="col" class="text-center">Categoría</th>
         <th *ngIf="(tipoTabla != 'egreso')" scope="col" class="text-center">Vencimiento</th>
-        <th *ngIf="(tipoTabla == 'ingreso')" class="text-center" scope="col">Comprobante</th>
+        <th *ngIf="(tipoTabla != 'stock')" class="text-center" scope="col">Comprobante</th>
         <th *ngIf="(tipoTabla == 'ingreso')" class="text-center" scope="col">Ingreso</th>
         <th *ngIf="(tipoTabla == 'egreso')" class="text-center" scope="col">Egreso</th>
         <th scope="col" class="text-center">Acción</th>
@@ -20,7 +20,7 @@
         <td class="text-center">{{producto.marca}}</td>
         <td class="text-center">{{producto.categoria}}</td>
         <td *ngIf="(tipoTabla != 'egreso')" class="ancho-celda-vencimiento text-center">{{producto.vencimiento | date: 'dd/MM/yyyy'}}</td>
-        <td *ngIf="(tipoTabla == 'ingreso')" class="text-center">{{producto.comprobante}}</td>
+        <td *ngIf="(tipoTabla != 'stock')" class="text-center">{{producto.comprobante}}</td>
         <td *ngIf="(tipoTabla == 'ingreso')" class="text-center">{{producto.ingreso | date: 'dd/MM/yyyy'}}</td>
         <td *ngIf="(tipoTabla == 'egreso')" class="text-center">{{producto.egreso | date: 'dd/MM/yyyy'}}</td>
         <th scope="col" class="text-center">

@@ -1,1 +1,76 @@
-<p>ba-egreso works!</p>
+<fieldset [formGroup]="busquedaAvanzada">
+  <div class="form-group">
+    <div class="input-group">
+      <input type="text" class="form-control" formControlName="global_param" id="buscar-stock" placeholder="buscar por nombre de producto, número de comprobante Ej.: Azucar" (keyup.enter)="buscar()" >
+      <div class="input-group-append btn-group">
+        <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
+        <button type="button" class="btn btn-danger" (click)="buscar()"><i class="fas fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-success" (click)="buscar()"><i class="fas fa-plus"></i></button>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-md" (click)="mostrarBusquedaAvanzada()" [ngClass]="{'btn-success': btnSeleccion, 'btn-primary': !btnSeleccion}">
+    Búsqueda Avanzada &nbsp;
+    <i class="fas fa-caret-down" *ngIf="!mostrar" ></i>
+    <i class="fas fa-caret-up" *ngIf="mostrar" ></i>
+  </button>
+  <div class="card mt-1" *ngIf="mostrar" >
+    <div class="card-body">
+      <fieldset>
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label for="fecha_desde" class="prioridad">Egreso Desde/Hasta:</label>
+            <div class="input-group">
+              <input class="form-control input-append"
+              placeholder="Desde: dd/mm/yyyy"
+              ngbDatepicker
+              #datePicker="ngbDatepicker"
+              id="fecha_desde"
+              formControlName="egresoDesde"
+              (ngModelChange)="formatFecha($event, 'egreso_desde');"
+              [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('egresoDesde').value)}"
+              [displayMonths]="2"
+              [navigation]="'select'"
+              [dayTemplate]="t"
+              [autoClose]="false" >
+              <input class="form-control" #c1 placeholder="Hasta: dd/mm/yyyy" ngbDatepicker #fb="ngbDatepicker"
+              id="fecha_hasta" formControlName="egresoHasta" (ngModelChange)="formatFecha($event, 'egreso_hasta')" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('egresoHasta').value)}"
+              >
+              <div class="input-group-prepend">
+                  <button class="btn btn-outline-info" (click)="abrirDp()" type="button">
+                      <span class="oi oi-calendar" title="Fecha desde/hasta" aria-hidden="true"></span>
+                  </button>
+              </div>
+              <ngb-datepicker #db (select)="onDateSelection($event)" class="dp-style" [ngClass]="{'d-block': mostrarDp, 'd-none': !mostrarDp}" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [container]="'body'" ></ngb-datepicker>
+              <ng-template #t let-date let-focused="focused">
+                  <span class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                  </span>
+                </ng-template>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="categoria" class="prioridad">Categoría:</label>
+            <select class="form-control" id="categoria" formControlName="categoriaid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('categoriaid').value)}" >
+              <option value="">Seleccione Categoría</option>
+              <option *ngFor="let categoria of categoriaLista" value="{{categoria.id}}">{{categoria.nombre}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="marca" class="prioridad">Marca:</label>
+            <select class="form-control" id="marca" formControlName="marcaid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('marcaid').value)}" >
+              <option value="">Seleccione Localidad</option>
+              <option *ngFor="let marca of marcaLista" value="{{marca.id}}">{{marca.nombre}}</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</fieldset>
+
