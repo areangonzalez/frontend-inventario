@@ -5,10 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaStockComponent, ListaProductoComponent } from './lista';
 import { AlertComponent } from './alert/alert.component';
 import { ComprobanteComponent, ProductoComponent } from './formulario';
+import { ComprobanteModalContent, ComprobanteModalComponent } from './modal';
 
 
 @NgModule({
-  declarations: [ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent],
+  declarations: [ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent],
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
@@ -20,7 +21,8 @@ import { ComprobanteComponent, ProductoComponent } from './formulario';
     CommonModule,
     FormsModule, ReactiveFormsModule,
     NgbModule,
-    ListaStockComponent, AlertComponent
+    ListaStockComponent, AlertComponent,
+    ComprobanteModalContent, ComprobanteModalComponent
   ]
 })
 export class SharedModule { }
