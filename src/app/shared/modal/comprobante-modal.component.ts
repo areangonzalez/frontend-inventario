@@ -14,7 +14,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
       </button>
     </div>
     <div class="modal-body">
-      <p>Hello</p>
+      <form-comprobante></form-comprobante>
+      <form-producto></form-producto>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="cerrarModal()">Close</button>
@@ -43,7 +44,7 @@ export class ComprobanteModalComponent {
   constructor( private _modalService: NgbModal ) { }
 
   open() {
-    const modalRef = this._modalService.open(ComprobanteModalContent);
+    const modalRef = this._modalService.open(ComprobanteModalContent, { size: 'lg' });
     //modalRef.componentInstance.algunAtributo = 'algo';
   }
 
