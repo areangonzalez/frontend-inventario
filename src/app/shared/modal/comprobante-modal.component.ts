@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 /**
@@ -8,7 +8,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'comprobante-modal-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">Hi there!</h4>
+      <h4 class="modal-title">{{titulo}}</h4>
       <button type="button" class="close" aria-label="Close" (click)="cerrarModal()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -19,11 +19,12 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
       <shared-lista-producto></shared-lista-producto>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="cerrarModal()">Close</button>
+      <button type="button" class="btn btn-outline-success" (click)="cerrarModal()"><i class="fas fa-save"></i> Guardar</button>
     </div>
   `
 })
 export class ComprobanteModalContent {
+  @Input("titulo") public titulo: string;
 
   constructor( private _ativeModal: NgbActiveModal ) { }
 
@@ -41,12 +42,13 @@ export class ComprobanteModalContent {
   styleUrls: ['./comprobante-modal.component.scss']
 })
 export class ComprobanteModalComponent {
+  @Input("titulo") public titulo: string;
 
   constructor( private _modalService: NgbModal ) { }
 
   open() {
     const modalRef = this._modalService.open(ComprobanteModalContent, { size: 'lg' });
-    //modalRef.componentInstance.algunAtributo = 'algo';
+    modalRef.componentInstance.titulo = this.titulo;
   }
 
 }

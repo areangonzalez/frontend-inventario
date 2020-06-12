@@ -3,13 +3,13 @@
     <div class="input-group">
       <input type="text" class="form-control" formControlName="global_param" id="buscar-stock" placeholder="buscar por nombre de producto, número de comprobante Ej.: Azucar" (keyup.enter)="buscar()" >
       <div class="input-group-append btn-group">
-        <button type="button" class="btn btn-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
-        <button type="button" class="btn btn-danger" (click)="buscar()"><i class="fas fa-trash-alt"></i></button>
-        <button type="button" class="btn btn-success" (click)="buscar()"><i class="fas fa-plus"></i></button>
+        <button type="button" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
+        <button type="button" class="btn btn-outline-danger" (click)="buscar()"><i class="fas fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-outline-success" (click)="buscar()"><i class="fas fa-plus"></i></button>
       </div>
     </div>
   </div>
-  <button type="button" class="btn btn-md" (click)="mostrarBusquedaAvanzada()" [ngClass]="{'btn-success': btnSeleccion, 'btn-primary': !btnSeleccion}">
+  <button type="button" class="btn btn-md" (click)="mostrarBusquedaAvanzada()" [ngClass]="{'btn-success': btnSeleccion, 'btn-outline-primary': !btnSeleccion}">
     Búsqueda Avanzada &nbsp;
     <i class="fas fa-caret-down" *ngIf="!mostrar" ></i>
     <i class="fas fa-caret-up" *ngIf="mostrar" ></i>
