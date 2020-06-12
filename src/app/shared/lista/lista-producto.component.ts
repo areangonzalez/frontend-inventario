@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-lista-producto',
+  selector: 'shared-lista-producto',
   templateUrl: './lista-producto.component.html',
   styleUrls: ['./lista-producto.component.scss']
 })

@@ -16,6 +16,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
     <div class="modal-body">
       <form-comprobante></form-comprobante>
       <form-producto></form-producto>
+      <shared-lista-producto></shared-lista-producto>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="cerrarModal()">Close</button>
