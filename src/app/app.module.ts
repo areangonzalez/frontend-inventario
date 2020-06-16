@@ -5,13 +5,18 @@ import { NgbModule, NgbDatepickerI18n, NgbTooltipModule, NgbDateAdapter, NgbDate
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
-import { SharedModule, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserFormatter } from "./shared";
+import {
+  SharedModule, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
+  BreadcrumbComponent
+} from "./shared";
+import { BreadcrumbsService } from './core/service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CabeceraComponent
+    CabeceraComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { SharedModule, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserF
   ],
   providers: [
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
-    { provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter }
+    { provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter },
+    BreadcrumbsService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ import { ComprobanteModalContent, ComprobanteModalComponent } from './modal';
 
 
 @NgModule({
-  declarations: [ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent],
+  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent ],
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,

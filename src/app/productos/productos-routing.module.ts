@@ -12,13 +12,16 @@ const routes: Routes = [
     component: ProductosComponent,
     children: [
       {
-        path: 'stock', component: StockComponent
+        path: 'stock', component: StockComponent,
+        data: { breadcrumb: 'Stock' }
       },
       {
-        path: 'ingreso', component: IngresoComponent
+        path: 'ingreso', component: IngresoComponent,
+        data: { breadcrumb: 'Ingreso' }
       },
       {
-        path: 'egreso', component: EgresoComponent
+        path: 'egreso', component: EgresoComponent,
+        data: { breadcrumb: 'Egreso' }
       },
       { path: '**', redirectTo: 'stock', pathMatch: 'full' },
     ]
