@@ -2,26 +2,32 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="nro_comprobante">Nro. Remito:</label>
+        <label for="nro_comprobante">Nro. Remito (<b class="text-danger">*</b>):</label>
         <div class="input-group">
-          <input class="form-control col-md-4" type="text" min="1"maxlength="4" formControlName="nroComprobantePrincipal" placeholder="0000">
+          <input class="form-control col-md-4" type="text" min="1" maxlength="4" formControlName="nroComprobantePrincipal" placeholder="0000" (keyup)="esNumero($event.target)" (change)="validarNumeroComprobante($event.target, 'principal')">
           <div class="input-group-append input-group-prepend">
             <span class="input-group-text">-</span>
           </div>
-          <input class="form-control col-md-8" type="text" min="1" maxlength="8" formControlName="nroComprobanteFinal" placeholder="00000000" >
+          <input class="form-control col-md-8" type="text" min="1" maxlength="8" formControlName="nroComprobanteFinal" placeholder="00000000" (keyup)="esNumero($event.target)" (change)="validarNumeroComprobante($event.target, 'final')">
+        </div>
+        <div class="text-danger" *ngIf="((comprobanteForm.get('nroComprobantePrincipal').invalid || comprobanteForm.get('nroComprobanteFinal').invalid) && submitted)">
+          <span>Se requiere completar el numero de comprobante.</span>
         </div>
       </div>
     </div>
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="fecha_emision">Fecha:</label>
+        <label for="fecha_emision">Fecha Remito (<b class="text-danger">*</b>):</label>
         <div class="input-group">
           <input class="form-control" id="fecha_emision" placeholder="dd/mm/yyyy"
-                 name="dp" formControlName="fechaEmision" ngbDatepicker #d="ngbDatepicker">
+                 name="dp" formControlName="fechaEmision" (ngModelChange)="formatearFecha($event)" ngbDatepicker #d="ngbDatepicker">
           <div class="input-group-append">
             <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
           </div>
+        </div>
+        <div class="text-danger" *ngIf="((comprobanteForm.get('feha_emision').invalid || comprobanteForm.get('feha_emision').invalid) && submitted)">
+          <span>Se requiere completar el numero de comprobante.</span>
         </div>
       </div>
     </div>

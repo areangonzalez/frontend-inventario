@@ -35,4 +35,15 @@ export class UtilService {
     return patternNum.test(numero);
   }
 
+  public completarConCeros(valor:string, cantidad:number) {
+    let valorFinal: string = '';
+    let cantidadReal: number = (cantidad - valor.length);
+
+    for (let i = 0; i < cantidadReal; i++) {
+       valorFinal += '0';
+    }
+
+    return valorFinal + valor;
+  }
+
 }
