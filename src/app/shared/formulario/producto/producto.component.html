@@ -5,12 +5,18 @@
         <label for="nombre">Producto:</label>
         <input type="text" class="form-control" id="nombre" placeholder="Ej.: Azucar" formControlName="nombre">
         <input type="hidden" id="productoid" formControlName="productoid">
+        <div *ngIf="(productoForm.get('productoid').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese un nombre de producto.</span>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label for="cantidad">Cantidad:</label>
-        <input type="text" class="form-control" id="cantidad" formControlName="cantidad" placeholder="Ej.: 1000">
+        <input type="text" class="form-control" id="cantidad" formControlName="cantidad" placeholder="Ej.: 1000" >
+        <div *ngIf="(productoForm.get('cantidad').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese una cantidad.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +27,9 @@
         <select class="form-control" id="categoriaid" formControlName="cantidad">
           <option value="">Seleccione una Categoría</option>
         </select>
+        <div *ngIf="(productoForm.get('categoriaid').invalid && submitted)" class="text-danger">
+          <span>Por favor seleccione una categoría.</span>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
@@ -29,6 +38,9 @@
         <select class="form-control" id="marca" formControlName="marcaid">
           <option value="">Seleccione Marca</option>
         </select>
+        <div *ngIf="(productoForm.get('productoid').invalid && submitted)" class="text-danger">
+          <span>Por favor seleccione una marca.</span>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
@@ -40,6 +52,10 @@
             <option value="">Medida</option>
           </select>
         </div>
+        <div *ngIf="((productoForm.get('unidad').invalid || productoForm.get('medidaid').invalid) && submitted)" class="text-danger">
+          <div *ngIf="productoForm.get('unidad').hasError('required')">Por favor ingrese una cantidad para la unidad de medida.</div>
+          <div *ngIf="productoForm.get('medidaid').hasError('required')">Por favor seleccione una medida.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -49,10 +65,13 @@
         <label for="vencimiento">Vencimiento:</label>
         <div class="input-group">
           <input class="form-control" placeholder="dd/mm/yyyy"
-                 name="dp" formControlName="vencimiento" ngbDatepicker #d="ngbDatepicker">
+                 name="dp" formControlName="fechaVencimiento" ngbDatepicker #d="ngbDatepicker">
           <div class="input-group-append">
             <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
           </div>
+        </div>
+        <div *ngIf="(productoForm.get('fechaVencimiento').invalid && submitted)" class="text-danger">
+          <span>Por favor seleccione una fecha de vencimiento.</span>
         </div>
       </div>
     </div>

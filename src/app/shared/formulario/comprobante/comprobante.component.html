@@ -26,7 +26,7 @@
             <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
           </div>
         </div>
-        <div class="text-danger" *ngIf="((comprobanteForm.get('feha_emision').invalid || comprobanteForm.get('feha_emision').invalid) && submitted)">
+        <div class="text-danger" *ngIf="(comprobanteForm.get('fechaEmision').invalid && submitted)">
           <span>Se requiere completar el numero de comprobante.</span>
         </div>
       </div>

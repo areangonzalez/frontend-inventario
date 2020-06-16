@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'form-producto',
@@ -8,17 +8,19 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class ProductoComponent implements OnInit {
   public productoForm: FormGroup;
+  public submitted: boolean = false;
 
   constructor( private _fb: FormBuilder ) {
     this.productoForm = _fb.group({
-      productoid: '',
-      nombre: '',
-      cantidad: '',
-      categoriaid: '',
-      marcaid: '',
-      unidad: '',
-      medidaid: '',
-      vencimiento: ''
+      productoid: ['', Validators.required],
+      nombre: ['', Validators.required],
+      cantidad: ['', Validators.required],
+      categoriaid: ['', Validators.required],
+      marcaid: ['', Validators.required],
+      unidad: ['', Validators.required],
+      medidaid: ['', Validators.required],
+      vencimiento: '',
+      fechaVencimiento: ['', Validators.required]
     })
   }
 
