@@ -7,7 +7,8 @@ import { RoutingModule } from './routing.module';
 import { AppComponent } from './app.component';
 import {
   SharedModule, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
-  BreadcrumbComponent
+  BreadcrumbComponent,
+  fakeBackendProvider
 } from "./shared";
 import { BreadcrumbsService } from './core/service';
 
@@ -28,7 +29,10 @@ import { BreadcrumbsService } from './core/service';
   providers: [
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     { provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter },
-    BreadcrumbsService
+    BreadcrumbsService,
+
+    // fake backend
+    fakeBackendProvider
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
