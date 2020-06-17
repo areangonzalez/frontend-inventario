@@ -3,6 +3,29 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
+let listadoProductos = [
+  { id: 1, nombre: 'Azucar blanca', unidad_valor: 1, unidad_medida: 4, marcaid: 4, categoriaid: 1, producto: 'Azucar blanca, 1lt (Chango)' },
+  { id: 8, nombre: 'Alcohol', unidad_valor: 250, unidad_medida: 1, marcaid: 8, categoriaid: 2, producto: 'Alcohol, 250 cm3 (Purocol)' },
+  { id: 2, nombre: 'Fideos secos guiseros', unidad_valor: 500, unidad_medida: 3, marcaid: 3, categoriaid: 1, producto: 'Fideos secos guiseros, 500gr (Canale)' },
+  { id: 3, nombre: 'Harina de trigo 000', unidad_valor: 500, unidad_medida: 3, marcaid: 1, categoriaid: 1, producto: 'Harina de trigo 000, 500gr (Cañuelas)' },
+  { id: 7, nombre: 'Jabón blanco en pan', unidad_valor: 200, unidad_medida: 3, marcaid: 9, categoriaid: 2, producto: 'Jabón blanco en pan, 200gr (Ala)' },
+  { id: 5, nombre: 'Leche entera', unidad_valor: 1, unidad_medida: 2, marcaid: 5, categoriaid: 1, producto: 'Leche entera, 1lt (La Serenísima)' },
+  { id: 6, nombre: 'Manteca', unidad_valor: 200, unidad_medida: 3, marcaid: 6, categoriaid: 1, producto: 'Manteca, 200gr (La Serenísima)' },
+  { id: 4, nombre: 'Mermelada de ciruela', unidad_valor: 454, unidad_medida: 3, marcaid: 1, categoriaid: 1, producto: 'Mermelada de ciruela, 454gr (Canale)' }
+];
+let unidad_medida = [
+  { id:1, nombre: 'Centimetros Cúbicos', simbolo: 'cm3' }, { id:2, nombre: 'Litro', simbolo: 'lt' },
+  { id:3, nombre: 'Gramos', simbolo: 'gr' }, { id:4, nombre: 'Kilogramos', simbolo: 'kg' },
+  { id:5, nombre: 'Miligramos', simbolo: 'ml' }, { id:6, nombre: 'Unidad', simbolo: 'un' }
+];
+let listadoMarcas = [
+  { id:1, nombre:'Cañuelas' },{ id:2, nombre:'Dos Hermanos' },{ id:3, nombre:'Canale' },
+  { id:4, nombre:'Chango' },{ id:5, nombre:'Sancor' },{ id:6, nombre:'La Serenísima' },
+  { id:7, nombre:'La salteña' },{ id:8, nombre:'Purocol' },{ id:9, nombre:'Ala' },
+];
+let listadoCategorias = [
+  { id:1, nombre:'Alimentos/Bebidas' }, { id:1, nombre:'Limpieza' }
+];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -20,8 +43,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             switch (true) {
                 case url.endsWith('/apimock/inventarios') && method === 'POST':
                     return crearInventario();
-                /* case url.endsWith('/users') && method === 'GET':
-                    return getUsers(); */
+                case url.endsWith('/apimock/productos') && method === 'GET':
+                    return listarProductos();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -29,6 +52,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         // route functions
+
+        function listarProductos() {
+          return ok(listadoProductos);
+        }
 
         function crearInventario() {
             const { username, password } = body;

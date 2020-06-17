@@ -1,0 +1,4 @@
+<div class="form-group">
+  <label for="typeahead-format">Search for a state:</label>
+  <input id="typeahead-format" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
+</div>

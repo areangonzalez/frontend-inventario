@@ -13,7 +13,6 @@ import {
   ErrorInterceptor
 } from "./shared";
 import { BreadcrumbsService } from './core/service';
-import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { CoreModule } from './core/core.module';
     NgbModule,
     NgbTooltipModule,
     RoutingModule,
-    CoreModule,
     SharedModule
   ],
   providers: [
