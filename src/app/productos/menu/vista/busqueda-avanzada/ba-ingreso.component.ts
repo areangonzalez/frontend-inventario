@@ -11,6 +11,7 @@ import { UtilService } from 'src/app/core/service';
 export class BaIngresoComponent implements OnInit {
   @Input("productos") public productos: any; // listado de productos
   @Input("categorias") public categorias: any; // Listados de categorias
+  @Input("unidadMedida") public unidadMedida: any; // Listados de unidadMedida
 
   public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
   public marcaLista: any = [{id:1, nombre:'Canale'}];

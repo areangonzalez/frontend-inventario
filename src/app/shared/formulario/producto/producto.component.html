@@ -54,6 +54,7 @@
           <input type="text" class="form-control" id="unidad" formControlName="unidad_valor" placeholder="Ej.: 500">
           <select class="form-control" id="medida" formControlName="unidad_medidaid">
             <option value="">Medida</option>
+            <option *ngFor="let medida of listadoDeUnidadMedida" value="{{medida.id}}">{{medida.simbolo}}</option>
           </select>
         </div>
         <div *ngIf="((productoForm.get('unidad_valor').invalid || productoForm.get('unidad_medidaid').invalid) && submitted)" class="text-danger">

@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductoComponent implements OnInit {
   @Input("listadoDeProducto") listadoDeProducto:any; // Listado de productos
   @Input("listadoDeCategoria") listadoDeCategoria:any; // listado de categoria
+  @Input("listadoDeUnidadMedida") listadoDeUnidadMedida:any; // listado de unidad de medida
 
   public productoForm: FormGroup;
   public submitted: boolean = false;
@@ -32,6 +33,8 @@ export class ProductoComponent implements OnInit {
   }
 
   obtenerProducto(producto:any) {
+    console.log(producto);
+
     this.productoForm.patchValue(producto);
   }
 

@@ -4,14 +4,14 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 let listadoProductos = [
-  { id: 1, nombre: 'Azucar blanca', unidad_valor: 1, unidad_medida: 4, marcaid: 4, categoriaid: 1, producto: 'Azucar blanca, 1lt (Chango)' },
-  { id: 8, nombre: 'Alcohol', unidad_valor: 250, unidad_medida: 1, marcaid: 8, categoriaid: 2, producto: 'Alcohol, 250 cm3 (Purocol)' },
-  { id: 2, nombre: 'Fideos secos guiseros', unidad_valor: 500, unidad_medida: 3, marcaid: 3, categoriaid: 1, producto: 'Fideos secos guiseros, 500gr (Canale)' },
-  { id: 3, nombre: 'Harina de trigo 000', unidad_valor: 500, unidad_medida: 3, marcaid: 1, categoriaid: 1, producto: 'Harina de trigo 000, 500gr (Cañuelas)' },
-  { id: 7, nombre: 'Jabón blanco en pan', unidad_valor: 200, unidad_medida: 3, marcaid: 9, categoriaid: 2, producto: 'Jabón blanco en pan, 200gr (Ala)' },
-  { id: 5, nombre: 'Leche entera', unidad_valor: 1, unidad_medida: 2, marcaid: 5, categoriaid: 1, producto: 'Leche entera, 1lt (La Serenísima)' },
-  { id: 6, nombre: 'Manteca', unidad_valor: 200, unidad_medida: 3, marcaid: 6, categoriaid: 1, producto: 'Manteca, 200gr (La Serenísima)' },
-  { id: 4, nombre: 'Mermelada de ciruela', unidad_valor: 454, unidad_medida: 3, marcaid: 1, categoriaid: 1, producto: 'Mermelada de ciruela, 454gr (Canale)' }
+  { id: 1, nombre: 'Azucar blanca', unidad_valor: 1, unidad_medidaid: 4, marcaid: 4, categoriaid: 1, producto: 'Azucar blanca, 1lt (Chango)' },
+  { id: 8, nombre: 'Alcohol', unidad_valor: 250, unidad_medidaid: 1, marcaid: 8, categoriaid: 2, producto: 'Alcohol, 250 cm3 (Purocol)' },
+  { id: 2, nombre: 'Fideos secos guiseros', unidad_valor: 500, unidad_medidaid: 3, marcaid: 3, categoriaid: 1, producto: 'Fideos secos guiseros, 500gr (Canale)' },
+  { id: 3, nombre: 'Harina de trigo 000', unidad_valor: 500, unidad_medidaid: 3, marcaid: 1, categoriaid: 1, producto: 'Harina de trigo 000, 500gr (Cañuelas)' },
+  { id: 7, nombre: 'Jabón blanco en pan', unidad_valor: 200, unidad_medidaid: 3, marcaid: 9, categoriaid: 2, producto: 'Jabón blanco en pan, 200gr (Ala)' },
+  { id: 5, nombre: 'Leche entera', unidad_valor: 1, unidad_medidaid: 2, marcaid: 5, categoriaid: 1, producto: 'Leche entera, 1lt (La Serenísima)' },
+  { id: 6, nombre: 'Manteca', unidad_valor: 200, unidad_medidaid: 3, marcaid: 6, categoriaid: 1, producto: 'Manteca, 200gr (La Serenísima)' },
+  { id: 4, nombre: 'Mermelada de ciruela', unidad_valor: 454, unidad_medidaid: 3, marcaid: 1, categoriaid: 1, producto: 'Mermelada de ciruela, 454gr (Canale)' }
 ];
 let unidad_medida = [
   { id:1, nombre: 'Centimetros Cúbicos', simbolo: 'cm3' }, { id:2, nombre: 'Litro', simbolo: 'lt' },
@@ -47,6 +47,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarProductos();
                 case url.endsWith('/apimock/categorias') && method === 'GET':
                     return listarCategorias();
+                case url.endsWith('/apimock/unidad-medidas') && method === 'GET':
+                    return listarUnidadMedida();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -61,6 +63,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         /* LISTADO CATEGORIAS */
         function listarCategorias() {
           return ok(listadoCategorias);
+        }
+        /* LISTADO UNIDAD MEDIDA */
+        function listarUnidadMedida() {
+          return ok(unidad_medida);
         }
 
         function crearInventario() {
