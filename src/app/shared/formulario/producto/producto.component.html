@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="col-md-8">
-      <shared-autocompletar [listado]="listadoDeProducto"></shared-autocompletar>
+      <shared-autocompletar [listado]="listadoDeProducto" (obtenerSeleccion)="obtenerProducto($event)" ></shared-autocompletar>
     </div>
     <div class="col-md-4">
       <div class="form-group">
@@ -27,8 +27,9 @@
     <div class="col-md-4">
       <div class="form-group">
         <label for="categoria">Categoría:</label>
-        <select class="form-control" id="categoriaid" formControlName="cantidad">
+        <select class="form-control" id="categoriaid" formControlName="categoriaid">
           <option value="">Seleccione una Categoría</option>
+          <option *ngFor="let categoria of listadoDeCategoria" value="{{categoria.id}}">{{categoria.nombre}}</option>
         </select>
         <div *ngIf="(productoForm.get('categoriaid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione una categoría.</span>
@@ -50,14 +51,14 @@
       <div class="form-group">
         <label for="unidad_medida">Unidad de Medida:</label>
         <div class="input-group">
-          <input type="text" class="form-control" id="unidad" formControlName="unidad" placeholder="Ej.: 500">
-          <select class="form-control" id="medida" formControlName="medidaid">
+          <input type="text" class="form-control" id="unidad" formControlName="unidad_valor" placeholder="Ej.: 500">
+          <select class="form-control" id="medida" formControlName="unidad_medidaid">
             <option value="">Medida</option>
           </select>
         </div>
-        <div *ngIf="((productoForm.get('unidad').invalid || productoForm.get('medidaid').invalid) && submitted)" class="text-danger">
-          <div *ngIf="productoForm.get('unidad').hasError('required')">Por favor ingrese una cantidad para la unidad de medida.</div>
-          <div *ngIf="productoForm.get('medidaid').hasError('required')">Por favor seleccione una medida.</div>
+        <div *ngIf="((productoForm.get('unidad_valor').invalid || productoForm.get('unidad_medidaid').invalid) && submitted)" class="text-danger">
+          <div *ngIf="productoForm.get('unidad_valor').hasError('required')">Por favor ingrese una cantidad para la unidad de medida.</div>
+          <div *ngIf="productoForm.get('unidad_medidaid').hasError('required')">Por favor seleccione una medida.</div>
         </div>
       </div>
     </div>

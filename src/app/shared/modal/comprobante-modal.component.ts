@@ -15,7 +15,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
     </div>
     <div class="modal-body">
       <form-comprobante></form-comprobante>
-      <form-producto [listadoDeProducto]="listaProductos" ></form-producto>
+      <form-producto [listadoDeProducto]="listaProductos" [listadoDeCategoria]="listaCategorias" ></form-producto>
       <shared-lista-producto></shared-lista-producto>
     </div>
     <div class="modal-footer">
@@ -25,7 +25,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ComprobanteModalContent {
   @Input("titulo") public titulo: string;
-  @Input("listaProductos") public listaProductos: any;
+  @Input("listaProductos") public listaProductos: any; // Listado de productos
+  @Input("listaCategorias") public listaCategorias: any; // Listado de productos
 
   constructor( private _ativeModal: NgbActiveModal ) { }
 
@@ -44,7 +45,8 @@ export class ComprobanteModalContent {
 })
 export class ComprobanteModalComponent {
   @Input("titulo") public titulo: string;
-  @Input("productos") public productos: any;
+  @Input("productos") public productos: any; // listado de productos
+  @Input("categorias") public categorias: any; // listado de categorías
 
   constructor( private _modalService: NgbModal ) { }
 
@@ -52,6 +54,7 @@ export class ComprobanteModalComponent {
     const modalRef = this._modalService.open(ComprobanteModalContent, { size: 'lg' });
     modalRef.componentInstance.titulo = this.titulo;
     modalRef.componentInstance.listaProductos = this.productos;
+    modalRef.componentInstance.listaCategorias = this.categorias;
   }
 
 }

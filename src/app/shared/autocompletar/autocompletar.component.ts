@@ -32,8 +32,6 @@ export class AutocompletarComponent {
    * @param valor Item seleccionado por el auto completar
    */
   seleccionaElemento(valor: NgbTypeaheadSelectItemEvent){
-    console.log(valor);
-
       // Reviso si hubo una selección
       if (valor != undefined) {
         this.seleccionaValor.emit(valor.item);

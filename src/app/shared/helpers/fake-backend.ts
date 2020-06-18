@@ -45,6 +45,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return crearInventario();
                 case url.endsWith('/apimock/productos') && method === 'GET':
                     return listarProductos();
+                case url.endsWith('/apimock/categorias') && method === 'GET':
+                    return listarCategorias();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -52,9 +54,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         // route functions
-
+        /* LISTADO PRODUCTOS */
         function listarProductos() {
           return ok(listadoProductos);
+        }
+        /* LISTADO CATEGORIAS */
+        function listarCategorias() {
+          return ok(listadoCategorias);
         }
 
         function crearInventario() {

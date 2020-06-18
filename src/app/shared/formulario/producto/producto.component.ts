@@ -8,7 +8,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./producto.component.scss']
 })
 export class ProductoComponent implements OnInit {
-  @Input("listadoDeProducto") listadoDeProducto:any;
+  @Input("listadoDeProducto") listadoDeProducto:any; // Listado de productos
+  @Input("listadoDeCategoria") listadoDeCategoria:any; // listado de categoria
+
   public productoForm: FormGroup;
   public submitted: boolean = false;
 
@@ -19,14 +21,18 @@ export class ProductoComponent implements OnInit {
       cantidad: ['', Validators.required],
       categoriaid: ['', Validators.required],
       marcaid: ['', Validators.required],
-      unidad: ['', Validators.required],
-      medidaid: ['', Validators.required],
+      unidad_valor: ['', Validators.required],
+      unidad_medidaid: ['', Validators.required],
       vencimiento: '',
       fechaVencimiento: ['', Validators.required]
     })
   }
 
   ngOnInit(): void {
+  }
+
+  obtenerProducto(producto:any) {
+    this.productoForm.patchValue(producto);
   }
 
 }

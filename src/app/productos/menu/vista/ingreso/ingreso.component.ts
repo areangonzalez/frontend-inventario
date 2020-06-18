@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class IngresoComponent implements OnInit {
   public listadoProductos: any;
+  public listadoCategorias: any;
   public listadoStock: any = [
     { id:1, cantidad: 1000, producto: 'Alcohol, 250 cc', marca: 'Purocol', categoria: 'Limpieza', vencimiento: '2022-03-20', comprobante: '0002-00000187', ingreso: '2020-05-20' },
     { id:2, cantidad: 2500, producto: 'jabón blanco en pan, 200 gr', marca: 'Ala', categoria: 'Limpieza', vencimiento: '2021-03-20', comprobante: '0002-00000187', ingreso: '2020-05-20' },
@@ -22,8 +23,7 @@ export class IngresoComponent implements OnInit {
 
   ngOnInit(): void {
     this.listadoProductos = this._route.snapshot.data["productos"];
-    console.log(this.listadoProductos);
-
+    this.listadoCategorias = this._route.snapshot.data["categorias"];
   }
 
 }

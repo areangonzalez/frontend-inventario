@@ -9,7 +9,9 @@ import { UtilService } from 'src/app/core/service';
   styleUrls: ['./ba-stock.component.scss']
 })
 export class BaIngresoComponent implements OnInit {
-  @Input("productos") public productos: any;
+  @Input("productos") public productos: any; // listado de productos
+  @Input("categorias") public categorias: any; // Listados de categorias
+
   public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
   public marcaLista: any = [{id:1, nombre:'Canale'}];
   public medidadLista: any = [{ id:1, nombre:'kg' },{ id:2, nombre:'lts' },{ id:3, nombre:'gr' }];
@@ -17,7 +19,6 @@ export class BaIngresoComponent implements OnInit {
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
   public btnSeleccion: boolean = false;
-
 
   // Variables para calendarios
   public hoveredDate: NgbDate | null = null; // Resalta la fecha
