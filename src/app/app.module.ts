@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule, NgbDatepickerI18n, NgbTooltipModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { RoutingModule } from './routing.module';
 
@@ -25,6 +25,7 @@ import { BreadcrumbsService } from './core/service';
     BrowserModule,
     NgbModule,
     NgbTooltipModule,
+    HttpClientModule,
     RoutingModule,
     SharedModule
   ],

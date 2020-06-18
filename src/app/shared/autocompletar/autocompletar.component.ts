@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Observable, merge, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
+import { NgbTypeaheadSelectItemEvent, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 
-const productos = ['uno', 'dos', 'tres'];
 
 @Component({
   selector: 'shared-autocompletar',
@@ -10,17 +10,40 @@ const productos = ['uno', 'dos', 'tres'];
   styleUrls: ['./autocompletar.component.scss']
 })
 export class AutocompletarComponent {
-  //@Input("productos") public productos: any;
+  @Input("listado") public listado;
+  @Output("obtenerSeleccion") public seleccionaValor = new EventEmitter();
   public model: any;
 
-  formatter = (result: string) => result.toUpperCase();
+  @ViewChild('instance') instance: NgbTypeahead;
+    focus$ = new Subject<string>();
+    click$ = new Subject<string>();
 
-  search = (text$: Observable<string>) =>
+    search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
-      distinctUntilChanged(),
       map(term => term === '' ? []
-        : productos.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+        : this.listado.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
+
+  formatter = (x: {nombre: string}) => x.nombre;
+
+  /**
+   * Busca el nombre del item seleccionado y devuelve el objeto al componente padre
+   * @param valor Item seleccionado por el auto completar
+   */
+  seleccionaElemento(valor: NgbTypeaheadSelectItemEvent){
+    console.log(valor);
+
+      // Reviso si hubo una selección
+      if (valor != undefined) {
+        this.seleccionaValor.emit(valor.item);
+      }else{// sino hubo seleccion mando un mensaje de error
+        this.seleccionaValor.emit(false);
+      }
+    }
+
+  nombreProducto() {
+    // Tarea futura de taiga
+  }
 
 }

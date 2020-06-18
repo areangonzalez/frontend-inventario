@@ -4,6 +4,7 @@ import { ProductosComponent } from './productos.component';
 import { StockComponent } from './menu/vista/stock/stock.component';
 import { IngresoComponent } from './menu/vista/ingreso/ingreso.component';
 import { EgresoComponent } from './menu/vista/egreso/egreso.component';
+import { ProductoService } from '../core/service';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
       },
       {
         path: 'ingreso', component: IngresoComponent,
-        data: { breadcrumb: 'Ingreso' }
+        data: { breadcrumb: 'Ingreso' },
+        resolve: { productos: ProductoService }
       },
       {
         path: 'egreso', component: EgresoComponent,
@@ -32,6 +34,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ProductoService]
 })
 export class ProductosRoutingModule { }

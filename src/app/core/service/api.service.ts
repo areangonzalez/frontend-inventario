@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
     constructor(
         private http: HttpClient,

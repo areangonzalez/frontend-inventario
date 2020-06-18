@@ -15,7 +15,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
     </div>
     <div class="modal-body">
       <form-comprobante></form-comprobante>
-      <form-producto></form-producto>
+      <form-producto [listadoDeProducto]="listaProductos" ></form-producto>
       <shared-lista-producto></shared-lista-producto>
     </div>
     <div class="modal-footer">
@@ -25,6 +25,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ComprobanteModalContent {
   @Input("titulo") public titulo: string;
+  @Input("listaProductos") public listaProductos: any;
 
   constructor( private _ativeModal: NgbActiveModal ) { }
 
@@ -43,12 +44,14 @@ export class ComprobanteModalContent {
 })
 export class ComprobanteModalComponent {
   @Input("titulo") public titulo: string;
+  @Input("productos") public productos: any;
 
   constructor( private _modalService: NgbModal ) { }
 
   open() {
     const modalRef = this._modalService.open(ComprobanteModalContent, { size: 'lg' });
     modalRef.componentInstance.titulo = this.titulo;
+    modalRef.componentInstance.listaProductos = this.productos;
   }
 
 }

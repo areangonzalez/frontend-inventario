@@ -1,4 +1,12 @@
 <div class="form-group">
+  <ng-template #rt let-r="result" let-t="term">
+    {{ r.producto }}
+    <!-- <ngb-highlight [result]="r.nombre" [term]="t"></ngb-highlight> -->
+  </ng-template>
+
   <label for="typeahead-format">Search for a state:</label>
-  <input id="typeahead-format" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
+  <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
+  [inputFormatter]="formatter" (selectItem)="seleccionaElemento($event)" />
+
+  <!-- <input id="typeahead-format" #instance="ngbTypeahead" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)" (click)="click$.next($event.target.value)" /> -->
 </div>
