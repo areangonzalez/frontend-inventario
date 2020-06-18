@@ -11,6 +11,7 @@ export class ProductoComponent implements OnInit {
   @Input("listadoDeProducto") listadoDeProducto:any; // Listado de productos
   @Input("listadoDeCategoria") listadoDeCategoria:any; // listado de categoria
   @Input("listadoDeUnidadMedida") listadoDeUnidadMedida:any; // listado de unidad de medida
+  @Input("listadoDeMarcas") listadoDeMarcas:any; // listado de marcas
 
   public productoForm: FormGroup;
   public submitted: boolean = false;

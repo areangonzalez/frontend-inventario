@@ -4,7 +4,7 @@ import { ProductosComponent } from './productos.component';
 import { StockComponent } from './menu/vista/stock/stock.component';
 import { IngresoComponent } from './menu/vista/ingreso/ingreso.component';
 import { EgresoComponent } from './menu/vista/egreso/egreso.component';
-import { ProductoService, CategoriaService, UnidadMedidaService } from '../core/service';
+import { ProductoService, CategoriaService, UnidadMedidaService, MarcaService } from '../core/service';
 
 const routes: Routes = [
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
         data: { breadcrumb: 'Ingreso' },
         resolve: {
           productos: ProductoService, categorias: CategoriaService,
-          unidadMedida: UnidadMedidaService
+          unidadMedida: UnidadMedidaService, marcas: MarcaService
         }
       },
       {
@@ -38,6 +38,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  providers: [ProductoService, CategoriaService, UnidadMedidaService]
+  providers: [ProductoService, CategoriaService, UnidadMedidaService, MarcaService]
 })
 export class ProductosRoutingModule { }

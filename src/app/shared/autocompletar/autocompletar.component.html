@@ -3,7 +3,7 @@
     {{ r.producto }}
   </ng-template>
 
-  <label for="typeahead-format">Search for a state:</label>
+  <label for="typeahead-format">Producto (<b class="text-danger">*</b>):</label>
   <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt"
   [inputFormatter]="formatter" (selectItem)="seleccionaElemento($event)" />
 </div>

@@ -24,7 +24,7 @@ let listadoMarcas = [
   { id:7, nombre:'La salteña' },{ id:8, nombre:'Purocol' },{ id:9, nombre:'Ala' },
 ];
 let listadoCategorias = [
-  { id:1, nombre:'Alimentos/Bebidas' }, { id:1, nombre:'Limpieza' }
+  { id:1, nombre:'Alimentos/Bebidas' }, { id:2, nombre:'Limpieza' }
 ];
 
 @Injectable()
@@ -49,6 +49,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarCategorias();
                 case url.endsWith('/apimock/unidad-medidas') && method === 'GET':
                     return listarUnidadMedida();
+                case url.endsWith('/apimock/marcas') && method === 'GET':
+                    return listarMarcas();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -67,6 +69,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         /* LISTADO UNIDAD MEDIDA */
         function listarUnidadMedida() {
           return ok(unidad_medida);
+        }
+        /* LISTADO MARCAS */
+        function listarMarcas() {
+          return ok(listadoMarcas);
         }
 
         function crearInventario() {

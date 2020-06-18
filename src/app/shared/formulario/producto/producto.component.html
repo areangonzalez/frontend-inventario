@@ -1,17 +1,11 @@
 <fieldset [formGroup]="productoForm">
   <div class="row">
     <div class="col-md-8">
-      <div class="form-group">
-        <label for="nombre">Producto:</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Ej.: Azucar" formControlName="nombre">
-        <input type="hidden" id="productoid" formControlName="productoid">
-        <div *ngIf="(productoForm.get('productoid').invalid && submitted)" class="text-danger">
-          <span>Por favor ingrese un nombre de producto.</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-8">
       <shared-autocompletar [listado]="listadoDeProducto" (obtenerSeleccion)="obtenerProducto($event)" ></shared-autocompletar>
+      <input type="hidden" id="productoid" formControlName="productoid">
+      <div *ngIf="(productoForm.get('productoid').invalid && submitted)" class="text-danger">
+        <span>Por favor ingrese un nombre de producto.</span>
+      </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
@@ -41,6 +35,7 @@
         <label for="marca">Marca:</label>
         <select class="form-control" id="marca" formControlName="marcaid">
           <option value="">Seleccione Marca</option>
+          <option *ngFor="let marca of listadoDeMarcas" value="{{marca.id}}">{{marca.nombre}}</option>
         </select>
         <div *ngIf="(productoForm.get('productoid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione una marca.</span>

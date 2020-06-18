@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import {
   AlertService, UtilService, BreadcrumbsService, ApiService, ProductoService, CategoriaService,
-  UnidadMedidaService
+  UnidadMedidaService, MarcaService
  } from "./service";
 
 
 @NgModule({
   declarations: [
     AlertService, UtilService, BreadcrumbsService, ApiService, ProductoService, CategoriaService,
-    UnidadMedidaService
+    UnidadMedidaService, MarcaService
   ],
   imports: [
     CommonModule
