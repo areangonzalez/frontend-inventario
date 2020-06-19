@@ -7,10 +7,11 @@ import { AlertComponent } from './alert/alert.component';
 import { ComprobanteComponent, ProductoComponent } from './formulario';
 import { ComprobanteModalContent, ComprobanteModalComponent } from './modal';
 import { AutocompletarComponent } from './autocompletar/autocompletar.component';
+import { FocusOnShowDirective } from './directive/focus-on-show.directive';
 
 
 @NgModule({
-  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent ],
+  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective ],
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,

@@ -10,13 +10,13 @@ import { NgbTypeaheadSelectItemEvent, NgbTypeahead } from '@ng-bootstrap/ng-boot
   styleUrls: ['./autocompletar.component.scss']
 })
 export class AutocompletarComponent {
-  @Input("listado") public listado;
-  @Input("submitted") public submitted;
+  @Input("listado") public listado: any;
+  @Input("submitted") public submitted: boolean;
+  @Input("nombreValor") public model: any;
+  @Input("setFocus") public setFocus: boolean;
   @Output("obtenerSeleccion") public seleccionaValor = new EventEmitter();
-  public model: any;
 
   @ViewChild('instance') instance: NgbTypeahead;
-    focus$ = new Subject<string>();
     click$ = new Subject<string>();
 
     search = (text$: Observable<string>) =>
@@ -27,6 +27,12 @@ export class AutocompletarComponent {
     )
 
   formatter = (x: {nombre: string}) => x.nombre;
+
+  focus() {
+    if (this.setFocus) {
+      this.model = '';
+    }
+  }
 
   /**
    * Busca el nombre del item seleccionado y devuelve el objeto al componente padre

@@ -15,8 +15,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
     </div>
     <div class="modal-body">
       <form-comprobante></form-comprobante>
-      <form-producto [listadoDeProducto]="listaProductos" [listadoDeCategoria]="listaCategorias" [listadoDeUnidadMedida]="listaUnidadMedida" [listadoDeMarcas]="listaMarcas" ></form-producto>
-      <shared-lista-producto></shared-lista-producto>
+      <form-producto [listadoDeProducto]="listaProductos" [listadoDeCategoria]="listaCategorias" [listadoDeUnidadMedida]="listaUnidadMedida" [listadoDeMarcas]="listaMarcas" (obtenerListadoDestock)="crearListadoDeStock($event)"></form-producto>
+      <shared-lista-producto [stock]="listadoDeStock" ></shared-lista-producto>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-success" (click)="cerrarModal()"><i class="fas fa-save"></i> Guardar</button>
@@ -29,11 +29,16 @@ export class ComprobanteModalContent {
   @Input("listaCategorias") public listaCategorias: any; // Listado de productos
   @Input("listaUnidadMedida") public listaUnidadMedida: any; // Listado de unidad de medida
   @Input("listaMarcas") public listaMarcas: any; // Listado de unidad de medida
+  public listadoDeStock: any = [];
 
   constructor( private _ativeModal: NgbActiveModal ) { }
 
   cerrarModal() {
     this._ativeModal.close('close');
+  }
+
+  crearListadoDeStock(stock: any) {
+    this.listadoDeStock.push(stock);
   }
 }
 

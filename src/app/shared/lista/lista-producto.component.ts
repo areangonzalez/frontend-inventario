@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'shared-lista-producto',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista-producto.component.scss']
 })
 export class ListaProductoComponent implements OnInit {
+  @Input("stock") public stock:any;
 
   constructor() { }
 
