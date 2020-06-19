@@ -11,6 +11,7 @@ import { NgbTypeaheadSelectItemEvent, NgbTypeahead } from '@ng-bootstrap/ng-boot
 })
 export class AutocompletarComponent {
   @Input("listado") public listado;
+  @Input("submitted") public submitted;
   @Output("obtenerSeleccion") public seleccionaValor = new EventEmitter();
   public model: any;
 

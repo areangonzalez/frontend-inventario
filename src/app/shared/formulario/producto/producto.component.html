@@ -1,18 +1,32 @@
 <fieldset [formGroup]="productoForm">
   <div class="row">
-    <div class="col-md-8">
-      <shared-autocompletar [listado]="listadoDeProducto" (obtenerSeleccion)="obtenerProducto($event)" ></shared-autocompletar>
+    <div class="col-md-4">
+      {{ productoForm.get('productoid').invalid && submitted }}
+      <shared-autocompletar [listado]="listadoDeProducto" (obtenerSeleccion)="obtenerProducto($event)" [submitted]="productoForm.get('nombre').invalid && submitted" ></shared-autocompletar>
       <input type="hidden" id="productoid" formControlName="productoid">
-      <div *ngIf="(productoForm.get('productoid').invalid && submitted)" class="text-danger">
-        <span>Por favor ingrese un nombre de producto.</span>
+      <input type="hidden" id="producto" formControlName="producto">
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="cantidad">Cantidad (<b class="text-danger">*</b>):</label>
+        <input type="text" class="form-control" id="cantidad" formControlName="cantidad" placeholder="Ej.: 1000" [ngClass]="{'is-invalid': (productoForm.get('cantidad').invalid && submitted)}" >
+        <div *ngIf="(productoForm.get('cantidad').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese una cantidad.</span>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="cantidad">Cantidad:</label>
-        <input type="text" class="form-control" id="cantidad" formControlName="cantidad" placeholder="Ej.: 1000" >
-        <div *ngIf="(productoForm.get('cantidad').invalid && submitted)" class="text-danger">
-          <span>Por favor ingrese una cantidad.</span>
+        <label for="vencimiento">Vencimiento (<b class="text-danger">*</b>):</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="dd/mm/yyyy"
+                 name="dp" formControlName="fechaVencimiento" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (productoForm.get('fechaVencimiento').invalid && submitted)}">
+          <div class="input-group-append">
+            <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt" ></i></button>
+          </div>
+        </div>
+        <div *ngIf="(productoForm.get('fechaVencimiento').invalid && submitted)" class="text-danger">
+          <span>Por favor seleccione una fecha de vencimiento.</span>
         </div>
       </div>
     </div>
@@ -20,8 +34,8 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="categoria">Categoría:</label>
-        <select class="form-control" id="categoriaid" formControlName="categoriaid">
+        <label for="categoria">Categoría (<b class="text-danger">*</b>):</label>
+        <select class="form-control" id="categoriaid" formControlName="categoriaid" [ngClass]="{'is-invalid': (productoForm.get('categoriaid').invalid && submitted)}">
           <option value="">Seleccione una Categoría</option>
           <option *ngFor="let categoria of listadoDeCategoria" value="{{categoria.id}}">{{categoria.nombre}}</option>
         </select>
@@ -32,8 +46,8 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="marca">Marca:</label>
-        <select class="form-control" id="marca" formControlName="marcaid">
+        <label for="marca">Marca (<b class="text-danger">*</b>):</label>
+        <select class="form-control" id="marca" formControlName="marcaid" [ngClass]="{'is-invalid': (productoForm.get('marcaid').invalid && submitted)}">
           <option value="">Seleccione Marca</option>
           <option *ngFor="let marca of listadoDeMarcas" value="{{marca.id}}">{{marca.nombre}}</option>
         </select>
@@ -44,10 +58,10 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="unidad_medida">Unidad de Medida:</label>
+        <label for="unidad_medida">Unidad de Medida (<b class="text-danger">*</b>):</label>
         <div class="input-group">
-          <input type="text" class="form-control" id="unidad" formControlName="unidad_valor" placeholder="Ej.: 500">
-          <select class="form-control" id="medida" formControlName="unidad_medidaid">
+          <input type="text" class="form-control" id="unidad" formControlName="unidad_valor" placeholder="Ej.: 500" [ngClass]="{'is-invalid': (productoForm.get('unidad_valor').invalid && submitted)}">
+          <select class="form-control" id="medida" formControlName="unidad_medidaid" [ngClass]="{'is-invalid': (productoForm.get('unidad_medidaid').invalid && submitted)}">
             <option value="">Medida</option>
             <option *ngFor="let medida of listadoDeUnidadMedida" value="{{medida.id}}">{{medida.simbolo}}</option>
           </select>
@@ -60,25 +74,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="vencimiento">Vencimiento:</label>
-        <div class="input-group">
-          <input class="form-control" placeholder="dd/mm/yyyy"
-                 name="dp" formControlName="fechaVencimiento" ngbDatepicker #d="ngbDatepicker">
-          <div class="input-group-append">
-            <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
-          </div>
-        </div>
-        <div *ngIf="(productoForm.get('fechaVencimiento').invalid && submitted)" class="text-danger">
-          <span>Por favor seleccione una fecha de vencimiento.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-md-12">
-      <button type="button" class="btn btn-outline-success form-control"><i class="fas fa-plus"></i>&nbsp;Agregar Producto</button>
+      <button type="button" class="btn btn-outline-success form-control" (click)="agregarProductoLista()"><i class="fas fa-plus"></i>&nbsp;Agregar Producto</button>
     </div>
   </div>
 </fieldset>
