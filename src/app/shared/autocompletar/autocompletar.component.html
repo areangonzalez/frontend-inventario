@@ -1,10 +1,10 @@
-<div class="form-group">
+<div [formGroup]="form" class="form-group">
   <ng-template #rt let-r="result" let-t="term">
     {{ r.producto }}
   </ng-template>
   <label for="typeahead-format">Producto (<b class="text-danger">*</b>):</label>
-  <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt" placeholder="Ej.: Azucar"
-  [inputFormatter]="formatter" (selectItem)="seleccionaElemento($event)" [ngClass]="{'is-invalid': submitted}" (blur)="existeValor()" />
+  <input id="typeahead-template" type="text" class="form-control" formControlName="nombre" [ngbTypeahead]="search" [resultTemplate]="rt" placeholder="Ej.: Azucar"
+  [inputFormatter]="formatter" (selectItem)="seleccionaElemento($event)" [ngClass]="{'is-invalid': submitted}" />
   <div *ngIf="submitted" class="text-danger">
     <span>Por favor ingrese un nombre de producto.</span>
   </div>

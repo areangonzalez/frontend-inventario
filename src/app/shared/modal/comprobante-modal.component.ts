@@ -38,7 +38,8 @@ export class ComprobanteModalContent {
   }
 
   crearListadoDeStock(stock: any) {
-    this.listadoDeStock.push(stock);
+    this.listadoDeStock.push(Object.assign({}, stock));
+    console.log(this.listadoDeStock);
   }
 }
 

@@ -45,5 +45,34 @@ export class UtilService {
 
     return valorFinal + valor;
   }
+  /**
+   * Verifica si hay cambios en un listado dependiendo del tipo de dato
+   * @param listado listado a verificar
+   * @param atributo nombre del atributo del listado a verificar
+   * @param valor el valor a verificar el cambio
+   */
+  verificarCambio(listado:any, atributo: string, valor: any) {
+    let cambio = false;
+    for (const k in listado) {
+      if (k === atributo) {
+        if (listado[atributo] !== valor ) {
+          cambio = true;
+        }
+      }
+    }
+    return cambio;
+  }
+  /**
+   * Busco en un listado el nombre de un valor por su id
+   * @param listado listado compuesto por id - nombre
+   * @param id identificador del elemento a buscar
+   */
+  buscarNombrePorId(listado:any, id:any) {
+    for (let i = 0; i < listado.length; i++) {
+      if (parseInt(listado[i].id) == parseInt(id) ) {
+        return listado[i].nombre;
+      }
+    }
+  }
 
 }

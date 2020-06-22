@@ -46,6 +46,8 @@ export class ProductoComponent implements OnInit {
   obtenerProducto(producto:any) {
     this.productoSeleccionado = producto;
     this.productoForm.patchValue(producto);
+    this.productoForm.patchValue({productoid: producto.id});
+    this.productoForm.patchValue({nombre: producto.nombre});
   }
 
   agregarProductoLista(){
@@ -54,19 +56,75 @@ export class ProductoComponent implements OnInit {
     if (this.productoForm.invalid) {
       return;
     }else{
+      let nombre:string = "", unidad:string = "", medida:string = "", marca:string = "";
+      if (this.productoSeleccionado) {
+        /**
+         * verifico si hay cambios en cada campo del producto y borro su id para notificar que es un nuevo producto
+         */
+        if (this._util.verificarCambio(this.productoSeleccionado, 'categoriaid', this.productoForm.get('categoriaid').value)) {
+          this.productoSeleccionado["categoriaid"] = this.productoForm.get('categoriaid').value;
+          this.productoSeleccionado["id"] = "";
+        }
+        if (this._util.verificarCambio(this.productoSeleccionado, 'marcaid', this.productoForm.get('marcaid').value)) {
+          this.productoSeleccionado["marcaid"] = this.productoForm.get('marcaid').value;
+          this.productoSeleccionado["id"] = "";
+          marca = this._util.buscarNombrePorId(this.listadoDeMarcas, this.productoSeleccionado["marcaid"]);
+        }
+        if (this._util.verificarCambio(this.productoSeleccionado, 'unidad_valor', this.productoForm.get('unidad_valor').value)) {
+          this.productoSeleccionado["unidad_valor"] = this.productoForm.get('unidad_valor').value;
+          this.productoSeleccionado["id"] = "";
+          marca = this.productoSeleccionado["unidad_valor"];
+        }
+        if (this._util.verificarCambio(this.productoSeleccionado, 'unidad_medidaid', this.productoForm.get('unidad_medidaid').value)) {
+          this.productoSeleccionado["unidad_medidaid"] = this.productoForm.get('unidad_medidaid').value;
+          this.productoSeleccionado["id"] = "";
+          medida = this._util.buscarNombrePorId(this.listadoDeUnidadMedida, this.productoSeleccionado["unidad_medidaid"]);
+        }
+        if (typeof this.productoForm.get("nombre").value === 'string') {
+          if (this._util.verificarCambio(this.productoSeleccionado, 'nombre', this.productoForm.get('nombre').value)) {
+            this.productoSeleccionado["nombre"] = this.productoForm.get('nombre').value;
+            this.productoSeleccionado["id"] = "";
+            marca = this.productoSeleccionado["nombre"];
+          }
+        }
+        console.log(this.productoSeleccionado)
+        this.productoSeleccionado['cantidad'] = this.productoForm.get('cantidad').value;
+        this.productoSeleccionado['fecha_vencimiento'] = this.productoForm.get('fecha_vencimiento').value;
 
-      this.productoSeleccionado['cantidad'] = this.productoForm.get('cantidad').value;
-      this.productoSeleccionado['fecha_vencimiento'] = this.productoForm.get('fecha_vencimiento').value;
-      this.obtenerListadoDestock.emit(this.productoSeleccionado);
-
-      this.productoValor = null;
-      this.productoForm.reset();
-      this.productoForm.get("categoriaid").patchValue("");
-      this.productoForm.get("marcaid").patchValue("");
-      this.productoForm.get("unidad_medidaid").patchValue("");
-      this.submitted = false;
-      this.focusAuto = true;
+        if(this.productoSeleccionado["id"] !== "") {
+          this.obtenerListadoDestock.emit(this.productoSeleccionado);
+        }else{
+          this.productoSeleccionado["producto"] = (nombre != "") ? nombre : this.productoSeleccionado["nombre"];
+          this.productoSeleccionado["producto"] += (unidad != "") ? ", " + unidad : ", " + this.productoSeleccionado["unidad_valor"];
+          this.productoSeleccionado["producto"] += (medida != "") ? medida : this._util.buscarNombrePorId(this.listadoDeUnidadMedida,this.productoSeleccionado["unidad_medidaid"]);
+          this.productoSeleccionado["producto"] += (marca != "") ? " (" + marca + ")" : " (" + this._util.buscarNombrePorId(this.listadoDeMarcas,this.productoSeleccionado["marcaid"]) + ")";
+          // se aplica servicio para el guardado del nuevo producto y se le agrega su nuevo id al producto
+          this.obtenerListadoDestock.emit(this.productoSeleccionado);
+        }
+      }else{
+        console.log("Obtengo un producto nuevo", this.productoForm.value);
+        //this.obtenerListadoDestock.emit();
+      }
+      this.limpiarCampos();
     }
+  }
+  /**
+   * limpio los campos del formulario
+   */
+  limpiarCampos() {
+    this.productoSeleccionado = undefined;
+    this.productoForm.get("nombre").setValue("");
+    this.productoForm.get("cantidad").setValue("");
+    this.productoForm.get("fechaVencimiento").setValue("");
+    this.productoForm.get("categoriaid").setValue("");
+    this.productoForm.get("marcaid").setValue("");
+    this.productoForm.get("unidad_valor").setValue("");
+    this.productoForm.get("unidad_medidaid").setValue("");
+    this.submitted = false;
+  }
+
+  verificarProducto() {
+
   }
 
   /**

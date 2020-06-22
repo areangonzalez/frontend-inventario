@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Observable, merge, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, filter, tap, switchMap, catchError } from 'rxjs/operators';
 import { NgbTypeaheadSelectItemEvent, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -10,9 +11,9 @@ import { NgbTypeaheadSelectItemEvent, NgbTypeahead } from '@ng-bootstrap/ng-boot
   styleUrls: ['./autocompletar.component.scss']
 })
 export class AutocompletarComponent {
+  @Input("form") public form: FormGroup;
   @Input("listado") public listado: any;
   @Input("submitted") public submitted: boolean;
-  @Input("nombreValor") public model: any;
   @Input("setFocus") public setFocus: boolean;
   @Output("obtenerSeleccion") public seleccionaValor = new EventEmitter();
 
@@ -24,15 +25,15 @@ export class AutocompletarComponent {
       debounceTime(200),
       map(term => term === '' ? []
         : this.listado.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    )
+    );
 
   formatter = (x: {nombre: string}) => x.nombre;
 
-  existeValor() {
-    if (this.model) {
+  /* existeValor() {
+    if (!this.model) {
       this.model = '';
     }
-  }
+  } */
 
   /**
    * Busca el nombre del item seleccionado y devuelve el objeto al componente padre
@@ -41,7 +42,6 @@ export class AutocompletarComponent {
   seleccionaElemento(valor: NgbTypeaheadSelectItemEvent){
       // Reviso si hubo una selección
       if (valor != undefined) {
-        this.model = valor.item;
         this.seleccionaValor.emit(valor.item);
       }else{// sino hubo seleccion mando un mensaje de error
         this.seleccionaValor.emit(false);
