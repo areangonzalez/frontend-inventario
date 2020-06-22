@@ -28,8 +28,8 @@ export class AutocompletarComponent {
 
   formatter = (x: {nombre: string}) => x.nombre;
 
-  focus() {
-    if (this.setFocus) {
+  existeValor() {
+    if (this.model) {
       this.model = '';
     }
   }
@@ -41,6 +41,7 @@ export class AutocompletarComponent {
   seleccionaElemento(valor: NgbTypeaheadSelectItemEvent){
       // Reviso si hubo una selección
       if (valor != undefined) {
+        this.model = valor.item;
         this.seleccionaValor.emit(valor.item);
       }else{// sino hubo seleccion mando un mensaje de error
         this.seleccionaValor.emit(false);

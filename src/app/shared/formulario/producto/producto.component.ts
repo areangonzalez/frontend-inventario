@@ -37,7 +37,7 @@ export class ProductoComponent implements OnInit {
       fecha_vencimiento: '',
       fechaVencimiento: ['', Validators.required],
       producto: ''
-    })
+    });
   }
 
   ngOnInit(): void {
