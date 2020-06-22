@@ -8,10 +8,11 @@ import { ComprobanteComponent, ProductoComponent } from './formulario';
 import { ComprobanteModalContent, ComprobanteModalComponent } from './modal';
 import { AutocompletarComponent } from './autocompletar/autocompletar.component';
 import { FocusOnShowDirective } from './directive/focus-on-show.directive';
+import { ConfirmarBorradoProductoModalComponent, ConfirmarBorradoProductoModalContent } from './modal/confirmar-borrado-producto-modal.component';
 
 
 @NgModule({
-  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective ],
+  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective, ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent ],
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
@@ -25,7 +26,8 @@ import { FocusOnShowDirective } from './directive/focus-on-show.directive';
     NgbModule,
     ListaStockComponent, AlertComponent,
     ComprobanteModalContent, ComprobanteModalComponent,
-    AutocompletarComponent
+    AutocompletarComponent,
+    ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent
   ]
 })
 export class SharedModule { }

@@ -9,12 +9,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of stock">
+      <tr *ngFor="let item of stock;let i=index">
         <td class="ancho-celda-minimo text-center">{{item.cantidad}}</td>
         <td>{{item.producto}} </td>
         <td class="ancho-celda-vencimiento text-center">{{item.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
         <th scope="col" class="text-center">
-          <button type="button" class="btn btn-sm btn-danger" ><i class="fas fa-trash-alt"></i></button>
+          <abrir-confirmacion-borrado-producto-modal [texto]="'producto'" [indexListado]="i" [listado]="stock"></abrir-confirmacion-borrado-producto-modal>
         </th>
       </tr>
     </tbody>
