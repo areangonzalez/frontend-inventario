@@ -9,6 +9,14 @@ export class ProductoService implements Resolve<any> {
 
   constructor( private http: ApiService) { }
 
+  guardar(params: Object) {
+    return this.http.post('/productos', params);
+  }
+
+  listar() {
+    return this.http.get('/productos');
+  }
+
   resolve() {
     return this.http.get('/productos')
   }

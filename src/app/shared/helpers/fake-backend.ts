@@ -3,7 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-let listadoProductos = [
+let productos = [
   { id: 1, nombre: 'Azucar blanca', unidad_valor: 1, unidad_medidaid: 4, marcaid: 4, categoriaid: 1, producto: 'Azucar blanca, 1lt (Chango)' },
   { id: 8, nombre: 'Alcohol', unidad_valor: 250, unidad_medidaid: 1, marcaid: 8, categoriaid: 2, producto: 'Alcohol, 250 cm3 (Purocol)' },
   { id: 2, nombre: 'Fideos secos guiseros', unidad_valor: 500, unidad_medidaid: 3, marcaid: 3, categoriaid: 1, producto: 'Fideos secos guiseros, 500gr (Canale)' },
@@ -27,10 +27,49 @@ let listadoCategorias = [
   { id:1, nombre:'Alimentos/Bebidas' }, { id:2, nombre:'Limpieza' }
 ];
 
+// Comprobar listado de productos
+function getProductos(){
+  let listaProductos = productos;
+  if(localStorage.getItem("productos")) {
+    let productosStorage: any[] = JSON.parse(localStorage.getItem("productos"));
+    for (let i = 0; i < productosStorage.length; i++) {
+      let existe = false;
+      for (let j = 0; j < listaProductos.length; j++) {
+        if (productosStorage[i].id === listaProductos[j].id){
+          listaProductos[j] = productosStorage[i]; // si se edito
+          existe = true;
+        }
+      }
+      if (!existe) {
+        listaProductos.push(productosStorage[i]);
+      }
+    }
+  }
+  return listaProductos;
+}
+/**
+ * realizo una busqueda dentro de un listado para obtener sus datos
+ * @param id identificador de la busqueda
+ * @param listado listado a buscar
+ * @return objeto que contiene los datos encontrados
+ */
+function getDatosListado(id:number, listado:any) {
+  for (let i = 0; i < listado.length; i++) {
+    if (listado[i].id == id) {
+      return listado[i];
+    }
+  }
+}
+
+function ultimoID(listado:any) {
+  return listado.length + 1;
+}
+
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
+        const listadoProductos = getProductos();
 
         // wrap in delayed observable to simulate server api call
         return of(null)
@@ -45,6 +84,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return crearInventario();
                 case url.endsWith('/apimock/productos') && method === 'GET':
                     return listarProductos();
+                case url.endsWith('/apimock/productos') && method === 'POST':
+                    return crearProducto();
                 case url.endsWith('/apimock/categorias') && method === 'GET':
                     return listarCategorias();
                 case url.endsWith('/apimock/unidad-medidas') && method === 'GET':
@@ -60,7 +101,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // route functions
         /* LISTADO PRODUCTOS */
         function listarProductos() {
-          return ok(listadoProductos);
+          if (listadoProductos) {
+            return ok(listadoProductos);
+          }else {
+            return error("No se puede obtener listado de productos");
+
+          }
         }
         /* LISTADO CATEGORIAS */
         function listarCategorias() {
@@ -86,6 +132,32 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 lastName: user.lastName,
                 token: 'fake-jwt-token' */
             })
+        }
+        /* CREAR PRODUCTO */
+        function crearProducto() {
+          let producto = body;
+          let nuevoId = ultimoID(listadoProductos);
+          let marca = getDatosListado(producto['marcaid'], listadoMarcas);
+          let unidadMedida = getDatosListado(producto['marcaid'], unidad_medida);
+          let nombreProducto = producto['nombre'] + ', '+ producto['unidad_valor'] + unidadMedida['simbolo'] + ' (' + marca['nombre'] + ')';
+
+          listadoProductos.push({
+            id: nuevoId,
+            nombre: producto['nombre'],
+            unidad_valor: producto['unidad_valor'],
+            unidad_medidaid: producto['unidad_medidaid'],
+            marcaid: producto['marcaid'],
+            categoriaid: producto['categoriaid'],
+            producto: nombreProducto
+          });
+
+          localStorage.setItem('productos', JSON.stringify(listadoProductos));
+          console.log("nuevo id: ",nuevoId);
+          if (nuevoId) {
+            return ok({id:nuevoId})
+          }else{
+            error("No se a podido crear el producto");
+          }
         }
 
         // helper functions

@@ -67,10 +67,10 @@ export class UtilService {
    * @param listado listado compuesto por id - nombre
    * @param id identificador del elemento a buscar
    */
-  buscarNombrePorId(listado:any, id:any) {
+  buscarDatosPorId(listado:any, id:any) {
     for (let i = 0; i < listado.length; i++) {
       if (parseInt(listado[i].id) == parseInt(id) ) {
-        return listado[i].nombre;
+        return listado[i];
       }
     }
   }

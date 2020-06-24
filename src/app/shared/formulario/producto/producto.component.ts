@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UtilService } from 'src/app/core/service';
+import { UtilService, ProductoService, AlertService } from 'src/app/core/service';
 
 @Component({
   selector: 'form-producto',
@@ -24,7 +24,8 @@ export class ProductoComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder, private _route: ActivatedRoute,
-    private _util: UtilService
+    private _util: UtilService, private _productoService: ProductoService,
+    private _mensajeService: AlertService
   ) {
     this.productoForm = _fb.group({
       productoid: '',
@@ -56,55 +57,28 @@ export class ProductoComponent implements OnInit {
     if (this.productoForm.invalid) {
       return;
     }else{
-      let nombre:string = "", unidad:string = "", medida:string = "", marca:string = "";
+      let productoVerificado:any, productoNuevo:any;
       if (this.productoSeleccionado) {
         /**
          * verifico si hay cambios en cada campo del producto y borro su id para notificar que es un nuevo producto
          */
-        if (this._util.verificarCambio(this.productoSeleccionado, 'categoriaid', this.productoForm.get('categoriaid').value)) {
-          this.productoSeleccionado["categoriaid"] = this.productoForm.get('categoriaid').value;
-          this.productoSeleccionado["id"] = "";
-        }
-        if (this._util.verificarCambio(this.productoSeleccionado, 'marcaid', this.productoForm.get('marcaid').value)) {
-          this.productoSeleccionado["marcaid"] = this.productoForm.get('marcaid').value;
-          this.productoSeleccionado["id"] = "";
-          marca = this._util.buscarNombrePorId(this.listadoDeMarcas, this.productoSeleccionado["marcaid"]);
-        }
-        if (this._util.verificarCambio(this.productoSeleccionado, 'unidad_valor', this.productoForm.get('unidad_valor').value)) {
-          this.productoSeleccionado["unidad_valor"] = this.productoForm.get('unidad_valor').value;
-          this.productoSeleccionado["id"] = "";
-          marca = this.productoSeleccionado["unidad_valor"];
-        }
-        if (this._util.verificarCambio(this.productoSeleccionado, 'unidad_medidaid', this.productoForm.get('unidad_medidaid').value)) {
-          this.productoSeleccionado["unidad_medidaid"] = this.productoForm.get('unidad_medidaid').value;
-          this.productoSeleccionado["id"] = "";
-          medida = this._util.buscarNombrePorId(this.listadoDeUnidadMedida, this.productoSeleccionado["unidad_medidaid"]);
-        }
-        if (typeof this.productoForm.get("nombre").value === 'string') {
-          if (this._util.verificarCambio(this.productoSeleccionado, 'nombre', this.productoForm.get('nombre').value)) {
-            this.productoSeleccionado["nombre"] = this.productoForm.get('nombre').value;
-            this.productoSeleccionado["id"] = "";
-            marca = this.productoSeleccionado["nombre"];
-          }
-        }
-        console.log(this.productoSeleccionado)
-        this.productoSeleccionado['cantidad'] = this.productoForm.get('cantidad').value;
-        this.productoSeleccionado['fecha_vencimiento'] = this.productoForm.get('fecha_vencimiento').value;
+        productoVerificado = this.verificarProducto(this.productoSeleccionado);
 
-        if(this.productoSeleccionado["id"] !== "") {
-          this.obtenerListadoDestock.emit(this.productoSeleccionado);
+        productoVerificado['cantidad'] = this.productoForm.get('cantidad').value;
+        productoVerificado['fecha_vencimiento'] = this.productoForm.get('fecha_vencimiento').value;
+
+        if(productoVerificado["id"] !== "") {
+          this.obtenerListadoDestock.emit(productoVerificado);
         }else{
-          this.productoSeleccionado["producto"] = (nombre != "") ? nombre : this.productoSeleccionado["nombre"];
-          this.productoSeleccionado["producto"] += (unidad != "") ? ", " + unidad : ", " + this.productoSeleccionado["unidad_valor"];
-          this.productoSeleccionado["producto"] += (medida != "") ? medida : this._util.buscarNombrePorId(this.listadoDeUnidadMedida,this.productoSeleccionado["unidad_medidaid"]);
-          this.productoSeleccionado["producto"] += (marca != "") ? " (" + marca + ")" : " (" + this._util.buscarNombrePorId(this.listadoDeMarcas,this.productoSeleccionado["marcaid"]) + ")";
           // se aplica servicio para el guardado del nuevo producto y se le agrega su nuevo id al producto
-          this.obtenerListadoDestock.emit(this.productoSeleccionado);
+          this.nuevoProducto(productoVerificado);
         }
       }else{
-        console.log("Obtengo un producto nuevo", this.productoForm.value);
-        //this.obtenerListadoDestock.emit();
+        // se aplica servicio para el guardado del nuevo producto y se le agrega su nuevo id al producto
+        productoVerificado = this.verificarProducto(this.productoForm.value);
+        this.nuevoProducto(productoVerificado);
       }
+      // Limpio los campos despues de haber agregado el producto al listado
       this.limpiarCampos();
     }
   }
@@ -120,12 +94,77 @@ export class ProductoComponent implements OnInit {
     this.productoForm.get("marcaid").setValue("");
     this.productoForm.get("unidad_valor").setValue("");
     this.productoForm.get("unidad_medidaid").setValue("");
+    this.productoForm.get("productoid").setValue("");
     this.submitted = false;
   }
+  /**
+   * verifico si hay cambios en el producto seleccionado
+   * @param producto devuelvo un objeto de producto si tuvo o no cambios
+   */
+  verificarProducto(producto: Object) {
+    let medida:string = "", marca:string = "";
 
-  verificarProducto() {
+    if (this._util.verificarCambio(producto, 'categoriaid', this.productoForm.get('categoriaid').value)) {
+      producto["categoriaid"] = this.productoForm.get('categoriaid').value;
+      producto["id"] = "";
+    }
+    if (this._util.verificarCambio(producto, 'marcaid', this.productoForm.get('marcaid').value)) {
+      producto["marcaid"] = this.productoForm.get('marcaid').value;
+      producto["id"] = "";
+    }
+    if (this._util.verificarCambio(producto, 'unidad_valor', this.productoForm.get('unidad_valor').value)) {
+      producto["unidad_valor"] = this.productoForm.get('unidad_valor').value;
+      producto["id"] = "";
+    }
+    if (this._util.verificarCambio(producto, 'unidad_medidaid', this.productoForm.get('unidad_medidaid').value)) {
+      producto["unidad_medidaid"] = this.productoForm.get('unidad_medidaid').value;
+      producto["id"] = "";
+    }
+    if (typeof this.productoForm.get("nombre").value === 'string') {
+      if (this._util.verificarCambio(producto, 'nombre', this.productoForm.get('nombre').value)) {
+        producto["nombre"] = this.productoForm.get('nombre').value;
+        producto["id"] = "";
+      }
+    }
+    // busco los valores de la medida y la marca
+    medida = this._util.buscarDatosPorId(this.listadoDeUnidadMedida,producto["unidad_medidaid"]);
+    marca = this._util.buscarDatosPorId(this.listadoDeMarcas,producto["marcaid"]);
+    // armo el nombre de producto
+    producto["producto"] = producto["nombre"];
+    producto["producto"] += ", " + producto["unidad_valor"];
+    producto["producto"] += medida['simbolo'] + " (" + marca['nombre'] + ")";
 
+    return producto;
   }
+  /**
+   * Guarda un nuevo producto y devuelve su id
+   * @param params
+   * @return devuelve el nuevo producto con su id
+   */
+  nuevoProducto(params: Object) {
+    this._productoService.guardar(params).subscribe(
+      respuesta => {
+        params['id'] = respuesta['id'];
+        this.obtenerListadoDestock.emit(params);
+        // refresco el listado del autoCompletar
+        this.listarProducto();
+      }, error => {
+        this._mensajeService.cancelado(error.message);
+      }
+    );
+  }
+  /**
+   * obtiene el listado de productos
+   */
+  listarProducto() {
+    this._productoService.listar().subscribe(
+      respuesta => {
+        this.listadoDeProducto = respuesta;
+      }, error => { this._mensajeService.cancelado(error.message); }
+    )
+  }
+
+
 
   /**
    * Formatea la fecha para una variable del formulario
