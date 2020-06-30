@@ -8,7 +8,12 @@
         <th scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="((stock.length == 0) && submitted)">
+      <tr>
+        <td class="text-center text-danger" colspan="4" rowspan="1">NO se puede crear comprobante sin productos!!</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(stock.length > 0)">
       <tr *ngFor="let item of stock;let i=index">
         <td class="ancho-celda-minimo text-center">{{item.cantidad}}</td>
         <td>{{item.producto}} </td>

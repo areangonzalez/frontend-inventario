@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService, UtilService } from 'src/app/core/service';
 
@@ -8,21 +8,10 @@ import { AlertService, UtilService } from 'src/app/core/service';
   styleUrls: ['./comprobante.component.scss']
 })
 export class ComprobanteComponent implements OnInit {
-  public comprobanteForm: FormGroup;
-  public submitted: boolean = false;
+  @Input("comprobante") public comprobanteForm: FormGroup;
+  @Input("submitted") public submitted: boolean;
 
-  constructor(
-    private _fb: FormBuilder, private _mensajeService: AlertService,
-    private _util: UtilService
-  ) {
-    this.comprobanteForm = _fb.group({
-      nro_comprobante: '',
-      nroComprobantePrincipal: ['', Validators.required],
-      nroComprobanteFinal: ['', Validators.required],
-      fecha_emision: '',
-      fechaEmision: ['', Validators.required]
-    });
-  }
+  constructor( private _mensajeService: AlertService, private _util: UtilService ) {}
 
   ngOnInit(): void {
   }
@@ -33,18 +22,26 @@ export class ComprobanteComponent implements OnInit {
       case 'principal':
         // completo numero principal
         numero.value = this._util.completarConCeros(numero.value, 4);
-        this.comprobanteForm.get("nroComprobantePrincipal").patchValue(numero.value);
+        if (numero.value != '0000') {
+          this.comprobanteForm.get("nroComprobantePrincipal").patchValue(numero.value);
+        } else {
+          this.comprobanteForm.get("nroComprobantePrincipal").patchValue('');
+        }
         break;
       case 'final':
         //completo numero final
         numero.value = this._util.completarConCeros(numero.value, 8);
-        this.comprobanteForm.get("nroComprobanteFinal").patchValue(numero.value);
+        if (numero.value != '00000000') {
+          this.comprobanteForm.get("nroComprobanteFinal").patchValue(numero.value);
+        } else {
+          this.comprobanteForm.get("nroComprobanteFinal").patchValue('');
+        }
         break;
     }
     // concateno los numero de comprobantes
     valor = this.comprobanteForm.get("nroComprobantePrincipal").value + "-" + this.comprobanteForm.get("nroComprobanteFinal").value;
     // se actualiza el numero de comprobante completo
-    this.comprobanteForm.get("nro_comprobante").patchValue(valor);
+    this.comprobanteForm.get("nro_remito").patchValue(valor);
   }
 
   esNumero(numero:any) {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Componente que muestra el contenido del modal
@@ -14,12 +15,17 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
       </button>
     </div>
     <div class="modal-body">
-      <form-comprobante></form-comprobante>
+      <form-comprobante [comprobante]="comprobanteForm" [submitted]="submitted" ></form-comprobante>
       <form-producto [listadoDeProducto]="listaProductos" [listadoDeCategoria]="listaCategorias" [listadoDeUnidadMedida]="listaUnidadMedida" [listadoDeMarcas]="listaMarcas" (obtenerListadoDestock)="crearListadoDeStock($event)"></form-producto>
-      <shared-lista-producto [stock]="listadoDeStock" ></shared-lista-producto>
+      <shared-lista-producto [stock]="listadoDeStock" [submitted]="submitted" ></shared-lista-producto>
+      <hr style="border: solid 1px #eee;">
+      <div [formGroup]="comprobanteForm" class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <textarea class="form-control" id="descripcion" formControlName="descripcion" rows="1" placeholder="Descripción..."></textarea>
+      </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-success" (click)="cerrarModal()"><i class="fas fa-save"></i> Guardar</button>
+      <button type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
     </div>
   `
 })
@@ -30,11 +36,35 @@ export class ComprobanteModalContent {
   @Input("listaUnidadMedida") public listaUnidadMedida: any; // Listado de unidad de medida
   @Input("listaMarcas") public listaMarcas: any; // Listado de unidad de medida
   public listadoDeStock: any = [];
+  public comprobanteForm: FormGroup;
+  public submitted: boolean = false;
 
-  constructor( private _ativeModal: NgbActiveModal ) { }
+  constructor( private _ativeModal: NgbActiveModal, private _fb: FormBuilder  ) {
+    this.comprobanteForm = _fb.group({
+      nro_remito: '',
+      nroComprobantePrincipal: ['', Validators.required],
+      nroComprobanteFinal: ['', Validators.required],
+      fechaEmision: ['', Validators.required],
+      fecha_emision: '',
+      descripcion: ''
+    });
+  }
 
   cerrarModal() {
     this._ativeModal.close('close');
+  }
+
+  guardar() {
+    this.submitted = true;
+
+    if (this.comprobanteForm.invalid && (this.listadoDeStock.length > 0)) {
+      return;
+    } else {
+      let parametros = this.comprobanteForm.value;
+      parametros["lista_producto"] = this.listadoDeStock;
+
+      console.log(parametros);
+    }
   }
 
   crearListadoDeStock(stock: any) {

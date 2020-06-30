@@ -4,11 +4,11 @@
       <div class="form-group">
         <label for="nro_comprobante">Nro. Remito (<b class="text-danger">*</b>):</label>
         <div class="input-group">
-          <input class="form-control col-md-4" type="text" min="1" maxlength="4" formControlName="nroComprobantePrincipal" placeholder="0000" (keyup)="esNumero($event.target)" (change)="validarNumeroComprobante($event.target, 'principal')">
+          <input class="form-control col-md-4" type="text" min="1" maxlength="4" formControlName="nroComprobantePrincipal" placeholder="0000" (keyup)="esNumero($event.target)" (change)="validarNumeroComprobante($event.target, 'principal')" [ngClass]="{'is-invalid': (comprobanteForm.get('nroComprobantePrincipal').invalid && submitted)}">
           <div class="input-group-append input-group-prepend">
             <span class="input-group-text">-</span>
           </div>
-          <input class="form-control col-md-8" type="text" min="1" maxlength="8" formControlName="nroComprobanteFinal" placeholder="00000000" (keyup)="esNumero($event.target)" (change)="validarNumeroComprobante($event.target, 'final')">
+          <input class="form-control col-md-8" type="text" min="1" maxlength="8" formControlName="nroComprobanteFinal" placeholder="00000000" (keyup)="esNumero($event.target)" (change)="validarNumeroComprobante($event.target, 'final')" [ngClass]="{'is-invalid': (comprobanteForm.get('nroComprobanteFinal').invalid && submitted)}">
         </div>
         <div class="text-danger" *ngIf="((comprobanteForm.get('nroComprobantePrincipal').invalid || comprobanteForm.get('nroComprobanteFinal').invalid) && submitted)">
           <span>Se requiere completar el numero de comprobante.</span>
@@ -21,9 +21,9 @@
         <label for="fecha_emision">Fecha Remito (<b class="text-danger">*</b>):</label>
         <div class="input-group">
           <input class="form-control" id="fecha_emision" placeholder="dd/mm/yyyy"
-                 name="dp" formControlName="fechaEmision" (ngModelChange)="formatearFecha($event)" ngbDatepicker #d="ngbDatepicker">
+                 name="dp" formControlName="fechaEmision" (ngModelChange)="formatearFecha($event)" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (comprobanteForm.get('fechaEmision').invalid && submitted)}">
           <div class="input-group-append">
-            <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+            <button class="btn" [ngClass]="(comprobanteForm.get('fechaEmision').invalid && submitted) ? 'btn-outline-danger' : 'btn-outline-info'" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
           </div>
         </div>
         <div class="text-danger" *ngIf="(comprobanteForm.get('fechaEmision').invalid && submitted)">

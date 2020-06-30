@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListaProductoComponent implements OnInit {
   @Input("stock") public stock:any;
+  @Input("submitted") public submitted: boolean;
 
   constructor() { }
 

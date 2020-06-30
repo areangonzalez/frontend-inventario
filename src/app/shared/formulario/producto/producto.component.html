@@ -22,7 +22,7 @@
                  name="dp" formControlName="fechaVencimiento" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (productoForm.get('fechaVencimiento').invalid && submitted)}"
                  (ngModelChange)="formatearFecha($event)">
           <div class="input-group-append">
-            <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt" ></i></button>
+            <button class="btn" [ngClass]="(productoForm.get('fechaVencimiento').invalid && submitted) ? 'btn-outline-danger' : 'btn-outline-info'" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt" ></i></button>
           </div>
         </div>
         <div *ngIf="(productoForm.get('fechaVencimiento').invalid && submitted)" class="text-danger">
