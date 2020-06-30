@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { InventarioService, AlertService } from 'src/app/core/service';
 
 /**
  * Componente que muestra el contenido del modal
@@ -39,7 +40,10 @@ export class ComprobanteModalContent {
   public comprobanteForm: FormGroup;
   public submitted: boolean = false;
 
-  constructor( private _ativeModal: NgbActiveModal, private _fb: FormBuilder  ) {
+  constructor(
+    private _ativeModal: NgbActiveModal, private _fb: FormBuilder,
+    private _inventarioService: InventarioService, private _mensaje: AlertService
+  ) {
     this.comprobanteForm = _fb.group({
       nro_remito: '',
       nroComprobantePrincipal: ['', Validators.required],
@@ -63,7 +67,11 @@ export class ComprobanteModalContent {
       let parametros = this.comprobanteForm.value;
       parametros["lista_producto"] = this.listadoDeStock;
 
-      console.log(parametros);
+      /* this._inventarioService.guardar(parametros).subscribe(
+        respuesta => {
+          this._mensaje.exitoso("El stock ha sido guardado con éxito!");
+      }, error => { this._mensaje.cancelado(error.message); }); */
+
     }
   }
 
