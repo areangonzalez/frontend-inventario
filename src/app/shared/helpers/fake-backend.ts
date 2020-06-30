@@ -122,15 +122,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function crearInventario() {
-            const { username, password } = body;
-            const user = {id:0};
-            if (!user) return error('Username or password is incorrect');
+            let comprobante = body;
+            if (!comprobante) return error('Error al guardar');
             return ok({
-                id: user.id,
-                /* username: user.username,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                token: 'fake-jwt-token' */
+                id: 1,
             })
         }
         /* CREAR PRODUCTO */

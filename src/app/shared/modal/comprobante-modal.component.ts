@@ -67,17 +67,17 @@ export class ComprobanteModalContent {
       let parametros = this.comprobanteForm.value;
       parametros["lista_producto"] = this.listadoDeStock;
 
-      /* this._inventarioService.guardar(parametros).subscribe(
+      this._inventarioService.guardar(parametros).subscribe(
         respuesta => {
           this._mensaje.exitoso("El stock ha sido guardado con éxito!");
-      }, error => { this._mensaje.cancelado(error.message); }); */
+          this.cerrarModal();
+      }, error => { this._mensaje.cancelado(error.message); });
 
     }
   }
 
   crearListadoDeStock(stock: any) {
     this.listadoDeStock.push(Object.assign({}, stock));
-    console.log(this.listadoDeStock);
   }
 }
 

@@ -9,6 +9,6 @@ export class InventarioService {
   constructor( private _http: ApiService) { }
 
   guardar(param: Object) {
-    return this._http.post('inventarios', param);
+    return this._http.post('/inventarios', param);
   }
 }
