@@ -92,6 +92,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarUnidadMedida();
                 case url.endsWith('/apimock/marcas') && method === 'GET':
                     return listarMarcas();
+                case url.match(/\/apimock\/destinatarios\/\d+$/) && method === 'GET':
+                    return comprobantePorId();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -153,6 +155,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }else{
             error("No se a podido crear el producto");
           }
+        }
+        /* COMPROBANTE POR ID */
+        function comprobantePorId() {
+          let urlParts = request.url.split('/');
+          let id = parseInt(urlParts[urlParts.length - 1]);
+          let comprobante = {
+            "id": 1, "nro_remito": "0001-00001", "fecha_inicial": "2019-03-03", "fecha_emision": "2019-03-03", "total": 7500,
+            "proveedorid": 1, "descripcion": "Esto es una descripcion hecha por fixture 1", "producto_cant_total": "12",
+            "lista_producto": [
+              { "comprobanteid": 1, "productoid": 1, "fecha_vencimiento": "2019-03-03", "precio_unitario": 100, "defectuoso": true, "egresoid": "",
+                    "depositoid": "", "falta": false, "stock": false, "vencido": true, "cantidad": "1", "precio_total": 100, "nombre": "Aceite de girasol",
+                    "codigo": "A300", "unidad_valor": "1,5", "unidad_medidaid": 3, "marcaid": 1, "categoriaid": 1, "marca": "Arcor", "unidad_medida": "lt",
+                    "producto": "Aceite de girasol, 1,5lt (Arcor)" },
+                { "comprobanteid": 1, "productoid": 2, "fecha_vencimiento": "2019-03-20", "precio_unitario": 300, "defectuoso": false, "egresoid": 2,
+                    "depositoid": "", "falta": false, "stock": false, "vencido": true, "cantidad": "2", "precio_total": 600, "nombre": "Aceite de girasol",
+                    "codigo": "A301", "unidad_valor": "900", "unidad_medidaid": 4, "marcaid": 1, "categoriaid": 1, "marca": "Arcor", "unidad_medida": "ml",
+                    "producto": "Aceite de girasol, 900ml (Arcor)" }]};
+          console.log("comrpobante id: ", id);
+
+          return ok(comprobante);
         }
 
         // helper functions
