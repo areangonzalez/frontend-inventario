@@ -24,7 +24,7 @@
         <td *ngIf="(tipoTabla == 'ingreso')" class="text-center">{{producto.fecha_emision | date: 'dd/MM/yyyy'}}</td>
         <td *ngIf="(tipoTabla == 'egreso')" class="text-center">{{producto.egreso | date: 'dd/MM/yyyy'}}</td>
         <th scope="col" class="text-center">
-          <abrir-vista-comprobante-modal></abrir-vista-comprobante-modal>
+          <abrir-vista-comprobante-modal *ngIf="(tipoTabla == 'ingreso')" [idComprobante]="producto.comprobanteid" ></abrir-vista-comprobante-modal>
         </th>
       </tr>
     </tbody>

@@ -19,7 +19,10 @@
         <td>{{item.producto}} </td>
         <td class="ancho-celda-vencimiento text-center">{{item.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
         <th scope="col" class="text-center">
-          <abrir-confirmacion-borrado-producto-modal [texto]="'producto'" [indexListado]="i" [listado]="stock"></abrir-confirmacion-borrado-producto-modal>
+          <abrir-confirmacion-borrado-producto-modal *ngIf="borrar" [texto]="'producto'" [indexListado]="i" [listado]="stock"></abrir-confirmacion-borrado-producto-modal>
+          <button class="btn btn-sm btn-outline-secondary" ngbTooltip="Falta/n producto/s" placement="top" container="body" >
+            <i class="fas fa-level-down-alt"></i>
+          </button>
         </th>
       </tr>
     </tbody>

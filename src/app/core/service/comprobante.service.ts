@@ -9,6 +9,6 @@ export class ComprobanteService {
   constructor(private _http: ApiService) { }
 
   buscarPorId(id:number) {
-    return this._http.get("/comprobante/" + id);
+    return this._http.get("/comprobantes/" + id);
   }
 }

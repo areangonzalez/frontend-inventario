@@ -92,7 +92,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarUnidadMedida();
                 case url.endsWith('/apimock/marcas') && method === 'GET':
                     return listarMarcas();
-                case url.match(/\/apimock\/destinatarios\/\d+$/) && method === 'GET':
+                case url.match(/\/apimock\/comprobantes\/\d+$/) && method === 'GET':
                     return comprobantePorId();
                 default:
                     // pass through any requests not handled above
@@ -153,7 +153,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           if (nuevoId) {
             return ok({id:nuevoId})
           }else{
-            error("No se a podido crear el producto");
+            return error("No se a podido crear el producto");
           }
         }
         /* COMPROBANTE POR ID */
@@ -174,7 +174,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     "producto": "Aceite de girasol, 900ml (Arcor)" }]};
           console.log("comrpobante id: ", id);
 
-          return ok(comprobante);
+          if (id) {
+            return ok(comprobante);
+          }else {
+            return error("Este comrpobante no existe");
+          }
         }
 
         // helper functions
@@ -184,7 +188,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function error(message) {
-            return throwError({ error: { message } });
+            return throwError({ status: 403, error: { message: message } });
         }
 
         function unauthorized() {

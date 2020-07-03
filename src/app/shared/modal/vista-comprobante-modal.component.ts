@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ComprobanteService } from 'src/app/core/service/comprobante.service';
+import { AlertService } from 'src/app/core/service';
 
 /**
  * Componente que muestra el contenido del modal
@@ -7,29 +9,40 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'vista-comprobante-modal-content',
   template: `
-    <div class="modal-header d-flex justify-content-between">
-      <!-- <div><strong>{{datos.nro_remito}}</strong></div>
-      <div>R</div>
-      <div>{{datos.fecha_emision | date: 'dd/MM/yyyy'}}</div> -->
-      <!-- <button type="button" class="close" aria-label="Close" (click)="cerrarModal()">
-        <span aria-hidden="true">&times;</span>
-      </button> -->
+    <div class="modal-header d-flex justify-content-between" *ngIf="(datos !== undefined)">
+      <div><strong>N°: {{datos.nro_remito}}</strong></div>
+      <div><strong>R</strong></div>
+      <div><strong>{{datos.fecha_emision | date: 'dd/MM/yyyy'}}</strong></div>
     </div>
-    <div class="modal-body">
-    <!-- {{datos | json}} -->
-      <p>Aquí va la tabla de productos</p>
-      <p>Descripción del producto</p>
+    <div class="modal-body" *ngIf="(datos !== undefined)">
+      <shared-lista-producto [stock]="datos.lista_producto" [submitted]="false" [borrar]="false" ></shared-lista-producto>
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <div class="pt-1" >Observación:</div>
+          <div>
+            <button class="btn btn-sm btn-outline-secondary" placement="top" ngbTooltip="Editar" ><i class="fas fa-edit"></i></button>
+          </div>
+        </div>
+        <div *ngIf="(datos.descripcion != '')" class="card-body">
+          <p>{{datos.descripcion}}<p>
+        </div>
+      </div>
     </div>
-    <div class="modal-footer d-flex justify-content-between">
-      <button type="button" class="btn btn-outline-danger" (click)="confirmar(false)"><i class="fas fa-ban"></i> No</button>
-      <button type="button" class="btn btn-outline-success" (click)="confirmar(true)"><i class="fas fa-save"></i> Si</button>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="confirmar(true)"><i class="fas fa-times"></i> Cerrar</button>
     </div>
-  `
+  `,
+  styleUrls: ['./vista-comprobante-modal.component.scss']
 })
-export class VistaComprobanteModalContent {
+export class VistaComprobanteModalContent implements OnInit {
   @Input("idComprobante") public idComprobante: any;
+  public datos: any;
 
-  constructor( private _ativeModal: NgbActiveModal ) { }
+  constructor( private _ativeModal: NgbActiveModal, private _comprobanteService: ComprobanteService, private _mensaje: AlertService ) { }
+
+  ngOnInit() {
+    this.buscarComprobante(this.idComprobante);
+  }
 
   cerrarModal() {
     this._ativeModal.close('close');
@@ -39,6 +52,14 @@ export class VistaComprobanteModalContent {
     //this.listado.splice(this.id, 1);
     this._ativeModal.close('close');
   }
+
+  buscarComprobante(id:number) {
+    this._comprobanteService.buscarPorId(id).subscribe(
+      respuesta => {
+        console.log(respuesta);
+        this.datos = respuesta;
+      }, error => { this._mensaje.cancelado(error.message); })
+  }
 }
 
 @Component({
@@ -47,15 +68,12 @@ export class VistaComprobanteModalContent {
   styleUrls: ['./vista-comprobante-modal.component.scss']
 })
 export class VistaComprobanteModalComponent {
-  @Input("datosComprobante") public datos: any;
+  @Input("idComprobante") public idComprobante: any;
 
   constructor( private _modalService: NgbModal ) { }
 
   open() {
-    const modalRef = this._modalService.open(VistaComprobanteModalContent);
-    modalRef.componentInstance.datos = this.datos;
+    const modalRef = this._modalService.open(VistaComprobanteModalContent, { size: 'lg' });
+    modalRef.componentInstance.idComprobante = this.idComprobante;
   }
-
-
-
 }
