@@ -18,7 +18,7 @@ import { InventarioService, AlertService } from 'src/app/core/service';
     <div class="modal-body">
       <form-comprobante [comprobante]="comprobanteForm" [submitted]="submitted" ></form-comprobante>
       <form-producto [listadoDeProducto]="listaProductos" [listadoDeCategoria]="listaCategorias" [listadoDeUnidadMedida]="listaUnidadMedida" [listadoDeMarcas]="listaMarcas" (obtenerListadoDestock)="crearListadoDeStock($event)"></form-producto>
-      <shared-lista-producto [stock]="listadoDeStock" [submitted]="submitted" [borrar]="true" ></shared-lista-producto>
+      <shared-lista-producto [stock]="listadoDeStock" [submitted]="submitted" [borrar]="true" [vista]="false" ></shared-lista-producto>
       <hr style="border: solid 1px #eee;">
       <div [formGroup]="comprobanteForm" class="form-group">
         <label for="descripcion">Observación:</label>

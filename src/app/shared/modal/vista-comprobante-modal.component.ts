@@ -15,7 +15,7 @@ import { AlertService } from 'src/app/core/service';
       <div><strong>{{datos.fecha_emision | date: 'dd/MM/yyyy'}}</strong></div>
     </div>
     <div class="modal-body" *ngIf="(datos !== undefined)">
-      <shared-lista-producto [stock]="datos.lista_producto" [submitted]="false" [borrar]="false" ></shared-lista-producto>
+      <shared-lista-producto [stock]="datos.lista_producto" [submitted]="false" [borrar]="false" [vista]="true" [idComprobante]="idComprobante" ></shared-lista-producto>
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <div class="pt-1" >Observación:</div>

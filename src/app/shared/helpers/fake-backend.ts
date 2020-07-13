@@ -27,6 +27,19 @@ let listadoCategorias = [
   { id:1, nombre:'Alimentos/Bebidas' }, { id:2, nombre:'Limpieza' }
 ];
 
+let comprobante = {
+  "id": 1, "nro_remito": "0001-00001", "fecha_inicial": "2019-03-03", "fecha_emision": "2019-03-03", "total": 7500,
+  "proveedorid": 1, "descripcion": "Esto es una descripcion hecha por fixture 1", "producto_cant_total": "12",
+  "lista_producto": [
+    { "comprobanteid": 1, "productoid": 1, "fecha_vencimiento": "2019-03-03", "precio_unitario": 100, "defectuoso": true, "egresoid": "",
+          "depositoid": "", "falta": false, "stock": false, "vencido": true, "cantidad": "1", "precio_total": 100, "nombre": "Aceite de girasol",
+          "codigo": "A300", "unidad_valor": "1,5", "unidad_medidaid": 3, "marcaid": 1, "categoriaid": 1, "marca": "Arcor", "unidad_medida": "lt",
+          "producto": "Aceite de girasol, 1,5lt (Arcor)" },
+      { "comprobanteid": 1, "productoid": 2, "fecha_vencimiento": "2019-03-20", "precio_unitario": 300, "defectuoso": false, "egresoid": 2,
+          "depositoid": "", "falta": false, "stock": false, "vencido": true, "cantidad": "2", "precio_total": 600, "nombre": "Aceite de girasol",
+          "codigo": "A301", "unidad_valor": "900", "unidad_medidaid": 4, "marcaid": 1, "categoriaid": 1, "marca": "Arcor", "unidad_medida": "ml",
+          "producto": "Aceite de girasol, 900ml (Arcor)" }]};
+
 // Comprobar listado de productos
 function getProductos(){
   let listaProductos = productos;
@@ -94,6 +107,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarMarcas();
                 case url.match(/\/apimock\/comprobantes\/\d+$/) && method === 'GET':
                     return comprobantePorId();
+                case url.match(/\/apimock\/comprobantes\/registrar-producto-faltante\/\d+$/) && method === 'PUT':
+                  return registrarProductoFaltante();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -160,23 +175,55 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function comprobantePorId() {
           let urlParts = request.url.split('/');
           let id = parseInt(urlParts[urlParts.length - 1]);
-          let comprobante = {
-            "id": 1, "nro_remito": "0001-00001", "fecha_inicial": "2019-03-03", "fecha_emision": "2019-03-03", "total": 7500,
-            "proveedorid": 1, "descripcion": "Esto es una descripcion hecha por fixture 1", "producto_cant_total": "12",
-            "lista_producto": [
-              { "comprobanteid": 1, "productoid": 1, "fecha_vencimiento": "2019-03-03", "precio_unitario": 100, "defectuoso": true, "egresoid": "",
-                    "depositoid": "", "falta": false, "stock": false, "vencido": true, "cantidad": "1", "precio_total": 100, "nombre": "Aceite de girasol",
-                    "codigo": "A300", "unidad_valor": "1,5", "unidad_medidaid": 3, "marcaid": 1, "categoriaid": 1, "marca": "Arcor", "unidad_medida": "lt",
-                    "producto": "Aceite de girasol, 1,5lt (Arcor)" },
-                { "comprobanteid": 1, "productoid": 2, "fecha_vencimiento": "2019-03-20", "precio_unitario": 300, "defectuoso": false, "egresoid": 2,
-                    "depositoid": "", "falta": false, "stock": false, "vencido": true, "cantidad": "2", "precio_total": 600, "nombre": "Aceite de girasol",
-                    "codigo": "A301", "unidad_valor": "900", "unidad_medidaid": 4, "marcaid": 1, "categoriaid": 1, "marca": "Arcor", "unidad_medida": "ml",
-                    "producto": "Aceite de girasol, 900ml (Arcor)" }]};
-          console.log("comrpobante id: ", id);
+
+          let listado = JSON.parse(localStorage.getItem("comprobante"));
+          if (listado) {
+            if (listado.length > 0) {
+              comprobante = listado;
+            }
+            console.log(listado);
+          }
 
           if (id) {
             return ok(comprobante);
           }else {
+            return error("Este comrpobante no existe");
+          }
+        }
+
+        /* REGISTRAR PRODUCTO FALTANTES */
+        function registrarProductoFaltante() {
+          let urlParts = request.url.split('/');
+          let id = parseInt(urlParts[urlParts.length - 1]);
+          let params = body;
+
+          let listaProductos = comprobante["lista_producto"];
+          let productoNuevo: any;
+          for (let i = 0; i < listaProductos.length; i++) {
+            if ( listaProductos[i].fecha_vencimiento == params["fecha_vencimiento"] && listaProductos[i].productoid == params["productoid"] ) {
+              productoNuevo  = Object.assign({}, listaProductos[i]);
+
+              productoNuevo.falta = true;
+            }
+          }
+
+          listaProductos.push(productoNuevo);
+
+          // modifico el listado de productos del comprobante
+          comprobante["lista_producto"] = listaProductos;
+          // lo guardo en local storage al comprobante
+          localStorage.setItem('comprobante', JSON.stringify(comprobante));
+
+          console.log(params);
+
+          let respuesta = {
+            message: "Se modifica el comprobante",
+            comprobanteid: 1
+          };
+
+          if (id) {
+            return ok(respuesta);
+          } else {
             return error("Este comrpobante no existe");
           }
         }

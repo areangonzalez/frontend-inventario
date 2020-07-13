@@ -11,4 +11,8 @@ export class ComprobanteService {
   buscarPorId(id:number) {
     return this._http.get("/comprobantes/" + id);
   }
+
+  actualizarProductoFaltante(id:number, params: object) {
+    return this._http.put("/comprobantes/registrar-producto-faltante/" + id, params);
+  }
 }

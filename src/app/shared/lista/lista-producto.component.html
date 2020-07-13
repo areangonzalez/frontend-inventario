@@ -14,13 +14,13 @@
       </tr>
     </tbody>
     <tbody *ngIf="(stock.length > 0)">
-      <tr *ngFor="let item of stock;let i=index" [ngClass]="{'table-secondary': item.falta}" >
+      <tr *ngFor="let item of stock;let i=index" [ngClass]="{'table-secondary': item.falta}" ngbTooltip="{{info(item.falta)}}">
         <td class="ancho-celda-minimo text-center">{{item.cantidad}}</td>
         <td>{{item.producto}} </td>
         <td class="ancho-celda-vencimiento text-center">{{(item.falta) ? '' : item.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
         <th scope="col" class="text-center">
           <abrir-confirmacion-borrado-producto-modal *ngIf="borrar" [texto]="'producto'" [indexListado]="i" [listado]="stock"></abrir-confirmacion-borrado-producto-modal>
-          <agregar-cantidad-faltante-producto-modal *ngIf="(!item.falta)" [producto]="item" [cantidadProductoMaximo]="item.cantidad" (productoFaltante)="obtenerProductoFaltante(item, i,$event)"></agregar-cantidad-faltante-producto-modal>
+          <agregar-cantidad-faltante-producto-modal *ngIf="(!item.falta)" [producto]="item" [cantidadProductoMaximo]="item.cantidad" [vista]="vista" (productoFaltante)="obtenerProductoFaltante(item, i,$event)"></agregar-cantidad-faltante-producto-modal>
         </th>
       </tr>
     </tbody>
