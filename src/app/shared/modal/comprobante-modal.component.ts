@@ -50,7 +50,9 @@ export class ComprobanteModalContent {
       nroComprobanteFinal: ['', Validators.required],
       fechaEmision: ['', Validators.required],
       fecha_emision: '',
-      descripcion: ''
+      descripcion: '',
+      falta: false,
+      defectuoso: false
     });
   }
 

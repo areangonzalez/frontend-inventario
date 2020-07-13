@@ -15,4 +15,15 @@ export class ListaProductoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  obtenerProductoFaltante(productoOrigen:any, indiceProductoOrigen:number, productoNuevo:any) {
+    productoOrigen['cantidad'] = parseInt(productoOrigen['cantidad']) - parseInt(productoNuevo['cantidad']);
+    // borro el producto origen si la cantidad es igual a cero
+    if (productoOrigen['cantidad'] == 0){
+      this.stock.splice(indiceProductoOrigen, 1);
+    }
+
+    this.stock.push(productoNuevo);
+    console.log(productoOrigen,' ',productoNuevo);
+  }
+
 }
