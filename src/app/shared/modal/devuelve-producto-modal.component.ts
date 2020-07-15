@@ -7,17 +7,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
  * Componente que muestra el contenido del modal
  */
 @Component({
-  selector: 'falta-producto-modal-content',
+  selector: 'devuelve-producto-modal-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">Cantidad Faltante del Producto </h4>
+      <h4 class="modal-title">Cantidad de Producto a Devolver </h4>
       <button type="button" class="close" aria-label="Close" (click)="cerrarModal()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body" [formGroup]="form">
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="cantidad">Cantidad</label>
+        <label class="col-sm-2 col-form-label" for="cantidad">Cantidad:</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="cantidad" formControlName="cantidad" (keyup)="validarCantidad($event.target)" placeholder="Cantidad Máxima: {{cantidadProductoMaximo}}">
         </div>
@@ -28,6 +28,20 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
       <div *ngIf="(cantidadMaxima && submitted)" class="text-danger text-center">
         La cantidad no puede ser mayor a {{cantidadProductoMaximo}}.
       </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="vencimiento">Vencimiento:</label>
+        <div class="col-sm-9 input-group">
+          <input class="form-control" placeholder="dd/mm/yyyy"
+                name="dp" formControlName="fechaVencimiento" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (form.get('fechaVencimiento').invalid && submitted)}"
+                (ngModelChange)="formatearFecha($event)">
+          <div class="input-group-append">
+            <button class="btn" [ngClass]="(form.get('fechaVencimiento').invalid && submitted) ? 'btn-outline-danger' : 'btn-outline-info'" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt" ></i></button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="(form.get('fechaVencimiento').invalid && submitted)" class="text-danger">
+        <span>Por favor seleccione una fecha de vencimiento.</span>
+      </div>
     </div>
     <div class="modal-footer d-flex justify-content-between">
       <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()"><i class="fas fa-ban"></i> Cancelar</button>
@@ -35,7 +49,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     </div>
   `
 })
-export class FaltaProductoModalContent {
+export class DevuelveProductoModalContent {
   @Input("producto") public producto:any;
   @Input("cantidadProductoMaximo") public cantidadProductoMaximo;
   public submitted: boolean = false;
@@ -44,8 +58,23 @@ export class FaltaProductoModalContent {
 
   constructor( private _ativeModal: NgbActiveModal, private _util: UtilService, private _fb: FormBuilder ) {
     this.form = _fb.group({
-      cantidad: ['', Validators.required]
+      cantidad: ['', Validators.required],
+      fechaVencimiento: ['', Validators.required],
+      fecha_vencimiento: ['']
     });
+  }
+
+  /**
+   * Formatea la fecha para una variable del formulario
+   * @param obj [any] objecto de fecha
+   * @param keyFecha [string] nombre de la variable que sera seteada
+   */
+  public formatearFecha(fecha:any){
+    if (fecha !== null){
+      this.form.controls.fecha_vencimiento.setValue(this._util.formatearFecha(fecha.day, fecha.month, fecha.year, "yyyy-MM-dd"));
+    }else{
+      this.form.controls.fecha_vencimiento.setValue('');
+    }
   }
 
   cerrarModal() {
@@ -80,25 +109,25 @@ export class FaltaProductoModalContent {
 }
 
 @Component({
-  selector: 'agregar-cantidad-faltante-producto-modal',
-  templateUrl: './falta-producto-modal.component.html',
+  selector: 'agregar-cantidad-devolucion-producto-modal',
+  templateUrl: './devuelve-producto-modal.component.html',
 })
-export class FaltaProductoModalComponent {
+export class DevuelveProductoModalComponent {
   @Input("producto") public producto: any;
   @Input("cantidadProductoMaximo") public cantidadProductoMaximo;
-  @Output("productoFaltante") public productoFaltante = new EventEmitter();
+  @Output("productoDevolucion") public productoDevolucion = new EventEmitter();
 
   constructor( private _modalService: NgbModal ) { }
 
   open() {
-    const modalRef = this._modalService.open(FaltaProductoModalContent);
+    const modalRef = this._modalService.open(DevuelveProductoModalContent);
     modalRef.componentInstance.producto = this.producto;
     modalRef.componentInstance.cantidadProductoMaximo = this.cantidadProductoMaximo
     modalRef.result.then(
       (result) => {
           if (result == 'close') {
           } else {
-              return this.productoFaltante.emit(result);
+              return this.productoDevolucion.emit(result);
           }
       }
     );

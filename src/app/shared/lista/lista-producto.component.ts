@@ -58,4 +58,8 @@ export class ListaProductoComponent implements OnInit {
         }, error => { this._mensaje.cancelado(error.message); })
   }
 
+  registrarProductoDevuelto(productoOrigen:any, indiceProductoOrigen:number, productoNuevo:any) {
+
+  }
+
 }
