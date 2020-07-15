@@ -3,11 +3,13 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule, NgbDatepickerI18n, NgbTooltipModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { SelfBuildingSquareSpinnerModule } from "angular-epic-spinners";
+
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
 import {
-  SharedModule, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
+  SharedModule, LoaderComponent, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
   BreadcrumbComponent,
   fakeBackendProvider,
   ErrorInterceptor
@@ -18,6 +20,7 @@ import { BreadcrumbsService } from './core/service';
 @NgModule({
   declarations: [
     AppComponent,
+    LoaderComponent,
     CabeceraComponent,
     BreadcrumbComponent
   ],
@@ -26,6 +29,7 @@ import { BreadcrumbsService } from './core/service';
     NgbModule,
     NgbTooltipModule,
     HttpClientModule,
+    SelfBuildingSquareSpinnerModule,
     RoutingModule,
     SharedModule
   ],

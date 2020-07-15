@@ -14,11 +14,11 @@ const routes: Routes = [
     children: [
       {
         path: 'stock', component: StockComponent,
-        data: { breadcrumb: 'Stock' }
+        data: { loading: true, breadcrumb: 'Stock' }
       },
       {
         path: 'ingreso', component: IngresoComponent,
-        data: { breadcrumb: 'Ingreso' },
+        data: { loading: true, breadcrumb: 'Ingreso' },
         resolve: {
           productos: ProductoService, categorias: CategoriaService,
           unidadMedida: UnidadMedidaService, marcas: MarcaService
@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'egreso', component: EgresoComponent,
-        data: { breadcrumb: 'Egreso' }
+        data: { loading: true, breadcrumb: 'Egreso' }
       },
       { path: '**', redirectTo: 'stock', pathMatch: 'full' },
     ]
