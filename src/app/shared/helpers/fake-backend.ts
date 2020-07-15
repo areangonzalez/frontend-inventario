@@ -107,8 +107,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarMarcas();
                 case url.match(/\/apimock\/comprobantes\/\d+$/) && method === 'GET':
                     return comprobantePorId();
-                case url.match(/\/apimock\/comprobantes\/registrar-producto-faltante\/\d+$/) && method === 'PUT':
-                  return registrarProductoFaltante();
+                case url.match(/\/apimock\/comprobantes\/registrar-producto-pendiente\/\d+$/) && method === 'PUT':
+                  return registrarProductoPendiente();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -181,7 +181,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (listado.length > 0) {
               comprobante = listado;
             }
-            console.log(listado);
           }
 
           if (id) {
@@ -191,30 +190,40 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }
         }
 
-        /* REGISTRAR PRODUCTO FALTANTES */
-        function registrarProductoFaltante() {
+        /* REGISTRAR PRODUCTO PENDIENTES */
+        function registrarProductoPendiente() {
           let urlParts = request.url.split('/');
           let id = parseInt(urlParts[urlParts.length - 1]);
           let params = body;
 
+          console.log("parametros",params);
+
           let listaProductos = comprobante["lista_producto"];
           let productoNuevo: any;
+          let indice: number = 0;
+
+          console.log("lista productos: ", listaProductos);
           for (let i = 0; i < listaProductos.length; i++) {
-            if ( listaProductos[i].fecha_vencimiento == params["fecha_vencimiento"] && listaProductos[i].productoid == params["productoid"] ) {
+            if ( listaProductos[i].fecha_vencimiento == params["fecha_vencimiento"] && listaProductos[i].productoid == params["productoid"]) {
               productoNuevo  = Object.assign({}, listaProductos[i]);
 
-              productoNuevo.falta = true;
+              productoNuevo['falta'] = true;
+              productoNuevo['fecha_vencimiento'] = "";
+            } else if (listaProductos[i].fecha_vencimiento == "" && listaProductos[i].productoid == params['productoid'] ) {
+              indice = i;
+              listaProductos[i].cantidad = params['cantidad'];
+              listaProductos[i].fecha_vencimiento = params['fecha_vencimiento'];
+              listaProductos[i].falta = false;
             }
           }
-
-          listaProductos.push(productoNuevo);
+          if (params['falta'] === true) {
+            listaProductos.push(productoNuevo);
+          }
 
           // modifico el listado de productos del comprobante
           comprobante["lista_producto"] = listaProductos;
           // lo guardo en local storage al comprobante
           localStorage.setItem('comprobante', JSON.stringify(comprobante));
-
-          console.log(params);
 
           let respuesta = {
             message: "Se modifica el comprobante",

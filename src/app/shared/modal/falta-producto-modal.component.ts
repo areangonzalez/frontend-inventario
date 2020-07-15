@@ -47,19 +47,25 @@ export class FaltaProductoModalContent {
       cantidad: ['', Validators.required]
     });
   }
-
+  /**
+   * Cierra el modal
+   */
   cerrarModal() {
     this._ativeModal.close('close');
   }
-
+  /**
+   * valida si la cantidad es un numero
+   * @param numero este valor puede ser un string o numero
+   */
   validarCantidad(numero:any) {
     if (!this._util.validarNumero(numero.value)) {
       numero.value = numero.value.substring(0,numero.value.length - 1);
       this.form.get("cantidad").patchValue(numero.value);
     }
   }
-
-
+  /**
+   * guarda los atributos modificados de un producto
+   */
   guardar() {
     this.submitted = true;
     this.cantidadMaxima = false;

@@ -41,7 +41,11 @@ export class ListaProductoComponent implements OnInit {
   info(falta: boolean) {
     return (falta) ? 'Falta' : '';
   }
-
+  /**
+   * modifica un producto por su id de comprobante
+   * @param idComprobante identificador del comprobante
+   * @param params parametros del producto a modificar
+   */
   modificarProductoFaltante(idComprobante: number, params:object) {
     this._comprobanteService.actualizarProductoFaltante(this.idComprobante, params).subscribe(
       respuesta => {
@@ -50,15 +54,31 @@ export class ListaProductoComponent implements OnInit {
       }, error => { this._mensaje.cancelado(error.message); }
     )
   }
-
+  /**
+   * actuliza el listado para verificar los cambios
+   * @param idComprobante identificador del comprobante
+   */
   refrescarStock(idComprobante: number) {
       this._comprobanteService.buscarPorId(idComprobante).subscribe(
         respuesta => {
           this.stock = respuesta["lista_producto"];
         }, error => { this._mensaje.cancelado(error.message); })
   }
-
+  /**
+   * Registra un producto que ha sido devuelto
+   * @param productoOrigen producto real
+   * @param indiceProductoOrigen indice del producto en el listado
+   * @param productoNuevo prodcuto modificado
+   */
   registrarProductoDevuelto(productoOrigen:any, indiceProductoOrigen:number, productoNuevo:any) {
+    productoOrigen['cantidad'] = parseInt(productoOrigen['cantidad']) - parseInt(productoNuevo['cantidad']);
+
+    let producto: object = {
+      cantidad: productoNuevo["cantidad"], productoid: productoNuevo["productoid"],
+      fecha_vencimiento: productoNuevo["fecha_vencimiento"], falta: false
+    };
+
+    this.modificarProductoFaltante(this.idComprobante, producto);
 
   }
 

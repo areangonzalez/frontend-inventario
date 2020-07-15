@@ -76,11 +76,16 @@ export class DevuelveProductoModalContent {
       this.form.controls.fecha_vencimiento.setValue('');
     }
   }
-
+  /**
+   * cierra el modal
+   */
   cerrarModal() {
     this._ativeModal.close('close');
   }
-
+  /**
+   * valida la cantidad si es un numero
+   * @param numero este valor puede ser un string o numero
+   */
   validarCantidad(numero:any) {
     if (!this._util.validarNumero(numero.value)) {
       numero.value = numero.value.substring(0,numero.value.length - 1);
@@ -88,7 +93,9 @@ export class DevuelveProductoModalContent {
     }
   }
 
-
+  /**
+   * guarda los valores modificados del producto a dar de alta.
+   */
   guardar() {
     this.submitted = true;
     this.cantidadMaxima = false;
@@ -100,7 +107,8 @@ export class DevuelveProductoModalContent {
       }else {
         let productoDuplicado =  Object.assign({}, this.producto);
         productoDuplicado['cantidad'] = this.form.get('cantidad').value;
-        productoDuplicado['falta'] = true;
+        productoDuplicado['fecha_vencimiento'] = this.form.get('fecha_vencimiento').value;
+        productoDuplicado['falta'] = false;
         // envio producto
         this._ativeModal.close(productoDuplicado);
       }
