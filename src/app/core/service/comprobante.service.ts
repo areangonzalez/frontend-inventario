@@ -15,4 +15,8 @@ export class ComprobanteService {
   actualizarProductoFaltante(id:number, params: object) {
     return this._http.put("/comprobantes/registrar-producto-faltante/" + id, params);
   }
+
+  registrarProductoDevuelto(id: number, params: object) {
+    return this._http.put("/comprobantes/registrar-producto-pendiente/" + id, params);
+  }
 }
