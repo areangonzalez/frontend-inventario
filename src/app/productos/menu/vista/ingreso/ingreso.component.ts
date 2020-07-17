@@ -11,7 +11,7 @@ export class IngresoComponent implements OnInit {
   public listadoCategorias: any; // listado de categorias
   public listadoUnidadMedida: any; // listado de unidad de medidas
   public listadoMarcas: any; // listado de marcas
-  public listadoStock: any = [
+  public listadoIngreso: any = [
     { id:1, comprobanteid: 1, cantidad: 1000, producto: 'Alcohol, 250 cc', marca: 'Purocol', categoria: 'Limpieza', fecha_vencimiento: '2022-03-20', nro_remito: '0002-00000187', fecha_emision: '2020-05-20' },
     { id:2, comprobanteid: 1, cantidad: 2500, producto: 'jabón blanco en pan, 200 gr', marca: 'Ala', categoria: 'Limpieza', fecha_vencimiento: '2021-03-20', nro_remito: '0002-00000187', fecha_emision: '2020-05-20' },
     { id:3, comprobanteid: 1, cantidad: 3000, producto: 'Papel hig. Hoja simple, 320 ml', marca: 'Higienol', categoria: 'Limpieza', fecha_vencimiento: '2025-06-25', nro_remito: '0002-00000187', fecha_emision: '2020-05-20' },
