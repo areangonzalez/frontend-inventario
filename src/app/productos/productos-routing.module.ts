@@ -5,6 +5,7 @@ import { StockComponent } from './menu/vista/stock/stock.component';
 import { IngresoComponent } from './menu/vista/ingreso/ingreso.component';
 import { EgresoComponent } from './menu/vista/egreso/egreso.component';
 import { ProductoService, CategoriaService, UnidadMedidaService, MarcaService } from '../core/service';
+import { ComprobanteService } from '../core/service/comprobante.service';
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
         path: 'ingreso', component: IngresoComponent,
         data: { loading: true, breadcrumb: 'Ingreso' },
         resolve: {
-          productos: ProductoService, categorias: CategoriaService,
+          ingreso: ComprobanteService, productos: ProductoService, categorias: CategoriaService,
           unidadMedida: UnidadMedidaService, marcas: MarcaService
         }
       },
@@ -38,6 +39,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  providers: [ProductoService, CategoriaService, UnidadMedidaService, MarcaService]
+  providers: [ComprobanteService, ProductoService, CategoriaService, UnidadMedidaService, MarcaService]
 })
 export class ProductosRoutingModule { }
