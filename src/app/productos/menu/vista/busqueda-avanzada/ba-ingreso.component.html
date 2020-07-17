@@ -4,7 +4,7 @@
       <input type="text" class="form-control" [(ngModel)]="global_param" id="buscar-stock" placeholder="buscar por nombre de producto, número de rémito Ej.: Azucar" (keyup.enter)="buscar()" >
       <div class="input-group-append btn-group">
         <button type="button" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
-        <button type="button" class="btn btn-outline-danger" (click)="buscar()"><i class="fas fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-outline-danger" (click)="limpiarCampos()"><i class="fas fa-trash-alt"></i></button>
         <abrir-comprobante-modal [titulo]="'Agregar Stock'" [productos]="productos" [categorias]="categorias" [unidadMedida]="unidadMedida" [marcas]="marcas" ></abrir-comprobante-modal>
       </div>
     </div>

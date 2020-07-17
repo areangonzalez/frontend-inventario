@@ -14,6 +14,7 @@ export class BaIngresoComponent implements OnInit {
   @Input("unidadMedida") public unidadMedida: any; // Listados de unidad de medida
   @Input("marcas") public marcas: any; // Listados de marcas,
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
+  @Output("limpiar") public limpiar = new EventEmitter();
 
   public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
   public marcaLista: any = [{id:1, nombre:'Canale'}];
@@ -76,7 +77,21 @@ export class BaIngresoComponent implements OnInit {
   }
 
   public limpiarCampos() {
-    console.log('limpiamos');
+    let busqueda: any = this.busquedaAvanzada.value;
+      for (const key in busqueda) {
+        if (key == 'emisionDesde') {
+          busqueda[key] = null;
+        }else if (key == 'emisionHasta') {
+          busqueda[key] = null;
+        }else {
+          busqueda[key] = '';
+        }
+      }
+      this.global_param = '';
+      this.busquedaAvanzada.patchValue(busqueda);
+      this.btnSeleccion = false;
+      this.mostrar = false;
+      this.limpiar.emit(true);
   }
   /**
    * Formatea la fecha para una variable del formulario

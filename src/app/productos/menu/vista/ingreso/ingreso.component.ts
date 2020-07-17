@@ -62,4 +62,8 @@ export class IngresoComponent implements OnInit {
     }, error => { this._mensaje.cancelado(error); });
   }
 
+  limpiarCampos(e: boolean) {
+    this.buscar({}, 1);
+  }
+
 }
