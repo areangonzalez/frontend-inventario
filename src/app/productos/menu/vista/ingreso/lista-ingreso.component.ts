@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'producto-lista-ingreso',
@@ -7,10 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListaIngresoComponent implements OnInit {
   @Input("listadoIngreso") public listadoIngreso: any;
+  @Input("configPaginacion") public configPaginacion:any;
+  @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  cambioPagina(pagina:number){
+    this.cambioDePagina.emit(pagina);
   }
 
 }

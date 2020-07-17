@@ -3,5 +3,5 @@
   <ba-ingreso [productos]="listadoProductos" [categorias]="listadoCategorias" [unidadMedida]="listadoUnidadMedida" [marcas]="listadoMarcas" ></ba-ingreso>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <producto-lista-ingreso [listadoIngreso]="listadoIngreso"></producto-lista-ingreso>
+  <producto-lista-ingreso [listadoIngreso]="listadoIngreso" [configPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)"></producto-lista-ingreso>
 </div>

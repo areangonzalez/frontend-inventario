@@ -28,7 +28,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
       // subscribe to the NavigationEnd event
     //this._router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
       this._router.events.subscribe(event => {
-        console.log(event);
       let currentRoute: ActivatedRoute = this._activateRoute.root;
       let childrenRoutes: ActivatedRoute[] = currentRoute.children;
 

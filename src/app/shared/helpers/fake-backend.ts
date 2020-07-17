@@ -175,7 +175,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
         /* LISTADO DE COMPROBANTE INGRESO */
         function listarComprobantes() {
-          let comprobante = [
+          let page: number = parseInt(request.params.get("page"));
+          let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 2;
+
+          let comprobante = {
+            pagesize: pageSize, pages: 0, total_filtrado: 9, resultado: [
             { id:8, nro_remito: '0002-00000008', producto_cant_total: 1000, fecha_emision: '2020-06-03' },
             { id:7, nro_remito: '0002-00000007', producto_cant_total: 2500, fecha_emision: '2020-05-28' },
             { id:6, nro_remito: '0002-00000006', producto_cant_total: 3600, fecha_emision: '2020-05-21' },
@@ -184,8 +188,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             { id:3, nro_remito: '0002-00000003', producto_cant_total: 2000, fecha_emision: '2020-03-10' },
             { id:2, nro_remito: '0002-00000002', producto_cant_total: 3000, fecha_emision: '2020-01-22' },
             { id:1, nro_remito: '0002-00000001', producto_cant_total: 2100, fecha_emision: '2020-01-20' }
-          ];
+          ]};
 
+          // pagino el listado
+          let listaComprobantes = paginar(comprobante, comprobante.resultado, page, pageSize)
+          // Creo la respuesta
           if (comprobante) {
             return ok(comprobante);
           }else {
@@ -274,6 +281,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function isLoggedIn() {
             return headers.get('Authorization') === 'Bearer fake-jwt-token';
+        }
+
+        function paginar(listadoOrigen: any, listaEncontrados: any, page: number, pageSize: number) {
+          let totalFiltrado:number = listaEncontrados.length;
+          let total:number = totalFiltrado/pageSize;
+          let numEntero = Math.floor(total);
+          let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
+
+          listadoOrigen.total_filtrado = listaEncontrados.length;
+          listadoOrigen.pages = totalPagina;
+
+          if (page > 0) {
+            page = page;
+            let pageStart = page * pageSize;
+            let pageEnd = pageStart + pageSize;
+            listadoOrigen.resultado = listaEncontrados.slice(pageStart, pageEnd);
+          }else{
+            listadoOrigen.resultado = listaEncontrados.slice(0,pageSize);
+          }
+
+          return listadoOrigen;
         }
     }
 }
