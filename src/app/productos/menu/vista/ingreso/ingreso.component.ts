@@ -54,7 +54,7 @@ export class IngresoComponent implements OnInit {
    */
   buscar(params:any, page:number) {
     Object.assign(params, {page: page-1});
-
+    console.log(params);
     this.filtradoBusqueda = params;
     this._comprobanteService.buscar(params).subscribe(
       respuesta => {

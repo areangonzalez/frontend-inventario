@@ -1,7 +1,7 @@
-<fieldset [formGroup]="busquedaAvanzada">
+<fieldset>
   <div class="form-group">
     <div class="input-group">
-      <input type="text" class="form-control" formControlName="global_param" id="buscar-stock" placeholder="buscar por nombre de producto, número de rémito Ej.: Azucar" (keyup.enter)="buscar()" >
+      <input type="text" class="form-control" [(ngModel)]="global_param" id="buscar-stock" placeholder="buscar por nombre de producto, número de rémito Ej.: Azucar" (keyup.enter)="buscar()" >
       <div class="input-group-append btn-group">
         <button type="button" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
         <button type="button" class="btn btn-outline-danger" (click)="buscar()"><i class="fas fa-trash-alt"></i></button>
@@ -16,7 +16,7 @@
   </button>
   <div class="card mt-1" *ngIf="mostrar" >
     <div class="card-body">
-      <fieldset>
+      <fieldset [formGroup]="busquedaAvanzada">
         <div class="row">
           <div class="form-group col-md-4">
             <label for="categoria" class="prioridad">Categoría:</label>
@@ -52,15 +52,15 @@
                 ngbDatepicker
                 #datePicker="ngbDatepicker"
                 id="fecha_desde"
-                formControlName="ingresoDesde"
-                (ngModelChange)="formatFecha($event, 'ingreso_desde');"
-                [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('ingresoDesde').value)}"
+                formControlName="emisionDesde"
+                (ngModelChange)="formatFecha($event, 'emision_desde');"
+                [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('emisionDesde').value)}"
                 [displayMonths]="2"
                 [navigation]="'select'"
                 [dayTemplate]="t"
                 [autoClose]="false" >
                 <input class="form-control" #c1 placeholder="Hasta: dd/mm/yyyy" ngbDatepicker #fb="ngbDatepicker"
-                id="fecha_hasta" formControlName="ingresoHasta" (ngModelChange)="formatFecha($event, 'ingreso_hasta')" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('ingresoHasta').value)}"
+                id="fecha_hasta" formControlName="emisionHasta" (ngModelChange)="formatFecha($event, 'emision_hasta')" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('emisionHasta').value)}"
                 >
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-info" (click)="abrirDp()" type="button">

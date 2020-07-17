@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbDate, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UtilService } from 'src/app/core/service';
@@ -12,12 +12,13 @@ export class BaIngresoComponent implements OnInit {
   @Input("productos") public productos: any; // listado de productos
   @Input("categorias") public categorias: any; // Listados de categorias
   @Input("unidadMedida") public unidadMedida: any; // Listados de unidad de medida
-  @Input("marcas") public marcas: any; // Listados de marcas
+  @Input("marcas") public marcas: any; // Listados de marcas,
+  @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
 
   public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
   public marcaLista: any = [{id:1, nombre:'Canale'}];
   public medidadLista: any = [{ id:1, nombre:'kg' },{ id:2, nombre:'lts' },{ id:3, nombre:'gr' }];
-  public globalParam:string = '';
+  public global_param:string = '';
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
   public btnSeleccion: boolean = false;
@@ -39,24 +40,39 @@ export class BaIngresoComponent implements OnInit {
       _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
       // formulario de busqueda avanzada
       this.busquedaAvanzada = _fb.group({
-        global_param: '',
         categoriaid: '',
         marcaid: '',
         unidad: '',
         medidadid: '',
         defectuoso: '',
         vencido: '',
-        ingresoDesde: null,
-        ingreso_desde: '',
-        ingresoHasta: null,
-        ingreso_hasta: ''
+        emisionDesde: null,
+        emision_desde: '',
+        emisionHasta: null,
+        emision_hasta: ''
       });
     }
 
   ngOnInit(): void {
   }
   public buscar(){
-    console.log('buscamos');
+    let busquedaAvanzada = this.busquedaAvanzada.value;
+    let apiBusqueda:any = {};
+    let esTrue: boolean = false;
+
+    if (this.global_param !== '') {
+      Object.assign(apiBusqueda, {"global_param": this.global_param});
+    }
+    for (const clave in busquedaAvanzada) {
+      if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
+        if (clave != 'emisionDesde' && clave != 'emisionHasta'){
+          Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
+          esTrue = true;
+        }
+      }
+    }
+    this.btnSeleccion = esTrue;
+    this.obtenerBusqueda.emit(apiBusqueda);
   }
 
   public limpiarCampos() {
@@ -110,17 +126,16 @@ export class BaIngresoComponent implements OnInit {
   public onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-      console.log(date);
-      this.busquedaAvanzada.patchValue({ingresoDesde: date});
+      this.busquedaAvanzada.patchValue({emisionDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;
-      this.busquedaAvanzada.patchValue({ingresoHasta: date});
+      this.busquedaAvanzada.patchValue({emisionHasta: date});
       this.abrirDp();
     } else {
       this.toDate = null;
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({ingresoDesde: date});
-      this.busquedaAvanzada.patchValue({ingresoHasta: null});
+      this.busquedaAvanzada.patchValue({emisionDesde: date});
+      this.busquedaAvanzada.patchValue({emisionHasta: null});
     }
   }
   public isHovered(date: NgbDate) {
