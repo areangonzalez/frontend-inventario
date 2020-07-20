@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ProductosComponent } from './productos.component';
 import { ProductosRoutingModule } from './productos-routing.module';
 import { SharedModule } from '../shared';
-import { MenuComponent, StockComponent, IngresoComponent, EgresoComponent, BaStockComponent, BaIngresoComponent, BaEgresoComponent, ListaIngresoComponent } from './menu';
+import { MenuComponent, StockComponent, IngresoComponent, EgresoComponent, BaStockComponent, BaIngresoComponent, BaEgresoComponent, ListaIngresoComponent, ListaEgresoComponent } from './menu';
 
 @NgModule({
-  declarations: [ProductosComponent, MenuComponent, StockComponent, IngresoComponent, EgresoComponent, BaStockComponent, BaIngresoComponent, BaEgresoComponent, ListaIngresoComponent],
+  declarations: [ProductosComponent, MenuComponent, StockComponent, IngresoComponent, EgresoComponent, BaStockComponent, BaIngresoComponent, BaEgresoComponent, ListaIngresoComponent, ListaEgresoComponent],
   imports: [
     CommonModule,
     SharedModule,
