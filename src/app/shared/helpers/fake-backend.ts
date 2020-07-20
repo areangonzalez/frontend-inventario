@@ -107,6 +107,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarMarcas();
                 case url.endsWith('/apimock/comprobantes') && method === 'GET':
                     return listarComprobantes();
+                case url.endsWith('/apimock/egresos') && method === 'GET':
+                    return listarEgresos();
                 case url.match(/\/apimock\/comprobantes\/\d+$/) && method === 'GET':
                     return comprobantePorId();
                 case url.match(/\/apimock\/comprobantes\/registrar-producto-pendiente\/\d+$/) && method === 'PUT':
@@ -224,13 +226,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let id = parseInt(urlParts[urlParts.length - 1]);
           let params = body;
 
-          console.log("parametros",params);
-
           let listaProductos = comprobante["lista_producto"];
           let productoNuevo: any;
           let indice: number = 0;
 
-          console.log("lista productos: ", listaProductos);
           for (let i = 0; i < listaProductos.length; i++) {
             if ( listaProductos[i].fecha_vencimiento == params["fecha_vencimiento"] && listaProductos[i].productoid == params["productoid"]) {
               productoNuevo  = Object.assign({}, listaProductos[i]);
@@ -262,6 +261,33 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok(respuesta);
           } else {
             return error("Este comrpobante no existe");
+          }
+        }
+
+        /* LISTADO DE COMPROBANTE EGRESO */
+        function listarEgresos() {
+          //let page: number = parseInt(request.params.get("page"));
+          let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 2;
+
+          let egresos = {
+            pagesize: pageSize, pages: 0, total_filtrado: 9, resultado: [
+              { id: 1, fecha: "2019-03-03", origen: "un origen", producto_cant_total: 300, destino_nombre: "Un destino",
+              destino_localidadid: 2626, destino_localidad: "Viedma", nro_acta: "0001" },
+            { id: 2, fecha: "2019-04-04", origen: "un origen", producto_cant_total: 200, destino_nombre: "Un destino",
+              destino_localidadid: 2626, destino_localidad: "Viedma", nro_acta: "0002" },
+            { id: 3, fecha: "2019-05-05", origen: "un origen", producto_cant_total: 600, destino_nombre: "Un destino",
+              destino_localidadid: 2626, destino_localidad: "Viedma", nro_acta: "0003" }
+          ]};
+
+          // pagino el listado
+          // let listaComprobantes = paginar(egresos, egresos.resultado, page, pageSize)
+          // Creo la respuesta
+          if (egresos) {
+            console.log(egresos);
+
+            return ok(egresos);
+          }else {
+            return error("No se puede obtener listado de productos");
           }
         }
 

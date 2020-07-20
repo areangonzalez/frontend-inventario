@@ -10,3 +10,4 @@ export * from './unidad-medida.service';
 export * from './marca.service';
 export * from './inventario.service';
 export * from './comprobante.service';
+export * from './egreso.service';
