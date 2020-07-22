@@ -4,14 +4,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaStockComponent, ListaProductoComponent } from './lista';
 import { AlertComponent } from './alert/alert.component';
-import { ComprobanteComponent, ProductoComponent } from './formulario';
+import { ComprobanteComponent, ProductoComponent, EgresoComponent } from './formulario';
 import { ComprobanteModalContent, ComprobanteModalComponent, ConfirmarBorradoProductoModalComponent, ConfirmarBorradoProductoModalContent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent } from './modal';
 import { AutocompletarComponent } from './autocompletar/autocompletar.component';
 import { FocusOnShowDirective } from './directive/focus-on-show.directive';
 
 
 @NgModule({
-  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective, ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent ],
+  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective, ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, EgresoComponent ],
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
@@ -24,7 +24,7 @@ import { FocusOnShowDirective } from './directive/focus-on-show.directive';
     FormsModule, ReactiveFormsModule,
     NgbModule,
     ListaStockComponent, AlertComponent,
-    ComprobanteModalContent, ComprobanteModalComponent,
+    ComprobanteModalContent, ComprobanteModalComponent, EgresoComponent,
     AutocompletarComponent,
     ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent,
     VistaComprobanteModalContent, VistaComprobanteModalComponent,

@@ -1,0 +1,80 @@
+<fieldset [formGroup]="formEgreso">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="fecha_emision">Fecha (<b class="text-danger">*</b>):</label>
+        <div class="input-group">
+          <input class="form-control" id="fecha_emision" placeholder="dd/mm/yyyy"
+          name="dp" formControlName="fechaActa" (ngModelChange)="formatearFecha($event)" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (formEgreso.get('fechaActa').invalid && submitted)}">
+          <div class="input-group-append">
+            <button class="btn" [ngClass]="(formEgreso.get('fechaActa').invalid && submitted) ? 'btn-outline-danger' : 'btn-outline-info'" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+          </div>
+        </div>
+        <div class="text-danger" *ngIf="(formEgreso.get('fechaActa').invalid && submitted)">
+          <span>Pro favor ingrese una fecha.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="destino">Para (<b class="text-danger">*</b>):</label>
+        <input type="text" class="form-control" id="destino" formControlName="destino_nombre" placeholder="Ej.: Delegación Vidma" [ngClass]="{'is-invalid': (formEgreso.get('destino_nombre').invalid && submitted)}" >
+        <div *ngIf="(formEgreso.get('destino_nombre').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese un destino.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="origen">De (<b class="text-danger">*</b>):</label>
+        <input type="text" class="form-control" id="origen" formControlName="origen" placeholder="Ej.: Delegación Vidma" [ngClass]="{'is-invalid': (formEgreso.get('origen').invalid && submitted)}" >
+        <div *ngIf="(formEgreso.get('origen').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese un origen.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="asunto">Asunto (<b class="text-danger">*</b>):</label>
+        <select class="form-control" id="asunto" formControlName="tipo_egreso" [ngClass]="{'is-invalid': (formEgreso.get('tipo_egreso').invalid && submitted)}">
+          <option value="">Seleccione un Asunto</option>
+          <option *ngFor="let tipo of listadoTipoEgreso" value="{{tipo.id}}">{{tipo.nombre}}</option>
+        </select>
+        <div *ngIf="(formEgreso.get('tipo_egreso').invalid && submitted)" class="text-danger">
+          <span>Por favor seleccione un asunto.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="categoria">Localidad (<b class="text-danger">*</b>):</label>
+        <select class="form-control" id="localidadaid" formControlName="destino_localidadid" [ngClass]="{'is-invalid': (formEgreso.get('destino_localidadid').invalid && submitted)}">
+          <option value="">Seleccione una Asunto</option>
+          <option *ngFor="let localidad of listadolocalidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
+        </select>
+        <div *ngIf="(formEgreso.get('destino_localidadid').invalid && submitted)" class="text-danger">
+          <span>Por favor seleccione una localidad de destino.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="suscrito">Suscrito (<b class="text-danger">*</b>):</label>
+        <input type="text" class="form-control" id="suscrito" formControlName="suscrito" placeholder="Ej.: Delegación Vidma" [ngClass]="{'is-invalid': (formEgreso.get('suscrito').invalid && submitted)}" >
+        <div *ngIf="(formEgreso.get('suscrito').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese el nombre del suscrito.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
