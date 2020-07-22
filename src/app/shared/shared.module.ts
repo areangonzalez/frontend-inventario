@@ -5,13 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaStockComponent, ListaProductoComponent } from './lista';
 import { AlertComponent } from './alert/alert.component';
 import { ComprobanteComponent, ProductoComponent, EgresoComponent } from './formulario';
-import { ComprobanteModalContent, ComprobanteModalComponent, ConfirmarBorradoProductoModalComponent, ConfirmarBorradoProductoModalContent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent } from './modal';
+import { ComprobanteModalContent, ComprobanteModalComponent, ConfirmarBorradoProductoModalComponent, ConfirmarBorradoProductoModalContent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, CrearActaModalContent, CrearActaComponent } from './modal';
 import { AutocompletarComponent } from './autocompletar/autocompletar.component';
 import { FocusOnShowDirective } from './directive/focus-on-show.directive';
 
 
 @NgModule({
-  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective, ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, EgresoComponent ],
+  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective, ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, EgresoComponent, CrearActaModalContent, CrearActaComponent ],
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
@@ -29,7 +29,8 @@ import { FocusOnShowDirective } from './directive/focus-on-show.directive';
     ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent,
     VistaComprobanteModalContent, VistaComprobanteModalComponent,
     FaltaProductoModalContent, FaltaProductoModalComponent,
-    DevuelveProductoModalContent, DevuelveProductoModalComponent
+    DevuelveProductoModalContent, DevuelveProductoModalComponent,
+    CrearActaModalContent, CrearActaComponent
   ]
 })
 export class SharedModule { }

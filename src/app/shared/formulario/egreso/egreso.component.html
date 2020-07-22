@@ -1,6 +1,6 @@
 <fieldset [formGroup]="formEgreso">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="form-group">
         <label for="fecha_emision">Fecha (<b class="text-danger">*</b>):</label>
         <div class="input-group">
@@ -65,12 +65,10 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
     <div class="col-md-6">
       <div class="form-group">
         <label for="suscrito">Suscrito (<b class="text-danger">*</b>):</label>
-        <input type="text" class="form-control" id="suscrito" formControlName="suscrito" placeholder="Ej.: Delegación Vidma" [ngClass]="{'is-invalid': (formEgreso.get('suscrito').invalid && submitted)}" >
+        <input type="text" class="form-control" id="suscrito" formControlName="suscrito" placeholder="Ej.: Persona suscrita"[ngClass]="{'is-invalid': (formEgreso.get('suscrito').invalid && submitted)}" >
         <div *ngIf="(formEgreso.get('suscrito').invalid && submitted)" class="text-danger">
           <span>Por favor ingrese el nombre del suscrito.</span>
         </div>
