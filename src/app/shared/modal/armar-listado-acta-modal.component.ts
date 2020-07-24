@@ -25,10 +25,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
           </div>
         </div>
       </div>
-
-      <shared-lista-stock [tipoTabla]="'seleccionar_producto'" ></shared-lista-stock>
-
-
+      <div class="mt-2">
+        <shared-lista-stock [tipoTabla]="'seleccionar_producto'" ></shared-lista-stock>
+      </div>
+      <div class="mt-2">
+        <shared-lista-acta [listadoActa]="listadoActa" [borrar]="true"></shared-lista-acta>
+      </div>
     </div>
     <div class="modal-footer d-flex justify-content-between">
       <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()"><i class="fas fa-ban"></i> Cancelar</button>
@@ -39,6 +41,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ArmarListadoActaModalContent {
   @Input("inventario") public inventario: any;
   public global_param: string = '';
+  public listadoActa: any = [];
 
   constructor( private _ativeModal: NgbActiveModal, private _util: UtilService ) {}
   /**

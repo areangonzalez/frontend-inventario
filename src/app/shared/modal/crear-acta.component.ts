@@ -19,6 +19,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
       <shared-form-egreso></shared-form-egreso>
 
       <armar-listado-acta-modal></armar-listado-acta-modal>
+      <div class="mt-3">
+        <shared-lista-acta [listadoActa]="listadoActa" [borrar]="false"></shared-lista-acta>
+      </div>
 
     </div>
     <div class="modal-footer d-flex justify-content-between">
@@ -32,6 +35,7 @@ export class CrearActaModalContent {
   @Input("tipoEgreso") public tipoEgreso: any;
   public submitted: boolean = false;
   public form: FormGroup;
+  public listadoActa: any = [];
 
   constructor( private _ativeModal: NgbActiveModal, private _util: UtilService, private _fb: FormBuilder ) {
     this.form = _fb.group({

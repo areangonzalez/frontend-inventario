@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover table-sm">
+    <thead>
+      <tr>
+        <th class="text-center" scope="col">Producto</th>
+        <th class="text-center">Cantidad</th>
+        <th *ngIf="borrar" scope="col" class="text-center">Acción</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="(listadoActa.length == 0)">
+      <tr>
+        <td colspan="3" rowspan="1" class="text-center" ><b>NO HAY PRODUCTOS SELECCIONADOS</b></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listadoActa.length > 0)">
+      <tr *ngFor="let producto of listadoActa">
+        <td>{{producto.producto}}</td>
+        <td class="text-center">{{producto.cantidad}}</td>
+        <th *ngIf="borrar" scope="col" class="text-center">
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
