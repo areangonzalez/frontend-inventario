@@ -4,27 +4,18 @@
       <tr>
         <th class="ancho-celda-minimo text-center">Cantidad</th>
         <th scope="col">Producto</th>
-        <th scope="col" class="text-center">Marca</th>
         <th scope="col" class="text-center">Categoría</th>
-        <th *ngIf="(tipoTabla != 'egreso')" scope="col" class="text-center">Vencimiento</th>
-        <th *ngIf="(tipoTabla != 'stock')" class="text-center" scope="col">Comprobante</th>
-        <th *ngIf="(tipoTabla == 'ingreso')" class="text-center" scope="col">Ingreso</th>
-        <th *ngIf="(tipoTabla == 'egreso')" class="text-center" scope="col">Egreso</th>
-        <th scope="col" class="text-center">Acción</th>
+        <th scope="col" class="text-center">Vencimiento</th>
+        <th *ngIf="(tipoTabla == 'seleccionar_producto')" scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let producto of listadoStock">
         <td class="ancho-celda-minimo text-center">{{producto.cantidad}}</td>
         <td>{{producto.producto}}</td>
-        <td class="text-center">{{producto.marca}}</td>
         <td class="text-center">{{producto.categoria}}</td>
-        <td *ngIf="(tipoTabla != 'egreso')" class="ancho-celda-vencimiento text-center">{{producto.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
-        <td *ngIf="(tipoTabla != 'stock')" class="text-center">{{producto.nro_remito}}</td>
-        <td *ngIf="(tipoTabla == 'ingreso')" class="text-center">{{producto.fecha_emision | date: 'dd/MM/yyyy'}}</td>
-        <td *ngIf="(tipoTabla == 'egreso')" class="text-center">{{producto.egreso | date: 'dd/MM/yyyy'}}</td>
-        <th scope="col" class="text-center">
-          <abrir-vista-comprobante-modal *ngIf="(tipoTabla == 'ingreso')" [idComprobante]="producto.comprobanteid" ></abrir-vista-comprobante-modal>
+        <td class="ancho-celda-vencimiento text-center">{{producto.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
+        <th *ngIf="(tipoTabla == 'seleccionar_producto')" scope="col" class="text-center">
         </th>
       </tr>
     </tbody>
