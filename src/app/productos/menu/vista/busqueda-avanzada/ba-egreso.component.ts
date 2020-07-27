@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbDate, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from 'src/app/core/service';
@@ -9,6 +9,8 @@ import { UtilService } from 'src/app/core/service';
   styleUrls: ['./ba-stock.component.scss']
 })
 export class BaEgresoComponent implements OnInit {
+  @Input("listaInventario") public listaInventario: any;
+
   public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
   public marcaLista: any = [{id:1, nombre:'Canale'}];
   public medidadLista: any = [{ id:1, nombre:'kg' },{ id:2, nombre:'lts' },{ id:3, nombre:'gr' }];

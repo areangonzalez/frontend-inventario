@@ -26,7 +26,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
         </div>
       </div>
       <div class="mt-2">
-        <shared-lista-stock [tipoTabla]="'seleccionar_producto'" ></shared-lista-stock>
+        <shared-lista-stock [listadoStock]="inventario.resultado" [tipoTabla]="'seleccionar_producto'" (productoSeleccionado)="obtenerProducto($event)" ></shared-lista-stock>
       </div>
       <div class="mt-2">
         <shared-lista-acta [listadoActa]="listadoActa" [borrar]="true"></shared-lista-acta>
@@ -76,6 +76,10 @@ export class ArmarListadoActaModalContent {
     // }
   }
 
+  obtenerProducto(producto: any) {
+    this.listadoActa.push(producto);
+  }
+
   limpiar() {
   }
 
@@ -96,7 +100,7 @@ export class ArmarListadoActaModalComponent {
 
   open() {
     const modalRef = this._modalService.open(ArmarListadoActaModalContent, { size: 'lg' });
-    modalRef.componentInstance.inventario= this.listaInventario;
+    modalRef.componentInstance.inventario = this.listaInventario;
 /*     modalRef.result.then(
       (result) => {
           if (result == 'close') {

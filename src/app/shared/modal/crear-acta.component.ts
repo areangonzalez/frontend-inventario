@@ -18,7 +18,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     <div class="modal-body">
       <shared-form-egreso></shared-form-egreso>
 
-      <armar-listado-acta-modal></armar-listado-acta-modal>
+      <armar-listado-acta-modal [listaInventario]="listaInventario"></armar-listado-acta-modal>
       <div class="mt-3">
         <shared-lista-acta [listadoActa]="listadoActa" [borrar]="false"></shared-lista-acta>
       </div>
@@ -31,6 +31,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   `
 })
 export class CrearActaModalContent {
+  @Input("listaInventario") public listaInventario: any;
   @Input("localidad") public localidad: any;
   @Input("tipoEgreso") public tipoEgreso: any;
   public submitted: boolean = false;
@@ -81,6 +82,7 @@ export class CrearActaModalContent {
   styleUrls: ['./crear-acta.component.scss']
 })
 export class CrearActaComponent {
+  @Input("listaInventario") public listaInventario: any;
   @Input("listaLocalidad") public listaLocalidad: any;
   @Input("listaTipoEgreso") public listaTipoEgreso: any;
   // @Output("productoFaltante") public productoFaltante = new EventEmitter();
@@ -90,7 +92,8 @@ export class CrearActaComponent {
   open() {
     const modalRef = this._modalService.open(CrearActaModalContent, { size: 'lg' });
     modalRef.componentInstance.localidad = this.listaLocalidad;
-    modalRef.componentInstance.tipoEgreso = this.listaTipoEgreso
+    modalRef.componentInstance.tipoEgreso = this.listaTipoEgreso;
+    modalRef.componentInstance.listaInventario = this.listaInventario;
 /*     modalRef.result.then(
       (result) => {
           if (result == 'close') {
