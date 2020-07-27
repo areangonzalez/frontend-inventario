@@ -18,7 +18,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     <div class="modal-body">
       <shared-form-egreso></shared-form-egreso>
 
-      <armar-listado-acta-modal [listaInventario]="listaInventario"></armar-listado-acta-modal>
+      <armar-listado-acta-modal [listaActa]="listadoActa" [listaInventario]="listaInventario" (obtenerListadoActa)="armarListadoActa($event)"></armar-listado-acta-modal>
       <div class="mt-3">
         <shared-lista-acta [listadoActa]="listadoActa" [borrar]="false"></shared-lista-acta>
       </div>
@@ -73,6 +73,14 @@ export class CrearActaModalContent {
         // envio producto
         this._ativeModal.close(productoDuplicado); */
     }
+  }
+  /**
+   * armo el listado con los productos que representaran el acta
+   * @param listado lista de productos
+   */
+  armarListadoActa(listado: any) {
+    Object.assign(this.listadoActa, listado);
+    console.log("componente padre: ", this.listadoActa);
   }
 }
 

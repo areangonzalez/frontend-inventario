@@ -25,7 +25,7 @@ import { UtilService } from 'src/app/core/service';
     </div>
     <div class="modal-footer d-flex justify-content-between">
       <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()"><i class="fas fa-ban"></i> Cancelar</button>
-      <button type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Si</button>
+      <button type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
     </div>
   `
 })
@@ -35,17 +35,25 @@ export class AgregarCantidadMaximaModalContent {
   public msgError: boolean = false;
 
   constructor( private _ativeModal: NgbActiveModal, private _util: UtilService ) { }
-
+  /**
+   * cierro el modal
+   */
   cerrarModal() {
     this._ativeModal.close('close');
   }
-
+  /**
+   * valido si lo que se tipea es numero
+   * @param numero objeto que tiene el valor del campo
+   */
   validarNumero(numero: any) {
     if (!this._util.validarNumero(numero.value)) {
       numero.value = numero.value.substring(0,numero.value.length - 1);
     }
   }
-
+  /**
+   * guardo la cantidad del producto seleccionado,
+   * validando que no sea mayor a la cantidad real ni menor a 0.
+   */
   guardar() {
     if (parseInt(this.cantidad) < parseInt(this.cantidadMaxima) && parseInt(this.cantidad) > 0) {
       this._ativeModal.close(this.cantidad);
@@ -69,7 +77,14 @@ export class AgregarCantidadProductoComponent {
   open() {
     const modalRef = this._modalService.open(AgregarCantidadMaximaModalContent);
     modalRef.componentInstance.cantidadMaxima = this.cantidadMaxima;
-    modalRef.result.then()
+    modalRef.result.then(
+      (result) => {
+          if (result == 'close') {
+          } else {
+              return this.obtenerCantidad.emit(result);
+          }
+      }
+    );
   }
 
 }

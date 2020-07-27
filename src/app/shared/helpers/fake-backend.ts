@@ -307,8 +307,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           // let listaComprobantes = paginar(egresos, egresos.resultado, page, pageSize)
           // Creo la respuesta
           if (egresos) {
-            console.log(egresos);
-
             return ok(egresos);
           }else {
             return error("No se puede obtener listado de productos");

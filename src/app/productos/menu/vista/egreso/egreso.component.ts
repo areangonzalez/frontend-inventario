@@ -15,7 +15,6 @@ export class EgresoComponent implements OnInit {
   ngOnInit(): void {
     this.listadoInventario = this._route.snapshot.data["inventario"];
     this.listadoEgreso = this._route.snapshot.data["egresos"];
-    console.log(this.listadoEgreso);
   }
 
 }

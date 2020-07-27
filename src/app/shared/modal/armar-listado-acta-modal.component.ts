@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { UtilService } from 'src/app/core/service';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { UtilService, AlertService } from 'src/app/core/service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AbstractWebDriver } from 'protractor/built/browser';
 
 /**
  * Componente que muestra el contenido del modal
@@ -40,10 +41,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ArmarListadoActaModalContent {
   @Input("inventario") public inventario: any;
-  public global_param: string = '';
   public listadoActa: any = [];
+  public global_param: string = '';
 
-  constructor( private _ativeModal: NgbActiveModal, private _util: UtilService ) {}
+  constructor( private _ativeModal: NgbActiveModal, private _util: UtilService, private _mensaje: AlertService ) {}
   /**
    * Cierra el modal
    */
@@ -61,19 +62,15 @@ export class ArmarListadoActaModalContent {
     }
   }
   /**
-   * guarda los atributos modificados de un producto
+   * guarda los productos con las cantidades especificadas
    */
   guardar() {
-    /* this.submitted = true;
-    if (this.form.invalid) {
+    if (this.listadoActa.length == 0) {
+      this._mensaje.cancelado("El Acta debe tener al menos un producto agregado!!");
       return;
-    }else{ */
-        /* let productoDuplicado =  Object.assign({}, this.producto);
-        productoDuplicado['cantidad'] = this.form.get('cantidad').value;
-        productoDuplicado['falta'] = true;
-        // envio producto
-        this._ativeModal.close(productoDuplicado); */
-    // }
+    }else{
+        this._ativeModal.close(this.listadoActa);
+    }
   }
 
   obtenerProducto(producto: any) {
@@ -94,20 +91,62 @@ export class ArmarListadoActaModalContent {
 })
 export class ArmarListadoActaModalComponent {
   @Input("listaInventario") public listaInventario: any;
-  // @Output("productoFaltante") public productoFaltante = new EventEmitter();
+  @Input("listaActa") public listaActa: any;
+  @Output("obtenerListadoActa") public obtenerListadoActa = new EventEmitter();
 
-  constructor( private _modalService: NgbModal ) { }
+  constructor( private _modalService: NgbModal, private _mensaje: AlertService ) { }
 
   open() {
+    if (this.listaActa.length > 0) {
+      const modalRef2 = this._modalService.open(ConfirmarArmadoModalContent, { windowClass: 'red-modal' });
+      modalRef2.result.then(
+        (result) => {
+          if (result == false) {
+          } else {
+            this.abrirModal();
+          }
+        });
+    }else{
+      this.abrirModal();
+    }
+  }
+
+  abrirModal() {
     const modalRef = this._modalService.open(ArmarListadoActaModalContent, { size: 'lg' });
     modalRef.componentInstance.inventario = this.listaInventario;
-/*     modalRef.result.then(
+    modalRef.result.then(
       (result) => {
-          if (result == 'close') {
-          } else {
-              return this.productoFaltante.emit(result);
-          }
-      }
-    ); */
+        if (result == 'close') {
+        } else {
+          console.log(result)
+          return this.obtenerListadoActa.emit(result);
+        }
+      });
+  }
+}
+
+@Component({
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Importante</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss(false)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Se reinicia la lista de productos del acta.</p>
+    </div>
+    <div class="modal-footer d-flex justify-content-between">
+      <button type="button" class="btn btn-outline-danger" (click)="activeModal.close(false)">Cancelar</button>
+      <button type="button" class="btn btn-outline-success" (click)="activeModal.close(true)">Continuar</button>
+    </div>
+  `,
+  styleUrls: ['./armar-listado-acta-modal.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
+export class ConfirmarArmadoModalContent {
+  constructor(private modalService: NgbModal, public activeModal: NgbActiveModal, config: NgbModalConfig) {
+    config.backdrop = 'static';
+    config.keyboard = false;
   }
 }
