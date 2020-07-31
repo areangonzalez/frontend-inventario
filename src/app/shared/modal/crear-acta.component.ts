@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { UtilService } from 'src/app/core/service';
+import { UtilService, AlertService } from 'src/app/core/service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
@@ -16,7 +16,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
       </button>
     </div>
     <div class="modal-body">
-      <shared-form-egreso></shared-form-egreso>
+      <shared-form-egreso [formEgreso]="formEgreso" [submitted]="submitted" ></shared-form-egreso>
 
       <armar-listado-acta-modal [listaActa]="listadoActa" [listaInventario]="listaInventario" (obtenerListadoActa)="armarListadoActa($event)"></armar-listado-acta-modal>
       <div class="mt-3">
@@ -35,14 +35,23 @@ export class CrearActaModalContent {
   @Input("localidad") public localidad: any;
   @Input("tipoEgreso") public tipoEgreso: any;
   public submitted: boolean = false;
-  public form: FormGroup;
   public listadoActa: any = [];
+  public formEgreso: FormGroup;
 
-  constructor( private _ativeModal: NgbActiveModal, private _util: UtilService, private _fb: FormBuilder ) {
-    this.form = _fb.group({
-      cantidad: ['', Validators.required]
+  constructor( private _fb: FormBuilder, private _ativeModal: NgbActiveModal, private _util: UtilService, private _mensaje: AlertService ) {
+    this.formEgreso = _fb.group({
+      fecha_acta: ['', Validators.required],
+      fecha: '',
+      destino_nombre: ['', Validators.required],
+      destino_localidadid: ['', Validators.required],
+      nro_acta: ['', Validators.required],
+      tipo_egreso: ['', Validators.required],
+      origen: ['', Validators.required],
+      suscrito: ['', Validators.required],
+      descripcion: ''
     });
   }
+
   /**
    * Cierra el modal
    */
@@ -50,23 +59,19 @@ export class CrearActaModalContent {
     this._ativeModal.close('close');
   }
   /**
-   * valida si la cantidad es un numero
-   * @param numero este valor puede ser un string o numero
-   */
-  validarCantidad(numero:any) {
-    if (!this._util.validarNumero(numero.value)) {
-      numero.value = numero.value.substring(0,numero.value.length - 1);
-      this.form.get("cantidad").patchValue(numero.value);
-    }
-  }
-  /**
    * guarda los atributos modificados de un producto
    */
   guardar() {
     this.submitted = true;
-    if (this.form.invalid) {
+    if (this.formEgreso.invalid) {
       return;
     }else{
+      if (this.listadoActa.length == 0) {
+        this._mensaje.cancelado("El acta NO puede tener el listado sin productos.");
+      } else {
+
+      }
+
         /* let productoDuplicado =  Object.assign({}, this.producto);
         productoDuplicado['cantidad'] = this.form.get('cantidad').value;
         productoDuplicado['falta'] = true;
@@ -80,7 +85,6 @@ export class CrearActaModalContent {
    */
   armarListadoActa(listado: any) {
     Object.assign(this.listadoActa, listado);
-    console.log("componente padre: ", this.listadoActa);
   }
 }
 

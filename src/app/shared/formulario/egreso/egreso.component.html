@@ -2,16 +2,25 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <label for="fecha_emision">Fecha (<b class="text-danger">*</b>):</label>
+        <label for="fecha_acta">Fecha (<b class="text-danger">*</b>):</label>
         <div class="input-group">
-          <input class="form-control" id="fecha_emision" placeholder="dd/mm/yyyy"
-          name="dp" formControlName="fechaActa" (ngModelChange)="formatearFecha($event)" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (formEgreso.get('fechaActa').invalid && submitted)}">
+          <input class="form-control" id="fecha_acta" placeholder="dd/mm/yyyy"
+          name="dp" formControlName="fecha_acta" (ngModelChange)="formatearFecha($event)" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (formEgreso.get('fecha_acta').invalid && submitted)}">
           <div class="input-group-append">
-            <button class="btn" [ngClass]="(formEgreso.get('fechaActa').invalid && submitted) ? 'btn-outline-danger' : 'btn-outline-info'" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+            <button class="btn" [ngClass]="(formEgreso.get('fecha_acta').invalid && submitted) ? 'btn-outline-danger' : 'btn-outline-info'" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
           </div>
         </div>
-        <div class="text-danger" *ngIf="(formEgreso.get('fechaActa').invalid && submitted)">
+        <div class="text-danger" *ngIf="(formEgreso.get('fecha_acta').invalid && submitted)">
           <span>Pro favor ingrese una fecha.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="nro_acta">Nro de Acta (<b class="text-danger">*</b>):</label>
+        <input type="text" class="form-control" id="nro_acta" formControlName="nro_acta" placeholder="Ej.: 123/567" [ngClass]="{'is-invalid': (formEgreso.get('nro_acta').invalid && submitted)}" >
+        <div *ngIf="(formEgreso.get('nro_acta').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese un número de acta.</span>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UtilService } from 'src/app/core/service';
 
@@ -8,26 +8,12 @@ import { UtilService } from 'src/app/core/service';
   styleUrls: ['./egreso.component.scss']
 })
 export class EgresoComponent implements OnInit {
-  public formEgreso: FormGroup;
-  public submitted: boolean = false;
+  @Input("formEgreso") public formEgreso: FormGroup;
+  @Input("submitted") public submitted: boolean;
   public listadolocalidades: any = [{ id: 1, nombre: "Viedma" }];
   public listadoTipoEgreso: any = [{ id: 1, nombre: "modulo" },{ id: 2, nombre: "mercaderia" }];
 
-  constructor(
-    private _fb: FormBuilder, private _util: UtilService
-  ) {
-    this.formEgreso = _fb.group({
-      fechaActa: ['', Validators.required],
-      fecha: '',
-      destino_nombre: ['', Validators.required],
-      destino_localidadid: ['', Validators.required],
-      nro_acta: ['', Validators.required],
-      tipo_egreso: ['', Validators.required],
-      origen: ['', Validators.required],
-      suscrito: ['', Validators.required],
-      descripcion: ''
-    });
-  }
+  constructor( private _util: UtilService ) {}
 
   ngOnInit(): void {
   }
@@ -39,9 +25,9 @@ export class EgresoComponent implements OnInit {
    */
   public formatearFecha(fecha:any){
     if (fecha !== null){
-      this.formEgreso.controls.fecha_emision.setValue(this._util.formatearFecha(fecha.day, fecha.month, fecha.year, "yyyy-MM-dd"));
+      this.formEgreso.controls.fecha.setValue(this._util.formatearFecha(fecha.day, fecha.month, fecha.year, "yyyy-MM-dd"));
     }else{
-      this.formEgreso.controls.fecha_emision.setValue('');
+      this.formEgreso.controls.fecha.setValue('');
     }
   }
 

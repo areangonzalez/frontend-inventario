@@ -118,7 +118,6 @@ export class ArmarListadoActaModalComponent {
       (result) => {
         if (result == 'close') {
         } else {
-          console.log(result)
           return this.obtenerListadoActa.emit(result);
         }
       });
