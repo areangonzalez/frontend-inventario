@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { UtilService, AlertService } from 'src/app/core/service';
+import { UtilService, AlertService, EgresoService } from 'src/app/core/service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
@@ -38,14 +38,14 @@ export class CrearActaModalContent {
   public listadoActa: any = [];
   public formEgreso: FormGroup;
 
-  constructor( private _fb: FormBuilder, private _ativeModal: NgbActiveModal, private _util: UtilService, private _mensaje: AlertService ) {
+  constructor( private _fb: FormBuilder, private _ativeModal: NgbActiveModal, private _util: UtilService, private _mensaje: AlertService, private _egresoService: EgresoService ) {
     this.formEgreso = _fb.group({
       fecha_acta: ['', Validators.required],
       fecha: '',
       destino_nombre: ['', Validators.required],
       destino_localidadid: ['', Validators.required],
       nro_acta: ['', Validators.required],
-      tipo_egreso: ['', Validators.required],
+      tipo_egresoid: ['', Validators.required],
       origen: ['', Validators.required],
       suscrito: ['', Validators.required],
       descripcion: ''
@@ -69,14 +69,16 @@ export class CrearActaModalContent {
       if (this.listadoActa.length == 0) {
         this._mensaje.cancelado("El acta NO puede tener el listado sin productos.");
       } else {
+        let parametros = this.formEgreso.value;
+        parametros['lista_producto'] = this.listadoActa;
 
+        this._egresoService.guardar(parametros).subscribe(
+          respuesta => {
+            this._mensaje.exitoso("se ha guardado el acta exitosamente!!");
+            this._ativeModal.close('close');
+            console.log(respuesta);
+          }, error => { this._mensaje.cancelado(error); });
       }
-
-        /* let productoDuplicado =  Object.assign({}, this.producto);
-        productoDuplicado['cantidad'] = this.form.get('cantidad').value;
-        productoDuplicado['falta'] = true;
-        // envio producto
-        this._ativeModal.close(productoDuplicado); */
     }
   }
   /**

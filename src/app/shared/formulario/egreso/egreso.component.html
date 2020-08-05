@@ -51,11 +51,11 @@
     <div class="col-md-12">
       <div class="form-group">
         <label for="asunto">Asunto (<b class="text-danger">*</b>):</label>
-        <select class="form-control" id="asunto" formControlName="tipo_egreso" [ngClass]="{'is-invalid': (formEgreso.get('tipo_egreso').invalid && submitted)}">
+        <select class="form-control" id="asunto" formControlName="tipo_egresoid" [ngClass]="{'is-invalid': (formEgreso.get('tipo_egresoid').invalid && submitted)}">
           <option value="">Seleccione un Asunto</option>
           <option *ngFor="let tipo of listadoTipoEgreso" value="{{tipo.id}}">{{tipo.nombre}}</option>
         </select>
-        <div *ngIf="(formEgreso.get('tipo_egreso').invalid && submitted)" class="text-danger">
+        <div *ngIf="(formEgreso.get('tipo_egresoid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione un asunto.</span>
         </div>
       </div>

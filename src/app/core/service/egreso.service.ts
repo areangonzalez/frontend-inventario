@@ -10,6 +10,10 @@ export class EgresoService {
 
   constructor(private _http: ApiService) { }
 
+  guardar(params: Object) {
+    return this._http.post('/egresos', params);
+  }
+
   resolve() {
     return this._http.get('/egresos');
   }

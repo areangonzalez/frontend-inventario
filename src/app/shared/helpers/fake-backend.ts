@@ -111,6 +111,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarComprobantes();
                 case url.endsWith('/apimock/egresos') && method === 'GET':
                     return listarEgresos();
+                case url.endsWith('/apimock/egresos') && method === 'POST':
+                    return crearEgreso();
                 case url.match(/\/apimock\/comprobantes\/\d+$/) && method === 'GET':
                     return comprobantePorId();
                 case url.match(/\/apimock\/comprobantes\/registrar-producto-pendiente\/\d+$/) && method === 'PUT':
@@ -192,7 +194,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           });
 
           localStorage.setItem('productos', JSON.stringify(listadoProductos));
-          console.log("nuevo id: ",nuevoId);
           if (nuevoId) {
             return ok({id:nuevoId})
           }else{
@@ -310,6 +311,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok(egresos);
           }else {
             return error("No se puede obtener listado de productos");
+          }
+        }
+
+        function crearEgreso() {
+          let acta = body;
+          console.log(acta);
+
+          if (acta['lista_producto'].length > 0) {
+            return ok({id: 7});
+          }else{
+            return error("Error no se pudo guardar los datos");
           }
         }
 
