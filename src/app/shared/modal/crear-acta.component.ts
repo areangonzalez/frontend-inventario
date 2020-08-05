@@ -59,7 +59,7 @@ export class CrearActaModalContent {
     this._ativeModal.close('close');
   }
   /**
-   * guarda los atributos modificados de un producto
+   * guarda los atributos modificados de un acta
    */
   guardar() {
     this.submitted = true;
@@ -99,7 +99,6 @@ export class CrearActaComponent {
   @Input("listaInventario") public listaInventario: any;
   @Input("listaLocalidad") public listaLocalidad: any;
   @Input("listaTipoEgreso") public listaTipoEgreso: any;
-  // @Output("productoFaltante") public productoFaltante = new EventEmitter();
 
   constructor( private _modalService: NgbModal ) { }
 
@@ -108,13 +107,5 @@ export class CrearActaComponent {
     modalRef.componentInstance.localidad = this.listaLocalidad;
     modalRef.componentInstance.tipoEgreso = this.listaTipoEgreso;
     modalRef.componentInstance.listaInventario = this.listaInventario;
-/*     modalRef.result.then(
-      (result) => {
-          if (result == 'close') {
-          } else {
-              return this.productoFaltante.emit(result);
-          }
-      }
-    ); */
   }
 }

@@ -13,10 +13,11 @@
       </tr>
     </tbody>
     <tbody *ngIf="(listadoActa.length > 0)">
-      <tr *ngFor="let producto of listadoActa">
+      <tr *ngFor="let producto of listadoActa; let i = index;">
         <td>{{producto.producto}}</td>
         <td class="text-center">{{producto.cantidad}}</td>
         <th *ngIf="borrar" scope="col" class="text-center">
+          <abrir-confirmacion-borrado-producto-modal [texto]="'prducto'" [listado]="listadoActa" [indexListado]="i"></abrir-confirmacion-borrado-producto-modal>
         </th>
       </tr>
     </tbody>
