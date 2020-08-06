@@ -16,7 +16,7 @@
         <td class="text-center">{{acta.producto_cant_total}}</td>
         <td colspan="2" class="text-center">{{acta.destino_nombre}} ({{acta.destino_localidad}})</td>
         <th scope="col" class="text-center">
-          <abrir-vista-acta-modal></abrir-vista-acta-modal>
+          <abrir-vista-acta-modal [idActa]="acta.id"></abrir-vista-acta-modal>
         </th>
       </tr>
     </tbody>

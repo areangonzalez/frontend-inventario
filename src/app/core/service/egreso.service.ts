@@ -14,6 +14,11 @@ export class EgresoService {
     return this._http.post('/egresos', params);
   }
 
+
+  buscarPorId(id:number) {
+    return this._http.get('/egresos/' + id);
+  }
+
   resolve() {
     return this._http.get('/egresos');
   }

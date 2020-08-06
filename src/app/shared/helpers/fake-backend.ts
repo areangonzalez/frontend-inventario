@@ -113,6 +113,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return listarEgresos();
                 case url.endsWith('/apimock/egresos') && method === 'POST':
                     return crearEgreso();
+                case url.match(/\/apimock\/egresos\/\d+$/) && method === 'GET':
+                    return egresoPorId();
                 case url.match(/\/apimock\/comprobantes\/\d+$/) && method === 'GET':
                     return comprobantePorId();
                 case url.match(/\/apimock\/comprobantes\/registrar-producto-pendiente\/\d+$/) && method === 'PUT':
@@ -313,7 +315,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return error("No se puede obtener listado de productos");
           }
         }
-
+        /* CREAR UN ACTA */
         function crearEgreso() {
           let acta = body;
           console.log(acta);
@@ -322,6 +324,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok({id: 7});
           }else{
             return error("Error no se pudo guardar los datos");
+          }
+        }
+        /* OBTENER UN ACTA POR SU ID */
+        function egresoPorId() {
+          let urlParts = request.url.split('/');
+          let id = parseInt(urlParts[urlParts.length - 1]);
+
+          let acta: any = { fecha: "2020-03-03", origen: "Origen 1", destino_nombre: "Destino 1", destino_localidadid: 2626,
+            descripcion: "Esto es una descripcion de egreso", nro_acta: "456-123", tipo_egresoid: 1, fecha_inicial: "2020-08-03",
+            id: 4, suscrito: "algun suscrito", tipo_egreso: "Modulo", producto_cant_total: 2, destino_localidad: "Rio Colorado",
+            lista_producto: [
+              { cantidad: "20", producto: "Arroz blanco, 1kg (Dos hermanos)" },
+              { cantidad: "20", producto: "Fideos secos guiseros, 500 gr (Canale)" },
+              { cantidad: "20", producto: "Aceite de girasol, 900 ml (Legítimo)" },
+              { cantidad: "20", producto: "Azucar blanca, 1 kg (Ledesma)" },
+              { cantidad: "20", producto: "Leche entera, 1 lt (Sancor)" } ]
+            };
+
+          if (id){
+            return ok(acta);
+          }else{
+            error("error al obtener el acta");
           }
         }
 

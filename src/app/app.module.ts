@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
+import es from "@angular/common/locales/es";
+import { registerLocaleData } from "@angular/common";
 import { NgbModule, NgbDatepickerI18n, NgbTooltipModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -16,6 +18,7 @@ import {
 } from "./shared";
 import { BreadcrumbsService } from './core/service';
 
+registerLocaleData(es);
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { BreadcrumbsService } from './core/service';
   providers: [
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     { provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter },
+    { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     BreadcrumbsService,
 
