@@ -1,6 +1,6 @@
 <h2>Listado de Egreso</h2>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <ba-egreso [listaInventario]="listadoInventario" [localidades]="listadoLocalidad" ></ba-egreso>
+  <ba-egreso [listaInventario]="listadoInventario" [localidades]="listadoLocalidad" (limpiar)="limpiarCampos($event)" ></ba-egreso>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
   <producto-lista-egreso [listaEgreso]="listadoEgreso" (cambioDePagina)="cambiarPagina($event)" [configPaginacion]="configPaginacion" ></producto-lista-egreso>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbDate, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from 'src/app/core/service';
@@ -11,8 +11,9 @@ import { UtilService } from 'src/app/core/service';
 export class BaEgresoComponent implements OnInit {
   @Input("listaInventario") public listaInventario: any;
   @Input("localidades") public localidades: any;
+  @Output("limpiar") public limpiar = new EventEmitter();
 
-  public globalParam:string = '';
+  public global_param:string = '';
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
   public btnSeleccion: boolean = false;
@@ -49,7 +50,21 @@ export class BaEgresoComponent implements OnInit {
   }
 
   public limpiarCampos() {
-    console.log('limpiamos');
+    let busqueda: any = this.busquedaAvanzada.value;
+      for (const key in busqueda) {
+        if (key == 'efechaDesde') {
+          busqueda[key] = null;
+        }else if (key == 'efechaHasta') {
+          busqueda[key] = null;
+        }else {
+          busqueda[key] = '';
+        }
+      }
+      this.global_param = '';
+      this.busquedaAvanzada.patchValue(busqueda);
+      this.btnSeleccion = false;
+      this.mostrar = false;
+      this.limpiar.emit(true);
   }
   /**
    * Formatea la fecha para una variable del formulario
