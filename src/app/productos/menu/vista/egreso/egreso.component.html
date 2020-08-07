@@ -3,6 +3,5 @@
   <ba-egreso [listaInventario]="listadoInventario" ></ba-egreso>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <!-- <shared-lista-stock [listadoStock]="listadoStock" [tipoTabla]="'egreso'" ></shared-lista-stock> -->
-  <producto-lista-egreso [listaEgreso]="listadoEgreso.resultado" ></producto-lista-egreso>
+  <producto-lista-egreso [listaEgreso]="listadoEgreso" (cambioDePagina)="cambiarPagina($event)" [configPaginacion]="configPaginacion" ></producto-lista-egreso>
 </div>

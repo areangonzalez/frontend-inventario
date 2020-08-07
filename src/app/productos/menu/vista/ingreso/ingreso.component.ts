@@ -15,7 +15,7 @@ export class IngresoComponent implements OnInit {
   public listadoUnidadMedida: any; // listado de unidad de medidas
   public listadoMarcas: any; // listado de marcas
   public listadoIngreso: any; // listado de los comrpobantes de ingreso
-  public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de destinatarios
+  public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
 
   constructor(

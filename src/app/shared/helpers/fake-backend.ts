@@ -293,7 +293,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         /* LISTADO DE COMPROBANTE EGRESO */
         function listarEgresos() {
-          //let page: number = parseInt(request.params.get("page"));
+          let page: number = parseInt(request.params.get("page"));
           let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 2;
 
           let egresos = {
@@ -307,10 +307,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           ]};
 
           // pagino el listado
-          // let listaComprobantes = paginar(egresos, egresos.resultado, page, pageSize)
+          let listado = paginar(egresos, egresos.resultado, page, pageSize)
           // Creo la respuesta
-          if (egresos) {
-            return ok(egresos);
+          if (listado) {
+            return ok(listado);
           }else {
             return error("No se puede obtener listado de productos");
           }
