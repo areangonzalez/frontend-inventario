@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigurarPagina } from 'src/app/core/model';
-import { ConfiguracionParaPaginarService, EgresoService } from 'src/app/core/service';
+import { ConfiguracionParaPaginarService, EgresoService, AlertService } from 'src/app/core/service';
 
 @Component({
   selector: 'app-egreso',
@@ -17,7 +17,7 @@ export class EgresoComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute, private _configurarPaginacion: ConfiguracionParaPaginarService,
-    private _egresoService: EgresoService
+    private _egresoService: EgresoService, private _mensaje: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -40,21 +40,21 @@ export class EgresoComponent implements OnInit {
    * @param pagina numero de pagina
    */
   cambiarPagina(pagina:any) {
-    //this.buscar(this.filtradoBusqueda, pagina);
+    this.buscar(this.filtradoBusqueda, pagina);
   }
   /**
    * Configurar busqueda avanzada para mostrar listado
    * @param params [object] parametros que se filtraran en la busqueda
    * @param page [number] Es el numero de pagina menos 1
    */
-  /* buscar(params:any, page:number) {
+  buscar(params:any, page:number) {
     Object.assign(params, {page: page-1});
     console.log(params);
     this.filtradoBusqueda = params;
     this._egresoService.buscar(params).subscribe(
       respuesta => {
-        this.prepararListadoingreso(respuesta, page);
+        this.prepararListadoEgreso(respuesta, page);
     }, error => { this._mensaje.cancelado(error); });
-  } */
+  }
 
 }
