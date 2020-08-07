@@ -14,7 +14,7 @@
         <td class="ancho-celda-vencimiento text-center">{{comprobante.fecha_emision | date: 'dd/MM/yyyy'}}</td>
         <td class="ancho-celda-minimo text-center">{{comprobante.producto_cant_total}}</td>
         <th scope="col" class="text-center">
-          <abrir-vista-comprobante-modal [idComprobante]="comprobante.comprobanteid" ></abrir-vista-comprobante-modal>
+          <abrir-vista-comprobante-modal [idComprobante]="comprobante.id" ></abrir-vista-comprobante-modal>
         </th>
       </tr>
     </tbody>
