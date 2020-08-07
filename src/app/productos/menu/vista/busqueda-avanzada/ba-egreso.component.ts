@@ -10,15 +10,12 @@ import { UtilService } from 'src/app/core/service';
 })
 export class BaEgresoComponent implements OnInit {
   @Input("listaInventario") public listaInventario: any;
+  @Input("localidades") public localidades: any;
 
-  public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
-  public marcaLista: any = [{id:1, nombre:'Canale'}];
-  public medidadLista: any = [{ id:1, nombre:'kg' },{ id:2, nombre:'lts' },{ id:3, nombre:'gr' }];
   public globalParam:string = '';
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
   public btnSeleccion: boolean = false;
-
 
   // Variables para calendarios
   public hoveredDate: NgbDate | null = null; // Resalta la fecha
@@ -37,13 +34,11 @@ export class BaEgresoComponent implements OnInit {
       _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
       // formulario de busqueda avanzada
       this.busquedaAvanzada = _fb.group({
-        global_param: '',
-        marcaid: '',
-        categoriaid: '',
-        egresoDesde: null,
-        egreso_desde: '',
-        egresoHasta: null,
-        egreso_hasta: ''
+        destino_localidadid: '',
+        fechaDesde: null,
+        fecha_desde: '',
+        fechaHasta: null,
+        fecha_hasta: ''
       });
     }
 

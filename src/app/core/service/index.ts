@@ -11,3 +11,4 @@ export * from './marca.service';
 export * from './inventario.service';
 export * from './comprobante.service';
 export * from './egreso.service';
+export * from './localidad.service';
