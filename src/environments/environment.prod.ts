@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'nombreDominioProduccion'
+  baseUrl: 'http://api.gestor-inventario.local'
 };
