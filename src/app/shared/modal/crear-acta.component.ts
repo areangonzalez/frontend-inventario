@@ -16,7 +16,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
       </button>
     </div>
     <div class="modal-body">
-      <shared-form-egreso [formEgreso]="formEgreso" [submitted]="submitted" ></shared-form-egreso>
+      <shared-form-egreso [formEgreso]="formEgreso" [submitted]="submitted" [listadoLocalidades]="localidad" [listadoTipoEgreso]="tipoEgreso" ></shared-form-egreso>
 
       <armar-listado-acta-modal [listaActa]="listadoActa" [listaInventario]="listaInventario" (obtenerListadoActa)="armarListadoActa($event)"></armar-listado-acta-modal>
       <div class="mt-3">

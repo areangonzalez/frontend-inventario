@@ -11,6 +11,7 @@ import { UtilService } from 'src/app/core/service';
 export class BaEgresoComponent implements OnInit {
   @Input("listaInventario") public listaInventario: any;
   @Input("localidades") public localidades: any;
+  @Input("tipoEgresos") public tipoEgresos: any;
   @Output("limpiar") public limpiar = new EventEmitter();
 
   public global_param:string = '';

@@ -97,6 +97,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return crearInventario();
                 case url.endsWith('/apimock/inventarios') && method === 'GET':
                     return listarInventario();
+                case url.endsWith('/apimock/localidads') && method === 'GET':
+                    return listarLocalidades();
+                case url.endsWith('/apimock/tipo-egresos') && method === 'GET':
+                    return listarTipoEgresos();
                 case url.endsWith('/apimock/productos') && method === 'GET':
                     return listarProductos();
                 case url.endsWith('/apimock/productos') && method === 'POST':
@@ -147,8 +151,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               { id:1, cantidad: 2000, producto: 'Aceite de girasol, 900 ml', marca: 'Legítimo', categoria: 'Alimentos / Bebidas', vencimiento: '2020-07-23' },
               { id:4, cantidad: 6000, producto: 'Leche entera, 1 lt', marca: 'Sancor', categoria: 'Alimentos / Bebidas', vencimiento: '2020-06-13' },
             ]
-          }
-
+          };
 
           if (inventario) {
             return ok(inventario);
@@ -168,6 +171,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         /* LISTADO MARCAS */
         function listarMarcas() {
           return ok(listadoMarcas);
+        }
+
+        /* LISTADO LOCALIDAD */
+        function listarLocalidades() {
+          return ok([{id:1, nombre: "Cipolletti"}, {id:2, nombre:"Viedma"}]);
+        }
+        /* LISTADO TIPO EGRESO */
+        function listarTipoEgresos() {
+          return ok([{id:1, nombre: "Modulo"}, {id:2, nombre:"Bulto"}]);
         }
 
         function crearInventario() {

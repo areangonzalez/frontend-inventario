@@ -67,7 +67,7 @@
         <label for="categoria">Localidad (<b class="text-danger">*</b>):</label>
         <select class="form-control" id="localidadaid" formControlName="destino_localidadid" [ngClass]="{'is-invalid': (formEgreso.get('destino_localidadid').invalid && submitted)}">
           <option value="">Seleccione una Asunto</option>
-          <option *ngFor="let localidad of listadolocalidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
+          <option *ngFor="let localidad of listadoLocalidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
         </select>
         <div *ngIf="(formEgreso.get('destino_localidadid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione una localidad de destino.</span>

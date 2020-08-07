@@ -12,3 +12,4 @@ export * from './inventario.service';
 export * from './comprobante.service';
 export * from './egreso.service';
 export * from './localidad.service';
+export * from './tipo-egreso.service';

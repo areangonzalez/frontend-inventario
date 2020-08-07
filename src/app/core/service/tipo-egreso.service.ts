@@ -5,11 +5,11 @@ import { Resolve } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class LocalidadService {
+export class TipoEgresoService {
 
-  constructor(private _http: ApiService) { }
+  constructor( private _http: ApiService ) { }
 
   resolve() {
-    return this._http.get('/localidads')
+    return this._http.get('/tipo-egresos');
   }
 }

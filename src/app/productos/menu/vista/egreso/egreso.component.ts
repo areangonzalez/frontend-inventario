@@ -13,6 +13,7 @@ export class EgresoComponent implements OnInit {
   public listadoInventario: any;
   public listadoEgreso: any;
   public listadoLocalidad: any;
+  public listadoTipoEgreso: any;
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
 
@@ -24,6 +25,7 @@ export class EgresoComponent implements OnInit {
   ngOnInit(): void {
     this.listadoInventario = this._route.snapshot.data["inventario"];
     this.listadoLocalidad = this._route.snapshot.data["localidad"];
+    this.listadoTipoEgreso = this._route.snapshot.data["tipoEgreso"];
     this.prepararListadoEgreso(this._route.snapshot.data["egresos"], 1);
   }
   /**

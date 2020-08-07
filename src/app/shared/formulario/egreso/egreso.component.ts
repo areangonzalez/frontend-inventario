@@ -10,8 +10,8 @@ import { UtilService } from 'src/app/core/service';
 export class EgresoComponent implements OnInit {
   @Input("formEgreso") public formEgreso: FormGroup;
   @Input("submitted") public submitted: boolean;
-  public listadolocalidades: any = [{ id: 1, nombre: "Viedma" }];
-  public listadoTipoEgreso: any = [{ id: 1, nombre: "modulo" },{ id: 2, nombre: "mercaderia" }];
+  @Input("listadoLocalidades") public listadoLocalidades: any;
+  @Input("listadoTipoEgreso") public listadoTipoEgreso: any;
 
   constructor( private _util: UtilService ) {}
 
