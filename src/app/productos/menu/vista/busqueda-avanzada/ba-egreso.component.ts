@@ -133,16 +133,16 @@ export class BaEgresoComponent implements OnInit {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
       console.log(date);
-      this.busquedaAvanzada.patchValue({egresoDesde: date});
+      this.busquedaAvanzada.patchValue({fechaDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;
-      this.busquedaAvanzada.patchValue({egresoHasta: date});
+      this.busquedaAvanzada.patchValue({fechaHasta: date});
       this.abrirDp();
     } else {
       this.toDate = null;
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({egresoDesde: date});
-      this.busquedaAvanzada.patchValue({egresoHasta: null});
+      this.busquedaAvanzada.patchValue({fechaDesde: date});
+      this.busquedaAvanzada.patchValue({fechaHasta: null});
     }
   }
   public isHovered(date: NgbDate) {
