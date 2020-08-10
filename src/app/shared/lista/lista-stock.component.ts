@@ -8,6 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ListaStockComponent implements OnInit {
   @Input("listadoStock") public listadoStock: any;
   @Input("tipoTabla") public tipoTabla: string;
+  @Input("configPaginacion") public configPaginacion:any;
+  @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   @Output("productoSeleccionado") public productoSeleccionado = new EventEmitter();
   constructor() { }
 
@@ -28,8 +30,10 @@ export class ListaStockComponent implements OnInit {
     productoSel["cantidad"] = cantidad;
     // envio los datos del producto seleccionado al componente padre
     this.productoSeleccionado.emit(productoSel);
-
   }
 
+  cambioPagina(pagina:number){
+    this.cambioDePagina.emit(pagina);
+  }
 
 }
