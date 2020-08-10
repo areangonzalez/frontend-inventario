@@ -6,7 +6,7 @@ import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class InventarioService {
+export class InventarioActaService {
 
   constructor( private _http: ApiService) { }
 
@@ -22,6 +22,8 @@ export class InventarioService {
   }
 
   resolve() {
-    return this._http.get('/inventarios');
+    let httpParams = new HttpParams();
+    httpParams = this._http.formatParams(httpParams, {pagesize: 8});
+    return this._http.get('/inventarios', httpParams);
   }
 }

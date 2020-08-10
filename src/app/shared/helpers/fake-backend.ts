@@ -141,6 +141,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
         /* LISTADO INVENTARIO */
         function listarInventario() {
+          let page: number = parseInt(request.params.get("page"));
+          let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 2;
+
           let inventario = { pagesize: 20, pages: 1, total_filtrado: 2, cantidad_vencidos: 4, cantidad_faltantes: 3,
             cantidad_defectuosos: 3, cantidad_stock: 5,
             resultado: [
@@ -154,8 +157,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             ]
           };
 
-          if (inventario) {
-            return ok(inventario);
+          let listado = paginar(inventario, inventario.resultado, page, pageSize)
+
+          if (listado) {
+            return ok(listado);
           }else {
             return error("No se puede obtener listado de productos");
 

@@ -4,7 +4,7 @@ import { ProductosComponent } from './productos.component';
 import { StockComponent } from './menu/vista/stock/stock.component';
 import { IngresoComponent } from './menu/vista/ingreso/ingreso.component';
 import { EgresoComponent } from './menu/vista/egreso/egreso.component';
-import { ProductoService, CategoriaService, UnidadMedidaService, MarcaService, EgresoService, ComprobanteService, InventarioService, LocalidadService, TipoEgresoService } from '../core/service';
+import { ProductoService, CategoriaService, UnidadMedidaService, MarcaService, EgresoService, ComprobanteService, InventarioService, LocalidadService, TipoEgresoService, InventarioActaService } from '../core/service';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
       {
         path: 'egreso', component: EgresoComponent,
         data: { loading: true, breadcrumb: 'Egreso' },
-        resolve: { egresos: EgresoService, inventario: InventarioService, localidad: LocalidadService, tipoEgreso: TipoEgresoService }
+        resolve: { egresos: EgresoService, inventario: InventarioActaService, localidad: LocalidadService, tipoEgreso: TipoEgresoService }
       },
       { path: '**', redirectTo: 'stock', pathMatch: 'full' },
     ]
@@ -40,6 +40,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  providers: [ComprobanteService, ProductoService, CategoriaService, UnidadMedidaService, MarcaService, EgresoService, InventarioService, LocalidadService, TipoEgresoService]
+  providers: [ComprobanteService, ProductoService, CategoriaService, UnidadMedidaService, MarcaService, EgresoService, InventarioService, LocalidadService, TipoEgresoService, InventarioActaService]
 })
 export class ProductosRoutingModule { }

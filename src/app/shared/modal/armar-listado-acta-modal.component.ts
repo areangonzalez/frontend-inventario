@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { UtilService, AlertService } from 'src/app/core/service';
+import { UtilService, AlertService, ConfiguracionParaPaginarService, InventarioService } from 'src/app/core/service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AbstractWebDriver } from 'protractor/built/browser';
+import { ConfigurarPagina } from 'src/app/core/model';
 
 /**
  * Componente que muestra el contenido del modal
@@ -19,15 +20,15 @@ import { AbstractWebDriver } from 'protractor/built/browser';
     <div class="modal-body">
       <div class="form-group">
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="global_param" id="buscar-stock" placeholder="buscar por nombre de producto por Ej.: Azucar" (keyup.enter)="buscar()" >
+          <input type="text" class="form-control" [(ngModel)]="global_param" id="buscar-stock" placeholder="buscar por nombre de producto por Ej.: Azucar" (keyup.enter)="buscar({'global_param': global_param}, configPaginacion.page)" >
           <div class="input-group-append btn-group">
-            <button type="button" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
-            <button type="button" class="btn btn-outline-danger" (click)="limpiar()"><i class="fas fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-outline-primary" (click)="buscar({'global_param': global_param}, configPaginacion.page)"><i class="fas fa-search"></i></button>
+            <button type="button" class="btn btn-outline-danger" (click)="limpiarCampos()"><i class="fas fa-trash-alt"></i></button>
           </div>
         </div>
       </div>
       <div class="mt-2">
-        <shared-lista-stock [listadoStock]="inventario.resultado" [tipoTabla]="'seleccionar_producto'" (productoSeleccionado)="obtenerProducto($event)" ></shared-lista-stock>
+        <shared-lista-stock [listadoStock]="inventario" [configPaginacion]="configPaginacion" [tipoTabla]="'seleccionar_producto'" (productoSeleccionado)="obtenerProducto($event)" ></shared-lista-stock>
       </div>
       <div class="mt-2">
         <shared-lista-acta [listadoActa]="listadoActa" [borrar]="true"></shared-lista-acta>
@@ -37,14 +38,21 @@ import { AbstractWebDriver } from 'protractor/built/browser';
       <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()"><i class="fas fa-ban"></i> Cancelar</button>
       <button type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
     </div>
-  `
+  `,
+  providers: [ConfiguracionParaPaginarService]
 })
-export class ArmarListadoActaModalContent {
+export class ArmarListadoActaModalContent implements OnInit {
   @Input("inventario") public inventario: any;
   public listadoActa: any = [];
   public global_param: string = '';
+  public configPaginacion: ConfigurarPagina = new ConfigurarPagina();
+  public filtradoBusqueda: any;
 
-  constructor( private _ativeModal: NgbActiveModal, private _util: UtilService, private _mensaje: AlertService ) {}
+  constructor( private _ativeModal: NgbActiveModal, private _util: UtilService, private _mensaje: AlertService, private _configurarPaginacion: ConfiguracionParaPaginarService, private _inventarioService: InventarioService ) {}
+
+  ngOnInit() {
+    this.prepararListado(this.inventario, 1);
+  }
   /**
    * Cierra el modal
    */
@@ -76,11 +84,41 @@ export class ArmarListadoActaModalContent {
   obtenerProducto(producto: any) {
     this.listadoActa.push(producto);
   }
+  /**
+   * preparo el listado para configurar el paginado
+   * @param listado listado a configurar
+   * @param pagina numero de pagina que se encuentra el listado
+   */
+  prepararListado(listado:any, pagina: number) {
+    // preparo la variable con la configuracion para el paginado
+    this.configPaginacion = this._configurarPaginacion.config(listado, pagina);
 
-  limpiar() {
+    this.inventario = listado.resultado;
+  }
+  /**
+   * Solicito el cambio de pagina
+   * @param pagina numero de pagina
+   */
+  cambiarPagina(pagina:any) {
+    this.buscar(this.filtradoBusqueda, pagina);
   }
 
-  buscar() {
+  /**
+   * Configurar busqueda avanzada para mostrar listado
+   * @param params [object] parametros que se filtraran en la busqueda
+   * @param page [number] Es el numero de pagina menos 1
+   */
+  buscar(params: any, page:number) {
+    Object.assign(params, {page: page-1, pagesize: 8});
+    this.filtradoBusqueda = params;
+    this._inventarioService.buscar(params).subscribe(
+      respuesta => {
+        this.prepararListado(respuesta, page);
+    }, error => { this._mensaje.cancelado(error); });
+  }
+
+  limpiarCampos() {
+    this.buscar({global_param: ''}, 1);
   }
 }
 

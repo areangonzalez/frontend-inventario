@@ -56,13 +56,4 @@ export class StockComponent implements OnInit {
   limpiarCampos(e: boolean) {
     this.buscar({}, 1);
   }
-
-  /* agregarStock() {
-    this._alertService.exitoso('Success!!')
-  }
-
-  buscarStock() {
-    this._alertService.exitoso('Success!!')
-  } */
-
 }
