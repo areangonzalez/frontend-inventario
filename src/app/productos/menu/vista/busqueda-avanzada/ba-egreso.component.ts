@@ -13,6 +13,7 @@ export class BaEgresoComponent implements OnInit {
   @Input("localidades") public localidades: any;
   @Input("tipoEgresos") public tipoEgresos: any;
   @Output("limpiar") public limpiar = new EventEmitter();
+  @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
 
   public global_param:string = '';
   public busquedaAvanzada: FormGroup;
@@ -47,7 +48,23 @@ export class BaEgresoComponent implements OnInit {
   ngOnInit(): void {
   }
   public buscar(){
-    console.log('buscamos');
+    let busquedaAvanzada = this.busquedaAvanzada.value;
+    let apiBusqueda:any = {};
+    let esTrue: boolean = false;
+
+    if (this.global_param !== '') {
+      Object.assign(apiBusqueda, {"global_param": this.global_param});
+    }
+    for (const clave in busquedaAvanzada) {
+      if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
+        if (clave != 'fechaDesde' && clave != 'fechaHasta'){
+          Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
+          esTrue = true;
+        }
+      }
+    }
+    this.btnSeleccion = esTrue;
+    this.obtenerBusqueda.emit(apiBusqueda);
   }
 
   public limpiarCampos() {

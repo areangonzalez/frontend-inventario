@@ -14,7 +14,8 @@ const routes: Routes = [
     children: [
       {
         path: 'stock', component: StockComponent,
-        data: { loading: true, breadcrumb: 'Stock' }
+        data: { loading: true, breadcrumb: 'Stock' },
+        resolve: { inventario: InventarioService }
       },
       {
         path: 'ingreso', component: IngresoComponent,
