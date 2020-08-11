@@ -36,7 +36,7 @@ export class ProductoComponent implements OnInit {
       unidad_valor: ['', Validators.required],
       unidad_medidaid: ['', Validators.required],
       fecha_vencimiento: '',
-      fechaVencimiento: ['', Validators.required],
+      fechaVencimiento: null,
       producto: ''
     });
   }
@@ -53,11 +53,11 @@ export class ProductoComponent implements OnInit {
 
   agregarProductoLista(){
     this.submitted = true;
-
+    console.log(this.productoForm.status)
     if (this.productoForm.invalid) {
       return;
     }else{
-      let productoVerificado:any, productoNuevo:any;
+      let productoVerificado:any;
       if (this.productoSeleccionado) {
         /**
          * verifico si hay cambios en cada campo del producto y borro su id para notificar que es un nuevo producto
@@ -89,7 +89,7 @@ export class ProductoComponent implements OnInit {
     this.productoSeleccionado = undefined;
     this.productoForm.get("nombre").setValue("");
     this.productoForm.get("cantidad").setValue("");
-    this.productoForm.get("fechaVencimiento").setValue("");
+    this.productoForm.get("fechaVencimiento").setValue(null);
     this.productoForm.get("categoriaid").setValue("");
     this.productoForm.get("marcaid").setValue("");
     this.productoForm.get("unidad_valor").setValue("");
@@ -172,6 +172,7 @@ export class ProductoComponent implements OnInit {
    * @param keyFecha [string] nombre de la variable que sera seteada
    */
   public formatearFecha(fecha:any){
+    console.log(fecha);
     if (fecha !== null){
       this.productoForm.controls.fecha_vencimiento.setValue(this._util.formatearFecha(fecha.day, fecha.month, fecha.year, "yyyy-MM-dd"));
     }else{

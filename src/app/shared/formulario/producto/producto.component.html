@@ -16,17 +16,14 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="vencimiento">Vencimiento (<b class="text-danger">*</b>):</label>
+        <label for="vencimiento">Vencimiento:</label>
         <div class="input-group">
           <input class="form-control" placeholder="dd/mm/yyyy"
-                 name="dp" formControlName="fechaVencimiento" ngbDatepicker #d="ngbDatepicker" [ngClass]="{'is-invalid': (productoForm.get('fechaVencimiento').invalid && submitted)}"
+                 name="dp" formControlName="fechaVencimiento" ngbDatepicker #d="ngbDatepicker"
                  (ngModelChange)="formatearFecha($event)">
           <div class="input-group-append">
-            <button class="btn" [ngClass]="(productoForm.get('fechaVencimiento').invalid && submitted) ? 'btn-outline-danger' : 'btn-outline-info'" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt" ></i></button>
+            <button class="btn btn-outline-info" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt" ></i></button>
           </div>
-        </div>
-        <div *ngIf="(productoForm.get('fechaVencimiento').invalid && submitted)" class="text-danger">
-          <span>Por favor seleccione una fecha de vencimiento.</span>
         </div>
       </div>
     </div>

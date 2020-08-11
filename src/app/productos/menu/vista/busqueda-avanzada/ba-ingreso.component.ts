@@ -133,6 +133,12 @@ export class BaIngresoComponent implements OnInit {
     }
   }
 
+  actualizarListado(actualizar: boolean) {
+    if (actualizar) {
+      this.buscar();
+    }
+  }
+
   /* ### DATE PICKER CONFIG ### */
   /**
    * Selecciona el rango de fecha DESDE/HASTA

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InventarioService, AlertService } from 'src/app/core/service';
@@ -11,7 +11,7 @@ import { InventarioService, AlertService } from 'src/app/core/service';
   template: `
     <div class="modal-header">
       <h4 class="modal-title">{{titulo}}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="cerrarModal()">
+      <button type="button" class="close" aria-label="Close" (click)="cerrarModal(false)">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -25,7 +25,8 @@ import { InventarioService, AlertService } from 'src/app/core/service';
         <textarea class="form-control" id="descripcion" formControlName="descripcion" rows="1" placeholder="Descripción..."></textarea>
       </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer d-flex justify-content-between">
+    <button type="button" class="btn btn-outline-danger" (click)="cerrarModal(false)"><i class="fas fa-ban"></i> Cancelar</button>
       <button type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
     </div>
   `
@@ -48,7 +49,7 @@ export class ComprobanteModalContent {
       nro_remito: '',
       nroComprobantePrincipal: ['', Validators.required],
       nroComprobanteFinal: ['', Validators.required],
-      fechaEmision: ['', Validators.required],
+      fechaEmision: null,
       fecha_emision: '',
       descripcion: '',
       falta: false,
@@ -56,25 +57,32 @@ export class ComprobanteModalContent {
     });
   }
 
-  cerrarModal() {
-    this._ativeModal.close('close');
+  cerrarModal(guardar: boolean) {
+    if (guardar) {
+      this._ativeModal.close(true);
+    } else {
+      this._ativeModal.close('close');
+    }
   }
 
   guardar() {
     this.submitted = true;
 
-    if (this.comprobanteForm.invalid && (this.listadoDeStock.length > 0)) {
+    if (this.comprobanteForm.invalid) {
       return;
     } else {
       let parametros = this.comprobanteForm.value;
-      parametros["lista_producto"] = this.listadoDeStock;
-
-      this._inventarioService.guardar(parametros).subscribe(
-        respuesta => {
-          this._mensaje.exitoso("El stock ha sido guardado con éxito!");
-          this.cerrarModal();
-      }, error => { this._mensaje.cancelado(error.message); });
-
+      if (this.listadoDeStock.length == 0) {
+        this._mensaje.cancelado("El listado NO puede estar vacio!!");
+        return false;
+      }else{
+        parametros["lista_producto"] = this.listadoDeStock;
+        this._inventarioService.guardar(parametros).subscribe(
+          respuesta => {
+            this._mensaje.exitoso("El stock ha sido guardado con éxito!");
+            this.cerrarModal(true);
+          }, error => { this._mensaje.cancelado(error.message); });
+        }
     }
   }
 
@@ -97,6 +105,7 @@ export class ComprobanteModalComponent {
   @Input("categorias") public categorias: any; // listado de categorías
   @Input("unidadMedida") public unidadMedida: any; // listado de unidad de medida
   @Input("marcas") public marcas: any; // listado de marcas
+  @Output("seGuardo") public seGuardo = new EventEmitter();
 
 
   constructor( private _modalService: NgbModal ) { }
@@ -108,6 +117,14 @@ export class ComprobanteModalComponent {
     modalRef.componentInstance.listaCategorias = this.categorias;
     modalRef.componentInstance.listaUnidadMedida = this.unidadMedida;
     modalRef.componentInstance.listaMarcas = this.marcas;
+    modalRef.result.then(
+      (result) => {
+          if (result == 'close') {
+          } else {
+              return this.seGuardo.emit(result);
+          }
+      }
+    );
   }
 
 }
