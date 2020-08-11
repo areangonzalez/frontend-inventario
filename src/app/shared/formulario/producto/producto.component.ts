@@ -177,7 +177,6 @@ export class ProductoComponent implements OnInit {
    * @param keyFecha [string] nombre de la variable que sera seteada
    */
   public formatearFecha(fecha:any){
-    console.log(fecha);
     if (fecha !== null){
       this.productoForm.controls.fecha_vencimiento.setValue(this._util.formatearFecha(fecha.day, fecha.month, fecha.year, "yyyy-MM-dd"));
     }else{

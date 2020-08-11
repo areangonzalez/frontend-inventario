@@ -144,7 +144,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let page: number = parseInt(request.params.get("page"));
           let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 2;
 
-          let inventario = { pagesize: 20, pages: 1, total_filtrado: 2, cantidad_vencidos: 4, cantidad_faltantes: 3,
+          let inventario = { pagesize: pageSize, pages: 1, total_filtrado: 2, cantidad_vencidos: 4, cantidad_faltantes: 3,
             cantidad_defectuosos: 3, cantidad_stock: 5,
             resultado: [
               { productoid:7, cantidad: 3000, producto: 'Papel hig. Hoja simple, 320 ml', categoria: 'Limpieza', fecha_vencimiento: '2025-06-25' },
