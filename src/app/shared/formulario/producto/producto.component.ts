@@ -53,7 +53,7 @@ export class ProductoComponent implements OnInit {
 
   agregarProductoLista(){
     this.submitted = true;
-    console.log(this.productoForm.status)
+    // verifico si los campos son validos
     if (this.productoForm.invalid) {
       return;
     }else{
@@ -164,7 +164,12 @@ export class ProductoComponent implements OnInit {
     )
   }
 
-
+  esNumero(numero:any) {
+    if (!this._util.validarNumero(numero.value)) {
+      numero.value = numero.value.substring(0,numero.value.length - 1);
+      this.productoForm.get("cantidad").patchValue(numero.value);
+    }
+  }
 
   /**
    * Formatea la fecha para una variable del formulario
