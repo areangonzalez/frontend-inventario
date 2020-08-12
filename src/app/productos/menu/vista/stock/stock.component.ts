@@ -13,12 +13,18 @@ export class StockComponent implements OnInit {
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public listadoStock: any = [];
   public filtradoBusqueda: any = {};
+  public listadoCategoria: any = [];
+  public listadoMarcas: any = [];
+  public listadoUnidadMedida: any = [];
 
 
   constructor( private _mensaje: AlertService, private _route: ActivatedRoute, private _configurarPaginacion: ConfiguracionParaPaginarService, private _inventarioService: InventarioService ) { }
 
   ngOnInit(): void {
     this.prepararListadoStock(this._route.snapshot.data["inventario"], 1);
+    this.listadoCategoria = this._route.snapshot.data["categorias"];
+    this.listadoMarcas = this._route.snapshot.data["marcas"];
+    this.listadoUnidadMedida = this._route.snapshot.data["unidadMedida"];
   }
   /**
    * preparo el listado para configurar el paginado

@@ -1,6 +1,6 @@
 <h2>Listado de Stock</h2>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <ba-stock></ba-stock>
+  <ba-stock [categoriaLista]="listadoCategoria" [medidadLista]="listadoUnidadMedida" [marcaLista]="listadoMarcas" ></ba-stock>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
   <shared-lista-stock [listadoStock]="listadoStock" [configPaginacion]="configPaginacion" [tipoTabla]="'stock'" ></shared-lista-stock>

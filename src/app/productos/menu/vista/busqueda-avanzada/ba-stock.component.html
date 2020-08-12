@@ -1,7 +1,7 @@
-<fieldset [formGroup]="busquedaAvanzada">
+<fieldset>
   <div class="form-group">
     <div class="input-group">
-      <input type="text" class="form-control" formControlName="global_param" id="buscar-stock" placeholder="buscar por nombre de producto Ej.: Azucar" (keyup.enter)="buscar()" >
+      <input type="text" class="form-control" [(ngModel)]="global_param" id="buscar-stock" placeholder="buscar por nombre de producto Ej.: Azucar" (keyup.enter)="buscar()" >
       <div class="input-group-append btn-group">
         <button type="button" class="btn btn-outline-danger" (click)="buscar()"><i class="fas fa-trash-alt"></i></button>
         <button type="button" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
@@ -15,7 +15,7 @@
   </button>
   <div class="card mt-1" *ngIf="mostrar" >
     <div class="card-body">
-      <fieldset>
+      <fieldset [formGroup]="busquedaAvanzada">
         <div class="row">
           <div class="form-group col-md-4">
             <label for="categoria" class="prioridad">Categoría:</label>
@@ -27,17 +27,17 @@
           <div class="form-group col-md-4">
             <label for="marca" class="prioridad">Marca:</label>
             <select class="form-control" id="marca" formControlName="marcaid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('marcaid').value)}" >
-              <option value="">Seleccione Localidad</option>
+              <option value="">Seleccione Marca</option>
               <option *ngFor="let marca of marcaLista" value="{{marca.id}}">{{marca.nombre}}</option>
             </select>
           </div>
           <div class="form-group col-md-4">
-            <label for="marca" class="prioridad">Unidad de medida:</label>
+            <label for="unidad_medida" class="prioridad">Unidad de medida:</label>
             <div class="input-group">
               <input type="text" class="form-control" (keyup)="validarNumero($event.target)" placeholder="500" formControlName="unidad" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('unidad').value)}">
-              <select class="form-control" id="marca" formControlName="medidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('medidadid').value)}" >
-                <option value="">Seleccione Medidad</option>
-                <option *ngFor="let marca of medidadLista" value="{{marca.id}}">{{marca.nombre}}</option>
+              <select class="form-control" id="unidad_medida" formControlName="medidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('medidadid').value)}" >
+                <option value="">Seleccione Medida</option>
+                <option *ngFor="let medida of medidadLista" value="{{medida.id}}">{{medida.simbolo}} ({{medida.nombre}})</option>
               </select>
             </div>
           </div>
@@ -51,15 +51,15 @@
                 ngbDatepicker
                 #datePicker="ngbDatepicker"
                 id="fecha_desde"
-                formControlName="vencimientoDesde"
-                (ngModelChange)="formatFecha($event, 'vencimiento_desde');"
-                [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('vencimientoDesde').value)}"
+                formControlName="fechaVencimientoDesde"
+                (ngModelChange)="formatFecha($event, 'fecha_vencimiento_desde');"
+                [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('fechaVencimientoDesde').value)}"
                 [displayMonths]="2"
                 [navigation]="'select'"
                 [dayTemplate]="t"
                 [autoClose]="false" >
                 <input class="form-control" #c1 placeholder="Hasta: dd/mm/yyyy" ngbDatepicker #fb="ngbDatepicker"
-                id="fecha_hasta" formControlName="vencimientoHasta" (ngModelChange)="formatFecha($event, 'vencimiento_hasta')" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('vencimientoHasta').value)}"
+                id="fecha_hasta" formControlName="fechaVencimientoHasta" (ngModelChange)="formatFecha($event, 'fecha_vencimiento_hasta')" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('fechaVencimientoHasta').value)}"
                 >
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-info" (click)="abrirDp()" type="button">

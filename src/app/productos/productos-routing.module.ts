@@ -15,7 +15,7 @@ const routes: Routes = [
       {
         path: 'stock', component: StockComponent,
         data: { loading: true, breadcrumb: 'Stock' },
-        resolve: { inventario: InventarioService }
+        resolve: { inventario: InventarioService, categorias: CategoriaService, unidadMedida: UnidadMedidaService, marcas: MarcaService }
       },
       {
         path: 'ingreso', component: IngresoComponent,

@@ -56,8 +56,8 @@ export class BaEgresoComponent implements OnInit {
       Object.assign(apiBusqueda, {"global_param": this.global_param});
     }
     for (const clave in busquedaAvanzada) {
-      if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
-        if (clave != 'fechaDesde' && clave != 'fechaHasta'){
+      if (clave != 'fechaDesde' && clave != 'fechaHasta'){
+        if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
           Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
           esTrue = true;
         }
@@ -70,9 +70,9 @@ export class BaEgresoComponent implements OnInit {
   public limpiarCampos() {
     let busqueda: any = this.busquedaAvanzada.value;
       for (const key in busqueda) {
-        if (key == 'efechaDesde') {
+        if (key == 'fechaDesde') {
           busqueda[key] = null;
-        }else if (key == 'efechaHasta') {
+        }else if (key == 'fechaHasta') {
           busqueda[key] = null;
         }else {
           busqueda[key] = '';

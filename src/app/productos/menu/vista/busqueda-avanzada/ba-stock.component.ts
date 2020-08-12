@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from 'src/app/core/service';
@@ -10,10 +10,10 @@ import { UtilService } from 'src/app/core/service';
   styleUrls: ['./ba-stock.component.scss']
 })
 export class BaStockComponent implements OnInit {
-  public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
-  public marcaLista: any = [{id:1, nombre:'Canale'}];
-  public medidadLista: any = [{ id:1, nombre:'kg' },{ id:2, nombre:'lts' },{ id:3, nombre:'gr' }];
-  public globalParam:string = '';
+  @Input("categoriaLista") public categoriaLista: any;
+  @Input("marcaLista") public marcaLista: any;
+  @Input("medidadLista") public medidadLista: any;
+  public global_param:string = '';
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
   public btnSeleccion: boolean = false;
@@ -36,17 +36,16 @@ export class BaStockComponent implements OnInit {
       _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
       // formulario de busqueda avanzada
       this.busquedaAvanzada = _fb.group({
-        global_param: '',
         categoriaid: '',
         marcaid: '',
         unidad: '',
         medidadid: '',
-        defectuoso: '',
-        vencido: '',
-        vencimientoDesde: null,
-        vencimiento_desde: '',
-        vencimientoHasta: null,
-        vencimiento_hasta: ''
+        defectuoso: false,
+        vencido: false,
+        fechaVencimientoDesde: null,
+        fecha_vencimiento_desde: '',
+        fechaVencimientoHasta: null,
+        fecha_vencimiento_hasta: ''
       });
     }
 
@@ -108,16 +107,16 @@ export class BaStockComponent implements OnInit {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
       console.log(date);
-      this.busquedaAvanzada.patchValue({vencimientoDesde: date});
+      this.busquedaAvanzada.patchValue({fechaVencimientoDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;
-      this.busquedaAvanzada.patchValue({vencimientoHasta: date});
+      this.busquedaAvanzada.patchValue({fechaVencimientoHasta: date});
       this.abrirDp();
     } else {
       this.toDate = null;
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({vencimientoDesde: date});
-      this.busquedaAvanzada.patchValue({vencimientoHasta: null});
+      this.busquedaAvanzada.patchValue({fechaVencimientoDesde: date});
+      this.busquedaAvanzada.patchValue({fechaVencimientoHasta: null});
     }
   }
   public isHovered(date: NgbDate) {
