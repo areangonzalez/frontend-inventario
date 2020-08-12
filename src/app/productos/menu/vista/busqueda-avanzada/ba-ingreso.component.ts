@@ -16,9 +16,6 @@ export class BaIngresoComponent implements OnInit {
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
   @Output("limpiar") public limpiar = new EventEmitter();
 
-  public categoriaLista: any = [{id:1, nombre:'Alimentos / Bebidas'}];
-  public marcaLista: any = [{id:1, nombre:'Canale'}];
-  public medidadLista: any = [{ id:1, nombre:'kg' },{ id:2, nombre:'lts' },{ id:3, nombre:'gr' }];
   public global_param:string = '';
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
@@ -41,16 +38,10 @@ export class BaIngresoComponent implements OnInit {
       _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
       // formulario de busqueda avanzada
       this.busquedaAvanzada = _fb.group({
-        categoriaid: '',
-        marcaid: '',
-        unidad: '',
-        medidadid: '',
-        defectuoso: '',
-        vencido: '',
-        emisionDesde: null,
-        emision_desde: '',
-        emisionHasta: null,
-        emision_hasta: ''
+        fechaEmisionDesde: null,
+        fecha_emision_desde: '',
+        fechaEmisionHasta: null,
+        fecha_emision_hasta: ''
       });
     }
 
@@ -66,7 +57,7 @@ export class BaIngresoComponent implements OnInit {
     }
     for (const clave in busquedaAvanzada) {
       if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
-        if (clave != 'emisionDesde' && clave != 'emisionHasta'){
+        if (clave != 'fechaEmisionDesde' && clave != 'fechaEmisionHasta'){
           Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
           esTrue = true;
         }
@@ -79,9 +70,9 @@ export class BaIngresoComponent implements OnInit {
   public limpiarCampos() {
     let busqueda: any = this.busquedaAvanzada.value;
       for (const key in busqueda) {
-        if (key == 'emisionDesde') {
+        if (key == 'fechaEmisionDesde') {
           busqueda[key] = null;
-        }else if (key == 'emisionHasta') {
+        }else if (key == 'fechaEmisionHasta') {
           busqueda[key] = null;
         }else {
           busqueda[key] = '';
@@ -147,16 +138,16 @@ export class BaIngresoComponent implements OnInit {
   public onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({emisionDesde: date});
+      this.busquedaAvanzada.patchValue({fechaEmisionDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;
-      this.busquedaAvanzada.patchValue({emisionHasta: date});
+      this.busquedaAvanzada.patchValue({fechaEmisionHasta: date});
       this.abrirDp();
     } else {
       this.toDate = null;
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({emisionDesde: date});
-      this.busquedaAvanzada.patchValue({emisionHasta: null});
+      this.busquedaAvanzada.patchValue({fechaEmisionDesde: date});
+      this.busquedaAvanzada.patchValue({fechaEmisionHasta: null});
     }
   }
   public isHovered(date: NgbDate) {
