@@ -62,7 +62,7 @@ export class BaStockComponent implements OnInit {
       Object.assign(apiBusqueda, {"global_param": this.global_param});
     }
     for (const clave in busquedaAvanzada) {
-      if (clave != 'fechaDesde' && clave != 'fechaHasta'){
+      if (clave != 'fechaVencimientoDesde' && clave != 'fechaVencimientoHasta'){
         if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
           Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
           esTrue = true;
@@ -74,7 +74,21 @@ export class BaStockComponent implements OnInit {
   }
 
   public limpiarCampos() {
-    console.log('limpiamos');
+    let busqueda: any = this.busquedaAvanzada.value;
+      for (const key in busqueda) {
+        if (key == 'fechaVencimientoDesde') {
+          busqueda[key] = null;
+        }else if (key == 'fechaVencimientoHasta') {
+          busqueda[key] = null;
+        }else {
+          busqueda[key] = '';
+        }
+      }
+      this.global_param = '';
+      this.busquedaAvanzada.patchValue(busqueda);
+      this.btnSeleccion = false;
+      this.mostrar = false;
+      this.limpiar.emit(true);
   }
   /**
    * Formatea la fecha para una variable del formulario
