@@ -44,10 +44,10 @@ export class BaStockComponent implements OnInit {
         medidadid: '',
         defectuoso: false,
         vencido: false,
-        fechaVencimientoDesde: null,
-        fecha_vencimiento_desde: '',
-        fechaVencimientoHasta: null,
-        fecha_vencimiento_hasta: ''
+        fechaDesde: null,
+        fecha_desde: '',
+        fechaHasta: null,
+        fecha_hasta: ''
       });
     }
 
@@ -62,7 +62,7 @@ export class BaStockComponent implements OnInit {
       Object.assign(apiBusqueda, {"global_param": this.global_param});
     }
     for (const clave in busquedaAvanzada) {
-      if (clave != 'fechaVencimientoDesde' && clave != 'fechaVencimientoHasta'){
+      if (clave != 'fechaDesde' && clave != 'fechaHasta'){
         if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
           Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
           esTrue = true;
@@ -76,9 +76,9 @@ export class BaStockComponent implements OnInit {
   public limpiarCampos() {
     let busqueda: any = this.busquedaAvanzada.value;
       for (const key in busqueda) {
-        if (key == 'fechaVencimientoDesde') {
+        if (key == 'fechaDesde') {
           busqueda[key] = null;
-        }else if (key == 'fechaVencimientoHasta') {
+        }else if (key == 'fechaHasta') {
           busqueda[key] = null;
         }else {
           busqueda[key] = '';
@@ -139,16 +139,16 @@ export class BaStockComponent implements OnInit {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
       console.log(date);
-      this.busquedaAvanzada.patchValue({fechaVencimientoDesde: date});
+      this.busquedaAvanzada.patchValue({fechaDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;
-      this.busquedaAvanzada.patchValue({fechaVencimientoHasta: date});
+      this.busquedaAvanzada.patchValue({fechaHasta: date});
       this.abrirDp();
     } else {
       this.toDate = null;
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({fechaVencimientoDesde: date});
-      this.busquedaAvanzada.patchValue({fechaVencimientoHasta: null});
+      this.busquedaAvanzada.patchValue({fechaDesde: date});
+      this.busquedaAvanzada.patchValue({fechaHasta: null});
     }
   }
   public isHovered(date: NgbDate) {

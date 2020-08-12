@@ -26,15 +26,15 @@
                 ngbDatepicker
                 #datePicker="ngbDatepicker"
                 id="fecha_desde"
-                formControlName="fechaEmisionDesde"
-                (ngModelChange)="formatFecha($event, 'fecha_emision_desde');"
-                [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('fechaEmisionDesde').value)}"
+                formControlName="fechaDesde"
+                (ngModelChange)="formatFecha($event, 'fecha_desde');"
+                [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('fechaDesde').value)}"
                 [displayMonths]="2"
                 [navigation]="'select'"
                 [dayTemplate]="t"
                 [autoClose]="false" >
                 <input class="form-control" #c1 placeholder="Hasta: dd/mm/yyyy" ngbDatepicker #fb="ngbDatepicker"
-                id="fecha_hasta" formControlName="fechaEmisionHasta" (ngModelChange)="formatFecha($event, 'fecha_emision_hasta')" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('fechaEmisionHasta').value)}"
+                id="fecha_hasta" formControlName="fechaHasta" (ngModelChange)="formatFecha($event, 'fecha_hasta')" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('fechaHasta').value)}"
                 >
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-info" (click)="abrirDp()" type="button">

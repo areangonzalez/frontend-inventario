@@ -38,10 +38,10 @@ export class BaIngresoComponent implements OnInit {
       _configNgbDate.minDate = {year: 1900, month: 1, day: 1};
       // formulario de busqueda avanzada
       this.busquedaAvanzada = _fb.group({
-        fechaEmisionDesde: null,
-        fecha_emision_desde: '',
-        fechaEmisionHasta: null,
-        fecha_emision_hasta: ''
+        fechaDesde: null,
+        fecha_desde: '',
+        fechaHasta: null,
+        fecha_hasta: ''
       });
     }
 
@@ -57,7 +57,7 @@ export class BaIngresoComponent implements OnInit {
     }
     for (const clave in busquedaAvanzada) {
       if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
-        if (clave != 'fechaEmisionDesde' && clave != 'fechaEmisionHasta'){
+        if (clave != 'fechaDesde' && clave != 'fechaHasta'){
           Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
           esTrue = true;
         }
@@ -70,9 +70,9 @@ export class BaIngresoComponent implements OnInit {
   public limpiarCampos() {
     let busqueda: any = this.busquedaAvanzada.value;
       for (const key in busqueda) {
-        if (key == 'fechaEmisionDesde') {
+        if (key == 'fechaDesde') {
           busqueda[key] = null;
-        }else if (key == 'fechaEmisionHasta') {
+        }else if (key == 'fechaHasta') {
           busqueda[key] = null;
         }else {
           busqueda[key] = '';
@@ -138,16 +138,16 @@ export class BaIngresoComponent implements OnInit {
   public onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({fechaEmisionDesde: date});
+      this.busquedaAvanzada.patchValue({fechaDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;
-      this.busquedaAvanzada.patchValue({fechaEmisionHasta: date});
+      this.busquedaAvanzada.patchValue({fechaHasta: date});
       this.abrirDp();
     } else {
       this.toDate = null;
       this.fromDate = date;
-      this.busquedaAvanzada.patchValue({fechaEmisionDesde: date});
-      this.busquedaAvanzada.patchValue({fechaEmisionHasta: null});
+      this.busquedaAvanzada.patchValue({fechaDesde: date});
+      this.busquedaAvanzada.patchValue({fechaHasta: null});
     }
   }
   public isHovered(date: NgbDate) {
