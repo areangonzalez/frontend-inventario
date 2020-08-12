@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from 'src/app/core/service';
@@ -13,6 +13,8 @@ export class BaStockComponent implements OnInit {
   @Input("categoriaLista") public categoriaLista: any;
   @Input("marcaLista") public marcaLista: any;
   @Input("medidadLista") public medidadLista: any;
+  @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
+  @Output("limpiar") public limpiar = new EventEmitter();
   public global_param:string = '';
   public busquedaAvanzada: FormGroup;
   public mostrar: boolean = false;
@@ -52,7 +54,23 @@ export class BaStockComponent implements OnInit {
   ngOnInit(): void {
   }
   public buscar(){
-    console.log('buscamos');
+    let busquedaAvanzada = this.busquedaAvanzada.value;
+    let apiBusqueda:any = {};
+    let esTrue: boolean = false;
+
+    if (this.global_param !== '') {
+      Object.assign(apiBusqueda, {"global_param": this.global_param});
+    }
+    for (const clave in busquedaAvanzada) {
+      if (clave != 'fechaDesde' && clave != 'fechaHasta'){
+        if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
+          Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
+          esTrue = true;
+        }
+      }
+    }
+    this.btnSeleccion = esTrue;
+    this.obtenerBusqueda.emit(apiBusqueda);
   }
 
   public limpiarCampos() {

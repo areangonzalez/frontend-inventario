@@ -14,10 +14,9 @@ export class EgresoService {
     return this._http.post('/egresos', params);
   }
 
-  buscar(params: any) {
+  buscar(params: Object) {
     let httpParams = new HttpParams();
     httpParams = this._http.formatParams(httpParams, params);
-
     return this._http.get('/egresos', httpParams);
   }
 
