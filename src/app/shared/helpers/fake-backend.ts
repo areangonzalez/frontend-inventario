@@ -93,6 +93,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function handleRoute() {
             switch (true) {
+                case url.endsWith('/apimock/inventarios/set-defectuoso') && method === 'POST':
+                    return productoDefectuoso();
                 case url.endsWith('/apimock/inventarios') && method === 'POST':
                     return crearInventario();
                 case url.endsWith('/apimock/inventarios') && method === 'GET':
@@ -219,6 +221,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }else{
             return error("No se a podido crear el producto");
           }
+        }
+        /* PRODUCTO DEFECTUOSO */
+        function productoDefectuoso(){
+          let productoDefectuoso = body;
+
+          if (productoDefectuoso.defectuoso == 1) {
+            return ok({id: productoDefectuoso.id});
+          }else {
+            return error("error al agregar un producto defectuoso")
+          }
+
         }
         /* LISTADO DE COMPROBANTE INGRESO */
         function listarComprobantes() {

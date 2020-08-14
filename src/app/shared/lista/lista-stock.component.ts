@@ -36,4 +36,8 @@ export class ListaStockComponent implements OnInit {
     this.cambioDePagina.emit(pagina);
   }
 
+  guardarProductoDefectuoso(producto: object) {
+    this.productoSeleccionado.emit(producto);
+  }
+
 }

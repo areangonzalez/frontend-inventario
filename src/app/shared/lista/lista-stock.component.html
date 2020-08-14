@@ -6,7 +6,7 @@
         <th scope="col">Producto</th>
         <th scope="col" class="text-center">Categoría</th>
         <th scope="col" class="text-center">Vencimiento</th>
-        <th *ngIf="(tipoTabla == 'seleccionar_producto')" scope="col" class="text-center">Acción</th>
+        <th scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
     <tbody *ngIf="(listadoStock.length === 0)">
@@ -19,8 +19,9 @@
         <td>{{producto.producto}}</td>
         <td class="text-center">{{producto.categoria}}</td>
         <td class="ancho-celda-vencimiento text-center">{{producto.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
-        <th *ngIf="(tipoTabla == 'seleccionar_producto')" scope="col" class="text-center">
-          <agregar-cantidad-producto-modal [cantidadMaxima]="producto.cantidad" (obtenerCantidad)="nuevaCantidad($event, producto)"></agregar-cantidad-producto-modal>
+        <th scope="col" class="text-center">
+          <agregar-producto-defectuoso-modal *ngIf="(tipoTabla == 'stock')" [cantidadProductoMaximo]="producto.cantidad" [producto]="producto" (actualizarProductoDefectuoso)="guardarProductoDefectuoso($event)" ></agregar-producto-defectuoso-modal>
+          <agregar-cantidad-producto-modal *ngIf="(tipoTabla == 'seleccionar_producto')" [cantidadMaxima]="producto.cantidad" (obtenerCantidad)="nuevaCantidad($event, producto)"></agregar-cantidad-producto-modal>
         </th>
       </tr>
     </tbody>

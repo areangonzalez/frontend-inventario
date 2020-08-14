@@ -61,4 +61,14 @@ export class StockComponent implements OnInit {
   limpiarCampos(e: boolean) {
     this.buscar({}, 1);
   }
+
+  guardarProductoDefectuoso(defectuoso:object) {
+    this._inventarioService.defectuoso(defectuoso).subscribe(
+      respuesta => {
+        this._mensaje.exitoso("El producto a sido guardado correctamente!!");
+        // si la respuesta da ok actualizo el listado conlos criterios de busquedas ya otorgados.
+        this.buscar(this.filtradoBusqueda, this.configPaginacion.page);
+      }, error => { this._mensaje.cancelado(error); }
+    );
+  }
 }

@@ -21,6 +21,10 @@ export class InventarioService {
     return this._http.get('/inventarios', httpParams);
   }
 
+  defectuoso(params: Object) {
+    return this._http.post('/inventarios/set-defectuoso', params);
+  }
+
   resolve() {
     return this._http.get('/inventarios');
   }

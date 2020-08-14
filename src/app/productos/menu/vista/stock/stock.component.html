@@ -3,5 +3,5 @@
   <ba-stock [categoriaLista]="listadoCategoria" [medidadLista]="listadoUnidadMedida" [marcaLista]="listadoMarcas" (limpiar)="limpiarCampos($event)" (obtenerBusqueda)="buscar($event, configPaginacion.page)" ></ba-stock>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <shared-lista-stock [listadoStock]="listadoStock" [configPaginacion]="configPaginacion" [tipoTabla]="'stock'" ></shared-lista-stock>
+  <shared-lista-stock [listadoStock]="listadoStock" [configPaginacion]="configPaginacion" [tipoTabla]="'stock'" (productoSeleccionado)="guardarProductoDefectuoso($event)" ></shared-lista-stock>
 </div>
