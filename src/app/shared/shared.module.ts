@@ -5,13 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaStockComponent, ListaProductoComponent, ListaActaComponent } from './lista';
 import { AlertComponent } from './alert/alert.component';
 import { ComprobanteComponent, ProductoComponent, EgresoComponent } from './formulario';
-import { ComprobanteModalContent, ComprobanteModalComponent, ConfirmarBorradoProductoModalComponent, ConfirmarBorradoProductoModalContent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, CrearActaModalContent, CrearActaComponent, ArmarListadoActaModalContent, ArmarListadoActaModalComponent, AgregarCantidadProductoComponent, AgregarCantidadMaximaModalContent, ConfirmarArmadoModalContent, VistaActaModalContent, VistaActaModalComponent } from './modal';
+import { ComprobanteModalContent, ComprobanteModalComponent, ConfirmarBorradoProductoModalComponent, ConfirmarBorradoProductoModalContent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, CrearActaModalContent, CrearActaComponent, ArmarListadoActaModalContent, ArmarListadoActaModalComponent, AgregarCantidadProductoComponent, AgregarCantidadMaximaModalContent, ConfirmarArmadoModalContent, VistaActaModalContent, VistaActaModalComponent, ProductoDefectuosoModalContent, ProductoDefectuosoModalComponent } from './modal';
 import { AutocompletarComponent } from './autocompletar/autocompletar.component';
 import { FocusOnShowDirective } from './directive/focus-on-show.directive';
 
 
 @NgModule({
-  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective, ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, EgresoComponent, CrearActaModalContent, CrearActaComponent, ArmarListadoActaModalContent, ArmarListadoActaModalComponent, ListaActaComponent, AgregarCantidadMaximaModalContent, AgregarCantidadProductoComponent, ConfirmarArmadoModalContent, VistaActaModalContent, VistaActaModalComponent ],
+  declarations: [ ListaStockComponent, AlertComponent, ComprobanteComponent, ProductoComponent, ListaProductoComponent, ComprobanteModalContent, ComprobanteModalComponent, AutocompletarComponent, FocusOnShowDirective, ConfirmarBorradoProductoModalContent, ConfirmarBorradoProductoModalComponent, VistaComprobanteModalComponent, VistaComprobanteModalContent, FaltaProductoModalComponent, FaltaProductoModalContent, DevuelveProductoModalContent, DevuelveProductoModalComponent, EgresoComponent, CrearActaModalContent, CrearActaComponent, ArmarListadoActaModalContent, ArmarListadoActaModalComponent, ListaActaComponent, AgregarCantidadMaximaModalContent, AgregarCantidadProductoComponent, ConfirmarArmadoModalContent, VistaActaModalContent, VistaActaModalComponent, ProductoDefectuosoModalContent, ProductoDefectuosoModalComponent ],
   imports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
@@ -34,7 +34,8 @@ import { FocusOnShowDirective } from './directive/focus-on-show.directive';
     ArmarListadoActaModalContent, ArmarListadoActaModalComponent,
     AgregarCantidadMaximaModalContent, AgregarCantidadProductoComponent,
     ConfirmarArmadoModalContent,
-    VistaActaModalContent, VistaActaModalComponent
+    VistaActaModalContent, VistaActaModalComponent,
+    ProductoDefectuosoModalContent, ProductoDefectuosoModalComponent
   ]
 })
 export class SharedModule { }

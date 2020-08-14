@@ -7,3 +7,4 @@ export * from './crear-acta.component';
 export * from './armar-listado-acta-modal.component';
 export * from './agregar-cantidad-producto.component';
 export * from './vista-acta-modal.component';
+export * from './producto-defectuoso-modal.component';
