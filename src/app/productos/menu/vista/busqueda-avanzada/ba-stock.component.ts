@@ -118,14 +118,13 @@ export class BaStockComponent implements OnInit {
     return this.mostrar = !this.mostrar;
   }
   /**
-   * Valido si los valores ingresados al input son numeros,
-   * si no borro los valores ingresados
-   * @param datos objeto que contiene el valor del input
+   * se valida si unidad es un numero decimal
+   * @param numero numero a validar
    */
-  validarNumero(datos: any){
-    if (!this._util.validarNumero(datos.value)) {
-      datos.value = datos.value.substring(0,datos.value.length - 1);
-      this.busquedaAvanzada.get("unidad").patchValue(datos.value);
+  validarUnidad(numero: any) {
+    if (!this._util.validarNumeroDecimal(numero.value)) {
+      numero.value = numero.value.substring(0, numero.value.length -1);
+      this.busquedaAvanzada.get("unidad").patchValue(numero.value);
     }
   }
 

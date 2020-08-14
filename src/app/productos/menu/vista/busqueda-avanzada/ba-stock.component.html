@@ -34,7 +34,7 @@
           <div class="form-group col-md-4">
             <label for="unidad_medida" class="prioridad">Unidad de medida:</label>
             <div class="input-group">
-              <input type="text" class="form-control" (keyup)="validarNumero($event.target)" placeholder="500" formControlName="unidad" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('unidad').value)}">
+              <input type="text" class="form-control" (keyup)="validarUnidad($event.target)" placeholder="500" formControlName="unidad" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('unidad').value)}">
               <select class="form-control" id="unidad_medida" formControlName="medidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('medidadid').value)}" >
                 <option value="">Seleccione Medida</option>
                 <option *ngFor="let medida of medidadLista" value="{{medida.id}}">{{medida.simbolo}} ({{medida.nombre}})</option>
