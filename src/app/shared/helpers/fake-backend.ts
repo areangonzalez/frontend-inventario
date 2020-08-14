@@ -226,7 +226,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function productoDefectuoso(){
           let productoDefectuoso = body;
 
-          if (productoDefectuoso.defectuoso == 1) {
+          if (productoDefectuoso.defectuoso == true) {
             return ok({id: productoDefectuoso.id});
           }else {
             return error("error al agregar un producto defectuoso")

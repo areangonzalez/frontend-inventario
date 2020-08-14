@@ -10,11 +10,13 @@
       </tr>
     </thead>
     <tbody *ngIf="(listadoStock.length === 0)">
-      <th class="text-center " *ngIf="(tipoTabla == 'seleccionar_producto')" colspan="5" rowspan="1" ><strong>NO SE HAN ENCONTRADO RESULTADO</strong></th>
-      <th class="text-center " *ngIf="(tipoTabla == 'stock')" colspan="4" rowspan="1" ><strong>NO SE HAN ENCONTRADO RESULTADO</strong></th>
+      <th class="text-center " colspan="5" rowspan="1" ><strong>NO SE HAN ENCONTRADO RESULTADO</strong></th>
     </tbody>
     <tbody *ngIf="(listadoStock.length > 0)">
-      <tr *ngFor="let producto of listadoStock">
+      <tr *ngFor="let producto of listadoStock" [ngClass]="{
+        'table-danger': (producto.vencido && tipoTabla === 'stock'),
+        'table-secondary': (producto.defectuoso && tipoTabla === 'stock')
+      }">
         <td class="ancho-celda-minimo text-center">{{producto.cantidad}}</td>
         <td>{{producto.producto}}</td>
         <td class="text-center">{{producto.categoria}}</td>

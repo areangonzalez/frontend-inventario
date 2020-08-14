@@ -77,7 +77,7 @@ export class ProductoDefectuosoModalContent {
       }else {
         let productoDuplicado =  Object.assign({}, this.producto);
         productoDuplicado['cantidad'] = this.form.get('cantidad').value;
-        productoDuplicado['defectuoso'] = 1;
+        productoDuplicado['defectuoso'] = true;
         // envio producto
         this._ativeModal.close(productoDuplicado);
       }
