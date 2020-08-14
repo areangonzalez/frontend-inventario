@@ -184,4 +184,11 @@ export class ProductoComponent implements OnInit {
     }
   }
 
+  validarUnidad(numero: any) {
+    if (!this._util.validarNumeroDecimal(numero.value)) {
+      numero.value = numero.value.substring(0, numero.value.length -1);
+      this.productoForm.get("unidad").patchValue(numero.value);
+    }
+  }
+
 }

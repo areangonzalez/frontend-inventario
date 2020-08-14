@@ -74,5 +74,14 @@ export class UtilService {
       }
     }
   }
+  /**
+   * se valida si el numero ingresado tiene un punto para separar
+   * sus decimales
+   * @param numero numero que se testearar para su validacion
+   */
+  public validarNumeroDecimal(numero:any):boolean {
+    const pattern = /^\d*(\.\d{0,2})?$/;
+    return pattern.test(numero);
+  }
 
 }

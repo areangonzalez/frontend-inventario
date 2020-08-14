@@ -57,7 +57,7 @@
       <div class="form-group">
         <label for="unidad_medida">Unidad de Medida (<b class="text-danger">*</b>):</label>
         <div class="input-group">
-          <input type="text" class="form-control" id="unidad" formControlName="unidad_valor" placeholder="Ej.: 500" [ngClass]="{'is-invalid': (productoForm.get('unidad_valor').invalid && submitted)}">
+          <input type="text" class="form-control" id="unidad" formControlName="unidad_valor" placeholder="Ej.: 500" (keyup)="validarUnidad($event.target)" [ngClass]="{'is-invalid': (productoForm.get('unidad_valor').invalid && submitted)}">
           <select class="form-control" id="medida" formControlName="unidad_medidaid" [ngClass]="{'is-invalid': (productoForm.get('unidad_medidaid').invalid && submitted)}">
             <option value="">Medida</option>
             <option *ngFor="let medida of listadoDeUnidadMedida" value="{{medida.id}}">{{medida.simbolo}}</option>
