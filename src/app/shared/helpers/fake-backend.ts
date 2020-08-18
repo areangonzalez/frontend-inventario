@@ -149,15 +149,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let inventario = { pagesize: pageSize, pages: 1, total_filtrado: 2, cantidad_vencidos: 4, cantidad_faltantes: 3,
             cantidad_defectuosos: 3, cantidad_stock: 5,
             resultado: [
-              { productoid:7, cantidad: 3000, producto: 'Papel hig. Hoja simple, 320 ml', categoria: 'Limpieza', fecha_vencimiento: '2025-06-25' },
-              { productoid:5, cantidad: 1000, producto: 'Alcohol, 250 cc', categoria: 'Limpieza', fecha_vencimiento: '2022-03-20' },
-              { productoid:6, cantidad: 2500, producto: 'jabón blanco en pan, 200 gr', categoria: 'Limpieza', fecha_vencimiento: '2021-03-20' },
-              { productoid:2, cantidad: 3500, producto: 'Azucar blanca, 1 kg', categoria: 'Alimentos / Bebidas', fecha_vencimiento: '2020-12-12' },
-              { productoid:3, cantidad: 4000, producto: 'Fideos secos guiseros, 500 gr', categoria: 'Alimentos / Bebidas', fecha_vencimiento: '2020-08-12' },
-              { productoid:1, cantidad: 2000, producto: 'Aceite de girasol, 900 ml', categoria: 'Alimentos / Bebidas', fecha_vencimiento: '2020-07-23' },
-              { productoid:4, cantidad: 6000, producto: 'Leche entera, 1 lt', categoria: 'Alimentos / Bebidas', fecha_vencimiento: '2020-06-13' },
+              { productoid:7, cantidad: 3000, producto: 'Papel hig. Hoja simple, 320 ml', categoria: 'Limpieza', vencido: false, fecha_vencimiento: '2025-06-25' },
+              { productoid:5, cantidad: 1000, producto: 'Alcohol, 250 cc', categoria: 'Limpieza', vencido: false, fecha_vencimiento: '2022-03-20' },
+              { productoid:6, cantidad: 2500, producto: 'jabón blanco en pan, 200 gr', categoria: 'Limpieza', vencido: false, fecha_vencimiento: '2021-03-20' },
+              { productoid:2, cantidad: 3500, producto: 'Azucar blanca, 1 kg', categoria: 'Alimentos / Bebidas', vencido: false, fecha_vencimiento: '2020-12-12' },
+              { productoid:3, cantidad: 4000, producto: 'Fideos secos guiseros, 500 gr', categoria: 'Alimentos / Bebidas', vencido: false, fecha_vencimiento: '2020-09-12', por_vencer: true },
+              { productoid:1, cantidad: 2000, producto: 'Aceite de girasol, 900 ml', categoria: 'Alimentos / Bebidas', fecha_vencimiento: '2020-07-23', vencido: true },
+              { productoid:4, cantidad: 6000, producto: 'Leche entera, 1 lt', categoria: 'Alimentos / Bebidas', fecha_vencimiento: '2020-06-13', vencido: true },
             ]
           };
+
+          let productosSinVencer = inventario.resultado.filter(p => { return p.vencido !== true });
+          inventario.resultado = productosSinVencer;
 
           let listado = paginar(inventario, inventario.resultado, page, pageSize)
 
