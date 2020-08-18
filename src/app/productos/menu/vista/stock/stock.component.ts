@@ -43,16 +43,17 @@ export class StockComponent implements OnInit {
    * @param pagina numero de pagina
    */
   cambiarPagina(pagina:any) {
-    this.buscar(this.filtradoBusqueda, pagina);
+    this.buscar(this.filtradoBusqueda, pagina, this.sort);
   }
   /**
    * Configurar busqueda avanzada para mostrar listado
    * @param params [object] parametros que se filtraran en la busqueda
    * @param page [number] Es el numero de pagina menos 1
    */
-  buscar(params:any, page:number) {
-    Object.assign(params, {page: page-1});
+  buscar(params:any, page:number, sort: string) {
+    Object.assign(params, {page: page-1, sort: sort});
     this.filtradoBusqueda = params;
+    console.log(params);
     this._inventarioService.buscar(params).subscribe(
       respuesta => {
         this.prepararListadoStock(respuesta, page);
@@ -60,7 +61,8 @@ export class StockComponent implements OnInit {
   }
 
   limpiarCampos(e: boolean) {
-    this.buscar({}, 1);
+    this.sort = '-fecha_vencimiento'
+    this.buscar({}, 1, '-fecha_vencimiento');
   }
 
   guardarProductoDefectuoso(defectuoso:object) {
@@ -68,14 +70,14 @@ export class StockComponent implements OnInit {
       respuesta => {
         this._mensaje.exitoso("El producto a sido guardado correctamente!!");
         // si la respuesta da ok actualizo el listado conlos criterios de busquedas ya otorgados.
-        this.buscar(this.filtradoBusqueda, this.configPaginacion.page);
+        this.buscar(this.filtradoBusqueda, this.configPaginacion.page, this.sort);
       }, error => { this._mensaje.cancelado(error); }
     );
   }
 
   ordenarTabla(ordenar:string) {
-    Object.assign(this.filtradoBusqueda, {sort: ordenar});
-    this.buscar(this.filtradoBusqueda, this.configPaginacion.page);
+    this.sort = ordenar;
+    this.buscar(this.filtradoBusqueda, this.configPaginacion.page, this.sort);
   }
 
 }

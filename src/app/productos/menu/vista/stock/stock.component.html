@@ -1,6 +1,6 @@
 <h2>Listado de Stock</h2>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <ba-stock [categoriaLista]="listadoCategoria" [medidadLista]="listadoUnidadMedida" [marcaLista]="listadoMarcas" (limpiar)="limpiarCampos($event)" (obtenerBusqueda)="buscar($event, configPaginacion.page)" ></ba-stock>
+  <ba-stock [categoriaLista]="listadoCategoria" [medidadLista]="listadoUnidadMedida" [marcaLista]="listadoMarcas" (limpiar)="limpiarCampos($event)" (obtenerBusqueda)="buscar($event, configPaginacion.page, sort)" ></ba-stock>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
   <shared-lista-stock [listadoStock]="listadoStock" [configPaginacion]="configPaginacion" [tipoTabla]="'stock'" (cambioDePagina)="cambiarPagina($event)" (productoSeleccionado)="guardarProductoDefectuoso($event)" [sort]="sort" (ordenarTabla)="ordenarTabla($event)" ></shared-lista-stock>
