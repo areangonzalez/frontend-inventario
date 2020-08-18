@@ -9,8 +9,11 @@ export class ListaStockComponent implements OnInit {
   @Input("listadoStock") public listadoStock: any;
   @Input("tipoTabla") public tipoTabla: string;
   @Input("configPaginacion") public configPaginacion:any;
+  @Input("sort") public sort: string;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   @Output("productoSeleccionado") public productoSeleccionado = new EventEmitter();
+  @Output("ordenarTabla") public ordenarTabla = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -38,6 +41,25 @@ export class ListaStockComponent implements OnInit {
 
   guardarProductoDefectuoso(producto: object) {
     this.productoSeleccionado.emit(producto);
+  }
+
+  ordernar(tituloTabla:string) {
+    switch (tituloTabla) {
+      case 'cantidad':
+          this.sort = (this.sort == 'cantidad') ? '-cantidad' : 'cantidad';
+        break;
+      case 'producto':
+        this.sort = (this.sort == 'producto') ? '-producto' : 'producto';
+        break;
+      case 'categoriaid':
+        this.sort = (this.sort == 'categoriaid') ? '-categoriaid' : 'categoriaid';
+        break;
+      case 'fecha_vencimiento':
+        this.sort = (this.sort == 'fecha_vencimiento') ? '-fecha_vencimiento' : 'fecha_vencimiento';
+        break;
+    }
+    this.ordenarTabla.emit(this.sort);
+
   }
 
 }

@@ -16,6 +16,7 @@ export class StockComponent implements OnInit {
   public listadoCategoria: any = [];
   public listadoMarcas: any = [];
   public listadoUnidadMedida: any = [];
+  public sort: string = '-fecha_vencimiento';
 
 
   constructor( private _mensaje: AlertService, private _route: ActivatedRoute, private _configurarPaginacion: ConfiguracionParaPaginarService, private _inventarioService: InventarioService ) { }
@@ -71,4 +72,10 @@ export class StockComponent implements OnInit {
       }, error => { this._mensaje.cancelado(error); }
     );
   }
+
+  ordenarTabla(ordenar:string) {
+    Object.assign(this.filtradoBusqueda, {sort: ordenar});
+    this.buscar(this.filtradoBusqueda, this.configPaginacion.page);
+  }
+
 }

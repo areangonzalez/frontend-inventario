@@ -2,10 +2,18 @@
   <table class="table table-bordered table-hover table-sm">
     <thead>
       <tr>
-        <th class="ancho-celda-minimo text-center">Cantidad</th>
-        <th scope="col">Producto</th>
-        <th scope="col" class="text-center">Categoría</th>
-        <th scope="col" class="text-center">Vencimiento</th>
+        <th class="ancho-celda-minimo text-center pointer" (click)="ordernar('cantidad')">
+          <i *ngIf="(sort !== 'cantidad' && sort !== '-cantidad')" class="fas fa-sort"></i><i *ngIf="(sort == 'cantidad')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-cantidad')" class="fas fa-sort-down"></i> Cantidad
+        </th>
+        <th scope="col" class="pointer" (click)="ordernar('producto')">
+          <i *ngIf="(sort !== 'producto' && sort !== '-producto')" class="fas fa-sort"></i><i *ngIf="(sort == 'producto')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-producto')" class="fas fa-sort-down"></i> Producto
+        </th>
+        <th scope="col" class="text-center pointer" (click)="ordernar('categoriaid')">
+          <i *ngIf="(sort !== 'categoriaid' && sort !== '-categoriaid')" class="fas fa-sort"></i><i *ngIf="(sort == 'categoriaid')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-categoriaid')" class="fas fa-sort-down"></i> Categoría
+        </th>
+        <th scope="col" class="text-center pointer" (click)="ordernar('fecha_vencimiento')">
+          <i *ngIf="(sort !== 'fecha_vencimiento' && sort !== '-fecha_vencimiento')" class="fas fa-sort"></i><i *ngIf="(sort == 'fecha_vencimiento')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-fecha_vencimiento')" class="fas fa-sort-down"></i> Vencimiento
+        </th>
         <th scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
