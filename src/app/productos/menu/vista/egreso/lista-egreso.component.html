@@ -2,10 +2,16 @@
   <table class="table table-bordered table-hover table-sm">
     <thead>
       <tr>
-        <th scope="col" class="text-center">Fecha</th>
-        <th scope="col" class="text-center">Acta</th>
+        <th scope="col" class="text-center pointer" (click)="ordenar('fecha')">
+          <i *ngIf="(sort !== 'fecha' && sort !== '-fecha')" class="fas fa-sort"></i><i *ngIf="(sort == 'fecha')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-fecha')" class="fas fa-sort-down"></i> Fecha
+        </th>
+        <th scope="col" class="text-center pointer" (click)="ordenar('nro_acta')">
+          <i *ngIf="(sort !== 'nro_acta' && sort !== '-nro_acta')" class="fas fa-sort"></i><i *ngIf="(sort == 'nro_acta')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-nro_acta')" class="fas fa-sort-down"></i> Acta
+        </th>
+        <th scope="col" colspan="2" class="text-center pointer" (click)="ordenar('destino_nombre')" >
+          <i *ngIf="(sort !== 'destino_nombre' && sort !== '-destino_nombre')" class="fas fa-sort"></i><i *ngIf="(sort == 'destino_nombre')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-destino_nombre')" class="fas fa-sort-down"></i> Destino
+        </th>
         <th scope="col" class="text-center">Cant. de Productos</th>
-        <th scope="col" colspan="2" class="text-center">Destino</th>
         <th scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
@@ -13,8 +19,8 @@
       <tr *ngFor="let acta of listaEgreso">
         <td class="ancho-celda-vencimiento text-center">{{acta.fecha | date: 'dd/MM/yyyy'}}</td>
         <td class="text-center">{{acta.nro_acta}}</td>
-        <td class="text-center">{{acta.producto_cant_total}}</td>
         <td colspan="2" class="text-center">{{acta.destino_nombre}} ({{acta.destino_localidad}})</td>
+        <td class="text-center">{{acta.producto_cant_total}}</td>
         <th scope="col" class="text-center">
           <abrir-vista-acta-modal [idActa]="acta.id"></abrir-vista-acta-modal>
         </th>

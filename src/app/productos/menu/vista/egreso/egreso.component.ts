@@ -16,6 +16,7 @@ export class EgresoComponent implements OnInit {
   public listadoTipoEgreso: any;
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
+  public sort: string = '-nro_acta';
 
   constructor(
     private _route: ActivatedRoute, private _configurarPaginacion: ConfiguracionParaPaginarService,
@@ -44,15 +45,15 @@ export class EgresoComponent implements OnInit {
    * @param pagina numero de pagina
    */
   cambiarPagina(pagina:any) {
-    this.buscar(this.filtradoBusqueda, pagina);
+    this.buscar(this.filtradoBusqueda, pagina, this.sort);
   }
   /**
    * Configurar busqueda avanzada para mostrar listado
    * @param params [object] parametros que se filtraran en la busqueda
    * @param page [number] Es el numero de pagina menos 1
    */
-  buscar(params:any, page:number) {
-    Object.assign(params, {page: page-1});
+  buscar(params:any, page:number, sort: string) {
+    Object.assign(params, {page: page-1, sort: sort});
     console.log(params);
     this.filtradoBusqueda = params;
     this._egresoService.buscar(params).subscribe(
@@ -62,7 +63,14 @@ export class EgresoComponent implements OnInit {
   }
 
   limpiarCampos(e: boolean) {
-    this.buscar({}, 1);
+    this.sort = '-nro_acta';
+    this.buscar({}, 1, this.sort);
+  }
+
+  ordenarTabla(ordenar: string) {
+    this.sort = ordenar;
+    this.buscar(this.filtradoBusqueda, this.configPaginacion.page, this.sort);
+
   }
 
 }

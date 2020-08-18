@@ -1,6 +1,6 @@
 <h2>Listado de Ingreso</h2>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <ba-ingreso [productos]="listadoProductos" [categorias]="listadoCategorias" [unidadMedida]="listadoUnidadMedida" [marcas]="listadoMarcas" (obtenerBusqueda)="buscar($event, configPaginacion.page)" (limpiar)="limpiarCampos($event)" ></ba-ingreso>
+  <ba-ingreso [productos]="listadoProductos" [categorias]="listadoCategorias" [unidadMedida]="listadoUnidadMedida" [marcas]="listadoMarcas" (obtenerBusqueda)="buscar($event, configPaginacion.page, sort)" (limpiar)="limpiarCampos($event)" ></ba-ingreso>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
   <producto-lista-ingreso [listadoIngreso]="listadoIngreso" [configPaginacion]="configPaginacion" [sort]="sort" (ordenarTabla)="ordenarTabla($event)" (cambioDePagina)="cambiarPagina($event)" ></producto-lista-ingreso>
