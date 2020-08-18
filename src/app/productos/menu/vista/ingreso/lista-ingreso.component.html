@@ -2,8 +2,12 @@
   <table class="table table-bordered table-hover table-sm">
     <thead>
       <tr>
-        <th scope="col" class="text-center">N° Remito</th>
-        <th scope="col" class="text-center">Fecha</th>
+        <th scope="col" class="text-center pointer" (click)="ordenar('nro_remito')">
+          <i *ngIf="(sort !== 'nro_remito' && sort !== '-nro_remito')" class="fas fa-sort"></i><i *ngIf="(sort == 'nro_remito')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-nro_remito')" class="fas fa-sort-down"></i> N° Remito
+        </th>
+        <th scope="col" class="text-center pointer" (click)="ordenar('fecha_emision')">
+          <i *ngIf="(sort !== 'fecha_emision' && sort !== '-fecha_emision')" class="fas fa-sort"></i><i *ngIf="(sort == 'fecha_emision')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-fecha_emision')" class="fas fa-sort-down"></i> Fecha
+        </th>
         <th scope="col" class="text-center">Cantidad de Productos</th>
         <th scope="col" class="text-center">Acción</th>
       </tr>

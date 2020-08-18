@@ -17,6 +17,7 @@ export class IngresoComponent implements OnInit {
   public listadoIngreso: any; // listado de los comrpobantes de ingreso
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
+  public sort: string = '-nro_remito';
 
   constructor(
     private _route: ActivatedRoute,
@@ -44,7 +45,7 @@ export class IngresoComponent implements OnInit {
    * @param pagina numero de pagina
    */
   cambiarPagina(pagina:any) {
-    this.buscar(this.filtradoBusqueda, pagina);
+    this.buscar(this.filtradoBusqueda, pagina, this.sort);
   }
 
   /**
@@ -52,8 +53,8 @@ export class IngresoComponent implements OnInit {
    * @param params [object] parametros que se filtraran en la busqueda
    * @param page [number] Es el numero de pagina menos 1
    */
-  buscar(params:any, page:number) {
-    Object.assign(params, {page: page-1});
+  buscar(params:any, page:number, sort: string) {
+    Object.assign(params, {page: page-1, sort: sort});
     this.filtradoBusqueda = params;
     this._comprobanteService.buscar(params).subscribe(
       respuesta => {
@@ -62,7 +63,13 @@ export class IngresoComponent implements OnInit {
   }
 
   limpiarCampos(e: boolean) {
-    this.buscar({}, 1);
+    this.sort = '-nro_remito';
+    this.buscar({}, 1, this.sort);
+  }
+
+  ordenarTabla(ordenar:string) {
+    this.sort = ordenar;
+    this.buscar(this.filtradoBusqueda, this.configPaginacion.page, this.sort);
   }
 
 }
