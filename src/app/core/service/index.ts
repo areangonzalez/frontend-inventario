@@ -14,3 +14,5 @@ export * from './egreso.service';
 export * from './localidad.service';
 export * from './tipo-egreso.service';
 export * from './inventario-acta.service';
+export * from './jwt.service';
+export * from './autenticacion.service';
