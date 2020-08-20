@@ -11,7 +11,9 @@ import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
 import {
-  SharedModule, LoaderComponent, CabeceraComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
+  SharedModule,
+  AppLayoutComponent,
+  LoaderComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
   BreadcrumbComponent,
   fakeBackendProvider,
   ErrorInterceptor
@@ -24,8 +26,8 @@ registerLocaleData(es);
 @NgModule({
   declarations: [
     AppComponent,
+    AppLayoutComponent,
     LoaderComponent,
-    CabeceraComponent,
     BreadcrumbComponent
   ],
   imports: [
