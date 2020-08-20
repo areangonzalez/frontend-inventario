@@ -93,6 +93,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function handleRoute() {
             switch (true) {
+                case url.endsWith('/apimock/usuarios/login') && method === 'POST':
+                  return login();
                 case url.endsWith('/apimock/inventarios/set-defectuoso') && method === 'POST':
                     return productoDefectuoso();
                 case url.endsWith('/apimock/inventarios') && method === 'POST':
@@ -130,8 +132,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return next.handle(request);
             }
         }
-
         // route functions
+        /* LOGIN USUSARIO */
+        function login() {
+          let datos = body;
+          if ( datos.username === 'admin' && datos.password_hash === 'admins' ) {
+            let respuesta = {
+              username: 'Admin', access_token: 'fake-jwt-token'
+            };
+
+            return ok(respuesta);
+          }else{
+            return error("datos mal ingresado");
+          }
+        }
+
         /* LISTADO PRODUCTOS */
         function listarProductos() {
           if (listadoProductos) {

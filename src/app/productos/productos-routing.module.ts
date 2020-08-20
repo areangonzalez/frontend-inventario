@@ -5,6 +5,7 @@ import { StockComponent } from './menu/vista/stock/stock.component';
 import { IngresoComponent } from './menu/vista/ingreso/ingreso.component';
 import { EgresoComponent } from './menu/vista/egreso/egreso.component';
 import { ProductoService, CategoriaService, UnidadMedidaService, MarcaService, EgresoService, ComprobanteService, InventarioService, LocalidadService, TipoEgresoService, InventarioActaService } from '../core/service';
+import { AuthGuard } from '../core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,11 +15,13 @@ const routes: Routes = [
     children: [
       {
         path: 'stock', component: StockComponent,
+        canActivate: [AuthGuard],
         data: { loading: true, breadcrumb: 'Stock' },
         resolve: { inventario: InventarioService, categorias: CategoriaService, unidadMedida: UnidadMedidaService, marcas: MarcaService }
       },
       {
         path: 'ingreso', component: IngresoComponent,
+        canActivate: [AuthGuard],
         data: { loading: true, breadcrumb: 'Ingreso' },
         resolve: {
           ingreso: ComprobanteService, productos: ProductoService, categorias: CategoriaService,
@@ -27,6 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'egreso', component: EgresoComponent,
+        canActivate: [AuthGuard],
         data: { loading: true, breadcrumb: 'Egreso' },
         resolve: { egresos: EgresoService, inventario: InventarioActaService, localidad: LocalidadService, tipoEgreso: TipoEgresoService }
       },
@@ -40,6 +44,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  providers: [ComprobanteService, ProductoService, CategoriaService, UnidadMedidaService, MarcaService, EgresoService, InventarioService, LocalidadService, TipoEgresoService, InventarioActaService]
+  providers: [AuthGuard, ComprobanteService, ProductoService, CategoriaService, UnidadMedidaService, MarcaService, EgresoService, InventarioService, LocalidadService, TipoEgresoService, InventarioActaService]
 })
 export class ProductosRoutingModule { }
