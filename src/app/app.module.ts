@@ -17,6 +17,7 @@ import {
   ErrorInterceptor
 } from "./shared";
 import { BreadcrumbsService } from './core/service';
+import { JwtInterceptor } from './shared/helpers/jwt-interceptors';
 
 registerLocaleData(es);
 
@@ -41,6 +42,7 @@ registerLocaleData(es);
     { provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter },
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     BreadcrumbsService,
 
     // fake backend

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -8,6 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'productos',
+    canActivate: [AuthGuard],
     data: { title: 'Productos', breadcrumb: 'Productos' },
     loadChildren: () => import('./productos/productos.module').then(m => m.ProductosModule)
   },
@@ -20,6 +22,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class RoutingModule { }
