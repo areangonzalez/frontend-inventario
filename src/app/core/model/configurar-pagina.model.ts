@@ -14,12 +14,21 @@ export class ConfigurarPagina implements IConfigurarPagina {
   public page: number;
   public cantRegistros: number;
   public totalRegistros: number;
+  public cantidad_vencidos: number;
+  public cantidad_faltantes: number;
+  public cantidad_defectuosos: number;
+  public cantidad_stock: number;
+
 
   constructor() {
-      this.colleccionSize = 0;
+    this.colleccionSize = 0;
     this.pageSize = 20;
     this.page = 1;
     this.cantRegistros = 0;
     this.totalRegistros = 0;
+    this.cantidad_vencidos = 0;
+    this.cantidad_faltantes = 0;
+    this.cantidad_defectuosos = 0;
+    this.cantidad_stock = 0;
     }
 }

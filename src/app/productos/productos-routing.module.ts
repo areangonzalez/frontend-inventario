@@ -16,13 +16,13 @@ const routes: Routes = [
       {
         path: 'stock', component: StockComponent,
         canActivate: [AuthGuard],
-        data: { loading: true, breadcrumb: 'Stock' },
+        data: { loading: true, breadcrumb: 'Stock', title: 'Stock' },
         resolve: { inventario: InventarioService, categorias: CategoriaService, unidadMedida: UnidadMedidaService, marcas: MarcaService }
       },
       {
         path: 'ingreso', component: IngresoComponent,
         canActivate: [AuthGuard],
-        data: { loading: true, breadcrumb: 'Ingreso' },
+        data: { loading: true, breadcrumb: 'Ingreso', title: 'Ingreso' },
         resolve: {
           ingreso: ComprobanteService, productos: ProductoService, categorias: CategoriaService,
           unidadMedida: UnidadMedidaService, marcas: MarcaService
@@ -31,7 +31,7 @@ const routes: Routes = [
       {
         path: 'egreso', component: EgresoComponent,
         canActivate: [AuthGuard],
-        data: { loading: true, breadcrumb: 'Egreso' },
+        data: { loading: true, breadcrumb: 'Egreso', title: 'Egreso' },
         resolve: { egresos: EgresoService, inventario: InventarioActaService, localidad: LocalidadService, tipoEgreso: TipoEgresoService }
       },
       { path: '**', redirectTo: 'stock', pathMatch: 'full' },

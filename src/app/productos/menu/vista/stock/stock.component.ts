@@ -36,6 +36,11 @@ export class StockComponent implements OnInit {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configurarPaginacion.config(listado, pagina);
 
+    this.configPaginacion.cantidad_vencidos = listado.cantidad_vencidos;
+    this.configPaginacion.cantidad_faltantes = listado.cantidad_faltantes;
+    this.configPaginacion.cantidad_defectuosos = listado.cantidad_defectuosos;
+    this.configPaginacion.cantidad_stock = listado.cantidad_stock;
+
     this.listadoStock = listado.resultado;
   }
   /**
