@@ -10,7 +10,7 @@ Nos dirigimos al directorio donde tenemos el proyecto y seguimos los siguientes 
 
  - Utilizamos el siguiente comando a instalar, que nos proporcionara la instalación de las dependencias del proyecto:
     
-    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:9.1.5 npm install`
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:9.1.5 npm ci`
 
  - Compilamos el codigo con el siguiente comando:
     
