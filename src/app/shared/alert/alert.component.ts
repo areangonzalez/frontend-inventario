@@ -29,6 +29,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.alertSubscription = this.alertService.getMessage()
             .subscribe((alert: Alert) => {
 
+              console.log(alert);
                 // clear alerts when an empty alert is received
                 if (!alert) {
                   this.mensaje = false;

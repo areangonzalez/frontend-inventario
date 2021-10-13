@@ -53,7 +53,7 @@ function getProductos(){
           existe = true;
         }
       }
-      if (!existe) {
+      if (!existe && productosStorage[i].id !== "") {
         listaProductos.push(productosStorage[i]);
       }
     }
@@ -220,21 +220,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let producto = body;
           let nuevoId = ultimoID(listadoProductos);
           let marca = getDatosListado(producto['marcaid'], listadoMarcas);
-          let unidadMedida = getDatosListado(producto['marcaid'], unidad_medida);
+          let unidadMedida = getDatosListado(producto['unidad_medidaid'], unidad_medida);
+
           let nombreProducto = producto['nombre'] + ', '+ producto['unidad_valor'] + unidadMedida['simbolo'] + ' (' + marca['nombre'] + ')';
 
-          listadoProductos.push({
-            id: nuevoId,
-            nombre: producto['nombre'],
-            unidad_valor: producto['unidad_valor'],
-            unidad_medidaid: producto['unidad_medidaid'],
-            marcaid: producto['marcaid'],
-            categoriaid: producto['categoriaid'],
-            producto: nombreProducto
-          });
+          if (nuevoId !== "") {
+            listadoProductos.push({
+              id: nuevoId,
+              nombre: producto['nombre'],
+              unidad_valor: producto['unidad_valor'],
+              unidad_medidaid: producto['unidad_medidaid'],
+              marcaid: producto['marcaid'],
+              categoriaid: producto['categoriaid'],
+              producto: nombreProducto
+            });
 
-          localStorage.setItem('productos', JSON.stringify(listadoProductos));
-          if (nuevoId) {
+            localStorage.setItem('productos', JSON.stringify(listadoProductos));
             return ok({id:nuevoId})
           }else{
             return error("No se a podido crear el producto");

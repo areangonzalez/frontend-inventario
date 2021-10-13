@@ -44,6 +44,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             }
             this._loaderService.hide();
+            console.log(err);
+
             const error = err.error.message || err.statusText;
             return throwError(error);
         }))
