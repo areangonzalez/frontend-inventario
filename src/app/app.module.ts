@@ -15,7 +15,7 @@ import {
   AppLayoutComponent,
   LoaderComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
   BreadcrumbComponent,
-  fakeBackendProvider,
+  // fakeBackendProvider,
   ErrorInterceptor
 } from "./shared";
 import { BreadcrumbsService } from './core/service';
@@ -48,7 +48,7 @@ registerLocaleData(es);
     BreadcrumbsService,
 
     // fake backend
-    fakeBackendProvider
+    // fakeBackendProvider
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

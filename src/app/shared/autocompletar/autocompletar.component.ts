@@ -22,20 +22,22 @@ export class AutocompletarComponent {
 
     search = (text$: Observable<string>) =>
     text$.pipe(
+
       debounceTime(200),
       map(term => term === '' ? []
-        : this.listado.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-    );
+      : this.listado.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+      );
 
-  formatter = (x: {nombre: string}) => x.nombre;
+      formatter = (x: {nombre: string}) => x.nombre;
 
-  /* existeValor() {
-    if (!this.model) {
-      this.model = '';
-    }
-  } */
+      /* existeValor() {
+        if (!this.model) {
+          this.model = '';
+        }
+      } */
 
-  /**
+      /**
+
    * Busca el nombre del item seleccionado y devuelve el objeto al componente padre
    * @param valor Item seleccionado por el auto completar
    */

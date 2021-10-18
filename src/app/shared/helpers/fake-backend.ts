@@ -5,13 +5,13 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 let productos = [
   { id: 1, nombre: 'Azucar blanca', unidad_valor: 1, unidad_medidaid: 4, marcaid: 4, categoriaid: 1, producto: 'Azucar blanca, 1lt (Chango)' },
-  { id: 8, nombre: 'Alcohol', unidad_valor: 250, unidad_medidaid: 1, marcaid: 8, categoriaid: 2, producto: 'Alcohol, 250 cm3 (Purocol)' },
   { id: 2, nombre: 'Fideos secos guiseros', unidad_valor: 500, unidad_medidaid: 3, marcaid: 3, categoriaid: 1, producto: 'Fideos secos guiseros, 500gr (Canale)' },
   { id: 3, nombre: 'Harina de trigo 000', unidad_valor: 500, unidad_medidaid: 3, marcaid: 1, categoriaid: 1, producto: 'Harina de trigo 000, 500gr (Cañuelas)' },
-  { id: 7, nombre: 'Jabón blanco en pan', unidad_valor: 200, unidad_medidaid: 3, marcaid: 9, categoriaid: 2, producto: 'Jabón blanco en pan, 200gr (Ala)' },
+  { id: 4, nombre: 'Mermelada de ciruela', unidad_valor: 454, unidad_medidaid: 3, marcaid: 1, categoriaid: 1, producto: 'Mermelada de ciruela, 454gr (Canale)' },
   { id: 5, nombre: 'Leche entera', unidad_valor: 1, unidad_medidaid: 2, marcaid: 5, categoriaid: 1, producto: 'Leche entera, 1lt (La Serenísima)' },
   { id: 6, nombre: 'Manteca', unidad_valor: 200, unidad_medidaid: 3, marcaid: 6, categoriaid: 1, producto: 'Manteca, 200gr (La Serenísima)' },
-  { id: 4, nombre: 'Mermelada de ciruela', unidad_valor: 454, unidad_medidaid: 3, marcaid: 1, categoriaid: 1, producto: 'Mermelada de ciruela, 454gr (Canale)' }
+  { id: 7, nombre: 'Jabón blanco en pan', unidad_valor: 200, unidad_medidaid: 3, marcaid: 9, categoriaid: 2, producto: 'Jabón blanco en pan, 200gr (Ala)' },
+  { id: 8, nombre: 'Alcohol', unidad_valor: 250, unidad_medidaid: 1, marcaid: 8, categoriaid: 2, producto: 'Alcohol, 250 cm3 (Purocol)' }
 ];
 let unidad_medida = [
   { id:1, nombre: 'Centimetros Cúbicos', simbolo: 'cm3' }, { id:2, nombre: 'Litro', simbolo: 'lt' },
@@ -41,25 +41,17 @@ let comprobante = {
           "producto": "Aceite de girasol, 900ml (Arcor)" }]};
 
 // Comprobar listado de productos
-function getProductos(){
+/* function getProductos(){
   let listaProductos = productos;
-  if(localStorage.getItem("productos")) {
+  let existe = true;
+
+  if(localStorage.getItem("productos") !== null) {
     let productosStorage: any[] = JSON.parse(localStorage.getItem("productos"));
-    for (let i = 0; i < productosStorage.length; i++) {
-      let existe = false;
-      for (let j = 0; j < listaProductos.length; j++) {
-        if (productosStorage[i].id === listaProductos[j].id){
-          listaProductos[j] = productosStorage[i]; // si se edito
-          existe = true;
-        }
-      }
-      if (!existe && productosStorage[i].id !== "") {
-        listaProductos.push(productosStorage[i]);
-      }
-    }
   }
+  console.log(listaProductos);
+
   return listaProductos;
-}
+} */
 /**
  * realizo una busqueda dentro de un listado para obtener sus datos
  * @param id identificador de la busqueda
@@ -82,7 +74,7 @@ function ultimoID(listado:any) {
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
-        const listadoProductos = getProductos();
+        /* const listadoProductos = getProductos(); */
 
         // wrap in delayed observable to simulate server api call
         return of(null)
@@ -146,16 +138,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return error("datos mal ingresado");
           }
         }
-
-        /* LISTADO PRODUCTOS */
-        function listarProductos() {
-          if (listadoProductos) {
-            return ok(listadoProductos);
-          }else {
-            return error("No se puede obtener listado de productos");
-
-          }
-        }
         /* LISTADO INVENTARIO */
         function listarInventario() {
           let page: number = parseInt(request.params.get("page"));
@@ -215,17 +197,37 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 id: 1,
             })
         }
+        /* LISTADO PRODUCTOS */
+        function listarProductos() {
+          let listadoProductos = productos;
+          let productosStorage = (localStorage.getItem("productos") !== null) ? JSON.parse(localStorage.getItem("productos")) : [];
+          if (productosStorage.lenght > 0){
+            listadoProductos.push(productosStorage);
+          }
+          if (listadoProductos) {
+            console.log(listadoProductos);
+
+            return ok(listadoProductos);
+          }else {
+            return error("No se puede obtener listado de productos");
+
+          }
+        }
         /* CREAR PRODUCTO */
         function crearProducto() {
           let producto = body;
-          let nuevoId = ultimoID(listadoProductos);
+          let listadoProductos = productos;
+          let productosStorage = (localStorage.getItem("productos") !== null) ? JSON.parse(localStorage.getItem("productos")) : [];
           let marca = getDatosListado(producto['marcaid'], listadoMarcas);
           let unidadMedida = getDatosListado(producto['unidad_medidaid'], unidad_medida);
-
           let nombreProducto = producto['nombre'] + ', '+ producto['unidad_valor'] + unidadMedida['simbolo'] + ' (' + marca['nombre'] + ')';
-
+          if (productosStorage.lenght > 0){
+            listadoProductos.push(productosStorage);
+          }
+          // nuevo id para el producto
+          let nuevoId = ultimoID(listadoProductos);
           if (nuevoId !== "") {
-            listadoProductos.push({
+            let nuevoProducto = {
               id: nuevoId,
               nombre: producto['nombre'],
               unidad_valor: producto['unidad_valor'],
@@ -233,9 +235,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               marcaid: producto['marcaid'],
               categoriaid: producto['categoriaid'],
               producto: nombreProducto
-            });
+            };
+            productosStorage.push(nuevoProducto);
 
-            localStorage.setItem('productos', JSON.stringify(listadoProductos));
+            localStorage.setItem('productos', JSON.stringify(productosStorage));
             return ok({id:nuevoId})
           }else{
             return error("No se a podido crear el producto");

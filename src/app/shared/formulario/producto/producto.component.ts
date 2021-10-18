@@ -160,7 +160,8 @@ export class ProductoComponent implements OnInit {
    */
   listarProducto() {
     this._productoService.listar().subscribe(
-      respuesta => {
+      respuesta => {console.log(respuesta);
+
         this.listadoDeProducto = respuesta;
       }, error => { this._mensajeService.cancelado(error.message); }
     )
