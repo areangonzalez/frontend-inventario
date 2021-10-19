@@ -55,7 +55,7 @@ export class AgregarCantidadMaximaModalContent {
    * validando que no sea mayor a la cantidad real ni menor a 0.
    */
   guardar() {
-    if (parseInt(this.cantidad) < parseInt(this.cantidadMaxima) && parseInt(this.cantidad) > 0) {
+    if (parseInt(this.cantidad) <= parseInt(this.cantidadMaxima) && parseInt(this.cantidad) > 0) {
       this._ativeModal.close(this.cantidad);
     }else {
       this.msgError = true;

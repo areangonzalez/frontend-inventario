@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService, AlertService, ConfiguracionParaPaginarService, InventarioService } from 'src/app/core/service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AbstractWebDriver } from 'protractor/built/browser';
 import { ConfigurarPagina } from 'src/app/core/model';
 
 /**
