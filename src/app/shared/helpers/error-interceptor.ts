@@ -17,7 +17,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       this._loaderService.show();
       this.service_count++;
-      console.log("sumo: ",this.service_count);
         return next.handle(request).pipe(
           catchError(err => {
             if (err.status === 401) {
@@ -39,11 +38,8 @@ export class ErrorInterceptor implements HttpInterceptor {
               return throwError(error);
             }
         }), finalize(() => {
-
-          // this._loaderService.hide();
-          console.log("resto: ",this.service_count);
-          if (this.service_count-- === 0){
-            console.log("entran: ",this.service_count);
+          this.service_count--;
+          if (this.service_count === 0){
             this._loaderService.hide();
           }
         }))
