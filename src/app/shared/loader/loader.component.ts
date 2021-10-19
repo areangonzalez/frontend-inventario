@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, of, timer } from 'rxjs';
-import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from "@angular/router";
+import { Router, ActivatedRoute, PRIMARY_OUTLET } from "@angular/router";
 import { debounce } from 'rxjs/operators';
 import { LoaderService } from 'src/app/core/service';
 import { LoaderState } from 'src/app/core/model/loader-sate.model';
@@ -25,8 +25,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
     ngOnInit() {
       const ROUTE_PARAM_LOADING: string = "loading";
       const ROUTE_DATA_LOADING: string = "loading";
-      // subscribe to the NavigationEnd event
-    //this._router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
       this._router.events.subscribe(event => {
       let currentRoute: ActivatedRoute = this._activateRoute.root;
       let childrenRoutes: ActivatedRoute[] = currentRoute.children;
