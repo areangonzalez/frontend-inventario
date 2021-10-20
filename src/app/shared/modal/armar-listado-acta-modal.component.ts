@@ -29,7 +29,7 @@ import { ConfigurarPagina } from 'src/app/core/model';
         <shared-lista-stock [listadoStock]="inventario" [configPaginacion]="configPaginacion" [tipoTabla]="'seleccionar_producto'" (productoSeleccionado)="obtenerProducto($event)" ></shared-lista-stock>
       </div>
       <div class="mt-2">
-        <shared-lista-acta [listadoActa]="listadoActa" [borrar]="true"></shared-lista-acta>
+        <shared-lista-acta [listadoActa]="listadoActa" [borrar]="true" (ActualizarInventario)="actualizarStock($event)" ></shared-lista-acta>
       </div>
     </div>
     <div class="modal-footer d-flex justify-content-between">
@@ -117,6 +117,12 @@ export class ArmarListadoActaModalContent implements OnInit {
   limpiarCampos() {
     this.buscar({global_param: ''}, 1);
   }
+
+  actualizarStock(confirmar: boolean) {
+    if (confirmar){
+      this.buscar({}, this.configPaginacion.page);
+    }
+  }
 }
 
 @Component({
@@ -129,7 +135,10 @@ export class ArmarListadoActaModalComponent {
   @Input("listaActa") public listaActa: any;
   @Output("obtenerListadoActa") public obtenerListadoActa = new EventEmitter();
 
-  constructor( private _modalService: NgbModal, private _mensaje: AlertService ) { }
+  constructor(_config: NgbModalConfig, private _modalService: NgbModal, private _mensaje: AlertService ) {
+    _config.backdrop = 'static';
+    _config.keyboard = false;
+  }
 
   open() {
     if (this.listaActa.length > 0) {

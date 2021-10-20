@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 /**
@@ -30,12 +30,12 @@ export class ConfirmarBorradoProductoModalContent {
   constructor( private _ativeModal: NgbActiveModal ) { }
 
   cerrarModal() {
-    this._ativeModal.close('close');
+    this._ativeModal.close(false);
   }
 
   confirmar(confirmacion:boolean) {
     this.listado.splice(this.id, 1);
-    this._ativeModal.close('close');
+    this._ativeModal.close(true);
   }
 }
 
@@ -48,6 +48,7 @@ export class ConfirmarBorradoProductoModalComponent {
   @Input("texto") public texto:string;
   @Input("listado") public listado:any;
   @Input("indexListado") public index: number;
+  @Output("borrarProducto") public borrarProducto = new EventEmitter();
 
   constructor( private _modalService: NgbModal ) { }
 
@@ -56,6 +57,12 @@ export class ConfirmarBorradoProductoModalComponent {
     modalRef.componentInstance.texto = this.texto;
     modalRef.componentInstance.listado = this.listado;
     modalRef.componentInstance.id = this.index;
+    modalRef.result.then(
+      (result) => {
+        if (result !== false) {
+          return this.borrarProducto.emit(result);
+        }
+      });
   }
 
 }

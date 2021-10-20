@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'shared-lista-acta',
@@ -8,10 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ListaActaComponent implements OnInit {
   @Input("borrar") public borrar:boolean;
   @Input("listadoActa") public listadoActa:any;
+  @Output("ActualizarInventario") public actualizarInventario = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ConfirmarBorradoProducto(confirmar: boolean) {
+    if (confirmar) {
+      this.actualizarInventario.emit(true);
+    }
   }
 
 }

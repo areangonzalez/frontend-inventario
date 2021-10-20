@@ -30,14 +30,7 @@ export class AutocompletarComponent {
 
       formatter = (x: {nombre: string}) => x.nombre;
 
-      /* existeValor() {
-        if (!this.model) {
-          this.model = '';
-        }
-      } */
-
-      /**
-
+  /**
    * Busca el nombre del item seleccionado y devuelve el objeto al componente padre
    * @param valor Item seleccionado por el auto completar
    */
