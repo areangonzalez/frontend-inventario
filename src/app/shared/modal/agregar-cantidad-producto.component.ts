@@ -30,8 +30,8 @@ import { UtilService } from 'src/app/core/service';
   `
 })
 export class AgregarCantidadMaximaModalContent {
-  @Input("cantidadMaxima") public cantidadMaxima: string;
-  public cantidad: string = '';
+  @Input("cantidadMaxima") public cantidadMaxima: number;
+  public cantidad: number;
   public msgError: boolean = false;
 
   constructor( private _ativeModal: NgbActiveModal, private _util: UtilService ) { }
@@ -55,7 +55,7 @@ export class AgregarCantidadMaximaModalContent {
    * validando que no sea mayor a la cantidad real ni menor a 0.
    */
   guardar() {
-    if (parseInt(this.cantidad) <= parseInt(this.cantidadMaxima) && parseInt(this.cantidad) > 0) {
+    if (this.cantidad <= this.cantidadMaxima && this.cantidad > 0) {
       this._ativeModal.close(this.cantidad);
     }else {
       this.msgError = true;
@@ -69,7 +69,7 @@ export class AgregarCantidadMaximaModalContent {
   styleUrls: ['./agregar-cantidad-producto.component.scss']
 })
 export class AgregarCantidadProductoComponent {
-  @Input("cantidadMaxima") public cantidadMaxima: string;
+  @Input("cantidadMaxima") public cantidadMaxima: number;
   @Output("obtenerCantidad") public obtenerCantidad = new EventEmitter();
 
   constructor( private _modalService: NgbModal ) { }

@@ -4,15 +4,15 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, finalize } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { LoaderService } from 'src/app/core/service';
+import { AutenticacionService, LoaderService } from 'src/app/core/service';
 
-//import { AuthenticationService } from '@app/_services';
+
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   private service_count = 0;
    //constructor(private authenticationService: AuthenticationService) { }
-    constructor(private _loaderService: LoaderService) { }
+    constructor(private _auth: AutenticacionService, private _loaderService: LoaderService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       this._loaderService.show();
@@ -21,10 +21,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           catchError(err => {
             if (err.status === 401) {
                 // auto logout if 401 response returned from api
-                // this.authenticationService.logout();
-                // location.reload(true);
-                console.log(err.status);
-
+                this._auth.logout();
+                window.location.reload();
             }
             if (err.status === 403) {
               // auto logout if 401 response returned from api
