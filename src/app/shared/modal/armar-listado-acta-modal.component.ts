@@ -64,7 +64,6 @@ export class ArmarListadoActaModalContent implements OnInit {
   validarCantidad(numero:any) {
     if (!this._util.validarNumero(numero.value)) {
       numero.value = numero.value.substring(0,numero.value.length - 1);
-      //this.form.get("cantidad").patchValue(numero.value);
     }
   }
   /**

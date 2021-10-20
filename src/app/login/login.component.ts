@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     .pipe(first())
     .subscribe(
       respuesta => {
-        console.log(respuesta);
         this._router.navigate([this.returnUrl]);
       }, error => {
         this.huboError = true;
@@ -45,7 +44,6 @@ export class LoginComponent implements OnInit {
   }
 
   estaLogueado() {
-    console.log(localStorage.getItem('token-gdi'));
     if (localStorage.getItem('token-gdi') != null) {
       this._router.navigate(['/productos']);
     }
