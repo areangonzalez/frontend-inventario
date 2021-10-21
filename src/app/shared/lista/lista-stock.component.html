@@ -64,7 +64,7 @@
         <td class="text-center">{{producto.categoria}}</td>
         <td class="ancho-celda-vencimiento text-center">{{producto.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
         <th scope="col" class="text-center">
-          <agregar-producto-defectuoso-modal *ngIf="(tipoTabla == 'stock')" [cantidadProductoMaximo]="producto.cantidad" [producto]="producto" (actualizarProductoDefectuoso)="guardarProductoDefectuoso($event)" ></agregar-producto-defectuoso-modal>
+          <agregar-producto-defectuoso-modal *ngIf="(tipoTabla == 'stock' && !producto.defectuoso)" [cantidadProductoMaximo]="producto.cantidad" [producto]="producto" (actualizarProductoDefectuoso)="guardarProductoDefectuoso($event)" ></agregar-producto-defectuoso-modal>
           <agregar-cantidad-producto-modal *ngIf="(tipoTabla == 'seleccionar_producto')" [cantidadMaxima]="producto.cantidad" (obtenerCantidad)="nuevaCantidad($event, producto)"></agregar-cantidad-producto-modal>
         </th>
       </tr>
