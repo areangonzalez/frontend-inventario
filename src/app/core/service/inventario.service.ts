@@ -26,6 +26,8 @@ export class InventarioService {
   }
 
   resolve() {
-    return this._http.get('/inventarios');
+    let httpParams = new HttpParams();
+    httpParams = this._http.formatParams(httpParams, { sort: '-fecha_vencimiento', page: 0 });
+    return this._http.get('/inventarios', httpParams);
   }
 }
