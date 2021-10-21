@@ -18,6 +18,7 @@ export class ConfigurarPagina implements IConfigurarPagina {
   public cantidad_faltantes: number;
   public cantidad_defectuosos: number;
   public cantidad_stock: number;
+  public cantidad_por_vencer: number;
 
 
   constructor() {
@@ -30,5 +31,6 @@ export class ConfigurarPagina implements IConfigurarPagina {
     this.cantidad_faltantes = 0;
     this.cantidad_defectuosos = 0;
     this.cantidad_stock = 0;
+    this.cantidad_por_vencer = 0;
     }
 }

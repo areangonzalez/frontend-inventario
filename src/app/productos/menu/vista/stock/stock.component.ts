@@ -40,6 +40,7 @@ export class StockComponent implements OnInit {
     this.configPaginacion.cantidad_faltantes = listado.cantidad_faltantes;
     this.configPaginacion.cantidad_defectuosos = listado.cantidad_defectuosos;
     this.configPaginacion.cantidad_stock = listado.cantidad_stock;
+    this.configPaginacion.cantidad_por_vencer = listado.cantidad_por_vencer;
 
     this.listadoStock = listado.resultado;
   }
@@ -58,7 +59,6 @@ export class StockComponent implements OnInit {
   buscar(params:any, page:number, sort: string) {
     Object.assign(params, {page: page-1, sort: sort});
     this.filtradoBusqueda = params;
-    console.log(params);
     this._inventarioService.buscar(params).subscribe(
       respuesta => {
         this.prepararListadoStock(respuesta, page);

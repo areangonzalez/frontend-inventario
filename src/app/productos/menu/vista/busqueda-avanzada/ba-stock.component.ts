@@ -44,6 +44,7 @@ export class BaStockComponent implements OnInit {
         medidadid: '',
         defectuoso: false,
         vencido: false,
+        por_vencer: false,
         fechaDesde: null,
         fecha_desde: '',
         fechaHasta: null,
