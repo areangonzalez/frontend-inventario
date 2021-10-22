@@ -20,7 +20,7 @@ import { AlertService } from 'src/app/core/service';
         <div class="card-header d-flex justify-content-between">
           <div class="pt-1" >Observación:</div>
           <div>
-            <button class="btn btn-sm btn-outline-secondary" placement="top" ngbTooltip="Editar" ><i class="fas fa-edit"></i></button>
+            <modal-editar-descripcion [comprobante]="datos" (confirmarGuardado)="actualizarDatos($event)" ></modal-editar-descripcion>
           </div>
         </div>
         <div *ngIf="(datos.descripcion != '')" class="card-body">
@@ -59,6 +59,12 @@ export class VistaComprobanteModalContent implements OnInit {
         console.log(respuesta);
         this.datos = respuesta;
       }, error => { this._mensaje.cancelado(error.message); })
+  }
+
+  actualizarDatos(confirmacion: boolean) {
+    if (confirmacion) {
+      this.buscarComprobante(this.datos.id);
+    }
   }
 }
 

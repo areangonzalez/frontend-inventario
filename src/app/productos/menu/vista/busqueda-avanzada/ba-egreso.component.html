@@ -5,7 +5,7 @@
       <div class="input-group-append btn-group">
         <button type="button" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
         <button type="button" class="btn btn-outline-danger" (click)="limpiarCampos()"><i class="fas fa-trash-alt"></i></button>
-        <crear-acta-modal [listaInventario]="listaInventario" [listaLocalidad]="localidades" [listaTipoEgreso]="tipoEgresos"></crear-acta-modal>
+        <crear-acta-modal [listaInventario]="listaInventario" [listaLocalidad]="localidades" [listaTipoEgreso]="tipoEgresos" (confirmacion)="confirmarCrearActa($event)"></crear-acta-modal>
       </div>
     </div>
   </div>

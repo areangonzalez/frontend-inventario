@@ -123,6 +123,16 @@ export class BaEgresoComponent implements OnInit {
       this.busquedaAvanzada.get("unidad").patchValue(datos.value);
     }
   }
+  /**
+   * Al crear Un acta se envia la confirmación de creacion para actualizar el listado
+   * @param confirmacion booleano es true si salio exitoso
+   */
+  confirmarCrearActa(confirmacion: boolean) {
+    if (confirmacion) {
+      // se limpia los campos de busqueda y actualiza el listado
+      this.limpiarCampos();
+    }
+  }
 
   /* ### DATE PICKER CONFIG ### */
   /**

@@ -75,8 +75,7 @@ export class CrearActaModalContent {
         this._egresoService.guardar(parametros).subscribe(
           respuesta => {
             this._mensaje.exitoso("se ha guardado el acta exitosamente!!");
-            this._ativeModal.close('close');
-            console.log(respuesta);
+            this._ativeModal.close(true);
           }, error => { this._mensaje.cancelado(error); });
       }
     }
@@ -99,6 +98,7 @@ export class CrearActaComponent {
   @Input("listaInventario") public listaInventario: any;
   @Input("listaLocalidad") public listaLocalidad: any;
   @Input("listaTipoEgreso") public listaTipoEgreso: any;
+  @Output("confirmacion") public confirmacion = new EventEmitter();
 
   constructor( private _modalService: NgbModal ) { }
 
@@ -107,5 +107,12 @@ export class CrearActaComponent {
     modalRef.componentInstance.localidad = this.listaLocalidad;
     modalRef.componentInstance.tipoEgreso = this.listaTipoEgreso;
     modalRef.componentInstance.listaInventario = this.listaInventario;
+    modalRef.result.then(
+      (result) => {
+        if (result !== 'close') {
+          this.confirmacion.emit(true);
+        }
+      }
+    )
   }
 }

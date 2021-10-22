@@ -6,7 +6,7 @@ import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ComprobanteService {
+export class ComprobanteService implements Resolve<any>{
 
   constructor(private _http: ApiService) { }
 
@@ -16,6 +16,10 @@ export class ComprobanteService {
 
   actualizarProductoFaltante(id:number, params: object) {
     return this._http.put("/comprobantes/registrar-producto-pendiente/" + id, params);
+  }
+
+  guardar(params: object, id: number) {
+    return this._http.put("/comprobantes/" + id, params);
   }
 
   buscar(params:any) {
