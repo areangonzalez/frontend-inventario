@@ -54,7 +54,6 @@ export class EgresoComponent implements OnInit {
    */
   buscar(params:any, page:number, sort: string) {
     Object.assign(params, {page: page-1, sort: sort});
-    console.log(params);
     this.filtradoBusqueda = params;
     this._egresoService.buscar(params).subscribe(
       respuesta => {

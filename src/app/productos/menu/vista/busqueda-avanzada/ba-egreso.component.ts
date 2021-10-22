@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbDate, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from 'src/app/core/service';
@@ -8,7 +8,7 @@ import { UtilService } from 'src/app/core/service';
   templateUrl: './ba-egreso.component.html',
   styleUrls: ['./ba-stock.component.scss']
 })
-export class BaEgresoComponent implements OnInit {
+export class BaEgresoComponent {
   @Input("listaInventario") public listaInventario: any;
   @Input("localidades") public localidades: any;
   @Input("tipoEgresos") public tipoEgresos: any;
@@ -45,8 +45,9 @@ export class BaEgresoComponent implements OnInit {
       });
     }
 
-  ngOnInit(): void {
-  }
+  /**
+   * busca en listado por busqueda avanzada
+   */
   public buscar(){
     let busquedaAvanzada = this.busquedaAvanzada.value;
     let apiBusqueda:any = {};
@@ -66,7 +67,9 @@ export class BaEgresoComponent implements OnInit {
     this.btnSeleccion = esTrue;
     this.obtenerBusqueda.emit(apiBusqueda);
   }
-
+  /**
+   * Limpia los campos del formulario de busqueda avanzada
+   */
   public limpiarCampos() {
     let busqueda: any = this.busquedaAvanzada.value;
       for (const key in busqueda) {
@@ -117,7 +120,6 @@ export class BaEgresoComponent implements OnInit {
    * @param datos objeto que contiene el valor del input
    */
   validarNumero(datos: any){
-    console.log(datos.value)
     if (!this._util.validarNumero(datos.value)) {
       datos.value = datos.value.substring(0,datos.value.length - 1);
       this.busquedaAvanzada.get("unidad").patchValue(datos.value);
@@ -142,7 +144,6 @@ export class BaEgresoComponent implements OnInit {
   public onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-      console.log(date);
       this.busquedaAvanzada.patchValue({fechaDesde: date});
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;

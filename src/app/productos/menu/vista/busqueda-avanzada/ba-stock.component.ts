@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService } from 'src/app/core/service';
 
@@ -9,7 +9,7 @@ import { UtilService } from 'src/app/core/service';
   templateUrl: './ba-stock.component.html',
   styleUrls: ['./ba-stock.component.scss']
 })
-export class BaStockComponent implements OnInit {
+export class BaStockComponent {
   @Input("categoriaLista") public categoriaLista: any;
   @Input("marcaLista") public marcaLista: any;
   @Input("medidadLista") public medidadLista: any;
@@ -52,8 +52,6 @@ export class BaStockComponent implements OnInit {
       });
     }
 
-  ngOnInit(): void {
-  }
   public buscar(){
     let busquedaAvanzada = this.busquedaAvanzada.value;
     let apiBusqueda:any = {};
