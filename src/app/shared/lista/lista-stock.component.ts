@@ -59,7 +59,21 @@ export class ListaStockComponent implements OnInit {
         break;
     }
     this.ordenarTabla.emit(this.sort);
+  }
 
+  estadoProducto(por_vencer: boolean, defectuoso: boolean, vencido: boolean) {
+    let msj:string = "";
+    if (por_vencer && !(defectuoso)) {
+      msj = "El producto esta por vencer";
+    }
+    if (vencido && !(defectuoso)) {
+      msj = "El producto esta vencido";
+    }
+    if (defectuoso) {
+      msj = "El producto esta defectuoso";
+    }
+
+    return msj;
   }
 
 }

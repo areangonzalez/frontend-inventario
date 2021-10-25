@@ -63,7 +63,6 @@ export class VistaActaModalContent implements OnInit {
   buscarActa(id:number) {
     this._egresoService.buscarPorId(id).subscribe(
       respuesta => {
-        console.log(respuesta);
         this.datos = respuesta;
       }, error => { this._mensaje.cancelado(error.message); })
   }

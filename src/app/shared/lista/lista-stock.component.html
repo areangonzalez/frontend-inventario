@@ -55,10 +55,10 @@
     </tbody>
     <tbody *ngIf="(listadoStock.length > 0)">
       <tr *ngFor="let producto of listadoStock" [ngClass]="{
-        'table-danger': (producto.vencido && tipoTabla === 'stock'),
+        'table-warning': (producto.por_vencer && !(producto.defectuoso)),
         'table-secondary': (producto.defectuoso && tipoTabla === 'stock'),
-        'table-warning': (producto.por_vencer)
-      }">
+        'table-danger': (producto.vencido && !(producto.defectuoso) && tipoTabla === 'stock')
+      }" [ngbTooltip]="estadoProducto(producto.por_vencer, producto.defectuoso, producto.vencido)" container="body">
         <td class="ancho-celda-minimo text-center">{{producto.cantidad}}</td>
         <td>{{producto.producto}}</td>
         <td class="text-center">{{producto.categoria}}</td>

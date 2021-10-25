@@ -45,8 +45,6 @@ export class ProductoComponent implements OnInit {
   }
 
   obtenerProducto(producto:any) {
-    console.log(producto);
-
     this.productoSeleccionado = producto;
     this.productoForm.patchValue(producto);
     this.productoForm.patchValue({productoid: producto.id});
