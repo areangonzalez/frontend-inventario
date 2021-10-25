@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService, AlertService, EgresoService } from 'src/app/core/service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -100,7 +100,10 @@ export class CrearActaComponent {
   @Input("listaTipoEgreso") public listaTipoEgreso: any;
   @Output("confirmacion") public confirmacion = new EventEmitter();
 
-  constructor( private _modalService: NgbModal ) { }
+  constructor(_config: NgbModalConfig, private _modalService: NgbModal ) {
+    _config.backdrop = 'static';
+    _config.keyboard = false;
+  }
 
   open() {
     const modalRef = this._modalService.open(CrearActaModalContent, { size: 'lg' });

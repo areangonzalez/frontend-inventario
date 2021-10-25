@@ -25,7 +25,7 @@
       <tr *ngFor="let acta of listaEgreso">
         <td class="ancho-celda-vencimiento text-center">{{acta.fecha | date: 'dd/MM/yyyy'}}</td>
         <td class="text-center">{{acta.nro_acta}}</td>
-        <td colspan="2" class="text-center">{{acta.destino_nombre}} ({{acta.destino_localidad}})</td>
+        <td colspan="2" class="text-center">{{acta.destino_nombre}}</td>
         <td class="text-center">{{acta.producto_cant_total}}</td>
         <th scope="col" class="text-center">
           <abrir-vista-acta-modal [idActa]="acta.id"></abrir-vista-acta-modal>
