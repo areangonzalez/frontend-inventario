@@ -3,9 +3,6 @@
     <span *ngIf="configPaginacion.totalRegistros > 0">Stock: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
     <span *ngIf="configPaginacion.totalRegistros == 0">Stock: 0</span>
   </div>
-  <!-- <div class="d-flex align-items-center p-2 font-weight-bold">
-    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
-  </div> -->
   <div *ngIf="(tipoTabla == 'stock')" class="d-flex align-items-center p-2 font-weight-bold">
     <span ngbTooltip="Cantidad de Stock" container="body" class="text-success">
       Stock: {{configPaginacion.cantidad_stock}}
@@ -19,9 +16,6 @@
       Vencidos: {{configPaginacion.cantidad_vencidos}}
     </span>
     &nbsp;|&nbsp;
-    <!-- <span ngbTooltip="Cantidad por vencer a 10 dias" container="body" class="text-warning">
-      Stock: {{configPaginacion.cantidad_por_vencer}}
-    </span> -->
     <span ngbTooltip="Cantidad de defectuosos " container="body" class="text-secondary">
       Defectuosos: {{configPaginacion.cantidad_defectuosos}}
     </span>

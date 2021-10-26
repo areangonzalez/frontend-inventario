@@ -56,7 +56,6 @@ export class VistaComprobanteModalContent implements OnInit {
   buscarComprobante(id:number) {
     this._comprobanteService.buscarPorId(id).subscribe(
       respuesta => {
-        console.log(respuesta);
         this.datos = respuesta;
       }, error => { this._mensaje.cancelado(error.message); })
   }

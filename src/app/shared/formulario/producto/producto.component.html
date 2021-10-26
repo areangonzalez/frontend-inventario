@@ -1,7 +1,7 @@
 <fieldset [formGroup]="productoForm">
   <div class="row">
     <div class="col-md-4">
-      <shared-autocompletar #buscarProducto [form]="productoForm" [listado]="listadoDeProducto" (obtenerSeleccion)="obtenerProducto($event)" [submitted]="productoForm.get('nombre').invalid && submitted" [setFocus]="focusAuto" ></shared-autocompletar>
+      <shared-autocompletar #buscarProducto [form]="productoForm" [listado]="listados.productos" (obtenerSeleccion)="obtenerProducto($event)" [submitted]="productoForm.get('nombre').invalid && submitted" [setFocus]="focusAuto" ></shared-autocompletar>
       <input type="hidden" id="productoid" formControlName="productoid">
       <input type="hidden" id="producto" formControlName="producto">
     </div>
@@ -34,7 +34,7 @@
         <label for="categoria">Categoría (<b class="text-danger">*</b>):</label>
         <select class="form-control" id="categoriaid" formControlName="categoriaid" [ngClass]="{'is-invalid': (productoForm.get('categoriaid').invalid && submitted)}">
           <option value="">Seleccione una Categoría</option>
-          <option *ngFor="let categoria of listadoDeCategoria" value="{{categoria.id}}">{{categoria.nombre}}</option>
+          <option *ngFor="let categoria of listados.categorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
         </select>
         <div *ngIf="(productoForm.get('categoriaid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione una categoría.</span>
@@ -46,7 +46,7 @@
         <label for="marca">Marca (<b class="text-danger">*</b>):</label>
         <select class="form-control" id="marca" formControlName="marcaid" [ngClass]="{'is-invalid': (productoForm.get('marcaid').invalid && submitted)}">
           <option value="">Seleccione Marca</option>
-          <option *ngFor="let marca of listadoDeMarcas" value="{{marca.id}}">{{marca.nombre}}</option>
+          <option *ngFor="let marca of listados.marcas" value="{{marca.id}}">{{marca.nombre}}</option>
         </select>
         <div *ngIf="(productoForm.get('productoid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione una marca.</span>
@@ -60,7 +60,7 @@
           <input type="text" class="form-control" id="unidad" formControlName="unidad_valor" placeholder="Ej.: 500" (keyup)="validarUnidad($event.target)" [ngClass]="{'is-invalid': (productoForm.get('unidad_valor').invalid && submitted)}">
           <select class="form-control" id="medida" formControlName="unidad_medidaid" [ngClass]="{'is-invalid': (productoForm.get('unidad_medidaid').invalid && submitted)}">
             <option value="">Medida</option>
-            <option *ngFor="let medida of listadoDeUnidadMedida" value="{{medida.id}}">{{medida.simbolo}}</option>
+            <option *ngFor="let medida of listados.unidad_medida" value="{{medida.id}}">{{medida.simbolo}}</option>
           </select>
         </div>
         <div *ngIf="((productoForm.get('unidad_valor').invalid || productoForm.get('unidad_medidaid').invalid) && submitted)" class="text-danger">

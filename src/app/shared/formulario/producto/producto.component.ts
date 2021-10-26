@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ConfiguracionListados } from 'src/app/core/model';
 import { UtilService, ProductoService, AlertService } from 'src/app/core/service';
 
 @Component({
@@ -9,10 +10,11 @@ import { UtilService, ProductoService, AlertService } from 'src/app/core/service
   styleUrls: ['./producto.component.scss']
 })
 export class ProductoComponent implements OnInit {
-  @Input("listadoDeProducto") listadoDeProducto:any; // Listado de productos
-  @Input("listadoDeCategoria") listadoDeCategoria:any; // listado de categoria
-  @Input("listadoDeUnidadMedida") listadoDeUnidadMedida:any; // listado de unidad de medida
-  @Input("listadoDeMarcas") listadoDeMarcas:any; // listado de marcas
+  // @Input("listadoDeProducto") listadoDeProducto:any; // Listado de productos
+  // @Input("listadoDeCategoria") listadoDeCategoria:any; // listado de categoria
+  // @Input("listadoDeUnidadMedida") listadoDeUnidadMedida:any; // listado de unidad de medida
+  // @Input("listadoDeMarcas") listadoDeMarcas:any; // listado de marcas
+  @Input("listados") public listados: ConfiguracionListados;
   @Output("obtenerListadoDestock") public obtenerListadoDestock = new EventEmitter(); // listado de stock que es creada por el usuario
 
   public productoForm: FormGroup;
@@ -127,8 +129,8 @@ export class ProductoComponent implements OnInit {
       }
     }
     // busco los valores de la medida y la marca
-    medida = this._util.buscarDatosPorId(this.listadoDeUnidadMedida,producto["unidad_medidaid"]);
-    marca = this._util.buscarDatosPorId(this.listadoDeMarcas,producto["marcaid"]);
+    medida = this._util.buscarDatosPorId(this.listados.unidad_medida,producto["unidad_medidaid"]);
+    marca = this._util.buscarDatosPorId(this.listados.marcas,producto["marcaid"]);
     // armo el nombre de producto
     producto["producto"] = producto["nombre"];
     producto["producto"] += ", " + producto["unidad_valor"];
@@ -159,7 +161,7 @@ export class ProductoComponent implements OnInit {
   listarProducto() {
     this._productoService.listar().subscribe(
       respuesta => {
-        this.listadoDeProducto = respuesta;
+        this.listados.productos = respuesta;
       }, error => { this._mensajeService.cancelado(error.message); }
     )
   }

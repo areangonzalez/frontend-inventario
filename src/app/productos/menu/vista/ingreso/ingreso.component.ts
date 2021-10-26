@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfiguracionParaPaginarService, ComprobanteService, AlertService } from 'src/app/core/service';
-import { ConfigurarPagina } from 'src/app/core/model';
+import { ConfigurarPagina, ConfiguracionListados } from 'src/app/core/model';
 
 @Component({
   selector: 'app-ingreso',
@@ -10,11 +10,7 @@ import { ConfigurarPagina } from 'src/app/core/model';
   providers: [ConfiguracionParaPaginarService]
 })
 export class IngresoComponent implements OnInit {
-  public listadoProductos: any; // listado de productos
-  public listadoCategorias: any; // listado de categorias
-  public listadoUnidadMedida: any; // listado de unidad de medidas
-  public listadoMarcas: any; // listado de marcas
-  public listadoIngreso: any; // listado de los comrpobantes de ingreso
+  public configurarListas: ConfiguracionListados = {};
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
   public sort: string = '-nro_remito';
@@ -28,17 +24,17 @@ export class IngresoComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepararListadoingreso(this._route.snapshot.data['ingreso'], 1);
-    this.listadoProductos = this._route.snapshot.data["productos"];
-    this.listadoCategorias = this._route.snapshot.data["categorias"];
-    this.listadoUnidadMedida = this._route.snapshot.data["unidadMedida"];
-    this.listadoMarcas = this._route.snapshot.data["marcas"];
+    this.configurarListas.productos = this._route.snapshot.data["productos"];
+    this.configurarListas.categorias = this._route.snapshot.data["categorias"];
+    this.configurarListas.unidad_medida = this._route.snapshot.data["unidadMedida"];
+    this.configurarListas.marcas = this._route.snapshot.data["marcas"];
   }
 
   prepararListadoingreso(listado:any, pagina: number) {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configurarPaginacion.config(listado, pagina);
 
-    this.listadoIngreso = listado.resultado;
+    this.configurarListas.comprobantes = listado.resultado;
   }
   /**
    * Solicito el cambio de pagina

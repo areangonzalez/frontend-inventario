@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InventarioService, AlertService } from 'src/app/core/service';
+import { ConfiguracionListados } from 'src/app/core/model';
 
 /**
  * Componente que muestra el contenido del modal
@@ -17,7 +18,7 @@ import { InventarioService, AlertService } from 'src/app/core/service';
     </div>
     <div class="modal-body">
       <form-comprobante [comprobante]="comprobanteForm" [submitted]="submitted" ></form-comprobante>
-      <form-producto [listadoDeProducto]="listaProductos" [listadoDeCategoria]="listaCategorias" [listadoDeUnidadMedida]="listaUnidadMedida" [listadoDeMarcas]="listaMarcas" (obtenerListadoDestock)="crearListadoDeStock($event)"></form-producto>
+      <form-producto [listados]="listados" (obtenerListadoDestock)="crearListadoDeStock($event)"></form-producto>
       <shared-lista-producto [stock]="listadoDeStock" [submitted]="submitted" [borrar]="true" [vista]="false" ></shared-lista-producto>
       <hr style="border: solid 1px #eee;">
       <div [formGroup]="comprobanteForm" class="form-group">
@@ -31,12 +32,14 @@ import { InventarioService, AlertService } from 'src/app/core/service';
     </div>
   `
 })
-export class ComprobanteModalContent {
+export class ComprobanteModalContent implements OnInit {
   @Input("titulo") public titulo: string;
-  @Input("listaProductos") public listaProductos: any; // Listado de productos
-  @Input("listaCategorias") public listaCategorias: any; // Listado de productos
-  @Input("listaUnidadMedida") public listaUnidadMedida: any; // Listado de unidad de medida
-  @Input("listaMarcas") public listaMarcas: any; // Listado de unidad de medida
+  // @Input("listaProductos") public listaProductos: any; // Listado de productos
+  // @Input("listaCategorias") public listaCategorias: any; // Listado de productos
+  // @Input("listaUnidadMedida") public listaUnidadMedida: any; // Listado de unidad de medida
+  // @Input("listaMarcas") public listaMarcas: any; // Listado de unidad de medida
+  @Input("listados") public listados: ConfiguracionListados;
+  @Input("comprobante") public comprobante: any; // Datos del comprobante
   public listadoDeStock: any = [];
   public comprobanteForm: FormGroup;
   public submitted: boolean = false;
@@ -55,6 +58,13 @@ export class ComprobanteModalContent {
       falta: false,
       defectuoso: false
     });
+  }
+
+  ngOnInit(): void {
+    if (this.comprobante !== undefined) {
+      console.log("datos del comprobante:", this.comprobante);
+    }
+
   }
 
   cerrarModal(guardar: boolean) {
@@ -101,22 +111,35 @@ export class ComprobanteModalContent {
 })
 export class ComprobanteModalComponent {
   @Input("titulo") public titulo: string;
-  @Input("productos") public productos: any; // listado de productos
-  @Input("categorias") public categorias: any; // listado de categorías
-  @Input("unidadMedida") public unidadMedida: any; // listado de unidad de medida
-  @Input("marcas") public marcas: any; // listado de marcas
+  // @Input("productos") public productos: any; // listado de productos
+  // @Input("categorias") public categorias: any; // listado de categorías
+  // @Input("unidadMedida") public unidadMedida: any; // listado de unidad de medida
+  // @Input("marcas") public marcas: any; // listado de marcas
+  @Input("listados") public listados: ConfiguracionListados;
+  @Input("tipoForm") public tipoForm: string; // tipo de formulario "agregar/editar"
+  @Input("comprobanteid") public comprobanteid: number;
   @Output("seGuardo") public seGuardo = new EventEmitter();
 
 
   constructor( private _modalService: NgbModal ) { }
 
+  /* buscarComprobante() {
+
+  } */
+
   open() {
+    let comprobante: any;
+    console.log(this.comprobanteid);
+
+
     const modalRef = this._modalService.open(ComprobanteModalContent, { size: 'lg' });
     modalRef.componentInstance.titulo = this.titulo;
-    modalRef.componentInstance.listaProductos = this.productos;
-    modalRef.componentInstance.listaCategorias = this.categorias;
-    modalRef.componentInstance.listaUnidadMedida = this.unidadMedida;
-    modalRef.componentInstance.listaMarcas = this.marcas;
+    // modalRef.componentInstance.listaProductos = this.productos;
+    // modalRef.componentInstance.listaCategorias = this.categorias;
+    // modalRef.componentInstance.listaUnidadMedida = this.unidadMedida;
+    // modalRef.componentInstance.listaMarcas = this.marcas;
+    modalRef.componentInstance.listados = this.listados;
+    modalRef.componentInstance.comprobante = comprobante;
     modalRef.result.then(
       (result) => {
           if (result == 'close') {

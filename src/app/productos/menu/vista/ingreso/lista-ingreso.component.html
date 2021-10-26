@@ -25,6 +25,7 @@
         <td class="ancho-celda-minimo text-center">{{comprobante.producto_cant_total}}</td>
         <th scope="col" class="text-center">
           <abrir-vista-comprobante-modal [idComprobante]="comprobante.id" ></abrir-vista-comprobante-modal>
+          <!-- <abrir-comprobante-modal [tipoForm]="'editar'" [titulo]="'Editar Comprobante'" [productos]="productos" [categorias]="categorias" [unidadMedida]="unidadMedida" [marcas]="marcas" (seGuardo)="actualizarListado($event)" ></abrir-comprobante-modal> -->
         </th>
       </tr>
     </tbody>

@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ListaIngresoComponent {
   @Input("listadoIngreso") public listadoIngreso: any;
   @Input("configPaginacion") public configPaginacion:any;
+  @Input("ConfigListas") public ConfigListas:any;
   @Input("sort") public sort:string;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   @Output("ordenarTabla") public ordenarTabla = new EventEmitter();
@@ -28,6 +29,11 @@ export class ListaIngresoComponent {
         break;
     }
     this.ordenarTabla.emit(this.sort);
+  }
+
+  actualizarListado(confirmacion: any) {
+    console.log("confirmacion de guardado: ", confirmacion);
+
   }
 
 }
