@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ConfiguracionListados } from 'src/app/core/model';
 
 @Component({
   selector: 'producto-lista-ingreso',
@@ -6,9 +7,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./lista-ingreso.component.scss']
 })
 export class ListaIngresoComponent {
-  @Input("listadoIngreso") public listadoIngreso: any;
   @Input("configPaginacion") public configPaginacion:any;
-  @Input("ConfigListas") public ConfigListas:any;
+  @Input("listas") public listas: ConfiguracionListados;
   @Input("sort") public sort:string;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   @Output("ordenarTabla") public ordenarTabla = new EventEmitter();

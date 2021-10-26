@@ -10,7 +10,7 @@ import { ConfigurarPagina, ConfiguracionListados } from 'src/app/core/model';
   providers: [ConfiguracionParaPaginarService]
 })
 export class IngresoComponent implements OnInit {
-  public configurarListas: ConfiguracionListados = {};
+  public configurarListas: ConfiguracionListados = {}; // Array de obejtos de listas
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
   public sort: string = '-nro_remito';

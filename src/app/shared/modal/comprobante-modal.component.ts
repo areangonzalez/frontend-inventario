@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InventarioService, AlertService } from 'src/app/core/service';
+import { InventarioService, AlertService, ComprobanteService, UtilService } from 'src/app/core/service';
 import { ConfiguracionListados } from 'src/app/core/model';
+import { map } from 'rxjs/operators';
 
 /**
  * Componente que muestra el contenido del modal
@@ -34,19 +35,16 @@ import { ConfiguracionListados } from 'src/app/core/model';
 })
 export class ComprobanteModalContent implements OnInit {
   @Input("titulo") public titulo: string;
-  // @Input("listaProductos") public listaProductos: any; // Listado de productos
-  // @Input("listaCategorias") public listaCategorias: any; // Listado de productos
-  // @Input("listaUnidadMedida") public listaUnidadMedida: any; // Listado de unidad de medida
-  // @Input("listaMarcas") public listaMarcas: any; // Listado de unidad de medida
   @Input("listados") public listados: ConfiguracionListados;
-  @Input("comprobante") public comprobante: any; // Datos del comprobante
+  @Input("comprobanteid") public comprobanteid: any; // id del comprobante
   public listadoDeStock: any = [];
   public comprobanteForm: FormGroup;
   public submitted: boolean = false;
 
   constructor(
     private _ativeModal: NgbActiveModal, private _fb: FormBuilder,
-    private _inventarioService: InventarioService, private _mensaje: AlertService
+    private _inventarioService: InventarioService, private _mensaje: AlertService,
+    private _comprobanteService: ComprobanteService, private _util: UtilService
   ) {
     this.comprobanteForm = _fb.group({
       nro_remito: '',
@@ -61,10 +59,43 @@ export class ComprobanteModalContent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.comprobante !== undefined) {
-      console.log("datos del comprobante:", this.comprobante);
+    if (this.comprobanteid !== undefined) {
+      this.buscarComprobante(this.comprobanteid);
     }
+  }
 
+  buscarComprobante(id: number) {
+      this._comprobanteService.buscarPorId(id).pipe(
+        map((data) => {
+          let datos = {
+            nro_remito: '', nroComprobantePrincipal: '', nroComprobanteFinal: '', fechaEmision: null, fecha_emision: '',
+            descripcion: ''
+          };
+
+          datos.nro_remito = data["nro_remito"];
+          let nroComprobante = data["nro_remito"].split("-");
+
+          // verifico que al separarse tenga dos elementos
+          if (nroComprobante.length == 2) {
+            datos.nroComprobantePrincipal = nroComprobante[0];
+            datos.nroComprobanteFinal = nroComprobante[1];
+          }
+          datos.fecha_emision = data["fecha_emision"];
+          datos.fechaEmision = this._util.fechaTextoAobjeto(data["fecha_emision"]);
+          datos.descripcion = data["descripcion"];
+          datos["lista_producto"] = data["lista_producto"];
+
+          return datos;
+        })
+      )
+      .subscribe(
+        resultado => {
+          console.log(resultado);
+
+          this.comprobanteForm.patchValue(resultado);
+          this.listadoDeStock = resultado["lista_producto"];
+        }, error => { this._mensaje.cancelado(error); }
+      )
   }
 
   cerrarModal(guardar: boolean) {
@@ -87,11 +118,19 @@ export class ComprobanteModalContent implements OnInit {
         return false;
       }else{
         parametros["lista_producto"] = this.listadoDeStock;
-        this._inventarioService.guardar(parametros).subscribe(
-          respuesta => {
-            this._mensaje.exitoso("El stock ha sido guardado con éxito!");
-            this.cerrarModal(true);
-          }, error => { this._mensaje.cancelado(error.message); });
+        if (this.comprobanteid !== undefined){
+          this._inventarioService.guardar(parametros, this.comprobanteid).subscribe(
+            respuesta => {
+              this._mensaje.exitoso("El comprobante ha sido guardado con éxito!");
+              this.cerrarModal(true);
+            }, error => { this._mensaje.cancelado(error.message); });
+        }else{
+          this._inventarioService.guardar(parametros).subscribe(
+            respuesta => {
+              this._mensaje.exitoso("El stock ha sido guardado con éxito!");
+              this.cerrarModal(true);
+            }, error => { this._mensaje.cancelado(error.message); });
+          }
         }
     }
   }
@@ -111,35 +150,19 @@ export class ComprobanteModalContent implements OnInit {
 })
 export class ComprobanteModalComponent {
   @Input("titulo") public titulo: string;
-  // @Input("productos") public productos: any; // listado de productos
-  // @Input("categorias") public categorias: any; // listado de categorías
-  // @Input("unidadMedida") public unidadMedida: any; // listado de unidad de medida
-  // @Input("marcas") public marcas: any; // listado de marcas
   @Input("listados") public listados: ConfiguracionListados;
   @Input("tipoForm") public tipoForm: string; // tipo de formulario "agregar/editar"
   @Input("comprobanteid") public comprobanteid: number;
   @Output("seGuardo") public seGuardo = new EventEmitter();
 
 
-  constructor( private _modalService: NgbModal ) { }
-
-  /* buscarComprobante() {
-
-  } */
+  constructor( private _modalService: NgbModal) { }
 
   open() {
-    let comprobante: any;
-    console.log(this.comprobanteid);
-
-
     const modalRef = this._modalService.open(ComprobanteModalContent, { size: 'lg' });
     modalRef.componentInstance.titulo = this.titulo;
-    // modalRef.componentInstance.listaProductos = this.productos;
-    // modalRef.componentInstance.listaCategorias = this.categorias;
-    // modalRef.componentInstance.listaUnidadMedida = this.unidadMedida;
-    // modalRef.componentInstance.listaMarcas = this.marcas;
     modalRef.componentInstance.listados = this.listados;
-    modalRef.componentInstance.comprobante = comprobante;
+    modalRef.componentInstance.comprobanteid = this.comprobanteid;
     modalRef.result.then(
       (result) => {
           if (result == 'close') {

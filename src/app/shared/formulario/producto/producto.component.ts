@@ -10,11 +10,7 @@ import { UtilService, ProductoService, AlertService } from 'src/app/core/service
   styleUrls: ['./producto.component.scss']
 })
 export class ProductoComponent implements OnInit {
-  // @Input("listadoDeProducto") listadoDeProducto:any; // Listado de productos
-  // @Input("listadoDeCategoria") listadoDeCategoria:any; // listado de categoria
-  // @Input("listadoDeUnidadMedida") listadoDeUnidadMedida:any; // listado de unidad de medida
-  // @Input("listadoDeMarcas") listadoDeMarcas:any; // listado de marcas
-  @Input("listados") public listados: ConfiguracionListados;
+  @Input("listados") public listados: ConfiguracionListados; // Array de objetos que contiene los listados
   @Output("obtenerListadoDestock") public obtenerListadoDestock = new EventEmitter(); // listado de stock que es creada por el usuario
 
   public productoForm: FormGroup;

@@ -25,6 +25,16 @@ export class UtilService {
 
     return fecha;
   }
+  /**
+   * Funcion que toma una fecha y la devuelve en objeto, importante la fecha debe estar en formato "yyyy-mm-dd"
+   * @param fecha de tipo string
+   * @returns objeto
+   */
+  public fechaTextoAobjeto(fecha: string) {
+    let fechaArray = fecha.split("-");
+    let fechaObjeto = { year: parseInt(fechaArray[0]), month: parseInt(fechaArray[1]), day: parseInt(fechaArray[2]) };
+    return fechaObjeto;
+  }
 
   /**
    * @function validarNumero valida si el valor es un numero

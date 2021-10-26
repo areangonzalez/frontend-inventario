@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbDate, NgbDatepickerConfig, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UtilService } from 'src/app/core/service';
@@ -9,12 +9,8 @@ import { ConfiguracionListados } from "src/app/core/model";
   templateUrl: './ba-ingreso.component.html',
   styleUrls: ['./ba-stock.component.scss']
 })
-export class BaIngresoComponent implements OnInit {
-  /* @Input("productos") public productos: any; // listado de productos
-  @Input("categorias") public categorias: any; // Listados de categorias
-  @Input("unidadMedida") public unidadMedida: any; // Listados de unidad de medida
-  @Input("marcas") public marcas: any; // Listados de marcas, */
-  @Input("listados") public listados: ConfiguracionListados;
+export class BaIngresoComponent {
+  @Input("listados") public listados: ConfiguracionListados; // Array de objetos de listas
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
   @Output("limpiar") public limpiar = new EventEmitter();
 
@@ -47,10 +43,6 @@ export class BaIngresoComponent implements OnInit {
       });
     }
 
-  ngOnInit(): void {
-    console.log(this.listados);
-
-  }
   public buscar(){
     let busquedaAvanzada = this.busquedaAvanzada.value;
     let apiBusqueda:any = {};

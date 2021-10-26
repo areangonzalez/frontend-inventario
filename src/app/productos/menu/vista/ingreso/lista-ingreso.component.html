@@ -19,13 +19,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let comprobante of listadoIngreso">
+      <tr *ngFor="let comprobante of listas.comprobantes">
         <td class="text-center">{{comprobante.nro_remito}}</td>
         <td class="ancho-celda-vencimiento text-center">{{comprobante.fecha_emision | date: 'dd/MM/yyyy'}}</td>
         <td class="ancho-celda-minimo text-center">{{comprobante.producto_cant_total}}</td>
         <th scope="col" class="text-center">
-          <abrir-vista-comprobante-modal [idComprobante]="comprobante.id" ></abrir-vista-comprobante-modal>
-          <!-- <abrir-comprobante-modal [tipoForm]="'editar'" [titulo]="'Editar Comprobante'" [productos]="productos" [categorias]="categorias" [unidadMedida]="unidadMedida" [marcas]="marcas" (seGuardo)="actualizarListado($event)" ></abrir-comprobante-modal> -->
+          <div class="btn-group" role="group" aria-label="agrupacion">
+            <abrir-vista-comprobante-modal class="btn-group" [idComprobante]="comprobante.id" ></abrir-vista-comprobante-modal>
+            <abrir-comprobante-modal class="btn-group" [tipoForm]="'editar'" [titulo]="'Editar Comprobante'" [listados]="listas" [comprobanteid]="comprobante.id" (seGuardo)="actualizarListado($event)" ></abrir-comprobante-modal>
+          </div>
         </th>
       </tr>
     </tbody>
