@@ -3,5 +3,5 @@
   <ba-ingreso [listados]="configurarListas" (obtenerBusqueda)="buscar($event, configPaginacion.page, sort)" (limpiar)="limpiarCampos($event)" ></ba-ingreso>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <!-- <producto-lista-ingreso [listadoIngreso]="configurarListas.comprobantes" [configPaginacion]="configPaginacion" [sort]="sort" (ordenarTabla)="ordenarTabla($event)" (cambioDePagina)="cambiarPagina($event)" ></producto-lista-ingreso> -->
+  <producto-lista-ingreso [listadoIngreso]="configurarListas.comprobantes" [configPaginacion]="configPaginacion" [sort]="sort" (ordenarTabla)="ordenarTabla($event)" (cambioDePagina)="cambiarPagina($event)" ></producto-lista-ingreso>
 </div>
