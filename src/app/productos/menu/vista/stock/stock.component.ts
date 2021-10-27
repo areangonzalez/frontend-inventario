@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService, ConfiguracionParaPaginarService, InventarioService } from 'src/app/core/service';
 import { ActivatedRoute } from '@angular/router';
-import { ConfigurarPagina } from 'src/app/core/model';
+import { ConfigurarPagina, ConfiguracionListados } from 'src/app/core/model';
 
 @Component({
   selector: 'app-stock',
@@ -11,6 +11,7 @@ import { ConfigurarPagina } from 'src/app/core/model';
 })
 export class StockComponent implements OnInit {
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
+  public configurarListas: ConfiguracionListados = {}; // Array de obejtos de listas
   public listadoStock: any = [];
   public filtradoBusqueda: any = {};
   public listadoCategoria: any = [];
@@ -23,9 +24,9 @@ export class StockComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepararListadoStock(this._route.snapshot.data["inventario"], 1);
-    this.listadoCategoria = this._route.snapshot.data["categorias"];
-    this.listadoMarcas = this._route.snapshot.data["marcas"];
-    this.listadoUnidadMedida = this._route.snapshot.data["unidadMedida"];
+    this.configurarListas.categorias = this._route.snapshot.data["categorias"];
+    this.configurarListas.marcas = this._route.snapshot.data["marcas"];
+    this.configurarListas.unidad_medida = this._route.snapshot.data["unidadMedida"];
   }
   /**
    * preparo el listado para configurar el paginado
@@ -42,7 +43,7 @@ export class StockComponent implements OnInit {
     this.configPaginacion.cantidad_stock = listado.cantidad_stock;
     this.configPaginacion.cantidad_por_vencer = listado.cantidad_por_vencer;
 
-    this.listadoStock = listado.resultado;
+    this.configurarListas.stock = listado.resultado;
   }
   /**
    * Solicito el cambio de pagina

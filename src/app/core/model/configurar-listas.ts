@@ -4,4 +4,5 @@ export interface ConfiguracionListados {
    unidad_medida?: any;
    marcas?: any;
    comprobantes?: any;
+   stock?: any;
 }

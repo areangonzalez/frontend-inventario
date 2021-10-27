@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ConfiguracionListados } from 'src/app/core/model';
 import { UtilService } from 'src/app/core/service';
 
 
@@ -10,9 +11,7 @@ import { UtilService } from 'src/app/core/service';
   styleUrls: ['./ba-stock.component.scss']
 })
 export class BaStockComponent {
-  @Input("categoriaLista") public categoriaLista: any;
-  @Input("marcaLista") public marcaLista: any;
-  @Input("medidadLista") public medidadLista: any;
+  @Input("listados") public listados: ConfiguracionListados;
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
   @Output("limpiar") public limpiar = new EventEmitter();
   public global_param:string = '';

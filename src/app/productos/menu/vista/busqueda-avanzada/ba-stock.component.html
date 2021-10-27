@@ -21,14 +21,14 @@
             <label for="categoria" class="prioridad">Categoría:</label>
             <select class="form-control" id="categoria" formControlName="categoriaid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('categoriaid').value)}" >
               <option value="">Seleccione Categoría</option>
-              <option *ngFor="let categoria of categoriaLista" value="{{categoria.id}}">{{categoria.nombre}}</option>
+              <option *ngFor="let categoria of listados.categorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
             </select>
           </div>
           <div class="form-group col-md-4">
             <label for="marca" class="prioridad">Marca:</label>
             <select class="form-control" id="marca" formControlName="marcaid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('marcaid').value)}" >
               <option value="">Seleccione Marca</option>
-              <option *ngFor="let marca of marcaLista" value="{{marca.id}}">{{marca.nombre}}</option>
+              <option *ngFor="let marca of listados.marcas" value="{{marca.id}}">{{marca.nombre}}</option>
             </select>
           </div>
           <div class="form-group col-md-4">
@@ -37,7 +37,7 @@
               <input type="text" class="form-control" (keyup)="validarUnidad($event.target)" placeholder="500" formControlName="unidad" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('unidad').value)}">
               <select class="form-control" id="unidad_medida" formControlName="medidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('medidadid').value)}" >
                 <option value="">Seleccione Medida</option>
-                <option *ngFor="let medida of medidadLista" value="{{medida.id}}">{{medida.simbolo}} ({{medida.nombre}})</option>
+                <option *ngFor="let medida of listados.unidad_medida" value="{{medida.id}}">{{medida.simbolo}} ({{medida.nombre}})</option>
               </select>
             </div>
           </div>
