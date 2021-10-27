@@ -26,7 +26,7 @@ import { ConfigurarPagina } from 'src/app/core/model';
         </div>
       </div>
       <div class="mt-2">
-        <shared-lista-stock [listadoStock]="inventario" [configPaginacion]="configPaginacion" [tipoTabla]="'seleccionar_producto'" (productoSeleccionado)="obtenerProducto($event)" ></shared-lista-stock>
+        <shared-lista-stock [listadoStock]="inventario" [configPaginacion]="configPaginacion" [tipoTabla]="'seleccionar_producto'" (productoSeleccionado)="obtenerProducto($event)" (cambioDePagina)="cambiarPagina($event)" ></shared-lista-stock>
       </div>
       <div class="mt-2">
         <shared-lista-acta [listadoActa]="listadoActa" [borrar]="true" (ActualizarInventario)="actualizarStock($event)" ></shared-lista-acta>
@@ -44,7 +44,7 @@ export class ArmarListadoActaModalContent implements OnInit {
   public listadoActa: any = [];
   public global_param: string = '';
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina();
-  public filtradoBusqueda: any;
+  public filtradoBusqueda: any = {};
 
   constructor( private _ativeModal: NgbActiveModal, private _util: UtilService, private _mensaje: AlertService, private _configurarPaginacion: ConfiguracionParaPaginarService, private _inventarioService: InventarioService ) {}
 

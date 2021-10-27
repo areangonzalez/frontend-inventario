@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UtilService, AlertService, EgresoService } from 'src/app/core/service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ConfiguracionListados } from 'src/app/core/model';
 
 /**
  * Componente que muestra el contenido del modal
@@ -16,9 +17,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
       </button>
     </div>
     <div class="modal-body">
-      <shared-form-egreso [formEgreso]="formEgreso" [submitted]="submitted" [listadoLocalidades]="localidad" [listadoTipoEgreso]="tipoEgreso" ></shared-form-egreso>
+      <shared-form-egreso [formEgreso]="formEgreso" [submitted]="submitted" [listados]="listas" ></shared-form-egreso>
 
-      <armar-listado-acta-modal [listaActa]="listadoActa" [listaInventario]="listaInventario" (obtenerListadoActa)="armarListadoActa($event)"></armar-listado-acta-modal>
+      <armar-listado-acta-modal [listaActa]="listadoActa" [listaInventario]="listas.stock" (obtenerListadoActa)="armarListadoActa($event)"></armar-listado-acta-modal>
       <div class="mt-3">
         <shared-lista-acta [listadoActa]="listadoActa" [borrar]="false"></shared-lista-acta>
       </div>
@@ -31,9 +32,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   `
 })
 export class CrearActaModalContent {
-  @Input("listaInventario") public listaInventario: any;
-  @Input("localidad") public localidad: any;
-  @Input("tipoEgreso") public tipoEgreso: any;
+  @Input("listas") public listas: ConfiguracionListados;
   public submitted: boolean = false;
   public listadoActa: any = [];
   public formEgreso: FormGroup;
@@ -95,9 +94,10 @@ export class CrearActaModalContent {
   styleUrls: ['./crear-acta.component.scss']
 })
 export class CrearActaComponent {
-  @Input("listaInventario") public listaInventario: any;
+  /* @Input("listaInventario") public listaInventario: any;
   @Input("listaLocalidad") public listaLocalidad: any;
-  @Input("listaTipoEgreso") public listaTipoEgreso: any;
+  @Input("listaTipoEgreso") public listaTipoEgreso: any; */
+  @Input("listados") public listados: ConfiguracionListados;
   @Output("confirmacion") public confirmacion = new EventEmitter();
 
   constructor(_config: NgbModalConfig, private _modalService: NgbModal ) {
@@ -107,9 +107,7 @@ export class CrearActaComponent {
 
   open() {
     const modalRef = this._modalService.open(CrearActaModalContent, { size: 'lg' });
-    modalRef.componentInstance.localidad = this.listaLocalidad;
-    modalRef.componentInstance.tipoEgreso = this.listaTipoEgreso;
-    modalRef.componentInstance.listaInventario = this.listaInventario;
+    modalRef.componentInstance.listas = this.listados;
     modalRef.result.then(
       (result) => {
         if (result !== 'close') {

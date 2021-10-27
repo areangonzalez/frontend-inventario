@@ -53,7 +53,7 @@
         <label for="asunto">Asunto (<b class="text-danger">*</b>):</label>
         <select class="form-control" id="asunto" formControlName="tipo_egresoid" [ngClass]="{'is-invalid': (formEgreso.get('tipo_egresoid').invalid && submitted)}">
           <option value="">Seleccione un Asunto</option>
-          <option *ngFor="let tipo of listadoTipoEgreso" value="{{tipo.id}}">{{tipo.nombre}}</option>
+          <option *ngFor="let tipo of listados.tipo_egresos" value="{{tipo.id}}">{{tipo.nombre}}</option>
         </select>
         <div *ngIf="(formEgreso.get('tipo_egresoid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione un asunto.</span>
@@ -67,7 +67,7 @@
         <label for="categoria">Localidad (<b class="text-danger">*</b>):</label>
         <select class="form-control" id="localidadaid" formControlName="destino_localidadid" [ngClass]="{'is-invalid': (formEgreso.get('destino_localidadid').invalid && submitted)}">
           <option value="">Seleccione una Asunto</option>
-          <option *ngFor="let localidad of listadoLocalidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
+          <option *ngFor="let localidad of listados.localidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
         </select>
         <div *ngIf="(formEgreso.get('destino_localidadid').invalid && submitted)" class="text-danger">
           <span>Por favor seleccione una localidad de destino.</span>

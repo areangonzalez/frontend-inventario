@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ConfiguracionListados } from 'src/app/core/model';
 import { UtilService } from 'src/app/core/service';
 
 @Component({
@@ -10,8 +11,7 @@ import { UtilService } from 'src/app/core/service';
 export class EgresoComponent implements OnInit {
   @Input("formEgreso") public formEgreso: FormGroup;
   @Input("submitted") public submitted: boolean;
-  @Input("listadoLocalidades") public listadoLocalidades: any;
-  @Input("listadoTipoEgreso") public listadoTipoEgreso: any;
+  @Input("listados") public listados: ConfiguracionListados;
 
   constructor( private _util: UtilService ) {}
 

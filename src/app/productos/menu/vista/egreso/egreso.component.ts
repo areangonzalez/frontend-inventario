@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ConfigurarPagina } from 'src/app/core/model';
+import { ConfigurarPagina, ConfiguracionListados } from 'src/app/core/model';
 import { ConfiguracionParaPaginarService, EgresoService, AlertService } from 'src/app/core/service';
 
 @Component({
@@ -10,10 +10,11 @@ import { ConfiguracionParaPaginarService, EgresoService, AlertService } from 'sr
   providers: [ConfiguracionParaPaginarService]
 })
 export class EgresoComponent implements OnInit {
-  public listadoInventario: any;
-  public listadoEgreso: any;
+  /* public listadoInventario: any; // stock
+  public listadoEgreso: any; // egresos
   public listadoLocalidad: any;
-  public listadoTipoEgreso: any;
+  public listadoTipoEgreso: any; */
+  public configurarListas: ConfiguracionListados = {}; // Array de obejtos de listas
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};
   public sort: string = '-nro_acta';
@@ -24,9 +25,9 @@ export class EgresoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listadoInventario = this._route.snapshot.data["inventario"];
-    this.listadoLocalidad = this._route.snapshot.data["localidad"];
-    this.listadoTipoEgreso = this._route.snapshot.data["tipoEgreso"];
+    this.configurarListas.stock = this._route.snapshot.data["inventario"];
+    this.configurarListas.localidades = this._route.snapshot.data["localidad"];
+    this.configurarListas.tipo_egresos = this._route.snapshot.data["tipoEgreso"];
     this.prepararListadoEgreso(this._route.snapshot.data["egresos"], 1);
   }
   /**
@@ -38,7 +39,7 @@ export class EgresoComponent implements OnInit {
     // preparo la variable con la configuracion para el paginado
     this.configPaginacion = this._configurarPaginacion.config(listado, pagina);
 
-    this.listadoEgreso = listado.resultado;
+    this.configurarListas.egresos = listado.resultado;
   }
   /**
    * Solicito el cambio de pagina

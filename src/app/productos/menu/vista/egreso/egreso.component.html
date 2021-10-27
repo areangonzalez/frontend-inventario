@@ -1,7 +1,7 @@
 <h2>Listado de Egreso</h2>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <ba-egreso [listaInventario]="listadoInventario" [localidades]="listadoLocalidad" [tipoEgresos]="listadoTipoEgreso" (limpiar)="limpiarCampos($event)" (obtenerBusqueda)="buscar($event, configPaginacion.page, sort)" ></ba-egreso>
+  <ba-egreso [listados]="configurarListas" (limpiar)="limpiarCampos($event)" (obtenerBusqueda)="buscar($event, configPaginacion.page, sort)" ></ba-egreso>
 </div>
 <div class="bg-white shadow-sm rounded-lg mt-2 p-2">
-  <producto-lista-egreso [listaEgreso]="listadoEgreso" (cambioDePagina)="cambiarPagina($event)" [sort]="sort" (ordenarTabla)="ordenarTabla($event)" [configPaginacion]="configPaginacion" ></producto-lista-egreso>
+  <producto-lista-egreso [listaEgreso]="configurarListas.egresos" (cambioDePagina)="cambiarPagina($event)" [sort]="sort" (ordenarTabla)="ordenarTabla($event)" [configPaginacion]="configPaginacion" ></producto-lista-egreso>
 </div>

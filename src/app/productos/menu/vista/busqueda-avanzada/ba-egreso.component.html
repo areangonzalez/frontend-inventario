@@ -5,7 +5,7 @@
       <div class="input-group-append btn-group">
         <button type="button" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
         <button type="button" class="btn btn-outline-danger" (click)="limpiarCampos()"><i class="fas fa-trash-alt"></i></button>
-        <crear-acta-modal [listaInventario]="listaInventario" [listaLocalidad]="localidades" [listaTipoEgreso]="tipoEgresos" (confirmacion)="confirmarCrearActa($event)"></crear-acta-modal>
+        <crear-acta-modal [listados]="listados" (confirmacion)="confirmarCrearActa($event)"></crear-acta-modal>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
             <label for="localidad" class="prioridad">Localidad:</label>
             <select class="form-control" id="localidad" formControlName="destino_localidadid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaAvanzada.get('destino_localidadid').value)}" >
               <option value="">Seleccione una Localidad</option>
-              <option *ngFor="let localidad of localidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
+              <option *ngFor="let localidad of listados.localidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
             </select>
           </div>
         </div>

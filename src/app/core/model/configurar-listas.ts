@@ -5,4 +5,7 @@ export interface ConfiguracionListados {
    marcas?: any;
    comprobantes?: any;
    stock?: any;
+   tipo_egresos?: any;
+   egresos?: any;
+   localidades?: any;
 }
