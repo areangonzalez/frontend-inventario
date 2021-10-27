@@ -10,13 +10,13 @@ export class InventarioService {
 
   constructor( private _http: ApiService) { }
 
-  guardar(param: Object, id?:number) {
-    if (id !== undefined) {
-      return this._http.put('/inventarios/' + id, param);
-    }else {
-      return this._http.post('/inventarios', param);
-    }
-  }
+  // guardar(param: Object, id?:number) {
+  //   if (id !== undefined) {
+  //     return this._http.put('/inventarios/' + id, param);
+  //   }else {
+  //     return this._http.post('/inventarios', param);
+  //   }
+  // }
 
   buscar(params: any) {
     let httpParams = new HttpParams();

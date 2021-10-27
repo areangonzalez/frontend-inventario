@@ -48,8 +48,7 @@ export class VistaComprobanteModalContent implements OnInit {
     this._ativeModal.close('close');
   }
 
-  confirmar(confirmacion:boolean) {
-    //this.listado.splice(this.id, 1);
+  confirmar() {
     this._ativeModal.close('close');
   }
 

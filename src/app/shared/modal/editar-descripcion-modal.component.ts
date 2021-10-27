@@ -48,7 +48,7 @@ export class EditarDescripcionModalContent implements OnInit{
     if (confirmacion) {
       let params = this.data.value;
       // mando los parametros a guardar
-      this._comprobanteService.guardar(params, this.comprobante.id).subscribe(
+      this._comprobanteService.guardarObservacion(params, this.comprobante.id).subscribe(
         resultado => {
           this._msj.exitoso("Se ha editado con exito.");
           this._ativeModal.close(true);

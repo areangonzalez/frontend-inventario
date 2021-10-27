@@ -18,8 +18,8 @@ export class ComprobanteService implements Resolve<any>{
     return this._http.put("/comprobantes/registrar-producto-pendiente/" + id, params);
   }
 
-  guardar(params: object, id: number) {
-    return this._http.put("/comprobantes/" + id, params);
+  guardarObservacion(params: object, id: number) {
+    return this._http.put("/comprobantes/editar-observacion/" + id, params);
   }
 
   buscar(params:any) {
@@ -27,6 +27,14 @@ export class ComprobanteService implements Resolve<any>{
     httpParams = this._http.formatParams(httpParams, params);
 
     return this._http.get('/comprobantes', httpParams);
+  }
+
+  guardar(param: Object, id?:number) {
+    if (id !== undefined) {
+      return this._http.put('/comprobantes/' + id, param);
+    }else {
+      return this._http.post('/comprobantes', param);
+    }
   }
 
   resolve() {

@@ -42,8 +42,7 @@ export class ComprobanteModalContent implements OnInit {
   public submitted: boolean = false;
 
   constructor(
-    private _ativeModal: NgbActiveModal, private _fb: FormBuilder,
-    private _inventarioService: InventarioService, private _mensaje: AlertService,
+    private _ativeModal: NgbActiveModal, private _fb: FormBuilder, private _mensaje: AlertService,
     private _comprobanteService: ComprobanteService, private _util: UtilService
   ) {
     this.comprobanteForm = _fb.group({
@@ -90,8 +89,6 @@ export class ComprobanteModalContent implements OnInit {
       )
       .subscribe(
         resultado => {
-          console.log(resultado);
-
           this.comprobanteForm.patchValue(resultado);
           this.listadoDeStock = resultado["lista_producto"];
         }, error => { this._mensaje.cancelado(error); }
@@ -119,13 +116,13 @@ export class ComprobanteModalContent implements OnInit {
       }else{
         parametros["lista_producto"] = this.listadoDeStock;
         if (this.comprobanteid !== undefined){
-          this._inventarioService.guardar(parametros, this.comprobanteid).subscribe(
+          this._comprobanteService.guardar(parametros, this.comprobanteid).subscribe(
             respuesta => {
               this._mensaje.exitoso("El comprobante ha sido guardado con éxito!");
               this.cerrarModal(true);
             }, error => { this._mensaje.cancelado(error.message); });
         }else{
-          this._inventarioService.guardar(parametros).subscribe(
+          this._comprobanteService.guardar(parametros).subscribe(
             respuesta => {
               this._mensaje.exitoso("El stock ha sido guardado con éxito!");
               this.cerrarModal(true);
