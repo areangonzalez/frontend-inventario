@@ -12,11 +12,7 @@ import { ConfigurarPagina, ConfiguracionListados } from 'src/app/core/model';
 export class StockComponent implements OnInit {
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public configurarListas: ConfiguracionListados = {}; // Array de obejtos de listas
-  public listadoStock: any = [];
   public filtradoBusqueda: any = {};
-  public listadoCategoria: any = [];
-  public listadoMarcas: any = [];
-  public listadoUnidadMedida: any = [];
   public sort: string = '-fecha_vencimiento';
 
 
