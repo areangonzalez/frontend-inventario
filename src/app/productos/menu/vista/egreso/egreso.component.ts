@@ -10,10 +10,6 @@ import { ConfiguracionParaPaginarService, EgresoService, AlertService } from 'sr
   providers: [ConfiguracionParaPaginarService]
 })
 export class EgresoComponent implements OnInit {
-  /* public listadoInventario: any; // stock
-  public listadoEgreso: any; // egresos
-  public listadoLocalidad: any;
-  public listadoTipoEgreso: any; */
   public configurarListas: ConfiguracionListados = {}; // Array de obejtos de listas
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de comprobantes
   public filtradoBusqueda: any = {};

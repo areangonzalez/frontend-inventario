@@ -94,9 +94,6 @@ export class CrearActaModalContent {
   styleUrls: ['./crear-acta.component.scss']
 })
 export class CrearActaComponent {
-  /* @Input("listaInventario") public listaInventario: any;
-  @Input("listaLocalidad") public listaLocalidad: any;
-  @Input("listaTipoEgreso") public listaTipoEgreso: any; */
   @Input("listados") public listados: ConfiguracionListados;
   @Output("confirmacion") public confirmacion = new EventEmitter();
 
