@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import es from "@angular/common/locales/es";
 import { registerLocaleData } from "@angular/common";
-import { NgbModule, NgbDatepickerI18n, NgbTooltipModule, NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDatepickerI18n, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { SelfBuildingSquareSpinnerModule } from "angular-epic-spinners";
@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import {
   SharedModule,
   AppLayoutComponent,
+  AdminLayoutComponent,
   LoaderComponent, CustomDatepickerI18n, NgbDateARParserFormatter,
   BreadcrumbComponent,
   // fakeBackendProvider,
@@ -27,13 +28,13 @@ registerLocaleData(es);
   declarations: [
     AppComponent,
     AppLayoutComponent,
+    AdminLayoutComponent,
     LoaderComponent,
     BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    NgbTooltipModule,
     HttpClientModule,
     SelfBuildingSquareSpinnerModule,
     RoutingModule,

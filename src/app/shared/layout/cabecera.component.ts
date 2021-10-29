@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AutenticacionService, LoaderService } from 'src/app/core/service';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
+
 
 @Component({
   selector: 'layout-cabecera',
@@ -11,19 +12,27 @@ export class CabeceraComponent implements OnInit {
   public isCollapsed = true;
   public mostrar: boolean = false;
   public nombreUsuario: string = '';
-  public estoyLogueado:boolean = false;
+  public isAdmin: boolean = false;
 
-  constructor( private _router: Router, private _autenticacion: AutenticacionService, private _loader: LoaderService ) { }
+  constructor( private _router: Router, private _auth: AutenticacionService, private _loader: LoaderService ) { }
 
   ngOnInit(): void {
-    this.nombreUsuario = this._autenticacion.getUserName();
-    this.estoyLogueado = this._autenticacion.loggedIn();
+    this.setNombreUsuario();
+  }
+
+  setNombreUsuario() {
+    if (this._auth.loggedIn.apellido && this._auth.loggedIn.nombre && this._auth.loggedIn.rol !== 'admin') {
+      this.nombreUsuario = this._auth.loggedIn.apellido + ", " + this._auth.loggedIn.nombre;
+    }else{
+      this.nombreUsuario = "Admin";
+      this.isAdmin = true;
+    }
   }
 
   cerrarSesion() {
     this._loader.show();
       setTimeout(() => {
-        this._autenticacion.logout();
+        this._auth.logout();
         this._loader.hide();
         this._router.navigate(['/login']);
        }, 1000);
@@ -31,6 +40,10 @@ export class CabeceraComponent implements OnInit {
 
   mostrarMenu(){
     this.mostrar = !this.mostrar;
+  }
+
+  estoyLogueado(){
+    return true;
   }
 
   ocultarMenu(){

@@ -1,7 +1,9 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { NgbTooltipModule, NgbDatepickerModule, NgbCollapseModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CabeceraComponent } from './layout';
 import { ListaStockComponent, ListaProductoComponent, ListaActaComponent } from './lista';
@@ -29,15 +31,15 @@ import { FocusOnShowDirective } from './directive/focus-on-show.directive';
     ProductoDefectuosoModalContent, ProductoDefectuosoModalComponent, EditarDescripcionModalComponent, EditarDescripcionModalContent ],
   imports: [
     CommonModule,
-    FormsModule, ReactiveFormsModule,
-    NgbModule,
+    FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
+    NgbTooltipModule, NgbDatepickerModule, NgbCollapseModule, NgbPaginationModule, NgbTypeaheadModule,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     CommonModule,
     FormsModule, ReactiveFormsModule,
-    NgbModule,
+    NgbTooltipModule, NgbDatepickerModule, NgbCollapseModule, NgbPaginationModule, NgbTypeaheadModule,
     CabeceraComponent,
     ListaStockComponent, AlertComponent, ListaActaComponent,
     ComprobanteModalContent, ComprobanteModalComponent, EgresoComponent,

@@ -29,7 +29,7 @@ import { AlertService } from 'src/app/core/service';
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="confirmar(true)"><i class="fas fa-times"></i> Cerrar</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="confirmar()"><i class="fas fa-times"></i> Cerrar</button>
     </div>
   `,
   styleUrls: ['./vista-comprobante-modal.component.scss']

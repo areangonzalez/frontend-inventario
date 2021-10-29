@@ -12,7 +12,7 @@ export class JwtService {
   }
 
   saveToken(datosToken: object) {
-      localStorage.setItem('token-gdi', JSON.stringify({ datosToken }));
+      localStorage.setItem('token-gdi', JSON.stringify(datosToken));
   }
 
   destroyToken() {

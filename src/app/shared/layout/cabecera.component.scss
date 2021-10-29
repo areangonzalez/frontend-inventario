@@ -2,3 +2,15 @@
   border-color: #036954 !important;
   border-style: dashed !important;
 }
+.nav-name-user {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: black;
+}
+.navbar-nav li a.nav-name-user:hover {
+  box-shadow: 0 0 0 0 !important;
+  border-radius: 0;
+  color: black;
+  cursor: text;
+}

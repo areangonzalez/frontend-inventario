@@ -64,7 +64,36 @@ button.navbar-toggler{
 
 div.navbar-collapse {
   span {
-    font-size: 1.25rem;
-    color: #036954;
+    font-size: 1.25rem !important;
+    color: #036954 !important;
   }
 }
+
+/* .ds-cabecera-text {
+  margin-left: 0.5rem;
+  text-align: Left;
+}
+.margin-left-title {
+  margin-left: -1.5rem;
+}
+.margin-left-ul {
+  margin-left: 1rem;
+}
+.dropdown-menu {
+  background: #8cc63f;
+}
+.dropdown-item {
+  color: #ccff99 !important;
+}
+.dropdown-item {
+  &:hover {
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: #fff !important;
+    //box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    background: none !important;
+  }
+}
+ */
