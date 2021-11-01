@@ -8,4 +8,8 @@ export interface ConfiguracionListados {
    tipo_egresos?: any;
    egresos?: any;
    localidades?: any;
+   roles?: any;
+   permisos?: any;
+   usuarios?: any;
+   tamanioPagina?: any;
 }

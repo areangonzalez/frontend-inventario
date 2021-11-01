@@ -94,4 +94,47 @@ export class UtilService {
     return pattern.test(numero);
   }
 
+  /**
+   * validacion de numero cuil por su ultimo digito
+   * @param cuit stringo con el numero de cuit
+   * @returns boolean true si es correcto, false si es incorrecto
+   */
+   validarUltimoDigitoCuil(cuit: string) {
+    if (cuit.length !== 11) {
+      return false;
+    }
+
+    let acumulado = 0;
+    let digitos: any = cuit.split('');
+    let digito = parseInt(digitos.pop());
+
+    for (let i = 0; i < digitos.length; i++) {
+      acumulado += digitos[9 - i] * (2 + (i % 6));
+    }
+
+    let verif = 11 - (acumulado % 11);
+
+    if (verif === 11) {
+      verif = 0;
+    } else if (verif === 10) {
+      verif = 9;
+    }
+
+    return digito === verif;
+  }
+
+  fechaHoy() {
+    let date = new Date()
+
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+
+    if(month < 10){
+      return day+"-0"+month+"-"+year;
+    }else{
+      return day+"-"+month+"-"+year;
+    }
+  }
+
 }

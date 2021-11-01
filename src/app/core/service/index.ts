@@ -17,3 +17,5 @@ export * from './inventario-acta.service';
 export * from './jwt.service';
 export * from './autenticacion.service';
 export * from './usuario.service';
+export * from './permisos.service';
+export * from './rol.service';

@@ -5,11 +5,29 @@ import { SharedModule } from '../shared';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
+import {
+  AdministrarRolPermisoComponent, BusquedaAvanzadaComponent, DatosPersonaComponent, DatosUsuarioComponent,
+  UsuarioInfoComponent,
+  AgregarUsuarioModalContent, AgregarUsuarioModalComponent, AltaUsuarioModalContent, AltaUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
+  ConfiguracionTabComponent,
+  BajaUsuarioModalContent,
+  BajaUsuarioModalComponent,
+  UsuariosComponent,
+  UsuarioPermisoListaComponent
+} from "./componentes";
 import { GestorUsuariosComponent } from './gestor-usuarios';
 
 
 @NgModule({
-  declarations: [AdminComponent, GestorUsuariosComponent],
+  declarations: [
+    AdminComponent,
+    AdministrarRolPermisoComponent, BusquedaAvanzadaComponent, DatosPersonaComponent, DatosUsuarioComponent,
+    UsuarioInfoComponent,
+    UsuariosComponent, UsuarioPermisoListaComponent,
+    AgregarUsuarioModalContent, AgregarUsuarioModalComponent, AltaUsuarioModalContent, AltaUsuarioModalComponent, BajaUsuarioModalContent, BajaUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
+    ConfiguracionTabComponent,
+    GestorUsuariosComponent
+  ],
   imports: [
     NgbModule,
     SharedModule,
