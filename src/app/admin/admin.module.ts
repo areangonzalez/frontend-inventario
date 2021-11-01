@@ -5,10 +5,11 @@ import { SharedModule } from '../shared';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
+import { GestorUsuariosComponent } from './gestor-usuarios';
 
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [AdminComponent, GestorUsuariosComponent],
   imports: [
     NgbModule,
     SharedModule,
