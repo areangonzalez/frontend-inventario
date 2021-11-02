@@ -4,7 +4,7 @@
 }
 .nav-name-user {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   text-decoration: none;
   color: black;
 }
@@ -13,4 +13,17 @@
   border-radius: 0;
   color: black;
   cursor: text;
+}
+.nombre-ds {
+  color: #036954;
+  font-size: 11px;
+  /* margin-bottom: 0 !important; */
+  inline-size: 170px;
+  float: right;
+  height: 40px;
+  white-space: break-spaces !important;
+}
+.nombre-sys {
+  color: #036954 !important;
+  font-size: 1.5rem !important;
 }
