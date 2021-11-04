@@ -142,7 +142,7 @@ export class ProductoComponent implements OnInit {
   nuevoProducto(params: Object) {
     this._productoService.guardar(params).subscribe(
       respuesta => {
-        params['id'] = respuesta['id'];
+        params['productoid'] = respuesta['id'];
         this.obtenerListadoDestock.emit(params);
         // refresco el listado del autoCompletar
         this.listarProducto();
