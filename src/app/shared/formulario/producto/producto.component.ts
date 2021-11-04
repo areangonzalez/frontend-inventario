@@ -44,6 +44,7 @@ export class ProductoComponent implements OnInit {
 
   obtenerProducto(producto:any) {
     this.productoSeleccionado = producto;
+    this.productoSeleccionado["productoid"] = producto.id;
     this.productoForm.patchValue(producto);
     this.productoForm.patchValue({productoid: producto.id});
     this.productoForm.patchValue({nombre: producto.nombre});
@@ -57,6 +58,7 @@ export class ProductoComponent implements OnInit {
     }else{
       let productoVerificado:any;
       if (this.productoSeleccionado) {
+        console.log(this.productoSeleccionado)
         /**
          * verifico si hay cambios en cada campo del producto y borro su id para notificar que es un nuevo producto
          */
