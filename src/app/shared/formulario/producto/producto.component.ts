@@ -58,7 +58,6 @@ export class ProductoComponent implements OnInit {
     }else{
       let productoVerificado:any;
       if (this.productoSeleccionado) {
-        console.log(this.productoSeleccionado)
         /**
          * verifico si hay cambios en cada campo del producto y borro su id para notificar que es un nuevo producto
          */

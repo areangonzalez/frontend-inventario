@@ -14,6 +14,7 @@ export class ComprobanteComponent implements OnInit {
   constructor( private _mensajeService: AlertService, private _util: UtilService ) {}
 
   ngOnInit(): void {
+    this.fechaHoy();
   }
 
   validarNumeroComprobante(numero: any, tipo: string) {
@@ -61,6 +62,23 @@ export class ComprobanteComponent implements OnInit {
     }else{
       this.comprobanteForm.controls.fecha_emision.setValue('');
     }
+  }
+  public fechaHoy() {
+    let date = new Date()
+
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+    let fecha: string = "";
+
+    if(month < 10){
+      fecha = year+"-0"+month+"-"+day;
+    }else{
+      fecha = year+"-"+month+"-"+day;
+    }
+
+    this.comprobanteForm.patchValue({'fechaEmision': { day: day, month: month, year: year}})
+    this.comprobanteForm.patchValue({'fecha_emision': fecha})
   }
 
 
