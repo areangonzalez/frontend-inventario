@@ -4,15 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, finalize } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { AutenticacionService, LoaderService } from 'src/app/core/service';
+import { AlertService, AutenticacionService, LoaderService } from 'src/app/core/service';
 
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   private service_count = 0;
-   //constructor(private authenticationService: AuthenticationService) { }
-    constructor(private _auth: AutenticacionService, private _loaderService: LoaderService) { }
+    constructor(private _auth: AutenticacionService, private _loaderService: LoaderService, private _msj: AlertService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       this._loaderService.show();
@@ -25,11 +24,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                 window.location.reload();
             }
             if (err.status === 403) {
-              // auto logout if 401 response returned from api
-              // this.authenticationService.logout();
-              // location.reload(true);
-              console.log(err.status);
-
+              const error = err.error.message || err.statusText;
+              this._msj.cancelado(error);
+              return throwError(error);
             }
             if (err.status === 400) {
               const error = err.error.message || err.statusText;

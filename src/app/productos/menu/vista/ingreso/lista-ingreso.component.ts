@@ -31,7 +31,8 @@ export class ListaIngresoComponent {
     this.ordenarTabla.emit(this.sort);
   }
 
-  actualizarListado(confirmacion: any) {
+  actualizarListado(confirmacion: any, pagina: number) {
+    this.cambioPagina(pagina);
     console.log("confirmacion de guardado: ", confirmacion);
 
   }

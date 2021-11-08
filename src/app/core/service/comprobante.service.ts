@@ -38,6 +38,8 @@ export class ComprobanteService implements Resolve<any>{
   }
 
   resolve() {
-    return this._http.get('/comprobantes');
+    let httpParams = new HttpParams();
+    httpParams = this._http.formatParams(httpParams, { sort: '-nro_remito', page: 0 });
+    return this._http.get('/comprobantes', httpParams);
   }
 }

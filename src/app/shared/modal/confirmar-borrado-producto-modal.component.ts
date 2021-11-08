@@ -34,8 +34,10 @@ export class ConfirmarBorradoProductoModalContent {
   }
 
   confirmar(confirmacion:boolean) {
-    this.listado.splice(this.id, 1);
-    this._ativeModal.close(true);
+    if (confirmacion) {
+      this.listado.splice(this.id, 1);
+    }
+    this._ativeModal.close(confirmacion);
   }
 }
 
