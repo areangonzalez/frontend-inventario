@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import es from "@angular/common/locales/es";
 import { registerLocaleData } from "@angular/common";
@@ -46,7 +46,8 @@ registerLocaleData(es);
     { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    BreadcrumbsService,
+    Title,
+    BreadcrumbsService
 
     // fake backend
     // fakeBackendProvider

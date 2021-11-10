@@ -16,7 +16,8 @@
 }
 .nombre-ds {
   color: #036954;
-  font-size: 11px;
+  font-size: 12px;
+  font-family: 'Montserrat';
   /* margin-bottom: 0 !important; */
   inline-size: 170px;
   float: right;
@@ -26,4 +27,6 @@
 .nombre-sys {
   color: #036954 !important;
   font-size: 1.5rem !important;
+  font-family: 'Montserrat';
+  text-transform:uppercase;
 }

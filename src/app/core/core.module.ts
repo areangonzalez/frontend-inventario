@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import {
   LoaderService, AlertService, UtilService, ConfiguracionParaPaginarService, BreadcrumbsService, ApiService, ProductoService, CategoriaService,
-  UnidadMedidaService, MarcaService, InventarioService, ComprobanteService, EgresoService, LocalidadService, InventarioActaService, AutenticacionService, UsuarioService, RolService, JwtService
+  UnidadMedidaService, MarcaService, InventarioService, ComprobanteService, EgresoService, LocalidadService, InventarioActaService, AutenticacionService,
+  UsuarioService, RolService, JwtService, TitleService
  } from "./service";
 
 
 @NgModule({
   declarations: [
     LoaderService, AlertService, UtilService, ConfiguracionParaPaginarService, BreadcrumbsService, ApiService, ProductoService, CategoriaService,
-    UnidadMedidaService, MarcaService, InventarioService, ComprobanteService, EgresoService, LocalidadService, InventarioActaService, AutenticacionService, UsuarioService, RolService, JwtService
+    UnidadMedidaService, MarcaService, InventarioService, ComprobanteService, EgresoService, LocalidadService, InventarioActaService, AutenticacionService,
+    UsuarioService, RolService, JwtService, TitleService
   ],
   imports: [
     CommonModule

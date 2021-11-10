@@ -29,13 +29,15 @@ import { map } from 'rxjs/operators';
     </div>
     <div class="modal-footer d-flex justify-content-between">
     <button type="button" class="btn btn-outline-danger" (click)="cerrarModal(false)"><i class="fas fa-ban"></i> Cancelar</button>
-      <button type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
+      <button *ngIf="(tipoForm === 'agregar')" type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
+      <button *ngIf="(tipoForm === 'editar')" type="button" class="btn btn-outline-success" (click)="guardar()"><i class="far fa-check-circle"></i> Aprobar Comprobante</button>
     </div>
   `
 })
 export class ComprobanteModalContent implements OnInit {
   @Input("titulo") public titulo: string;
   @Input("listados") public listados: ConfiguracionListados;
+  @Input("tipoForm") public tipoForm: string;
   @Input("comprobanteid") public comprobanteid: any; // id del comprobante
   public listadoDeStock: any = [];
   public comprobanteForm: FormGroup;
@@ -160,6 +162,7 @@ export class ComprobanteModalComponent {
     modalRef.componentInstance.titulo = this.titulo;
     modalRef.componentInstance.listados = this.listados;
     modalRef.componentInstance.comprobanteid = this.comprobanteid;
+    modalRef.componentInstance.tipoForm = this.tipoForm;
     modalRef.result.then(
       (result) => {
           if (result == 'close') {

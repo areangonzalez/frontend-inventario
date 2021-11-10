@@ -20,8 +20,6 @@ export class AutenticacionService {
   login(params) {
     return this._http.post('/usuarios/login', { username: params.username, password_hash: params.password })
             .pipe(map(user => {
-              console.log(user);
-
               // login successful if there's a jwt token in the response
               if (user && user.access_token) {
                   this._jwtService.saveToken(user);

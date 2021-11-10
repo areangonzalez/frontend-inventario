@@ -31,7 +31,7 @@ export class ComprobanteService implements Resolve<any>{
 
   guardar(param: Object, id?:number) {
     if (id !== undefined) {
-      return this._http.put('/comprobantes/' + id, param);
+      return this._http.put('/comprobantes/aprobar/' + id, param);
     }else {
       return this._http.post('/comprobantes', param);
     }

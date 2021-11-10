@@ -1,7 +1,7 @@
-/* body {
-  overflow: hidden;
-  background-color: #eeeeee;
-} */
+body {
+  font-family: 'Montserrat', 'Times New Roman', Times, serif;
+  background-color: #eee;
+}
 .app-container {
   position: absolute;
   width: 100%;
@@ -30,6 +30,4 @@ td {
   border: #8cc63f;
   box-shadow: 0 0 0 0.2rem #8cc63f;
 }
-body {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
+

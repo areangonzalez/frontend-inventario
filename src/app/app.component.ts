@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TitleService } from 'src/app/core/service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend-gestor-inventario';
+  constructor(private _titleService: TitleService,) { }
+
+  ngOnInit(): void {
+    this._titleService.init();
+  }
 }

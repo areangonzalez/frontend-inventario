@@ -14,7 +14,7 @@
         <th scope="col" class="text-center pointer" (click)="ordenar('fecha_emision')">
           <i *ngIf="(sort !== 'fecha_emision' && sort !== '-fecha_emision')" class="fas fa-sort"></i><i *ngIf="(sort == 'fecha_emision')" class="fas fa-sort-up"></i><i *ngIf="(sort == '-fecha_emision')" class="fas fa-sort-down"></i> Fecha
         </th>
-        <th scope="col" class="text-center">Cantidad de Productos</th>
+        <th scope="col" class="text-center">Cant. de Productos</th>
         <th scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
@@ -26,7 +26,7 @@
         <th scope="col" class="text-center">
           <div class="btn-group" role="group" aria-label="agrupacion">
             <abrir-vista-comprobante-modal class="btn-group" [idComprobante]="comprobante.id" ></abrir-vista-comprobante-modal>
-            <abrir-comprobante-modal *ngIf="(comprobante.editable)" class="btn-group" [tipoForm]="'editar'" [titulo]="'Editar Comprobante'" [listados]="listas" [comprobanteid]="comprobante.id" (seGuardo)="actualizarListado($event, configPaginacion.page)" ></abrir-comprobante-modal>
+            <abrir-comprobante-modal *ngIf="(comprobante.editable)" class="btn-group" [tipoForm]="'editar'" [titulo]="'Aprobar Comprobante'" [listados]="listas" [comprobanteid]="comprobante.id" (seGuardo)="actualizarListado($event, configPaginacion.page)" ></abrir-comprobante-modal>
           </div>
         </th>
       </tr>
