@@ -26,7 +26,7 @@
         <th scope="col" class="text-center">
           <div class="btn-group" role="group" aria-label="agrupacion">
             <abrir-vista-comprobante-modal class="btn-group" [idComprobante]="comprobante.id" ></abrir-vista-comprobante-modal>
-            <abrir-comprobante-modal *ngIf="(comprobante.editable)" class="btn-group" [tipoForm]="'editar'" [titulo]="'Aprobar Comprobante'" [listados]="listas" [comprobanteid]="comprobante.id" (seGuardo)="actualizarListado($event, configPaginacion.page)" ></abrir-comprobante-modal>
+            <abrir-comprobante-modal *ngIf="(!comprobante.approved)" class="btn-group" [tipoForm]="'editar'" [titulo]="'Aprobar Comprobante'" [listados]="listas" [comprobanteid]="comprobante.id" (seGuardo)="actualizarListado($event, configPaginacion.page)" ></abrir-comprobante-modal>
           </div>
         </th>
       </tr>

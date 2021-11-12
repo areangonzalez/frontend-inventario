@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ConfigurarPagina } from "../model";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ConfiguracionParaPaginarService {
 
   constructor() {}

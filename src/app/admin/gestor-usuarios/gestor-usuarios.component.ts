@@ -18,9 +18,10 @@ export class GestorUsuariosComponent implements OnInit {
   constructor(private _route: ActivatedRoute, private _usuarioService: UsuarioService, private _configPagina: ConfiguracionParaPaginarService, private _msj: AlertService) { }
 
   ngOnInit() {
-    this.prepararListadoUsuario(this._route.snapshot.data["usuarios"], 1);
-    this.listas.roles = this._route.snapshot.data["roles"];
+    // this.prepararListadoUsuario(this._route.snapshot.data["usuarios"], 1);
+    this.prepararListadoUsuario({resultado: this._route.snapshot.data["usuarios"]}, 1); // sacar cuando api este completo
     this.listas.permisos = this._route.snapshot.data["permisos"];
+    this.listas.roles = [{name: 'Usuario'}];
   }
   /**
    * @function buscar busca en listado

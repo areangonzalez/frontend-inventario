@@ -13,7 +13,7 @@
      </ul>
     <ul class="navbar-nav" [ngStyle]="{'flex-column': !isCollapsed}" *ngIf="estoyLogueado()">
       <li class="" ><a class="nav-name-user" ><i class="fas fa-user-tie"></i>&nbsp;&nbsp;{{nombreUsuario}}</a></li>
-      <li class="" [routerLinkActive]="['active']" ><a class="nav-link" [routerLink]="['/admin']" ><i class="fas fa-users-cog"></i> Gestion de Usuarios</a></li>
+      <li class="" [routerLinkActive]="['active']" ><a class="nav-link" [routerLink]="['/admin/gestor-usuarios']" ><i class="fas fa-users-cog"></i> Gestion de Usuarios</a></li>
       <li class="" ><a class="nav-link" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
     </ul>
   </div>

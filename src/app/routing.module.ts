@@ -19,7 +19,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Productos', breadcrumb: 'Productos' },
+    data: { title: 'Gestión de Usuarios', breadcrumb: 'Gestión de Usuarios' },
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
