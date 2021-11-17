@@ -21,7 +21,12 @@
         <th scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="(listaEgreso.length == 0)">
+      <tr>
+        <td class="text-center bg-warning" rowspan="1" colspan="5"><strong>NO SE HAN ENCONTRADO RESULTADOS</strong></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listaEgreso.length > 0)">
       <tr *ngFor="let acta of listaEgreso">
         <td class="ancho-celda-vencimiento text-center">{{acta.fecha | date: 'dd/MM/yyyy'}}</td>
         <td class="text-center">{{acta.nro_acta}}</td>

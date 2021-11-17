@@ -18,7 +18,12 @@
         <th scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="(listas.comprobantes.length == 0)">
+      <tr>
+        <td class="text-center bg-warning" rowspan="1" colspan="4"><strong>NO SE HAN ENCONTRADO RESULTADOS</strong></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listas.comprobantes.length > 0)">
       <tr *ngFor="let comprobante of listas.comprobantes">
         <td class="text-center">{{comprobante.nro_remito}}</td>
         <td class="ancho-celda-vencimiento text-center">{{comprobante.fecha_emision | date: 'dd/MM/yyyy'}}</td>
