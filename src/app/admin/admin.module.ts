@@ -1,7 +1,7 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from '../shared';
-
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -30,6 +30,7 @@ import { GestorUsuariosComponent } from './gestor-usuarios';
   ],
   imports: [
     NgbModule,
+    NgSelectModule,
     SharedModule,
     AdminRoutingModule
   ],

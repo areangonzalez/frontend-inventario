@@ -9,3 +9,4 @@ $enable-responsive-font-sizes: true;
 /* Estilos globales */
 @import './assets/estilos/global-style.scss';
 @import './assets/estilos/layout.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
