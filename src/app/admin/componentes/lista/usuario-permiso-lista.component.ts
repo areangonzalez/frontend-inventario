@@ -7,7 +7,7 @@ import { UsuarioService, AlertService } from './../../../core/service';
   styleUrls: ['./usuario-permiso-lista.component.scss']
 })
 export class UsuarioPermisoListaComponent implements OnInit {
-  @Input("listaConvenioPermisos") public listaConvenioPermisos: any;
+  @Input("listaUsuarioPermisos") public listaUsuarioPermisos: any;
   @Output("editarPermisoUsuario") public editarPermisoUsuario = new EventEmitter();
 
   constructor(private _usuarioService: UsuarioService, private _msj: AlertService) { }
@@ -31,18 +31,18 @@ export class UsuarioPermisoListaComponent implements OnInit {
     }
   }
   /**
-   * Actuliza el listado de los permisos por programa
+   * Actuliza el listado de los permisos
    * @param idUsuario identificador del usuario que sirve para obtener el listado del mismo
    */
   actualizarListado(idUsuario: number) {
     this._usuarioService.listarAsignacion(idUsuario).subscribe(
-      listado => { this.listaConvenioPermisos = listado; },
+      listado => { this.listaUsuarioPermisos = listado; },
       error => { this._msj.cancelado(error); }
     )
   }
 
-  editarPermiso(convenioPermiso:any){
-    this.editarPermisoUsuario.emit(convenioPermiso);
+  editarPermiso(permisos:any){
+    this.editarPermisoUsuario.emit(permisos);
   }
 
 }

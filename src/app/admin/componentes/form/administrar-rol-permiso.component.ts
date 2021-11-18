@@ -1,4 +1,3 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertService, UsuarioService } from './../../../core/service';
 
@@ -9,21 +8,15 @@ import { AlertService, UsuarioService } from './../../../core/service';
 })
 export class AdministrarRolPermisoComponent implements OnInit {
   @Input("idUsuario") private idUsuario: number;
-  @Input("listaConvenio") public listaConvenio: any;
   @Input("listaPermisos") public listaPermisos: any;
   @Input("baja") public baja: boolean;
-  public listaConvenioPermisos: any = [{ lista_coonvenio: { lista_permiso: [] }}];
+  public listaUsuarioPermisos: any = {lista_permiso: []};
   public permisosSeleccionados: any = [];
   public permisosSeleccionadosEdit: any = [];
-  public datos: FormGroup;
   public submitted: boolean = false;
   public editado: boolean = false;
 
-  constructor(private _msj: AlertService, private _usuarioService: UsuarioService, private _fb: FormBuilder) {
-    this.datos = _fb.group({
-      tipo_convenioid: ['', [Validators.required]]
-    });
-  }
+  constructor(private _msj: AlertService, private _usuarioService: UsuarioService) {}
 
   ngOnInit() {
     this.obtenerListaPermisos(this.idUsuario);
@@ -36,7 +29,7 @@ export class AdministrarRolPermisoComponent implements OnInit {
     this._usuarioService.listarAsignacion(idUsuario).subscribe(
       respuesta => {
         // guardo el listado con roles y sus permisos
-        this.listaConvenioPermisos = respuesta;
+        this.listaUsuarioPermisos = respuesta;
       }, error => { this._msj.cancelado(error); }
     )
   }
@@ -46,9 +39,7 @@ export class AdministrarRolPermisoComponent implements OnInit {
   validarDatos() {
     this.submitted = true;
     let permisos: any = [];
-    if (this.datos.invalid) {
-      return;
-    }else if (this.permisosSeleccionados.length == 0) {
+    if (this.permisosSeleccionados.length == 0) {
       this._msj.cancelado("No se ha seleccionado ningun permiso.");
       return;
     }else{
@@ -65,7 +56,6 @@ export class AdministrarRolPermisoComponent implements OnInit {
 
       let params: any  = {
         usuarioid: this.idUsuario,
-        tipo_convenioid: this.datos.value.tipo_convenioid,
         lista_permiso: (this.editado) ? permisos : this.permisosSeleccionados
       };
 
@@ -81,8 +71,8 @@ export class AdministrarRolPermisoComponent implements OnInit {
       respuesta => {
         this._msj.exitoso("Se han agregado correctamente el convenio y los permisos al usuario.");
         this.obtenerListaPermisos(this.idUsuario);
+        this.limpiarDatos();
         this.editado = false;
-        this.limpiarForm();
       }, error => { this._msj.cancelado(error); }
     );
   }
@@ -91,17 +81,16 @@ export class AdministrarRolPermisoComponent implements OnInit {
    * @param permisos los datos del ususario con convenio y permisos
    */
   editarPermisos(permisos: any){
-    this.datos.patchValue({tipo_convenioid: permisos.tipo_convenioid});
-    this.permisosSeleccionados = permisos.lista_permiso;
+    console.log(permisos);
+
+    this.permisosSeleccionados = permisos;
     this.editado = true;
   }
   /**
    * se limpia el formulario y listado
    */
-  limpiarForm() {
-    this.datos.reset();
+  limpiarDatos() {
     this.permisosSeleccionados = [];
-    this.datos.patchValue({tipo_convenioid: ""});
   }
 
 }

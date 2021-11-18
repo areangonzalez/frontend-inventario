@@ -1,26 +1,19 @@
 <table class="table table-sm">
   <thead class="background-menu">
-    <th scope="col">Convenio</th>
     <th scope="col">Permisos</th>
     <th></th>
   </thead>
-  <tbody *ngIf="(listaConvenioPermisos !== undefined && listaConvenioPermisos.length == 0)">
-    <td scope="row" class="text-center bg-warning" rowspan="1" colspan="3"><strong>El usuario no tiene Rol/es y permiso/s</strong></td>
+  <tbody *ngIf="(listaUsuarioPermisos.lista_permiso !== undefined && listaUsuarioPermisos.lista_permiso.length == 0)">
+    <td scope="row" class="text-center bg-warning" rowspan="1" colspan="2"><strong>El usuario no tiene permiso/s</strong></td>
   </tbody>
-  <tbody *ngIf="(listaConvenioPermisos !== undefined && listaConvenioPermisos.length > 0)">
-    <tr *ngFor="let convenio of listaConvenioPermisos">
+  <tbody *ngIf="(listaUsuarioPermisos.lista_permiso !== undefined && listaUsuarioPermisos.lista_permiso.length > 0)">
+    <tr>
       <td scope="row">
-        <span class="badge badge-pill badge-info m-1">{{convenio.tipo_convenio}}</span>
+        <span class="badge badge-pill badge-info m-1" *ngFor="let permiso of listaUsuarioPermisos.lista_permiso" >{{permiso}}</span>
       </td>
-      <td *ngIf="(convenio.lista_permiso !== undefined && convenio.lista_permiso.length == 0)" class="text-center" scope="row">
-        <strong>Sin permisos</strong>
-      </td>
-      <td *ngIf="(convenio.lista_permiso !== undefined && convenio.lista_permiso.length > 0)" scope="row">
-        <span *ngFor="let permiso of convenio.lista_permiso" class="badge badge-pill badge-info m-1">{{permiso}}</span>
-      </td>
-      <td class="text-center">
-        <button type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="Editar permisos y convenio" container="body" placement="top" (click)="editarPermiso(convenio)"><i class="far fa-edit"></i></button>
-        <admin-confirmar-borrar-permiso-usuario-modal (confirmarBorrado)="borrarDato(convenio, $event)"></admin-confirmar-borrar-permiso-usuario-modal>
+      <td class="text-right">
+        <button type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="Editar permisos y convenio" container="body" placement="top" (click)="editarPermiso(listaUsuarioPermisos.lista_permiso)"><i class="far fa-edit"></i></button>
+        <admin-confirmar-borrar-permiso-usuario-modal (confirmarBorrado)="borrarDato(listaUsuarioPermisos, $event)"></admin-confirmar-borrar-permiso-usuario-modal>
       </td>
     </tr>
   </tbody>
