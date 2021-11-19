@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
     this._autenticacion.login(this.loginForm.value)
     .pipe(first())
     .subscribe(
-      respuesta => {
-        this._router.navigate([this.returnUrl]);
+      user => {
+        this.redirigirUsuario(user.rol);
       }, error => {
         this.huboError = true;
         this.mensaje = "Por favor verifique sus datos.";
@@ -47,6 +47,14 @@ export class LoginComponent implements OnInit {
     if (localStorage.getItem('token-gdi') != null) {
       this._router.navigate(['/productos']);
     }
+  }
+
+  redirigirUsuario(userRol: string) {
+      if ( userRol === 'soporte') {
+        this._router.navigate(['./admin']);
+      } else {
+        this._router.navigate(['./productos']);
+      }
   }
 
 }

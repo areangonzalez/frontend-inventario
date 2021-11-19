@@ -6,19 +6,27 @@ import { AutenticacionService } from '../service';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
-        private router: Router,
-        private authenticationService: AutenticacionService
+        private _router: Router,
+        private _auth: AutenticacionService
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (localStorage.getItem('token-gdi')) {
-            // logged in so return true
-            return true;
-        }
+      let autorizacion = this._auth.loggedIn;
+      const roles = route.data['rol'];
+      let cont = 0;
+      if (roles && autorizacion) {
+          for (const rol of roles) {
+            if ( rol === autorizacion.rol) {
+              cont++;
+            }
+          }
+          return autorizacion && cont > 0;
+      }
+      if (autorizacion) { return true; }
+      // not logged in so redirect to login page with the return url
 
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-        return false;
+      this._router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+      return false;
     }
 
     canActiveChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean {

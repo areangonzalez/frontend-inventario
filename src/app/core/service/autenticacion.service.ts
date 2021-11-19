@@ -23,8 +23,8 @@ export class AutenticacionService {
               // login successful if there's a jwt token in the response
               if (user && user.access_token) {
                   this._jwtService.saveToken(user);
-                  return true;
                 }
+              return user;
             }));
   }
 
