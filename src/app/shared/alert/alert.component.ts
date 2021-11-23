@@ -71,4 +71,40 @@ export class AlertComponent implements OnInit, OnDestroy {
 
         return classes.join(' ');
     }
+
+    iconClass(tipo: number) {
+      if (!alert) { return; }
+        switch (tipo) {
+            case AlertType.Exitoso:
+              return 'far fa-check-circle';
+            case AlertType.Cancelado:
+              return 'far fa-times-circle';
+            case AlertType.Confirmar:
+              return 'far fa-check-circle';
+        }
+    }
+
+    cssIconColor(tipo: number) {
+      if (!alert) { return; }
+        switch (tipo) {
+            case AlertType.Exitoso:
+              return 'text-success';
+            case AlertType.Cancelado:
+              return 'text-danger';
+            case AlertType.Confirmar:
+              return 'text-success';
+        }
+    }
+
+    obtenerTitulo(tipo: number) {
+      if (!alert) { return; }
+        switch (tipo) {
+            case AlertType.Exitoso:
+              return 'Exitoso';
+            case AlertType.Cancelado:
+              return 'Cancelado';
+            case AlertType.Confirmar:
+              return 'Confirmar';
+        }
+    }
 }

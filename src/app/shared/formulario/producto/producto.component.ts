@@ -148,7 +148,8 @@ export class ProductoComponent implements OnInit {
         // refresco el listado del autoCompletar
         this.listarProducto();
       }, error => {
-        this._mensajeService.cancelado(error.message);
+        console.log(error);
+        this._mensajeService.cancelado(error);
       }
     );
   }

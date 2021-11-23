@@ -4,7 +4,7 @@
       <input type="text" class="form-control" [(ngModel)]="global_param" id="buscar-stock" placeholder="Buscar por nombre de producto Ej.: Azucar" (keyup.enter)="buscar()" >
       <div class="input-group-append btn-group">
         <button type="button" ngbTooltip="Buscar" container="body" class="btn btn-outline-primary" (click)="buscar()"><i class="fas fa-search"></i></button>
-        <button type="button" class="btn btn-outline-danger" ngbTooltip="Limpiar Campos" container="body" (click)="limpiarCampos()"><i class="fas fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-outline-danger" ngbTooltip="Limpiar Campos" container="body" placement="top-right" (click)="limpiarCampos()"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
   </div>

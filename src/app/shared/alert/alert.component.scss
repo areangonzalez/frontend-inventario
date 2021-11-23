@@ -31,3 +31,15 @@
   -moz-box-shadow: 0px 11px 28px 5px rgba(61,61,61,1);
   box-shadow: 0px 11px 28px 5px rgba(61,61,61,1);
 }
+
+.altura-info-adicional {
+  overflow-y: auto;
+  max-height: 230px !important;
+}
+.mod-border-rounded {
+  border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  -webkit-border-radius: 10px !important;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

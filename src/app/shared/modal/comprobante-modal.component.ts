@@ -122,13 +122,13 @@ export class ComprobanteModalContent implements OnInit {
             respuesta => {
               this._mensaje.exitoso("El comprobante ha sido guardado con éxito!");
               this.cerrarModal(true);
-            }, error => { this._mensaje.cancelado(error.message); });
+            }, error => { this._mensaje.cancelado(error); });
         }else{
           this._comprobanteService.guardar(parametros).subscribe(
             respuesta => {
               this._mensaje.exitoso("El stock ha sido guardado con éxito!");
               this.cerrarModal(true);
-            }, error => { this._mensaje.cancelado(error.message); });
+            }, error => { this._mensaje.cancelado(error); });
           }
         }
     }
