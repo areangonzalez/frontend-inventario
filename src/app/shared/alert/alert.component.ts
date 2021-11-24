@@ -96,6 +96,18 @@ export class AlertComponent implements OnInit, OnDestroy {
         }
     }
 
+    buttonColor(tipo: number) {
+      if (!alert) { return; }
+        switch (tipo) {
+            case AlertType.Exitoso:
+              return 'btn btn-success';
+            case AlertType.Cancelado:
+              return 'btn btn-danger';
+            case AlertType.Confirmar:
+              return 'btn btn-success';
+        }
+    }
+
     obtenerTitulo(tipo: number) {
       if (!alert) { return; }
         switch (tipo) {
