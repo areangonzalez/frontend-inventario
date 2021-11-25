@@ -15,7 +15,7 @@ export class ComprobanteService implements Resolve<any>{
   }
 
   actualizarProductoFaltante(id:number, params: object) {
-    return this._http.put("/comprobantes/registrar-producto-pendiente/" + id, params);
+    return this._http.put("/comprobantes/set-producto-faltante/" + id, params);
   }
 
   guardarObservacion(params: object, id: number) {
