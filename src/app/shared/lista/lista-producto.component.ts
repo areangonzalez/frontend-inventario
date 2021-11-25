@@ -65,11 +65,9 @@ export class ListaProductoComponent implements OnInit {
   }
   /**
    * Registra un producto que ha sido devuelto
-   * @param productoOrigen producto real
-   * @param indiceProductoOrigen indice del producto en el listado
    * @param productoNuevo prodcuto modificado
    */
-  registrarProductoDevuelto(productoOrigen:any, indiceProductoOrigen:number, productoNuevo:any) {
+  registrarProductoDevuelto(productoNuevo:any) {
 
     let producto: object = {
       cantidad: productoNuevo["cantidad"], productoid: productoNuevo["productoid"],

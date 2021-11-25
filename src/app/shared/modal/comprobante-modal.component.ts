@@ -30,7 +30,8 @@ import { map } from 'rxjs/operators';
     <div class="modal-footer d-flex justify-content-between">
     <button type="button" class="btn btn-outline-danger" (click)="cerrarModal(false)"><i class="fas fa-ban"></i> Cancelar</button>
       <button *ngIf="(tipoForm === 'agregar')" type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
-      <button *ngIf="(tipoForm === 'editar')" type="button" class="btn btn-outline-success" (click)="guardar()"><i class="far fa-check-circle"></i> Aprobar Comprobante</button>
+      <button *ngIf="(tipoForm === 'editar')" type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
+      <button *ngIf="(tipoForm === 'editar')" type="button" class="btn btn-outline-primary" (click)="guardar()"><i class="far fa-check-circle"></i> Aprobar Comprobante</button>
     </div>
   `
 })
