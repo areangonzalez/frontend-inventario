@@ -17,11 +17,11 @@
         <div class="align-self-start collapse nabvar-collapse sidebar" id="navbarCollapse" [ngbCollapse]="!isCollapsed">
           <ul class="flex-column navbar-nav w-100">
             <li class="nav-item" [routerLinkActive]="['active']">
-              <a class="nav-link" [routerLink]="['gestor-usuarios']"><i class="fas fa-university"></i> Gestión de Usuarios</a>
+              <a class="nav-link" [routerLink]="['gestor-usuarios']"><i class="fas fa-users-cog"></i> Gestión de Usuarios</a>
             </li>
-            <!-- <li class="nav-item" [routerLinkActive]="['active']">
-              <a class="nav-link" [routerLink]="['/productos']"><i class="fas fa-university"></i> Stock</a>
-            </li> -->
+            <li class="nav-item" [routerLinkActive]="['active']">
+              <a class="nav-link" [routerLink]="['/productos']"><i class="fas fa-boxes"></i> Stock</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" (click)="cerrarSesion()" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
             </li>
