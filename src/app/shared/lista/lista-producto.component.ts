@@ -49,9 +49,8 @@ export class ListaProductoComponent implements OnInit {
   modificarProductoFaltante(idComprobante: number, params:object) {
     this._comprobanteService.actualizarProductoFaltante(this.idComprobante, params).subscribe(
       respuesta => {
-        console.log(respuesta);
         this.refrescarStock(respuesta["comprobanteid"]);
-      }, error => { this._mensaje.cancelado(error.message); }
+      }, error => { this._mensaje.cancelado(error); }
     )
   }
   /**
@@ -62,7 +61,7 @@ export class ListaProductoComponent implements OnInit {
       this._comprobanteService.buscarPorId(idComprobante).subscribe(
         respuesta => {
           this.stock = respuesta["lista_producto"];
-        }, error => { this._mensaje.cancelado(error.message); })
+        }, error => { this._mensaje.cancelado(error); })
   }
   /**
    * Registra un producto que ha sido devuelto
@@ -71,7 +70,6 @@ export class ListaProductoComponent implements OnInit {
    * @param productoNuevo prodcuto modificado
    */
   registrarProductoDevuelto(productoOrigen:any, indiceProductoOrigen:number, productoNuevo:any) {
-    productoOrigen['cantidad'] = parseInt(productoOrigen['cantidad']) - parseInt(productoNuevo['cantidad']);
 
     let producto: object = {
       cantidad: productoNuevo["cantidad"], productoid: productoNuevo["productoid"],
