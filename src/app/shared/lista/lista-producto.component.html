@@ -20,6 +20,7 @@
         <td class="ancho-celda-vencimiento text-center">{{(item.falta) ? '' : item.fecha_vencimiento | date: 'dd/MM/yyyy'}}</td>
         <th scope="col" class="text-center">
           <abrir-confirmacion-borrado-producto-modal *ngIf="borrar" [texto]="'producto'" [indexListado]="i" [listado]="stock"></abrir-confirmacion-borrado-producto-modal>
+          <agregar-cantidad-faltante-producto-modal *ngIf="(!item.falta && (!vista))" [producto]="item" [cantidadProductoMaximo]="item.cantidad" [vista]="vista" (productoFaltante)="obtenerProductoFaltante(item, i, $event)"></agregar-cantidad-faltante-producto-modal>
           <agregar-cantidad-devolucion-producto-modal *ngIf="(item.falta && !borrar)" [cantidadProductoMaximo]="item.cantidad" [producto]="item" (productoDevolucion)="registrarProductoDevuelto(item, i, $event)" ></agregar-cantidad-devolucion-producto-modal>
         </th>
       </tr>
