@@ -8,20 +8,20 @@ import { AuthGuard } from '../core/guard/auth.guard';
 
 
 const routes: Routes = [
-  /* {  path: '', redirectTo: 'gestor-usuarios', pathMatch: 'full' }, */
+  {  path: '', redirectTo: 'gestor-usuarios', pathMatch: 'full' },
   {
     path: '', component: AdminComponent,
     canActivate: [AuthGuard],
-    data: { loading: true, preload: true, breadcrumb: 'Administración', title: 'Administración'/* , rol: ['soporte', 'admin'] */ },
+    data: { loading: true, preload: true, breadcrumb: 'Administración', title: 'Administración', rol: ['soporte', 'admin'] },
   },{
     path: 'gestor-usuarios', component: GestorUsuariosComponent,
     canActivate: [AuthGuard],
-    data: { loading: true, title: 'Gestión de Usuarios'/* , rol: ['soporte', 'admin'] */ },
+    data: { loading: true, title: 'Gestión de Usuarios', rol: ['soporte', 'admin'] },
     resolve: { usuarios: UsuarioService, permisos: PermisosService, localidades: LocalidadService, roles: RolService }
   },{
     path: 'info-adicional', component: InfoAdicionalComponent,
     canActivate: [AuthGuard],
-    data: { loading: true, title: 'Gestión de Usuarios'/* , rol: ['soporte', 'admin'] */ },
+    data: { loading: true, title: 'Información Adicional', rol: ['soporte', 'admin'] },
     resolve: { permisos: PermisosService }
   }
 ];

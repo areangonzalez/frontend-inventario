@@ -6,7 +6,7 @@ import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class EgresoService {
+export class EgresoService implements Resolve<any> {
 
   constructor(private _http: ApiService) { }
 

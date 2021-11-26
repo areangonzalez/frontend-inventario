@@ -5,7 +5,7 @@ import { Resolve } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class LocalidadService {
+export class LocalidadService implements Resolve<any>{
 
   constructor(private _http: ApiService) { }
 

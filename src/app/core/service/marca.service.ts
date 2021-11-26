@@ -5,7 +5,7 @@ import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MarcaService {
+export class MarcaService implements Resolve<any> {
 
   constructor(private http: ApiService) { }
 

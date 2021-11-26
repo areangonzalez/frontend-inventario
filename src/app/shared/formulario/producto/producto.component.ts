@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { ConfiguracionListados } from 'src/app/core/model';
 import { UtilService, ProductoService, AlertService } from 'src/app/core/service';
 
@@ -21,8 +20,7 @@ export class ProductoComponent implements OnInit {
   public focusAuto: boolean = false;
 
   constructor(
-    private _fb: FormBuilder, private _route: ActivatedRoute,
-    private _util: UtilService, private _productoService: ProductoService,
+    private _fb: FormBuilder, private _util: UtilService, private _productoService: ProductoService,
     private _mensajeService: AlertService
   ) {
     this.productoForm = _fb.group({
@@ -148,7 +146,6 @@ export class ProductoComponent implements OnInit {
         // refresco el listado del autoCompletar
         this.listarProducto();
       }, error => {
-        console.log(error);
         this._mensajeService.cancelado(error);
       }
     );

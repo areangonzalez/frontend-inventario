@@ -33,8 +33,6 @@ export class ListaIngresoComponent {
 
   actualizarListado(confirmacion: any, pagina: number) {
     this.cambioPagina(pagina);
-    console.log("confirmacion de guardado: ", confirmacion);
-
   }
 
 }

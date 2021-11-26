@@ -113,7 +113,6 @@ export class BaIngresoComponent {
    * @param datos objeto que contiene el valor del input
    */
   validarNumero(datos: any){
-    console.log(datos.value)
     if (!this._util.validarNumero(datos.value)) {
       datos.value = datos.value.substring(0,datos.value.length - 1);
       this.busquedaAvanzada.get("unidad").patchValue(datos.value);

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ConfiguracionListados } from 'src/app/core/model';
 import { UtilService } from 'src/app/core/service';
 

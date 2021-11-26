@@ -5,7 +5,7 @@ import { Resolve } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class TipoEgresoService {
+export class TipoEgresoService implements Resolve<any>{
 
   constructor( private _http: ApiService ) { }
 

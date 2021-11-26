@@ -6,7 +6,7 @@ import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class RolService implements Resolve <any> {
+export class RolService implements Resolve<any> {
 
   constructor( private _api: ApiService ) { }
 

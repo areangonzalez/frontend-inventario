@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService, UtilService } from 'src/app/core/service';
+import { FormGroup } from '@angular/forms';
+import { UtilService } from 'src/app/core/service';
 
 @Component({
   selector: 'form-comprobante',
@@ -11,7 +11,7 @@ export class ComprobanteComponent implements OnInit {
   @Input("comprobante") public comprobanteForm: FormGroup;
   @Input("submitted") public submitted: boolean;
 
-  constructor( private _mensajeService: AlertService, private _util: UtilService ) {}
+  constructor( private _util: UtilService ) {}
 
   ngOnInit(): void {
     this.fechaHoy();

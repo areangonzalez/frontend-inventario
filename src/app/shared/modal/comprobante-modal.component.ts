@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InventarioService, AlertService, ComprobanteService, UtilService } from 'src/app/core/service';
+import { AlertService, ComprobanteService, UtilService } from 'src/app/core/service';
 import { ConfiguracionListados } from 'src/app/core/model';
 import { map } from 'rxjs/operators';
 

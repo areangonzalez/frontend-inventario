@@ -6,17 +6,9 @@ import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class InventarioService {
+export class InventarioService implements Resolve<any>{
 
   constructor( private _http: ApiService) { }
-
-  // guardar(param: Object, id?:number) {
-  //   if (id !== undefined) {
-  //     return this._http.put('/inventarios/' + id, param);
-  //   }else {
-  //     return this._http.post('/inventarios', param);
-  //   }
-  // }
 
   buscar(params: any) {
     let httpParams = new HttpParams();

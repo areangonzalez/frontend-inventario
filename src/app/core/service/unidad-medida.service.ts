@@ -5,7 +5,7 @@ import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UnidadMedidaService {
+export class UnidadMedidaService implements Resolve<any> {
 
   constructor(private http: ApiService) { }
 

@@ -1,13 +1,13 @@
 import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class UsuarioService implements Resolve<any> {
 
   constructor(private _api: ApiService) { }
   /**
