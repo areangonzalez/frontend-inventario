@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { GestorUsuariosComponent } from './gestor-usuarios';
+import { InfoAdicionalComponent } from './info-adicional';
 import { LocalidadService, PermisosService, RolService, UsuarioService } from '../core/service';
 import { AuthGuard } from '../core/guard/auth.guard';
 
@@ -17,6 +18,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { loading: true, title: 'Gestión de Usuarios'/* , rol: ['soporte', 'admin'] */ },
     resolve: { usuarios: UsuarioService, permisos: PermisosService, localidades: LocalidadService, roles: RolService }
+  },{
+    path: 'info-adicional', component: InfoAdicionalComponent,
+    canActivate: [AuthGuard],
+    data: { loading: true, title: 'Gestión de Usuarios'/* , rol: ['soporte', 'admin'] */ },
+    resolve: { permisos: PermisosService }
   }
 ];
 

@@ -16,6 +16,7 @@ import {
   UsuarioPermisoListaComponent
 } from "./componentes";
 import { GestorUsuariosComponent } from './gestor-usuarios';
+import { InfoAdicionalComponent } from './info-adicional';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { GestorUsuariosComponent } from './gestor-usuarios';
     UsuariosComponent, UsuarioPermisoListaComponent,
     AgregarUsuarioModalContent, AgregarUsuarioModalComponent, AltaUsuarioModalContent, AltaUsuarioModalComponent, BajaUsuarioModalContent, BajaUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
     ConfiguracionTabComponent,
-    GestorUsuariosComponent
+    GestorUsuariosComponent,
+    InfoAdicionalComponent
   ],
   imports: [
     NgbModule,

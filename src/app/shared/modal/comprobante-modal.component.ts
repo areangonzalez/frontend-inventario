@@ -28,10 +28,9 @@ import { map } from 'rxjs/operators';
       </div>
     </div>
     <div class="modal-footer d-flex justify-content-between">
-    <button type="button" class="btn btn-outline-danger" (click)="cerrarModal(false)"><i class="fas fa-ban"></i> Cancelar</button>
-      <button *ngIf="(tipoForm === 'agregar')" type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
-      <button *ngIf="(tipoForm === 'editar')" type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
-      <button *ngIf="(tipoForm === 'editar')" type="button" class="btn btn-outline-primary" (click)="guardar()"><i class="far fa-check-circle"></i> Aprobar Comprobante</button>
+      <button type="button" class="btn btn-outline-danger" (click)="cerrarModal(false)"><i class="fas fa-ban"></i> Cancelar</button>
+      <button type="button" class="btn btn-outline-success" (click)="guardar()"><i class="fas fa-save"></i> Guardar</button>
+      <button *ngIf="(tipoForm === 'editar')" type="button" class="btn btn-outline-primary" (click)="aprobarComprobante()"><i class="far fa-check-circle"></i> Aprobar Comprobante</button>
     </div>
   `
 })
@@ -132,6 +131,27 @@ export class ComprobanteModalContent implements OnInit {
             }, error => { this._mensaje.cancelado(error); });
           }
         }
+    }
+  }
+  // guardado para aprobar el comprobante
+  aprobarComprobante(){
+    this.submitted = true;
+
+    if (this.comprobanteForm.invalid) {
+      return;
+    } else {
+      let parametros = this.comprobanteForm.value;
+      if (this.listadoDeStock.length == 0) {
+        this._mensaje.cancelado("El listado NO puede estar vacio!!");
+        return false;
+      }else{
+        parametros["lista_producto"] = this.listadoDeStock;
+        this._comprobanteService.aprobar(parametros, this.comprobanteid).subscribe(
+          respuesta => {
+            this._mensaje.exitoso("El comprobante ha sido aprobado con éxito!");
+            this.cerrarModal(true);
+          }, error => { this._mensaje.cancelado(error); });
+      }
     }
   }
 
