@@ -52,7 +52,8 @@ export class EditarDescripcionModalContent implements OnInit{
         resultado => {
           this._msj.exitoso("Se ha editado con exito.");
           this._ativeModal.close(true);
-        }, error => { this._msj.cancelado(error); }
+        }, error => { console.log(error);
+         this._msj.cancelado(error); }
       );
     }else { this._ativeModal.close(false); } // no se realizo el guardado
 

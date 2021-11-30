@@ -19,7 +19,7 @@ export class ComprobanteService implements Resolve<any>{
   }
 
   guardarObservacion(params: object, id: number) {
-    return this._http.put("/comprobantes/editar-observacion/" + id, params);
+    return this._http.put("/comprobantes/set-descripcion/" + id, params);
   }
 
   buscar(params:any) {
