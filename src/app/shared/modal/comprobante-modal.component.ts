@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertService, ComprobanteService, UtilService } from 'src/app/core/service';
 import { ConfiguracionListados } from 'src/app/core/model';
@@ -176,7 +176,10 @@ export class ComprobanteModalComponent {
   @Output("seGuardo") public seGuardo = new EventEmitter();
 
 
-  constructor( private _modalService: NgbModal) { }
+  constructor( _config: NgbModalConfig, private _modalService: NgbModal) {
+    _config.backdrop = 'static';
+    _config.keyboard = false;
+  }
 
   open() {
     const modalRef = this._modalService.open(ComprobanteModalContent, { size: 'lg' });

@@ -11,7 +11,7 @@ import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-boots
       </button>
     </div>
     <div class="modal-body">
-      <p>¿Está seguro que desea borrar el programa con sus permisos?</p>
+      <p>¿Está seguro que desea borrar los permisos del usuario?</p>
     </div>
     <div class=modal-footer>
     <button type="button" class="btn btn-danger" (click)="confirmar(false)"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> No</button>
