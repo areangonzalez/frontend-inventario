@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // baseUrl: '/apimock'
-  baseUrl: 'http://api.inventario.local/api'
+  baseUrl: 'http://inventario.local/api'
 };
 
 /*
