@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService, EgresoService } from 'src/app/core/service';
+import { saveAs } from "file-saver";
 
 
 /**
@@ -36,7 +37,8 @@ import { AlertService, EgresoService } from 'src/app/core/service';
         </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="confirmar(true)"><i class="fas fa-times"></i> Cerrar</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="exportarActa(true)"><i class="fas fa-times"></i> Cerrar</button>
+      <button type="button" class="btn btn-outline-success" (click)="confirmar(true)"><i class="fas fa-file-pdf"></i> Descargar</button>
     </div>
   `,
   styleUrls: ['./vista-comprobante-modal.component.scss']
@@ -65,6 +67,16 @@ export class VistaActaModalContent implements OnInit {
       respuesta => {
         this.datos = respuesta;
       }, error => { this._mensaje.cancelado(error.message); })
+  }
+
+  exportarActa(exportar: boolean) {
+    if (exportar){
+      this._egresoService.descargarPdf(this.idActa).subscribe(
+        blob => {
+          let file = new File([blob], 'prestaciones.xls', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+          saveAs(file);
+      }, error => { this._mensaje.cancelado(error.mensaje); });
+    }
   }
 }
 

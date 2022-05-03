@@ -27,4 +27,18 @@ export class EgresoService implements Resolve<any> {
   resolve() {
     return this._http.get('/egresos');
   }
+
+  descargarPdf(id:number) {
+    let headers = new Headers();
+    let httpParams = new HttpParams();
+    httpParams = this._http.formatParams(httpParams, {id:id});
+    headers.append('Content-type', 'aplication/json');
+    headers.append('Accept', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+    let options: object = {
+      responseType: 'blob',
+      params: httpParams,
+    };
+    return this._http.getFile('/export/acta egreso', options);
+  }
 }
