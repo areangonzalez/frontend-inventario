@@ -39,6 +39,6 @@ export class EgresoService implements Resolve<any> {
       responseType: 'blob',
       params: httpParams,
     };
-    return this._http.getFile('/export/acta egreso', options);
+    return this._http.getFile('/export/acta-egreso', options);
   }
 }
