@@ -37,8 +37,8 @@ import { saveAs } from "file-saver";
         </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="exportarActa(true)"><i class="fas fa-times"></i> Cerrar</button>
-      <button type="button" class="btn btn-outline-success" (click)="confirmar(true)"><i class="fas fa-file-pdf"></i> Descargar</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="confirmar(true)"><i class="fas fa-times"></i> Cerrar</button>
+      <button type="button" class="btn btn-outline-success" (click)="exportarActa(true)"><i class="fas fa-file-pdf"></i> Descargar</button>
     </div>
   `,
   styleUrls: ['./vista-comprobante-modal.component.scss']
