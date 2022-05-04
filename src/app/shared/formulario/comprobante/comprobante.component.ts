@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ConfiguracionListados } from 'src/app/core/model';
 import { UtilService } from 'src/app/core/service';
 
 @Component({
@@ -8,8 +9,11 @@ import { UtilService } from 'src/app/core/service';
   styleUrls: ['./comprobante.component.scss']
 })
 export class ComprobanteComponent implements OnInit {
+  @Input("listados") public listados: ConfiguracionListados; // Array de objetos que contiene los listados
   @Input("comprobante") public comprobanteForm: FormGroup;
   @Input("submitted") public submitted: boolean;
+  public provCuit: string = "";
+  public provTelefono: string = "";
 
   constructor( private _util: UtilService ) {}
 
@@ -50,6 +54,29 @@ export class ComprobanteComponent implements OnInit {
       numero.value = numero.value.substring(0,numero.value.length - 1);
       this.comprobanteForm.get("nroComprobantePrincipal").patchValue(numero.value);
     }
+  }
+
+  esNumeroCuit(numero:any) {
+    if (!this._util.validarNumero(numero.value)) {
+      numero.value = numero.value.substring(0,numero.value.length - 1);
+      this.comprobanteForm.get("cuit").patchValue(numero.value);
+    }
+  }
+
+  obtenerProvedor() {
+    if (this.comprobanteForm.get("proveedorid").value !== "") {
+      let provID = this.comprobanteForm.get("proveedorid").value;
+      for (let i = 0; i < this.listados.proveedores.length; i++) {
+        if (this.listados.proveedores[i].id === parseInt(provID)) {
+          this.provCuit = this.listados.proveedores[i].cuit;
+          this.provTelefono = this.listados.proveedores[i].telefono;
+        }
+      }
+    } else {
+      this.provCuit = "";
+      this.provTelefono = "";
+    }
+
   }
   /**
    * Formatea la fecha para una variable del formulario

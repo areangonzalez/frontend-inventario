@@ -31,5 +31,38 @@
         </div>
       </div>
     </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="proveedor">Proveedor (<b class="text-danger">*</b>):</label>
+        <select class="form-control" id="proveedorid" formControlName="proveedorid" (change)="obtenerProvedor()"
+         [ngClass]="{'is-invalid': (comprobanteForm.get('proveedorid').invalid && submitted)}">
+          <option value="">Seleccione un proveedor</option>
+          <option *ngFor="let proveedor of listados.proveedores" value="{{proveedor.id}}">{{proveedor.nombre}}</option>
+        </select>
+        <div *ngIf="(comprobanteForm.get('proveedorid').invalid && submitted)" class="text-danger">
+          <span>Por favor seleccione una Proveedor.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h4 class="margin-texto" >Cuit:  <span *ngIf="(provCuit !== '')" class="badge badge-light">{{provCuit}}</span></h4>
+      <!-- <div class="form-group">
+        <label for="cuit">Cuit (<b class="text-danger">*</b>):</label>
+        <input type="text" class="form-control" id="cuit" formControlName="cuit" placeholder="Ej.: 30646887328" (keyup)="esNumeroCuit($event.target)" [ngClass]="{'is-invalid': (comprobanteForm.get('cuit').invalid && submitted)}" >
+        <div *ngIf="(comprobanteForm.get('cuit').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese una cuit.</span>
+        </div>
+      </div> -->
+    </div>
+    <div class="col-md-4">
+      <h4 class="margin-texto">Teléfono:  <span *ngIf="(provTelefono !== '')" class="badge badge-light">{{provTelefono}}</span></h4>
+      <!-- <div class="form-group">
+        <label for="telefono">Teléfono (<b class="text-danger">*</b>):</label>
+        <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="Ej.: 1000" (keyup)="esNumero($event.target)" [ngClass]="{'is-invalid': (comprobanteForm.get('telefono').invalid && submitted)}" >
+        <div *ngIf="(comprobanteForm.get('telefono').invalid && submitted)" class="text-danger">
+          <span>Por favor ingrese una teléfono.</span>
+        </div>
+      </div> -->
+    </div>
   </div>
 </fieldset>

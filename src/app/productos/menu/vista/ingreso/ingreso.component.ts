@@ -28,6 +28,7 @@ export class IngresoComponent implements OnInit {
     this.configurarListas.categorias = this._route.snapshot.data["categorias"];
     this.configurarListas.unidad_medida = this._route.snapshot.data["unidadMedida"];
     this.configurarListas.marcas = this._route.snapshot.data["marcas"];
+    this.configurarListas.proveedores = this._route.snapshot.data["proveedores"];
   }
 
   prepararListadoingreso(listado:any, pagina: number) {

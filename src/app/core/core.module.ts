@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
   LoaderService, AlertService, UtilService, ConfiguracionParaPaginarService, BreadcrumbsService, ApiService, ProductoService, CategoriaService,
   UnidadMedidaService, MarcaService, InventarioService, ComprobanteService, EgresoService, LocalidadService, InventarioActaService, AutenticacionService,
-  UsuarioService, RolService, JwtService, TitleService
+  UsuarioService, RolService, JwtService, TitleService, ProveedorService
  } from "./service";
 
 
@@ -12,7 +12,7 @@ import {
   declarations: [
     LoaderService, AlertService, UtilService, ConfiguracionParaPaginarService, BreadcrumbsService, ApiService, ProductoService, CategoriaService,
     UnidadMedidaService, MarcaService, InventarioService, ComprobanteService, EgresoService, LocalidadService, InventarioActaService, AutenticacionService,
-    UsuarioService, RolService, JwtService, TitleService
+    UsuarioService, RolService, JwtService, TitleService, ProveedorService
   ],
   imports: [
     CommonModule

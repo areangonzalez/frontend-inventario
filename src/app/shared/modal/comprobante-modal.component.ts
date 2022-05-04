@@ -18,7 +18,7 @@ import { map } from 'rxjs/operators';
       </button>
     </div>
     <div class="modal-body">
-      <form-comprobante [comprobante]="comprobanteForm" [submitted]="submitted" ></form-comprobante>
+      <form-comprobante [comprobante]="comprobanteForm" [listados]="listados" [submitted]="submitted" ></form-comprobante>
       <form-producto [listados]="listados" (obtenerListadoDestock)="crearListadoDeStock($event)"></form-producto>
       <shared-lista-producto [stock]="listadoDeStock" [submitted]="submitted" [borrar]="true" [vista]="false" ></shared-lista-producto>
       <hr style="border: solid 1px #eee;">
@@ -55,7 +55,10 @@ export class ComprobanteModalContent implements OnInit {
       fecha_emision: '',
       descripcion: '',
       falta: false,
-      defectuoso: false
+      defectuoso: false,
+      /* cuit: ['', [Validators.required]],
+      telefono: ['', [Validators.required]], */
+      proveedorid: ['', [Validators.required]]
     });
   }
 

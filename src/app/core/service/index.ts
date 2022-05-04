@@ -20,3 +20,4 @@ export * from './usuario.service';
 export * from './permisos.service';
 export * from './rol.service';
 export * from './title.service';
+export * from './proveedor.service';

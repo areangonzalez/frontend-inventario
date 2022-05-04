@@ -5,12 +5,12 @@ import { ApiService } from './api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MarcaService implements Resolve<any> {
+export class ProveedorService implements Resolve<any> {
 
   constructor(private http: ApiService) { }
 
   resolve() {
-    return this.http.get('/marcas');
+    return this.http.get('/proveedors');
   }
 }
 

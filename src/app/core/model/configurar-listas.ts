@@ -12,4 +12,5 @@ export interface ConfiguracionListados {
    permisos?: any;
    usuarios?: any;
    tamanioPagina?: any;
+   proveedores?: any;
 }
