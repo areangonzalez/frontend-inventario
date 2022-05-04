@@ -38,7 +38,7 @@ import { saveAs } from "file-saver";
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary" (click)="confirmar(true)"><i class="fas fa-times"></i> Cerrar</button>
-      <button type="button" class="btn btn-outline-success" (click)="exportarActa(true)"><i class="fas fa-file-pdf"></i> Descargar</button>
+      <button type="button" class="btn btn-outline-danger" (click)="exportarActa(true)"><i class="fas fa-file-pdf"></i> Descargar</button>
     </div>
   `,
   styleUrls: ['./vista-comprobante-modal.component.scss']
@@ -73,7 +73,7 @@ export class VistaActaModalContent implements OnInit {
     if (exportar){
       this._egresoService.descargarPdf(this.idActa).subscribe(
         blob => {
-          let file = new File([blob], 'prestaciones.xls', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+          let file = new File([blob], 'egreso.pdf', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
           saveAs(file);
       }, error => { this._mensaje.cancelado(error.mensaje); });
     }

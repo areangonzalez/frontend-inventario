@@ -34,6 +34,7 @@
         <td class="text-center">{{acta.producto_cant_total}}</td>
         <th scope="col" class="text-center">
           <abrir-vista-acta-modal [idActa]="acta.id"></abrir-vista-acta-modal>
+          <button type="button" class="btn btn-sm btn-danger ml-1" ngbTooltip="Descargar Acta" container="body" (click)="exportarActa(acta.id)"><i class="fas fa-file-pdf"></i></button>
         </th>
       </tr>
     </tbody>

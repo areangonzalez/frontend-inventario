@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { EgresoService, AlertService } from 'src/app/core/service';
+import { saveAs } from "file-saver";
 
 @Component({
   selector: 'producto-lista-egreso',
@@ -12,7 +14,7 @@ export class ListaEgresoComponent {
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   @Output("ordenarTabla") public ordenarTabla = new EventEmitter();
 
-  constructor() { }
+  constructor(private _egresoService: EgresoService, private _mensaje: AlertService) { }
 
   cambioPagina(pagina:number){
     this.cambioDePagina.emit(pagina);
@@ -31,6 +33,15 @@ export class ListaEgresoComponent {
         break;
     }
     this.ordenarTabla.emit(this.sort);
+  }
+
+  exportarActa(idActa) {
+    this._egresoService.descargarPdf(idActa).subscribe(
+      blob => {
+        let file = new File([blob], 'egreso.pdf', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+        saveAs(file);
+    }, error => { this._mensaje.cancelado(error.mensaje); });
+
   }
 
 }
