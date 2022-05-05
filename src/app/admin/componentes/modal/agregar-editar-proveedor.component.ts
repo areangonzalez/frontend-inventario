@@ -7,7 +7,7 @@ import { ConfiguracionListados } from '../../../core/model';
   selector: 'admin-agregar-editar-proveedor-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">Agregar Proveedor</h4>
+      <h4 class="modal-title">{{(proveedorEditar === undefined) ? "Agregar": "Editar"}} Proveedor</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -18,7 +18,7 @@ import { ConfiguracionListados } from '../../../core/model';
   `
 })
 export class AgregarEditarProveedorContent {
-  @Input("proveedorEditar") public proveedorEditar: any;
+  @Input("proveedorEditar") public proveedorEditar: any | undefined;
 
   constructor(public activeModal: NgbActiveModal) {}
 

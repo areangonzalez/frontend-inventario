@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AlertService, ProveedorService } from 'src/app/core/service';
+import { AlertService, ProveedorAbmService } from 'src/app/core/service';
 import { ConfiguracionListados } from './../../../core/model';
 
 @Component({
@@ -14,7 +14,7 @@ export class ProvedorListaComponent implements OnInit {
   @Output("cambioDeTamanioPagina") public cambioDeTamanioPagina = new EventEmitter();
   public tamanioPagina: number = 20;
 
-  constructor(private _msj: AlertService, private _proveedorService: ProveedorService) { }
+  constructor(private _msj: AlertService, private _proveedorAbmService: ProveedorAbmService) { }
 
   ngOnInit(): void {
   }
@@ -37,14 +37,18 @@ export class ProvedorListaComponent implements OnInit {
   }
 
 
-  inactivarProveedor(inactivo:any, proveedorid: number) {
-    if (inactivo.confirmacion) {
-      inactivo['inactivo'] = 0;
-      /* this._proveedorService.baja(baja, proveedorid).subscribe(
+  inactivarProveedor(confirmacion: boolean, activo:number, proveedorid: number) {
+    if (confirmacion) {
+      let param:any = { activo: (activo == 1) ? 0 : 1};
+      this._proveedorAbmService.altaBajaProveedor(proveedorid, param).subscribe(
         resultado => {
-          this._msj.exitoso("El proveedor a sido dado de baja correctamente.");
+          if (param.activo == 0) {
+            this._msj.exitoso("El proveedor a sido dado de baja correctamente.");
+          }else{
+            this._msj.exitoso("El proveedor a sido dado de alta correctamente.");
+          }
           this.cambioPagina(this.configPaginacion.page);
-        }, error => { this._msj.cancelado(error); }) */
+        }, error => { this._msj.cancelado(error); })
     }
   }
 

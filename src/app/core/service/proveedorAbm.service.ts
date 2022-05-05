@@ -34,6 +34,10 @@ export class ProveedorAbmService implements Resolve<any> {
     }
   }
 
+  altaBajaProveedor(id: number, params: object) {
+    return this._api.put('/proveedors/set-activo/' + id, params);
+  }
+
   resolve() {
     let httpParams = new HttpParams();
     httpParams = this._api.formatParams(httpParams, { pagesize: 20, page: 0 });
