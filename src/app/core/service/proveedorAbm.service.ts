@@ -20,6 +20,19 @@ export class ProveedorAbmService implements Resolve<any> {
 
     return this._api.get('/proveedors',httpParams);
   }
+  /**
+   *
+   * @param param datos de proveedor
+   * @param id numero de identifficacion de provedor es opcional (?)
+   * @returns devuelve una respuesta del sistema de backend.
+   */
+  guardar(param: Object, id?:number) {
+    if (id !== undefined) {
+      return this._api.put('/proveedors/' + id, param);
+    }else {
+      return this._api.post('/proveedors', param);
+    }
+  }
 
   resolve() {
     let httpParams = new HttpParams();

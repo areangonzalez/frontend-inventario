@@ -18,6 +18,7 @@ import {
 import { GestorUsuariosComponent } from './gestor-usuarios';
 import { InfoAdicionalComponent } from './info-adicional';
 import { ProvedorComponent } from './provedor';
+import { ProveedorFormComponent } from './componentes/form/proveedor-form.component';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { ProvedorComponent } from './provedor';
     GestorUsuariosComponent,
     InfoAdicionalComponent,
     ProvedorComponent,
-    ProvedorListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent
+    ProvedorListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent, ProveedorFormComponent
   ],
   imports: [
     NgbModule,
