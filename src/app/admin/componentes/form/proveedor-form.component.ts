@@ -23,7 +23,7 @@ export class ProveedorFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.datosProveedor) {
-      console.log("se edita un proveedor");
+      this.datosForm.patchValue(this.datosProveedor);
     }
   }
 
@@ -47,6 +47,7 @@ export class ProveedorFormComponent implements OnInit {
       let params = this.datosForm.value;
       if (this.datosProveedor) {
         params["id"] = this.datosProveedor.id;
+        params["activo"] = this.datosProveedor.activo;
         this.guardarUsuario(params, this.datosProveedor.id);
 
       } else {

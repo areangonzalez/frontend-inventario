@@ -13,7 +13,7 @@ import { ConfiguracionListados } from '../../../core/model';
       </button>
     </div>
     <div class="modal-body">
-      <admin-proveedor-form [datosEditar]="proveedorEditar" (cancelarForm)="cancelarModal($event)" ></admin-proveedor-form>
+      <admin-proveedor-form [datosProveedor]="proveedorEditar" (cancelarForm)="cancelarModal($event)" ></admin-proveedor-form>
     </div>
   `
 })

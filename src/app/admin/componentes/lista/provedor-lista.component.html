@@ -38,6 +38,7 @@
         <td class="text-center">{{proveedor.cuit}}</td>
         <td class="text-center">{{proveedor.telefono}}</td>
         <td class="text-center">
+          <admin-agregar-editar-proveedor-modal [datosProveedor]="proveedor" (confirmarGuardado)="cambioPagina($event)"></admin-agregar-editar-proveedor-modal>
           <!-- <admin-configurar-usuario-modal [usuarioid]="user.id" [listasConfig]="listados" ></admin-configurar-usuario-modal>
           <admin-baja-usuario-modal *ngIf="(!user.baja)" [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)"></admin-baja-usuario-modal>
           <admin-alta-usuario-modal *ngIf="(user.baja)" [nombreUsuario]="user.username" (confirmarAlta)="darAltaUsuario($event, user.id)"></admin-alta-usuario-modal> -->
