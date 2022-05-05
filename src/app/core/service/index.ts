@@ -21,3 +21,4 @@ export * from './permisos.service';
 export * from './rol.service';
 export * from './title.service';
 export * from './proveedor.service';
+export * from './proveedorAbm.service';

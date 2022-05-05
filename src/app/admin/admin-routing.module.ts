@@ -3,7 +3,7 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { GestorUsuariosComponent } from './gestor-usuarios';
 import { InfoAdicionalComponent } from './info-adicional';
-import { LocalidadService, PermisosService, RolService, UsuarioService } from '../core/service';
+import { LocalidadService, PermisosService, ProveedorAbmService, RolService, UsuarioService } from '../core/service';
 import { AuthGuard } from '../core/guard/auth.guard';
 import { ProvedorComponent } from './provedor';
 
@@ -28,7 +28,7 @@ const routes: Routes = [
     path: 'proveedor', component: ProvedorComponent,
     canActivate: [AuthGuard],
     data: { loading: true, title: 'Proveedores', rol: ['soporte', 'admin'] },
-    // resolve: { permisos: PermisosService }
+    resolve: { proveedores: ProveedorAbmService }
   }
 ];
 

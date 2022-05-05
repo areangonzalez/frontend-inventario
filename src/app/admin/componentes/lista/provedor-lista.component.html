@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-between">
+  <div class="d-flex align-items-center p-2 font-weight-bold ancho-fijo">
+    <span *ngIf="configPaginacion.totalRegistros > 0">Proveedores: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+    <span *ngIf="configPaginacion.totalRegistros == 0">Proveedores: 0</span>
+    <div class="col-3 col-sm-3 col-md-3 col-lg-3 pr-0" >
+      <select class="form-control form-control-sm" id="page_size" [(ngModel)]="tamanioPagina" (change)="cambioTamanioPagina($event.target.value)">
+        <option *ngFor="let tamanio of listados.tamanioPagina" value="{{tamanio.size}}">{{tamanio.size}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+  </div>
+</div>
+<div class="row pl-3 pr-3">
+  <table class="table table-sm">
+    <thead class="background-menu">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th class="text-center" scope="col">Cuit</th>
+        <th class="text-center" scope="col">Teléfono</th>
+        <th class="text-center columna-160" scope="col">
+          <!-- <admin-agregar-usuario-modal [listas]="listados" (confirmarGuardado)="cambioPagina($event)"></admin-agregar-usuario-modal> -->
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="(listados.proveedores.length == 0)">
+      <tr>
+        <td class="text-center bg-warning" rowspan="1" colspan="7">
+          <strong>No se han encontrado resultado</strong>
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listados.proveedores.length > 0)" >
+      <tr *ngFor="let proveedor of listados.proveedores;" [ngClass]="{'table-danger': (proveedor.activo == 0)}" ngbTooltip="{{infoAdicional(proveedor.activo)}}">
+        <td>{{proveedor.nombre}}</td>
+        <td class="text-center">{{proveedor.cuit}}</td>
+        <td class="text-center">{{proveedor.telefono}}</td>
+        <td class="text-center">
+          <!-- <admin-configurar-usuario-modal [usuarioid]="user.id" [listasConfig]="listados" ></admin-configurar-usuario-modal>
+          <admin-baja-usuario-modal *ngIf="(!user.baja)" [nombreUsuario]="user.username" (confirmarBaja)="darBajaUsuario($event, user.id)"></admin-baja-usuario-modal>
+          <admin-alta-usuario-modal *ngIf="(user.baja)" [nombreUsuario]="user.username" (confirmarAlta)="darAltaUsuario($event, user.id)"></admin-alta-usuario-modal> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-between border-top">
+  <div class="d-flex align-items-center p-2 font-weight-bold ancho-fijo">
+    <span *ngIf="configPaginacion.totalRegistros > 0">Proveedores: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+    <span *ngIf="configPaginacion.totalRegistros == 0">Proveedores: 0</span>
+    <div class="col-3 col-sm-3 col-md-3 col-lg-3 pr-0" >
+      <select class="form-control form-control-sm" id="page_size" [(ngModel)]="tamanioPagina" (change)="cambioTamanioPagina($event.target.value)">
+        <option *ngFor="let tamanio of listados.tamanioPagina" value="{{tamanio.size}}">{{tamanio.size}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+  </div>
+</div>
+
+
+
+
