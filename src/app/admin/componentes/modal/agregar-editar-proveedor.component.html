@@ -1,0 +1,8 @@
+<button *ngIf="(datosProveedor === undefined)" type="button" class="btn btn-sm btn-success" (click)="abrirModal()">
+  <i class="fas fa-people-carry"></i>
+  Agregar Proveedor
+</button>
+<button *ngIf="(datosProveedor !== undefined)" type="button" class="btn btn-sm btn-secondary" (click)="abrirModal()">
+  <i class="fas fa-pen"></i>
+</button>
+

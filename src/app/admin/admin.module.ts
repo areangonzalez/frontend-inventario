@@ -12,12 +12,12 @@ import {
   BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
   ConfiguracionTabComponent,
   BajaUsuarioModalContent, BajaUsuarioModalComponent,
-  UsuariosComponent, UsuarioPermisoListaComponent
+  UsuariosComponent, UsuarioPermisoListaComponent,
+  ProvedorListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent
 } from "./componentes";
 import { GestorUsuariosComponent } from './gestor-usuarios';
 import { InfoAdicionalComponent } from './info-adicional';
 import { ProvedorComponent } from './provedor';
-import { ProvedorListaComponent } from './componentes/lista/provedor-lista.component';
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import { ProvedorListaComponent } from './componentes/lista/provedor-lista.compo
     GestorUsuariosComponent,
     InfoAdicionalComponent,
     ProvedorComponent,
-    ProvedorListaComponent
+    ProvedorListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent
   ],
   imports: [
     NgbModule,
