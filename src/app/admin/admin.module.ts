@@ -8,15 +8,15 @@ import { AdminComponent } from './admin.component';
 import {
   AdministrarRolPermisoComponent, BusquedaAvanzadaComponent, DatosPersonaComponent, DatosUsuarioComponent,
   UsuarioInfoComponent,
-  AgregarUsuarioModalContent, AgregarUsuarioModalComponent, AltaUsuarioModalContent, AltaUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
+  AgregarUsuarioModalContent, AgregarUsuarioModalComponent, AltaUsuarioModalContent, AltaUsuarioModalComponent,
+  BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
   ConfiguracionTabComponent,
-  BajaUsuarioModalContent,
-  BajaUsuarioModalComponent,
-  UsuariosComponent,
-  UsuarioPermisoListaComponent
+  BajaUsuarioModalContent, BajaUsuarioModalComponent,
+  UsuariosComponent, UsuarioPermisoListaComponent
 } from "./componentes";
 import { GestorUsuariosComponent } from './gestor-usuarios';
 import { InfoAdicionalComponent } from './info-adicional';
+import { ProvedorComponent } from './provedor';
 
 
 @NgModule({
@@ -28,7 +28,8 @@ import { InfoAdicionalComponent } from './info-adicional';
     AgregarUsuarioModalContent, AgregarUsuarioModalComponent, AltaUsuarioModalContent, AltaUsuarioModalComponent, BajaUsuarioModalContent, BajaUsuarioModalComponent, BorrarPermisoUsuarioModalContent, BorrarPermisoUsuarioModalComponent, ConfigurarUsuarioModalContent, ConfigurarUsuarioModalComponent,
     ConfiguracionTabComponent,
     GestorUsuariosComponent,
-    InfoAdicionalComponent
+    InfoAdicionalComponent,
+    ProvedorComponent
   ],
   imports: [
     NgbModule,

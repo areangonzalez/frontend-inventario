@@ -5,6 +5,7 @@ import { GestorUsuariosComponent } from './gestor-usuarios';
 import { InfoAdicionalComponent } from './info-adicional';
 import { LocalidadService, PermisosService, RolService, UsuarioService } from '../core/service';
 import { AuthGuard } from '../core/guard/auth.guard';
+import { ProvedorComponent } from './provedor';
 
 
 const routes: Routes = [
@@ -23,6 +24,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { loading: true, title: 'Información Adicional', rol: ['soporte', 'admin'] },
     resolve: { permisos: PermisosService }
+  },{
+    path: 'proveedor', component: ProvedorComponent,
+    canActivate: [AuthGuard],
+    data: { loading: true, title: 'Proveedores', rol: ['soporte', 'admin'] },
+    // resolve: { permisos: PermisosService }
   }
 ];
 
