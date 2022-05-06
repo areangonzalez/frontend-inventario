@@ -50,9 +50,21 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <label for="asunto">Asunto (<b class="text-danger">*</b>):</label>
+        <label for="observacion">Asunto (<b class="text-danger">*</b>):</label>
+          <textarea class="form-control" id="observacion" rows="1" formControlName="descripcion" placeholder="Describa el asunto...." [ngClass]="{'is-invalid': (formEgreso.get('descripcion').invalid && submitted)}"></textarea>
+          <div *ngIf="(formEgreso.get('descripcion').invalid && submitted)" class="text-danger">
+            <span *ngIf="formEgreso.get('descripcion').hasError('minlength')" >El asunto es muy corto.</span>
+            <span *ngIf="formEgreso.get('descripcion').hasError('required')" >Por favor agregue una asunto.</span>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="asunto">Bulto/Módulo (<b class="text-danger">*</b>):</label>
         <select class="form-control" id="asunto" formControlName="tipo_egresoid" [ngClass]="{'is-invalid': (formEgreso.get('tipo_egresoid').invalid && submitted)}">
-          <option value="">Seleccione un Asunto</option>
+          <option value="">Seleccione Bulto o Módulo</option>
           <option *ngFor="let tipo of listados.tipo_egresos" value="{{tipo.id}}">{{tipo.nombre}}</option>
         </select>
         <div *ngIf="(formEgreso.get('tipo_egresoid').invalid && submitted)" class="text-danger">

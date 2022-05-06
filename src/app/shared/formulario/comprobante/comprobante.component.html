@@ -40,7 +40,7 @@
           <option *ngFor="let proveedor of listados.proveedores" value="{{proveedor.id}}">{{proveedor.nombre}}</option>
         </select>
         <div *ngIf="(comprobanteForm.get('proveedorid').invalid && submitted)" class="text-danger">
-          <span>Por favor seleccione una Proveedor.</span>
+          <span>Por favor seleccione un Proveedor.</span>
         </div>
       </div>
     </div>

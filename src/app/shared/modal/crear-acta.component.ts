@@ -47,7 +47,7 @@ export class CrearActaModalContent {
       tipo_egresoid: ['', Validators.required],
       origen: ['', Validators.required],
       suscrito: ['', Validators.required],
-      descripcion: ''
+      descripcion: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
