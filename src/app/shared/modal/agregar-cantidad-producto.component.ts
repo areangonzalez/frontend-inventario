@@ -22,6 +22,10 @@ import { UtilService } from 'src/app/core/service';
           <span>La cantidad permitida es de {{cantidadMaxima}}.</span>
         </div>
       </div>
+      <div class="form-group">
+        <label for="observacion">Descripción:</label>
+        <textarea class="form-control" id="observacion" rows="1" [(ngModel)]="descripcion" placeholder="Descripción..." ></textarea>
+      </div>
     </div>
     <div class="modal-footer d-flex justify-content-between">
       <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()"><i class="fas fa-ban"></i> Cancelar</button>
@@ -33,6 +37,7 @@ export class AgregarCantidadMaximaModalContent {
   @Input("cantidadMaxima") public cantidadMaxima: number;
   public cantidad: number;
   public msgError: boolean = false;
+  public descripcion: string = "";
 
   constructor( private _ativeModal: NgbActiveModal, private _util: UtilService ) { }
   /**
@@ -52,11 +57,12 @@ export class AgregarCantidadMaximaModalContent {
   }
   /**
    * guardo la cantidad del producto seleccionado,
-   * validando que no sea mayor a la cantidad real ni menor a 0.
+   * y su descripción
    */
   guardar() {
+    // valido que no sea mayor a la cantidad real ni menor a 0
     if (this.cantidad <= this.cantidadMaxima && this.cantidad > 0) {
-      this._ativeModal.close(this.cantidad);
+      this._ativeModal.close({ cantidad: this.cantidad, descripcion: this.descripcion });
     }else {
       this.msgError = true;
     }

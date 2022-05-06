@@ -58,7 +58,7 @@ export class ComprobanteModalContent implements OnInit {
       defectuoso: false,
       /* cuit: ['', [Validators.required]],
       telefono: ['', [Validators.required]], */
-      proveedorid: ['', [Validators.required]]
+      proveedorid: ''
     });
   }
 

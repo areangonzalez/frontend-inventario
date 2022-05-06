@@ -22,15 +22,16 @@ export class ListaStockComponent implements OnInit {
   /**
    * Se resta la cantidad del producto seleccionado por el real.
    * Generando un nuevo listado de productos.
-   * @param cantidad valor de la cantidad de un producto
+   * @param cantYdescripcion objeto con dos valore de la cantidad de un producto y su descripcion { cantidad: 100, descripcion: "texto" }
    * @param producto objeto que se desea modificar
    */
-  nuevaCantidad(cantidad, producto) {
+  nuevaCantidad(cantYdescripcion:any, producto: any) {
     let productoSel = Object.assign({}, producto);
     // resto la cantidad seleccionada con la cantidad real del producto
-    producto["cantidad"] = parseInt(producto["cantidad"]) - parseInt(cantidad);
-    // guardo la cantidad en el nuevo objeto
-    productoSel["cantidad"] = cantidad;
+    producto["cantidad"] = parseInt(producto["cantidad"]) - parseInt(cantYdescripcion.cantidad);
+    // guardo la cantidad en el nuevo objeto de productos seleccionados
+    productoSel["cantidad"] = cantYdescripcion.cantidad;
+    productoSel["descripcion"] = cantYdescripcion.descripcion;
     // envio los datos del producto seleccionado al componente padre
     this.productoSeleccionado.emit(productoSel);
   }

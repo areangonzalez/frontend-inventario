@@ -33,15 +33,11 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="proveedor">Proveedor (<b class="text-danger">*</b>):</label>
-        <select class="form-control" id="proveedorid" formControlName="proveedorid" (change)="obtenerProvedor()"
-         [ngClass]="{'is-invalid': (comprobanteForm.get('proveedorid').invalid && submitted)}">
+        <label for="proveedor">Proveedor:</label>
+        <select class="form-control" id="proveedorid" formControlName="proveedorid" (change)="obtenerProvedor()">
           <option value="">Seleccione un proveedor</option>
           <option *ngFor="let proveedor of listados.proveedores" value="{{proveedor.id}}">{{proveedor.nombre}}</option>
         </select>
-        <div *ngIf="(comprobanteForm.get('proveedorid').invalid && submitted)" class="text-danger">
-          <span>Por favor seleccione un Proveedor.</span>
-        </div>
       </div>
     </div>
     <div class="col-md-4">

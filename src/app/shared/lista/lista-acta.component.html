@@ -2,20 +2,22 @@
   <table class="table table-bordered table-hover table-sm">
     <thead>
       <tr>
-        <th class="text-center" scope="col">Producto</th>
+        <th class="text-left" scope="col">Producto</th>
         <th class="text-center">Cantidad</th>
+        <th class="text-center">Descripción</th>
         <th *ngIf="borrar" scope="col" class="text-center">Acción</th>
       </tr>
     </thead>
     <tbody *ngIf="(listadoActa.length == 0)">
       <tr>
-        <td colspan="3" rowspan="1" class="text-center" ><b>NO HAY PRODUCTOS SELECCIONADOS</b></td>
+        <td colspan="4" rowspan="1" class="text-center" ><b>NO HAY PRODUCTOS SELECCIONADOS</b></td>
       </tr>
     </tbody>
     <tbody *ngIf="(listadoActa.length > 0)">
       <tr *ngFor="let producto of listadoActa; let i = index;">
         <td>{{producto.producto}}</td>
         <td class="text-center">{{producto.cantidad}}</td>
+        <td class="text-left">{{producto.descripcion}}</td>
         <th *ngIf="borrar" scope="col" class="text-center">
           <abrir-confirmacion-borrado-producto-modal [texto]="'prducto'" [listado]="listadoActa" [indexListado]="i" (borrarProducto)="ConfirmarBorradoProducto($event)"></abrir-confirmacion-borrado-producto-modal>
         </th>
