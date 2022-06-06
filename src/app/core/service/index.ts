@@ -22,3 +22,5 @@ export * from './rol.service';
 export * from './title.service';
 export * from './proveedor.service';
 export * from './proveedorAbm.service';
+export * from './marca.service';
+export * from './marcaAbm.service';

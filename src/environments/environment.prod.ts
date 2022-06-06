@@ -1,6 +1,6 @@
-// commit de versionado 2ed1dc483edd791c7c0d6145cbb0d863918d39f8
+//commit de versionado 62054fb537e986a6d9d967c1e6a6f832dc00d066
 
 export const environment = {
   production: true,
-  baseUrl: 'http://inventario.local/api'
+  baseUrl: 'https://deposito-api.rionegro.gov.ar/api'
 };

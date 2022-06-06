@@ -3,9 +3,10 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { GestorUsuariosComponent } from './gestor-usuarios';
 import { InfoAdicionalComponent } from './info-adicional';
-import { LocalidadService, PermisosService, ProveedorAbmService, RolService, UsuarioService } from '../core/service';
+import { LocalidadService, PermisosService, ProveedorAbmService, RolService, UsuarioService, MarcaAbmService } from '../core/service';
 import { AuthGuard } from '../core/guard/auth.guard';
 import { ProvedorComponent } from './provedor';
+import { MarcaComponent } from './marca';
 
 
 const routes: Routes = [
@@ -29,6 +30,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { loading: true, title: 'Proveedores', rol: ['soporte', 'admin'] },
     resolve: { proveedores: ProveedorAbmService }
+  }
+  ,{
+    path: 'marca', component: MarcaComponent,
+    canActivate: [AuthGuard],
+    data: { loading: true, title: 'Marcas', rol: ['soporte', 'admin'] },
+    resolve: { marcas: MarcaAbmService }
   }
 ];
 
