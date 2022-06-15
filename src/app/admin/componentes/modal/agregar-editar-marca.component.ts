@@ -6,7 +6,7 @@ import { AlertService } from '../../../core/service';
   selector: 'admin-agregar-editar-marca-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">{{(marcaEditar === undefined) ? "Agregar": "Editar"}} Proveedor</h4>
+      <h4 class="modal-title">{{(marcaEditar === undefined) ? "Agregar": "Editar"}} marca</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -47,7 +47,7 @@ export class AgregarEditarMarcaComponent{
  
      abrirModal() {
        const modalRef = this.modalService.open(AgregarEditarMarcaContent);
-       modalRef.componentInstance.proveedorEditar = this.datosMarca;
+       modalRef.componentInstance.marcaEditar = this.datosMarca;
        modalRef.result.then(
          (result) => {
              if (result == 'closed'){

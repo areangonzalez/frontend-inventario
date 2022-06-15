@@ -13,11 +13,9 @@ export class MarcaFormComponent implements OnInit {
   public datosForm: FormGroup;
   public submitted: boolean = false;
 
-  constructor(private _fb: FormBuilder, private _util: UtilService, private _msj: AlertService, private _proveedorAbmService: MarcaAbmService) {
+  constructor(private _fb: FormBuilder, private _util: UtilService, private _msj: AlertService, private _marcaAbmService: MarcaAbmService) {
     this.datosForm = _fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
-      cuit: ['', [Validators.required]],
-      telefono: ['', Validators.required]
     });
   }
 
@@ -61,17 +59,17 @@ export class MarcaFormComponent implements OnInit {
    */
   public guardarUsuario(params: object, id?: number) {
     if (id !== undefined) {
-      this._proveedorAbmService.guardar(params, id).subscribe(
+      this._marcaAbmService.guardar(params, id).subscribe(
         respuesta => {
-          this._msj.exitoso("Se ha editado el proveedor con exito.");
+          this._msj.exitoso("Se ha editado la marca con exito.");
           this.cancelarForm.emit(false);
         }, error => {
           this._msj.cancelado(error);
         });
     }else{
-      this._proveedorAbmService.guardar(params).subscribe(
+      this._marcaAbmService.guardar(params).subscribe(
         respuesta => {
-          this._msj.exitoso("Se ha guardado el provedor con exito.");
+          this._msj.exitoso("Se ha guardado la marca con exito.");
           this.cancelarForm.emit(false);
         }, error => {
           this._msj.cancelado(error);

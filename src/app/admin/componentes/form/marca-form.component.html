@@ -1,29 +1,12 @@
-<p>marca-form works!</p>
 <fieldset [formGroup]="datosForm">
     <div class="row">
       <div class="form-group col-md-12">
         <label for="nombre" class="prioridad">Nombre (<span class="is-invalid">*</span>):</label>
-        <input type="text" id="nombre" placeholder="Nombre de proveedor" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (datosForm.get('nombre').invalid && submitted)}">
+        <input type="text" id="nombre" placeholder="Nombre de Marca" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (datosForm.get('nombre').invalid && submitted)}">
         <div *ngIf="(datosForm.get('nombre').invalid && submitted)"
             class="text-danger">
             <div *ngIf="datosForm.get('nombre').hasError('required')">Este campo es requerido. </div>
             <div *ngIf="datosForm.get('nombre').hasError('minlength')">El nombre es muy corto.</div>
-        </div>
-      </div>
-      <div class="form-group col-md-12">
-        <label for="cuit" class="prioridad">Cuit (<span class="is-invalid">*</span>):</label>
-        <input type="text" id="cuit" placeholder="Número de CUIT" class="form-control" formControlName="cuit" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (datosForm.get('cuit').invalid && submitted)}">
-        <div *ngIf="(datosForm.get('cuit').invalid && submitted)"
-            class="text-danger">
-            <div *ngIf="datosForm.get('cuit').hasError('required')">Este campo es requerido. </div>
-        </div>
-      </div>
-      <div class="form-group col-md-12">
-        <label for="telefono" class="prioridad">Teléfono (<span class="is-invalid">*</span>):</label>
-        <input type="text" id="telefono" placeholder="Ej.: 2920 442758" class="form-control" formControlName="telefono" [ngClass]="{'is-invalid': (datosForm.get('telefono').invalid && submitted)}">
-        <div *ngIf="(datosForm.get('telefono').invalid && submitted)"
-            class="text-danger">
-            <div *ngIf="datosForm.get('telefono').hasError('required')">Este campo es requerido. </div>
         </div>
       </div>
     </div>

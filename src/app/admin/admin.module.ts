@@ -13,7 +13,7 @@ import {
   ConfiguracionTabComponent,
   BajaUsuarioModalContent, BajaUsuarioModalComponent,
   UsuariosComponent, UsuarioPermisoListaComponent,
-  ProvedorListaComponent, MarcaListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent, AgregarEditarMarcaComponent
+  ProvedorListaComponent, MarcaListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent, AgregarEditarMarcaComponent,AgregarEditarMarcaContent
 } from "./componentes";
 import { GestorUsuariosComponent } from './gestor-usuarios';
 import { InfoAdicionalComponent } from './info-adicional';
@@ -35,7 +35,7 @@ import { MarcaFormComponent } from './componentes/form/marca-form.component';
     GestorUsuariosComponent,
     InfoAdicionalComponent,
     ProvedorComponent,
-    ProvedorListaComponent,MarcaListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent, ProveedorFormComponent, AltaBajaProvedorComponent, MarcaComponent, AgregarEditarMarcaComponent, MarcaFormComponent
+    ProvedorListaComponent,MarcaListaComponent, AgregarEditarProveedorContent, AgregarEditarProveedorComponent, ProveedorFormComponent, AltaBajaProvedorComponent, MarcaComponent, AgregarEditarMarcaComponent, MarcaFormComponent,AgregarEditarMarcaContent
   ],
   imports: [
     NgbModule,

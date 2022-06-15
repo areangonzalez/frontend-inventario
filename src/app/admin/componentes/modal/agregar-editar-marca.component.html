@@ -1,1 +1,9 @@
-<p>agregar-editar-marca works!</p>
+<button *ngIf="(datosMarca === undefined)" type="button" class="btn btn-sm btn-success" (click)="abrirModal()">
+    <i class="fas fa-people-carry"></i>
+    Agregar Marca
+  </button>
+  <button *ngIf="(datosMarca !== undefined)" type="button" class="btn btn-sm btn-outline-secondary rounded-circle" (click)="abrirModal()">
+    <i class="fas fa-pen"></i>
+  </button>
+  
+  
